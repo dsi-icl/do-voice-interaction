@@ -4,5 +4,5 @@
 - [x] VPN Set up 
 - [x] Setting survey questions
 - [x] Familiarization with OVE Application Launcher
-- [ ] Try some API requests wwith Swagger UI
+- [ ] Try some API requests with Swagger UI
 - [ ] Install DeepSpeech and Rasa and try some examples
