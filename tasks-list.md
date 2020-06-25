@@ -3,7 +3,7 @@
 - [x] See the ove documentation and understand the concepts
 - [x] VPN Set up 
 - [x] Setting survey questions  
---- Tasks added ---  
+---Added tasks---  
 - [x] Familiarization with OVE Application Launcher
 - [x] Try some API requests with Swagger UI
 - [x] Install Rasa and follow the tutorial
