@@ -3,6 +3,11 @@
 - [x] See the ove documentation and understand the concepts
 - [x] VPN Set up 
 - [x] Setting survey questions
+--- Tasks added ---  
 - [x] Familiarization with OVE Application Launcher
-- [ ] Try some API requests with Swagger UI
-- [ ] Install DeepSpeech and Rasa and try some examples
+- [x] Try some API requests with Swagger UI
+- [x] Install Rasa and follow the tutorial
+- [ ] Try to build up a simple example (dialogue model) myself
+- [ ] Have a look how to make the process practical, if someone has a demo and wants to add voice interaction
+- [ ] Install DeepSpeech
+
