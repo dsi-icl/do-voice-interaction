@@ -9,5 +9,12 @@
 - [x] Install Rasa and follow the tutorial
 - [ ] Try to build up a simple example (dialogue model) myself
 - [ ] Have a look how to make the process practical, if someone has a demo and wants to add voice interaction
-- [ ] Install DeepSpeech
+- [ ] Install DeepSpeech  
 
+# Week of June 29th to July 3rd
+- [ ] Try to build the scenarios with RASA
+- [ ] Add scenarios according to the survey answers
+- [ ] Do the second survey according to answers of the first one
+
+- [ ] Install DeepSpeech
+- [ ] Have a look how to make the process practical, if someone has a demo and wants to add voice interaction
