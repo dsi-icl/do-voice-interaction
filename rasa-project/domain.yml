@@ -1,0 +1,82 @@
+intents:
+  - greet
+  - affirm
+  - deny
+  - goodbye
+  - help
+  - open
+  - out_of_scope
+  - search
+  - shutdown
+  - new_try
+  - uniform_background
+  - control
+
+entities:
+  - demo
+  - color
+  - control_command
+
+slots:
+  demo:
+    type: text
+  color:
+    type: categorical
+    values:
+    - black
+    - white
+  control_command:
+    type: categorical
+    values:
+    - refresh
+    - stop
+    - play
+    - mute
+    - pause
+
+actions:
+  - action_open
+  - action_list_demos
+  - action_shutdown
+  - action_uniform_screens
+  - action_control
+  - action_search
+
+responses:
+  utter_greet:
+  - text: "Welcome to the Data Observatory. I am your voice assistant. Can I help you ?"
+  utter_help:
+  - text: "I can execute the following commands:
+            - [Please]? open <demo>
+            - Show me something on <tag>
+            - Launch <demo>
+            - Activate <demo>
+            - Shutdown screens
+            - Reset browsers
+            - Do a clearspace
+            - Refresh the screens
+            - Pause [the video/the audio]?
+            - Play <video>
+            - Start animation
+            - Stop animation
+            - Quit [video/audio]?
+            - Mute [video/audio]?
+            - Full black/ Full white
+            - Turn the volume up/down"
+  utter_goodbye:
+  - text: "The Data Observatory thanks you for your presentation. I hope to see you soon :)"
+  utter_affirm:
+  - text: "Fine"
+  - text: "No worries"
+  utter_out_of_scope:
+  - text: "Sorry, I can't handle that request."
+  utter_confirm_shutdown:
+  - text: "Do you really want to shutdown the screens ?"
+  utter_ask_new_search:
+  - text: "Fine, please repeat your request with the new tag"
+
+
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

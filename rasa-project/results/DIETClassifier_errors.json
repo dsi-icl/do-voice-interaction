@@ -1,0 +1,22 @@
+[
+  {
+    "text": "Can you show me something on the data science institute",
+    "entities": [
+      {
+        "start": 29,
+        "end": 55,
+        "value": "the data science institute",
+        "entity": "demo"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "demo",
+        "start": 33,
+        "end": 55,
+        "value": "data science institute",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  }
+]
