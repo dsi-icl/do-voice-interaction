@@ -17,4 +17,4 @@
 - [x] Do the second survey according to answers of the first one
 
 - [x] Install DeepSpeech
-- [ ] Have a look how to make the process practical, if someone has a demo and wants to add voice interaction
+- [x] Have a look how to make the process practical, if someone has a demo and wants to add voice interaction
