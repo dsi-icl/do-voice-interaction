@@ -72,5 +72,5 @@ def load_model(sentence,model_path=MODEL_PATH, config=CONFIG, use_cuda=use_cuda,
     align, spec, stop_tokens = tts(model, ap, sentence, config, use_cuda, out_path)
 
 if __name__ == '__main__':
-	sentence =  "Welcome to the Data Observatory. I am your voice assistant. Can I help you ?"
+	sentence =  "The Data Observatory thanks you for your presentation. I hope to see you soon :)"
 	load_model(sentence)

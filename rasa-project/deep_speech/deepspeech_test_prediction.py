@@ -16,7 +16,7 @@ def ignore_stderr():
         os.dup2(old_stderr, 2)
         os.close(old_stderr)
 
-WAVE_OUTPUT_FILENAME = "test_audio.wav"
+WAVE_OUTPUT_FILENAME = "audio/test_audio.wav"
 
 def record_audio(output=WAVE_OUTPUT_FILENAME):
     CHUNK = 1024
@@ -44,7 +44,7 @@ def record_audio(output=WAVE_OUTPUT_FILENAME):
     stream.close()
     p.terminate()
 
-    wf = wave.open(WAVE_OUTPUT_FILENAME, 'wb')
+    wf = wave.open(output, 'wb')
     wf.setnchannels(CHANNELS)
     wf.setsampwidth(p.get_sample_size(FORMAT))
     wf.setframerate(RATE)
