@@ -1,30 +1,17 @@
 from functools import lru_cache
 import fileinput
-import requests
-import requests_cache
 
-@lru_cache(maxsize=1)
-def get_access_token(user,password):
-    response = requests.post('http://gdo-students.dsi.ic.ac.uk:6080/api/auth',json={'user':user,'password':password})
-    if(response.status_code==200):
-        return response.json()['token']
-    else:
-        return None
-
-def get_list_demos(response):
-    list_demos = []
-    for i in range(len(response)):
-        list_demos.append(response[i]['id'])
-    return list_demos
-
+from util_graphql import GraphQL
 
 def write_demos_entities():
 
     #we retrieve the list of available demos
-    requests_cache.install_cache('project cache')
-    token = get_access_token('guest','guest')
-    response = requests.get('http://gdo-students.dsi.ic.ac.uk:6080/api/dev-store/list?metadata=true', headers={'AUTH_TOKEN': token})
-    available_demos = get_list_demos(response.json())
+    my_graphQL = GraphQL()
+
+    if not my_graphQL.environment_is_opened():
+        my_graphQL.open_environment('students')
+
+    available_demos = list(my_graphQL.get_projects().values())
 
     #we open the nlu.md file in read mode to retrieve all the lines of the file
     file = open("./data/nlu.md","r")
