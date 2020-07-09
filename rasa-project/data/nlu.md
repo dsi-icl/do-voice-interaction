@@ -13,6 +13,7 @@
 - of course
 - that sounds good
 - correct
+- confirm
 
 ## intent:deny
 - no
@@ -32,23 +33,21 @@
 ## intent:help
 - help
 - I need help
-- Could you help me please
+- Could you help me
 - I want to ask you something
 - request
 - I need your support
 - support
 
 ## intent:open  
+- [airesearch](demo)
+- [test-controllers](demo)
 - [publicproject](demo)
 - [tygradovis](demo)
 - [pedro](demo)
 - [jagadovis](demo)
-- [gaze](demo)
 - [datasparks20template](demo)
-- [datasparks20procurement](demo)
-- [anothertest](demo)
-- [anopenbucket](demo)
-- I would like to open [airesearch](demo)
+- I would like to open [gaze](demo)
 - please open [amr](demo)
 - launch [defra](demo)
 - activate [An open bucket new works](demo)
@@ -77,13 +76,24 @@
 - Show me something on [london](demo)
 - Can you show me something on [the data science institute](demo)
 - Search [shanghai metro](demo)
+- search demo
+- I'd like to search something on [London](demo)
 
 ## intent:shutdown
 - Shut down screens
 - Turn out screens
-- Could you shut down the Screens ?
-- I'd like to shut down the Screens
-- Screens shutdown, please
+- Could you shutdown the Screens ?
+- I'd like to shutdown the Screens
+- Screens shutdown
+- Shut down GDO
+- Could you shutdown the global data observatory
+
+## intent:turn_on_gdo
+- Turn on the gdo
+- Could you turn on the screens
+- I'd like to turn on the Global Data Observatory
+- Start the gdo
+- Turn on the screens
 
 ## intent:new_try
 - restart
@@ -98,6 +108,14 @@
 - I only want [white](color) screens
 - I want a [black](color) background
 
+## intent:clear_space
+- Clear the screens
+- clean the space
+- clear space
+- I'd like to clean the space
+- Could you clear the space
+
+
 ## intent:control
 - [Play](control_command) the video
 - [play](control_command) the audio
@@ -107,3 +125,25 @@
 - [Stop](control_command) it
 - Could you [mute](control_command) the video
 - I'd like to [refresh](control_command) the screen
+
+## intent:switch_modes
+- I'd like to switch the mode
+- Switch the mode
+- Mode [cluster](mode)
+- mode [section](mode)
+- Select [section](mode)
+- Could you select [cluster](mode)
+- The [section](mode) mode would be fine
+- I would like to take the [section](mode)
+- I choose [cluster](mode)
+- Change the mode
+
+## intent:open_environment
+- Open [students](work_environment) environment
+- Go to [production](work_environment) environment
+- Show me available environments
+- List of available environments
+- Select [development](work_environment) environment
+- Could you open the [production](work_environment) please
+- I'd like to go on the [students](work_environment)
+- What's the current environment
