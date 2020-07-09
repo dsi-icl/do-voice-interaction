@@ -104,7 +104,7 @@
   - utter_affirm
 
 ## search 3
-* search: Search something on pollution
+* search: Search something on [pollution]
   - action_search
 * new_try: yes restart
   - action_search
@@ -133,6 +133,23 @@
 * deny: no thanks
   - utter_affirm
 
+## shutdown confirm and fail, restart
+* shutdown: Shut down the screens please
+  - utter_confirm_shutdown
+* affirm: Yes I'm sure
+  - action_shutdown
+* affirm: yes
+  - action_shutdown
+
+## shutdown confirm and fail, give up
+* shutdown: Shut down gdo
+  - utter_confirm_shutdown
+* affirm: Indeed
+  - action_shutdown
+* deny: No
+  - utter_affirm
+
+
 ## uniform screens 1
 * uniform_background: Show me full [white](color) screens please
  - action_uniform_screens
@@ -160,3 +177,62 @@
 ## control mute
 * control: [Mute](control_command) this audio file
 - action_control
+
+## clear space 1
+* clear_space: I would like to clean the screens
+- action_clear_space
+
+## clear space 2
+* clear_space: Please clear the space
+- action_clear_space
+
+## turn on gdo, confirm 1
+* turn_on_gdo: Turn on the global data observatory, please
+  - utter_confirm_turn_on_gdo
+* affirm: yes I confirm
+  - action_turn_on_gdo
+
+## turn on gdo, cancel 1
+* turn_on_gdo: Could you turn on the screens
+  - utter_confirm_turn_on_gdo
+* deny: no
+  - utter_affirm
+
+## turn on gdo, confirm, restart 1
+* turn_on_gdo: I'd like to turn on the global data observatory
+  - utter_confirm_turn_on_gdo
+* affirm: Yes
+  - action_turn_on_gdo
+* affirm: Yes, please
+  - action_turn_on_gdo
+
+## turn on gdo, confirm, without restart 1
+* turn_on_gdo: Please, I would like to turn on the screens
+  - utter_confirm_turn_on_gdo
+* affirm: Yes
+  - action_turn_on_gdo
+* deny: No
+
+# switch modes 1
+* switch_modes: Mode [cluster](mode)
+  - action_switch_modes
+
+# switch modes 2
+* switch_modes: I'd like to change the mode
+  - action_switch_modes
+
+# switch modes 2
+* switch_modes: Please could you switch [cluster](mode) to [section](mode) ?
+  - action_switch_modes
+
+# open environment 1
+* open_environment: Show me the current environment
+  - action_open_environment
+
+# open environment 2
+* open_environment: Open [development](work_environment)
+  - action_open_environment
+
+# open environment 3
+* open_environment: What are the available environments ?
+  - action_open_environment
