@@ -11,11 +11,17 @@ intents:
   - new_try
   - uniform_background
   - control
+  - clear_space
+  - switch_modes
+  - turn_on_gdo
+  - open_environment
 
 entities:
   - demo
   - color
   - control_command
+  - mode
+  - work_environment
 
 slots:
   demo:
@@ -33,14 +39,29 @@ slots:
     - play
     - mute
     - pause
+  mode:
+    type: categorical
+    values:
+    - section
+    - cluster
+  work_environment:
+    type: categorical
+    values:
+    - students
+    - production
+    - development
 
 actions:
   - action_open
   - action_list_demos
   - action_shutdown
+  - action_turn_on_gdo
   - action_uniform_screens
   - action_control
   - action_search
+  - action_clear_space
+  - action_switch_modes
+  - action_open_environment
 
 responses:
   utter_greet:
@@ -71,7 +92,9 @@ responses:
   utter_out_of_scope:
   - text: "Sorry, I can't handle that request."
   utter_confirm_shutdown:
-  - text: "Do you really want to shutdown the screens ?"
+  - text: "Do you really want to shut down the screens ?"
+  utter_confirm_turn_on_gdo:
+  - text: "Do you really want to turn on the Global Data Observatory ? ?"
   utter_ask_new_search:
   - text: "Fine, please repeat your request with the new tag"
 
