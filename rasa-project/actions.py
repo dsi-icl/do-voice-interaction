@@ -17,6 +17,7 @@ import requests
 import requests_cache
 
 from utils import get_access_token, get_list_demos
+from util_graphql import GraphQL
 
 class ActionOpen(Action):
 
@@ -27,23 +28,25 @@ class ActionOpen(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        requests_cache.install_cache('project cache')
+        my_graphQL = GraphQL()
 
-        token = get_access_token('guest','guest')
+        response = my_graphQL.load_project(tracker.get_slot("demo"))
 
-        print("the name of the slot :",tracker.get_slot("demo"))
-        if token!=None:
-            response = requests.get('http://gdo-students.dsi.ic.ac.uk:6080/api/dev-store/list?metadata=true', headers={'AUTH_TOKEN': token})
-            if response.status_code==200:
-                available_demos = get_list_demos(response.json())
-                if tracker.get_slot("demo") in available_demos:
-                    dispatcher.utter_message(text="Opening demo")
-                else:
-                    dispatcher.utter_message(text="There is no such demo available. Would you like to hear the list ?")
-            else:
-                dispatcher.utter_message(text="I'm sorry, something went wrong. Do you want me to restart ? (Restart/no)")
-        else:
-            dispatcher.utter_message(text="I'm sorry, I don't have any access to the AssetManager RESTFUL service. I need assistance")
+        if response=="NO ENVIRONMENT IS OPENED":
+            list_environments = my_graphQL.get_available_environments()
+            dispatcher.utter_message("Please, choose an environment before. Here are the available environments : "+", ".join(list_environments))
+            dispatcher.utter_message("You'll might have to choose a mode before launching ",tracker.get_slot("demo"))
+        if response=="NO MODE IS SELECTED":
+            dispatcher.utter_message(text="Please, select a mode between cluster and section")
+
+        if response=="NO PROJECT WITH THIS NAME":
+            dispatcher.utter_message(text="There is no such demo available. Would you like to hear the list ?")
+
+        if response=="OK":
+            dispatcher.utter_message(text="Opening demo...")
+
+        my_graphQL.client.close()
+
         return [SlotSet("demo",None)]
 
 class ActionListDemos(Action):
@@ -55,20 +58,24 @@ class ActionListDemos(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        requests_cache.install_cache('project cache')
+        my_graphQL = GraphQL()
 
-        token = get_access_token('guest','guest')
+        response = my_graphQL.get_projects()
 
-        if token!=None:
-            response = requests.get('http://gdo-students.dsi.ic.ac.uk:6080/api/dev-store/list?metadata=true', headers={'AUTH_TOKEN': token})
-            if response.status_code==200:
-                available_demos = get_list_demos(response.json())
-                dispatcher.utter_message("Here is the list of available demos : {}".format(available_demos))
-            else:
-                dispatcher.utter_message(text="I'm sorry, something went wrong.")
-        else:
-            dispatcher.utter_message(text="I'm sorry, I don't have any access to the AssetManager RESTFUL service.")
+        if response == None :
+            list_environments = my_graphQL.get_available_environments()
+            dispatcher.utter_message("I'm sorry, something went wrong. It seems that no environment is opened. Please choose an environment before. Here are all available environments : "+" ,".join(list_environments))
+
+        elif len(response.values()) == 0:
+            dispatcher.utter_message(text="There are no available demo.")
+
+        else :
+            dispatcher.utter_message("Here is the list of available demos : "+", ".join(response.values()))
+
+        my_graphQL.client.close()
+
         return []
+
 
 class ActionShutDown(Action):
 
@@ -79,8 +86,36 @@ class ActionShutDown(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        print("Shutting down screens...")
-        dispatcher.utter_message("Screens shutdown in progress")
+        my_graphQL = GraphQL()
+
+        if my_graphQL.turn_off_gdo()=="off":
+            print("The screens are shut down")
+            dispatcher.utter_message("The screens are shut down")
+        else:
+            dispatcher.utter_message(text="Something went wrong. Do you want me to restart ?")
+
+        my_graphQL.client.close()
+
+        return []
+
+class ActionTurnOnGDO(Action):
+
+    def name(self) -> Text:
+        return "action_turn_on_gdo"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        my_graphQL = GraphQL()
+
+        if my_graphQL.turn_on_gdo()=="on":
+            print("The GDO is on")
+            dispatcher.utter_message(text="The Global Data Observatory is on")
+        else:
+            dispatcher.utter_message(text="Something went wrong. Do you want me to restart ?")
+
+        my_graphQL.client.close()
 
         return []
 
@@ -95,15 +130,19 @@ class ActionUniformScreens(Action):
 
         color = tracker.get_slot("color")
 
-        if color != None:
-            color = color.lower()
-
         if color=="white":
             print("Full white screens")
             dispatcher.utter_message("White background in progress")
         elif color=="black":
-            print("Full black screens")
-            dispatcher.utter_message("Black background in progress")
+
+            my_graphQL = GraphQL()
+
+            if not my_graphQL.clear_screen():
+                dispatcher.utter_message(text="No environment is opened. I can't display full black screens")
+            else:
+                print("Full black screens")
+                dispatcher.utter_message("Black background in progress")
+            my_graphQL.client.close()
         else:
             print("Did not identify the background color")
             dispatcher.utter_message("I'm sorry I can only display a black or white background.")
@@ -170,29 +209,121 @@ class ActionSearch(Action):
 
             tag = tracker.get_slot("demo")
 
-            requests_cache.install_cache('project cache')
+            my_graphQL = GraphQL()
 
-            token = get_access_token('guest','guest')
+            available_demos = my_graphQL.get_projects()
 
-            print("the name of the slot :",tracker.get_slot("demo"))
-
-            if token!=None and tag!= None:
-                response = requests.get('http://gdo-students.dsi.ic.ac.uk:6080/api/dev-store/list?metadata=true', headers={'AUTH_TOKEN': token})
-                if response.status_code==200:
-                    available_demos = get_list_demos(response.json())
-                    result_search = self.demo_contains_tag(tag.lower(),available_demos)
-                    if result_search[0]:
-                        ids_demos_tag =result_search[1]
-                        dispatcher.utter_message(text="Reading the demos")
-                        dispatcher.utter_message("Results for {} : {}".format(tracker.get_slot("demo"),ids_demos_tag))
+            if available_demos == None:
+                dispatcher.utter_message(text="First, open an environment please")
+            elif tag == None:
+                dispatcher.utter_message(text="I'm sorry, there is no demos on this topic")
+            else:
+                dispatcher.utter_message(text="Reading the demos...")
+                available_demos_names = available_demos.values()
+                result_search = self.demo_contains_tag(tag.lower(),available_demos_names)
+                if result_search[0]:
+                    ids_demos_tag =result_search[1]
+                    if len(ids_demos_tag)<=10:
+                        dispatcher.utter_message("Results for "+str(tracker.get_slot("demo"))+" : "+", ".join(ids_demos_tag))
                     else:
                         dispatcher.utter_message(text="The list of demos is too long to read out. Would you like to refine it by other tags?")
                 else:
-                    dispatcher.utter_message(text="I'm sorry, something went wrong. Do you want me to restart ? (Restart/no)")
-            elif token == None:
-                dispatcher.utter_message(text="I'm sorry, I don't have any access to the AssetManager RESTFUL service. I need assistance")
-            else:
-                dispatcher.utter_message(text="I'm sorry, there is no demos on this topic")
+                    dispatcher.utter_message(text="I'm sorry, there is no demos on this topic")
 
+            my_graphQL.client.close()
 
             return [SlotSet("demo",None)]
+
+
+class ActionClearSpace(Action):
+
+        def name(self) -> Text:
+            return "action_clear_space"
+
+        def run(self, dispatcher: CollectingDispatcher,
+                tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+            my_graphQL = GraphQL()
+
+            if not my_graphQL.clear_screen():
+                dispatcher.utter_message(text="No environment is opened. I can't display clear the screens")
+            else:
+                print("Clear space")
+                dispatcher.utter_message("The space is cleaned")
+
+            my_graphQL.client.close()
+
+            return []
+
+class ActionSwitchMode(Action):
+
+        def name(self) -> Text:
+            return "action_switch_modes"
+
+        def run(self, dispatcher: CollectingDispatcher,
+                tracker: Tracker,
+                domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+            my_graphQL = GraphQL()
+
+            mode = tracker.get_slot('mode')
+            current_mode = my_graphQL.get_current_mode()
+
+            if mode == None:
+                if current_mode == None:
+                    dispatcher.utter_message(text="No mode has been selected. You can choose between cluster or section")
+                else :
+                    dispatcher.utter_message(text="The current mode is {}".format(current_mode))
+                    if current_mode == "section":
+                        new_mode = my_graphQL.choose_mode("cluster")
+                        dispatcher.utter_message(text="The mode has been changed to {}".format(new_mode['changeMode']['id']))
+                    elif current_mode == "cluster":
+                        new_mode = my_graphQL.choose_mode("section")
+                        dispatcher.utter_message(text="The mode has been changed to {}".format(new_mode['changeMode']['id']))
+            else:
+                if current_mode == mode:
+                    dispatcher.utter_message(text="The mode is already {}".format(current_mode))
+                else:
+                    new_mode = my_graphQL.choose_mode(mode)
+                    dispatcher.utter_message(text="The mode has been changed to {}".format(new_mode['changeMode']['id']))
+
+            my_graphQL.client.close()
+
+            return [SlotSet("mode",None)]
+
+class ActionOpenEnvironment(Action):
+
+        def name(self) -> Text:
+            return "action_open_environment"
+
+        def run(self, dispatcher: CollectingDispatcher,
+                tracker: Tracker,
+                domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+            my_graphQL = GraphQL()
+
+            environment = tracker.get_slot('work_environment')
+
+            current_environment = my_graphQL.get_current_environment()
+
+            list_available_environments = my_graphQL.get_available_environments()
+
+            if environment==None:
+                if my_graphQL.environment_is_opened():
+                    dispatcher.utter_message(text="The current environment is {}".format(current_environment))
+                else :
+                    dispatcher.utter_message("No environment is open")
+                dispatcher.utter_message(text="The available environments are : "+", ".join(list_available_environments))
+            else:
+                if environment == current_environment:
+                    dispatcher.utter_message(text="The environment is already the "+str(environment)+" one")
+                elif environment not in list_available_environments:
+                    dispatcher.utter_message(text="There's no such available environment")
+                    dispatcher.utter_message(text="The available environments are : "+", ".join(list_available_environments))
+                else:
+                    dispatcher.utter_message(text="The environement has been set to {}".format(my_graphQL.open_environment(environment)["changeEnvironment"]["id"]))
+
+            my_graphQL.client.close()
+
+            return [SlotSet("work_environment",None)]
