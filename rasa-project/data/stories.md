@@ -81,11 +81,54 @@
 * affirm
   - action_shutdown
 
+## shutdown confirm and fail, restart
+* shutdown
+  - utter_confirm_shutdown
+* affirm
+  - action_shutdown
+* affirm
+  - action_shutdown
+
+## shutdown confirm and fail, give up
+* shutdown
+  - utter_confirm_shutdown
+* affirm
+  - action_shutdown
+* deny
+  - utter_affirm
+
 ## shutdown cancel
 * shutdown
   - utter_confirm_shutdown
 * deny
   - utter_affirm
+
+## turn on gdo, confirm
+* turn_on_gdo
+  - utter_confirm_turn_on_gdo
+* affirm
+  - action_turn_on_gdo
+
+## turn on gdo, cancel
+* turn_on_gdo
+  - utter_confirm_turn_on_gdo
+* deny
+  - utter_affirm
+
+## turn on gdo, confirm, restart
+* turn_on_gdo
+  - utter_confirm_turn_on_gdo
+* affirm
+  - action_turn_on_gdo
+* affirm
+  - action_turn_on_gdo
+
+## turn on gdo, confirm, without restart
+* turn_on_gdo
+  - utter_confirm_turn_on_gdo
+* affirm
+  - action_turn_on_gdo
+* deny
 
 ## uniform screens
 * uniform_background
@@ -96,3 +139,17 @@
 * control
   - action_control
   - slot{"control_command":null}
+
+# clear screens
+* clear_space
+  - action_clear_space
+
+# switch modes
+* switch_modes
+  - action_switch_modes
+  - slot{"mode":null}
+
+# open environment
+* open_environment
+  - action_open_environment
+  - slot{"work_environment":null}
