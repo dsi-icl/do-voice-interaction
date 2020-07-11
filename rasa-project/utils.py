@@ -1,4 +1,3 @@
-from functools import lru_cache
 import fileinput
 
 from util_graphql import GraphQL
