@@ -155,6 +155,16 @@ class TestRequestsGDO(unittest.TestCase):
 
         my_graphQL.client.close()
 
+    def test_find_string_in_other_string(self):
+
+        my_graphQL = GraphQL()
+        name = my_graphQL.find_string_in_other_string("mars selfies",["mars screenshot","marsselfies","mars"])
+
+        self.assertEqual(name,"marsselfies")
+
+        my_graphQL.client.close()
+
+
 
 
 if __name__ == '__main__':
