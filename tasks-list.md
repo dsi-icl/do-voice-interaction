@@ -20,6 +20,6 @@
 - [x] Have a look how to make the process practical, if someone has a demo and wants to add voice interaction
 
 # Week of July 6th to July 10th
-- [x] Finish the 1st survey
+- [x] Finish the 2nd survey
 - [x] Make the connection between DeepSpeech and Rasa
 - [x] Getting familiar with gaphql and using it
