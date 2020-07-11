@@ -27,22 +27,24 @@ def ignore_stderr():
         os.dup2(old_stderr, 2)
         os.close(old_stderr)
 
-response = requests.post('http://localhost:5005/webhooks/rest/webhook',json={"message":"Hello"})
-
-print("\nCHATBOT : ",end=' ')
-for i in response.json():
-    bot_message = i['text']
-    print(f"{i['text']}")
-
-welcome = AudioSegment.from_wav('./tts_audios/welcome.wav')
-with ignore_stderr():
-    play(welcome)
+# response = requests.post('http://localhost:5002/webhooks/rest/webhook',json={"message":"Hello"})
+#
+# print("\nCHATBOT : ",end=' ')
+# for i in response.json():
+#     bot_message = i['text']
+#     print(f"{i['text']}")
+#
+# welcome = AudioSegment.from_wav('./tts_audios/welcome.wav')
+# with ignore_stderr():
+#     play(welcome)
 
 bot_message = ""
 message = ""
 
-while bot_message != "The Data Observatory thanks you for your presentation. I hope to see you soon :)":
+while bot_message != "The Data Observatory thanks you for your presentation. I hope to see you soon :)\n":
 
+    bot_message = ""
+    
     ts = time.time()
     OUT_FILE = "./deep_speech/audio/"+str(ts)+".wav"
 
@@ -53,20 +55,21 @@ while bot_message != "The Data Observatory thanks you for your presentation. I h
     print("\nYOU : {}".format(message))
 
     if len(message)==0:
+        os.remove("./deep_speech/audio/"+str(ts)+".wav")
         continue
 
     print("\nSending message now...\n")
 
-    response = requests.post('http://localhost:5005/webhooks/rest/webhook',json={"sender":"Human","message":message})
+    response = requests.post('http://localhost:5002/webhooks/rest/webhook',json={"sender":"Human","message":message})
     # r = requests.get("http://localhost:5005/conversations/Human/tracker")
     # results = json.loads(r.content.decode('utf8'))
     #
     # print(results['latest_message']['intent'])
 
     for i in response.json():
-        bot_message = i['text']
+        bot_message += i['text']+"\n"
 
-    if 'help' in message:
+    if 'help' in message or 'I can execute the following commands' in bot_message:
         bot_response = AudioSegment.from_wav('./tts_audios/help.wav')
     elif 'bye' in message:
         bot_response = AudioSegment.from_wav('./tts_audios/goodbye.wav')
@@ -79,5 +82,6 @@ while bot_message != "The Data Observatory thanks you for your presentation. I h
 
     with ignore_stderr():
         play(bot_response)
+
 
     os.remove("./deep_speech/audio/"+str(ts)+".wav")
