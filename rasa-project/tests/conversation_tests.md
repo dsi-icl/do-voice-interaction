@@ -5,13 +5,13 @@
 * greet: hello there!
   - utter_greet
 * affirm: yes, indeed !
-  - utter_help
+  - action_help
 
 ## welcome and asking for help 2
 * greet: good afternoon
   - utter_greet
 * affirm: yes, indeed !
-  - utter_help
+  - action_help
 
 ## welcome and no help needed 1
 * greet: hi there
@@ -35,11 +35,11 @@
 
 ## help 1
 * help: I've got a request for you
-  - utter_help
+  - action_help
 
 ## help 2
 * help: Some support please
-  - utter_help
+  - action_help
 
 ## open success 1
 * open: Please, launch the [airesearch](demo).
@@ -74,12 +74,14 @@
   - action_open
 * deny: no thank you
   - utter_affirm
+  - action_reset_slot
 
 ## open fail 2
 * open: [bitcoin](demo)
   - action_open
 * deny: no that's OK
   - utter_affirm
+  - action_reset_slot
 
 ## open fail and restart 1
 * open: Start [amr](demo)
@@ -104,7 +106,7 @@
   - utter_affirm
 
 ## search 3
-* search: Search something on [pollution]
+* search: Search something on sun
   - action_search
 * new_try: yes restart
   - action_search
@@ -151,11 +153,11 @@
 
 
 ## uniform screens 1
-* uniform_background: Show me full [white](color) screens please
+* uniform_background: Show me full black screens please
  - action_uniform_screens
 
 ## uniform screens 2
-* uniform_background: Can I see a [black](color) background
+* uniform_background: Can I see a black background
 - action_uniform_screens
 
 ## control pause
@@ -167,7 +169,7 @@
 - action_control
 
 ## control play
-* control: Could you [play](control_command) the song please ?
+* control: [play](control_command) the song
 - action_control
 
 ## control refresh
