@@ -1,5 +1,8 @@
 from gql import gql, Client
 from gql.transport.requests import RequestsHTTPTransport
+from functools import lru_cache
+from cachetools import LRUCache, cachedmethod
+import operator
 
 class GraphQL:
 
@@ -17,6 +20,8 @@ class GraphQL:
             transport=sample_transport,
             fetch_schema_from_transport=True,
         )
+
+        self.cache = LRUCache(maxsize=128)
 
     def open_environment(self,name_environment):
         "Function that opens the chosen environment"
@@ -198,6 +203,8 @@ class GraphQL:
 
         return False
 
+    #@lru_cache(user_function)
+    @cachedmethod(operator.attrgetter('cache'))
     def get_projects(self):
         "Function that returns a map with all available projects (id->name) and None if no environment is selected"
 
@@ -220,7 +227,7 @@ class GraphQL:
         map_projects = {}
 
         for project in result["current"]["projects"]:
-            map_projects[project['id']] = project['name']
+            map_projects[project['id']] = project['name'].lower()
 
         return map_projects
 
@@ -294,13 +301,68 @@ class GraphQL:
 
         return result["environments"][0]["amUser"]
 
+    def find_string_in_other_string(self,input_name,available_demos):
+        "Function that checks if each word of a string is contained in an other string"
+
+        words = input_name.split()
+
+        demo_found = False
+
+        count = 0
+
+        while not demo_found and count < len(available_demos):
+            demo_name = available_demos[count]
+            demo_found = True
+            ind = 0
+
+            while demo_found and ind<len(words):
+                demo_found = words[ind] in demo_name
+                ind += 1
+
+            if demo_found:
+                name = demo_name
+
+            ind = 0
+            count += 1
+
+        if demo_found:
+            return name
+
+        return None
+
+
+
+    def project_has_video(self,id):
+        "Function that checks if a project has a video or not"
+
+        query = gql('''
+            query has_video_controller($id:String!) {
+                current {
+                    project(id:$id){
+                        videoController
+                    }
+                }
+            }
+        '''
+        )
+
+        params = {
+            "id":id
+        }
+
+        result = self.client.execute(query,variable_values=params)
+
+        return result["current"]["project"]["videoController"]
+
+
 
 
 if __name__ == '__main__':
     my_graphQL = GraphQL()
-    print(my_graphQL.open_environment("students"))
+    # print(my_graphQL.open_environment("students"))
     # my_graphQL.login('guest','guest')
     # my_graphQL.logout()
     # my_graphQL.turn_on_gdo()
     # my_graphQL.turn_off_gdo()
-    print(my_graphQL.choose_mode("cluster"))
+    # print(my_graphQL.choose_mode("cluster"))
+    print(my_graphQL.project_has_video('dev-store#airesearch'))
