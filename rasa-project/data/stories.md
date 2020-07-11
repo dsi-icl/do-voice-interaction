@@ -2,7 +2,7 @@
 * greet
   - utter_greet
 * affirm
-  - utter_help
+  - action_help
 
 ## welcome and no help needed
 * greet
@@ -16,34 +16,44 @@
 
 ## help
 * help
-  - utter_help
+  - action_help
 
 ## open success
 * open
   - action_open
-  - slot{"demo": null}
+  - slot{"demo": null,"demo_name": null}
 
 ## open fail and list
 * open
   - action_open
-  - slot{"demo": null}
+  - slot{"demo": null,"demo_name": null}
 * affirm
   - action_list_demos
 
 ## open fail
 * open
   - action_open
-  - slot{"demo": null}
+  - slot{"demo": null,"demo_name": null}
 * deny
   - utter_affirm
+  - action_reset_slot
+  - slot{"demo": null,"demo_name": null}
 
 ## open fail and restart
 * open
   - action_open
-  - slot{"demo": null}
+  -  slot{"demo": null,"demo_name": null}
 * new_try
   - action_open
+  -  slot{"demo": null,"demo_name": null}
+
+## open and find demo similar
+* open
+  - action_open
   - slot{"demo": null}
+* open
+  - action_open
+  - slot{"demo": null,"demo_name": null}
 
 ## out_of_scope
 * out_of_scope
@@ -133,7 +143,6 @@
 ## uniform screens
 * uniform_background
   - action_uniform_screens
-  - slot{"color":null}
 
 ## control
 * control
