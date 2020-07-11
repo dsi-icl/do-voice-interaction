@@ -18,7 +18,6 @@ intents:
 
 entities:
   - demo
-  - color
   - control_command
   - mode
   - work_environment
@@ -26,11 +25,6 @@ entities:
 slots:
   demo:
     type: text
-  color:
-    type: categorical
-    values:
-    - black
-    - white
   control_command:
     type: categorical
     values:
@@ -50,6 +44,8 @@ slots:
     - students
     - production
     - development
+  demo_name:
+    type: unfeaturized
 
 actions:
   - action_open
@@ -62,28 +58,12 @@ actions:
   - action_clear_space
   - action_switch_modes
   - action_open_environment
+  - action_help
+  - action_reset_slot
 
 responses:
   utter_greet:
   - text: "Welcome to the Data Observatory. I am your voice assistant. Can I help you ?"
-  utter_help:
-  - text: "I can execute the following commands:
-            - [Please]? open <demo>
-            - Show me something on <tag>
-            - Launch <demo>
-            - Activate <demo>
-            - Shutdown screens
-            - Reset browsers
-            - Do a clearspace
-            - Refresh the screens
-            - Pause [the video/the audio]?
-            - Play <video>
-            - Start animation
-            - Stop animation
-            - Quit [video/audio]?
-            - Mute [video/audio]?
-            - Full black/ Full white
-            - Turn the volume up/down"
   utter_goodbye:
   - text: "The Data Observatory thanks you for your presentation. I hope to see you soon :)"
   utter_affirm:
