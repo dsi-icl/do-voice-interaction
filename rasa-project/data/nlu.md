@@ -40,6 +40,7 @@
 - support
 
 ## intent:open  
+- [aire search](demo)
 - [airesearch](demo)
 - [test-controllers](demo)
 - [publicproject](demo)
@@ -101,12 +102,11 @@
 - Could you restart ?
 
 ## intent:uniform_background
-- full [black](color)
-- full [white](color)
-- I would like [white](color) screens
-- Please display [black](color) screens
-- I only want [white](color) screens
-- I want a [black](color) background
+- full black
+- I would like black screens
+- Please display black screens
+- I only want black screens
+- I want a black background
 
 ## intent:clear_space
 - Clear the screens
