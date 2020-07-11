@@ -13,10 +13,7 @@ from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import SlotSet
 
-import requests
-import requests_cache
-
-from utils import get_access_token, get_list_demos
+from functools import lru_cache
 from util_graphql import GraphQL
 
 class ActionOpen(Action):
@@ -30,7 +27,11 @@ class ActionOpen(Action):
 
         my_graphQL = GraphQL()
 
-        response = my_graphQL.load_project(tracker.get_slot("demo"))
+        if tracker.get_slot("demo_name") != None:
+            response = my_graphQL.load_project(tracker.get_slot("demo_name"))
+        else:
+            response = my_graphQL.load_project(tracker.get_slot("demo"))
+
 
         if response=="NO ENVIRONMENT IS OPENED":
             list_environments = my_graphQL.get_available_environments()
@@ -40,14 +41,25 @@ class ActionOpen(Action):
             dispatcher.utter_message(text="Please, select a mode between cluster and section")
 
         if response=="NO PROJECT WITH THIS NAME":
-            dispatcher.utter_message(text="There is no such demo available. Would you like to hear the list ?")
+            if tracker.get_slot("demo")!=None:
+                #available_demos = my_graphQL.get_projects()
+                available_demos = ['airesearch','amr','test-controller']
+                #name = my_graphQL.find_string_in_other_string(tracker.get_slot("demo"),list(available_demos.values()))
+                name = my_graphQL.find_string_in_other_string(tracker.get_slot("demo"),available_demos)
+                if name != None:
+                    dispatcher.utter_message(text="I've found this demo : "+str(name)+". If you want me to open it, please say open?")
+                    return [SlotSet("demo",None), SlotSet("demo_name",name)]
+                else:
+                    dispatcher.utter_message(text="There is no such demo available. Would you like to hear the list ?")
+            else :
+                dispatcher.utter_message(text="There is no such demo available. Would you like to hear the list ?")
 
         if response=="OK":
             dispatcher.utter_message(text="Opening demo...")
 
         my_graphQL.client.close()
 
-        return [SlotSet("demo",None)]
+        return [SlotSet("demo",None),SlotSet("demo_name",None)]
 
 class ActionListDemos(Action):
 
@@ -128,26 +140,17 @@ class ActionUniformScreens(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        color = tracker.get_slot("color")
 
-        if color=="white":
-            print("Full white screens")
-            dispatcher.utter_message("White background in progress")
-        elif color=="black":
+        my_graphQL = GraphQL()
 
-            my_graphQL = GraphQL()
-
-            if not my_graphQL.clear_screen():
-                dispatcher.utter_message(text="No environment is opened. I can't display full black screens")
-            else:
-                print("Full black screens")
-                dispatcher.utter_message("Black background in progress")
-            my_graphQL.client.close()
+        if not my_graphQL.clear_screen():
+            dispatcher.utter_message(text="No environment is opened. I can't display full black screens")
         else:
-            print("Did not identify the background color")
-            dispatcher.utter_message("I'm sorry I can only display a black or white background.")
+            print("Full black screens")
+            dispatcher.utter_message("Black background in progress")
+        my_graphQL.client.close()
 
-        return [SlotSet("color",None)]
+        return []
 
 class ActionControl(Action):
 
@@ -327,3 +330,43 @@ class ActionOpenEnvironment(Action):
             my_graphQL.client.close()
 
             return [SlotSet("work_environment",None)]
+
+class ActionHelp(Action):
+
+        def name(self) -> Text:
+            return "action_help"
+
+        def run(self, dispatcher: CollectingDispatcher,
+                tracker: Tracker,
+                domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+            dispatcher.utter_message(text="I can execute the following commands :")
+            dispatcher.utter_message(text="-[Please]? open <demo>")
+            dispatcher.utter_message(text="-Show me something on <tag>")
+            dispatcher.utter_message(text="-Launch <demo>")
+            dispatcher.utter_message(text="-Activate <demo>")
+            dispatcher.utter_message(text="-Shutdown screens")
+            dispatcher.utter_message(text="-Reset browsers")
+            dispatcher.utter_message(text="-Do a clearspace")
+            dispatcher.utter_message(text="-Refresh the screens")
+            dispatcher.utter_message(text="-Pause [the video/the audio]")
+            dispatcher.utter_message(text="-Play <video>")
+            dispatcher.utter_message(text="-Start animation")
+            dispatcher.utter_message(text="-Stop animation")
+            dispatcher.utter_message(text="-Quit [video/audio]")
+            dispatcher.utter_message(text="-Mute [video/audio]")
+            dispatcher.utter_message(text="-Full black screens")
+            dispatcher.utter_message(text="-Open environment")
+            dispatcher.utter_message(text="-Switch mode")
+            dispatcher.utter_message(text="-Turn on the Global Data Observatory")
+            dispatcher.utter_message(text="-Shutdown the Global Data Observatory")
+
+            return []
+
+class ActionResetSlot(Action):
+
+    def name(self):
+        return "action_reset_slot"
+
+    def run(self, dispatcher, tracker, domain):
+        return [SlotSet("demo", None), SlotSet("demo_name",None)]
