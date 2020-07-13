@@ -23,3 +23,8 @@
 - [x] Finish the 2nd survey
 - [x] Make the connection between DeepSpeech and Rasa
 - [x] Getting familiar with gaphql and using it
+
+# Week of July 13th to July 17th
+- [ ] Send the 2nd survey
+- [ ] Design the modular architecture 
+- [ ] Make UML diagrams
