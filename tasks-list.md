@@ -15,7 +15,6 @@
 - [x] Try to build the scenarios with RASA
 - [x] Add scenarios according to the survey answers
 - [x] Do the second survey according to answers of the first one
-
 - [x] Install DeepSpeech
 - [x] Have a look how to make the process practical, if someone has a demo and wants to add voice interaction
 
