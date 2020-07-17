@@ -131,27 +131,6 @@ class ActionTurnOnGDO(Action):
 
         return []
 
-class ActionUniformScreens(Action):
-
-    def name(self) -> Text:
-        return "action_uniform_screens"
-
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
-
-        my_graphQL = GraphQL()
-
-        if not my_graphQL.clear_screen():
-            dispatcher.utter_message(text="No environment is opened. I can't display full black screens")
-        else:
-            print("Full black screens")
-            dispatcher.utter_message("Black background in progress")
-        my_graphQL.client.close()
-
-        return []
-
 class ActionControl(Action):
 
         def name(self) -> Text:
@@ -360,6 +339,7 @@ class ActionHelp(Action):
             dispatcher.utter_message(text="-Switch mode")
             dispatcher.utter_message(text="-Turn on the Global Data Observatory")
             dispatcher.utter_message(text="-Shutdown the Global Data Observatory")
+            dispatcher.utter_message(text="-Open/Close/Reset browsers")
 
             return []
 
@@ -370,3 +350,78 @@ class ActionResetSlot(Action):
 
     def run(self, dispatcher, tracker, domain):
         return [SlotSet("demo", None), SlotSet("demo_name",None)]
+
+class ActionOpenBrowsers(Action):
+
+    def name(self):
+        return "action_open_browsers"
+
+    def run(self, dispatcher, tracker, domain):
+
+        my_graphQL = GraphQL()
+
+        if not my_graphQL.environment_is_opened():
+            dispatcher.utter_message(text="Please, open en environment before")
+        elif not my_graphQL.mode_is_selected():
+            dispatcher.utter_message(text="Please, select a mode before")
+        elif my_graphQL.open_browsers():
+            dispatcher.utter_message(text="The browsers are open")
+        else:
+            dispatcher.utter_message(text="Something went wrong. Do you want me to try again ?")
+
+        my_graphQL.client.close()
+        return []
+
+class ActionCloseBrowsers(Action):
+
+    def name(self):
+        return "action_close_browsers"
+
+    def run(self, dispatcher, tracker, domain):
+
+        my_graphQL = GraphQL()
+
+        if not my_graphQL.environment_is_opened():
+            dispatcher.utter_message(text="Please, open en environment before")
+        elif not my_graphQL.mode_is_selected():
+            dispatcher.utter_message(text="Please, select a mode before")
+        elif my_graphQL.close_browsers():
+            dispatcher.utter_message(text="The browsers are closed")
+        else:
+            dispatcher.utter_message(text="Something went wrong. Do you want me to try again ?")
+
+        my_graphQL.client.close()
+        return []
+
+class ActionRefreshBrowsers(Action):
+
+    def name(self):
+        return "action_refresh_browsers"
+
+    def run(self, dispatcher, tracker, domain):
+
+        my_graphQL = GraphQL()
+
+        if not my_graphQL.environment_is_opened():
+            dispatcher.utter_message(text="Please, open en environment before")
+        elif not my_graphQL.mode_is_selected():
+            dispatcher.utter_message(text="Please, select a mode before")
+        elif my_graphQL.refresh_browsers():
+            dispatcher.utter_message(text="The browsers are refreshed")
+        else:
+            dispatcher.utter_message(text="Something went wrong. Do you want me to try again ?")
+
+        my_graphQL.client.close()
+        return []
+
+class ActionRepeat(Action):
+
+    def name(self):
+        return "action_repeat"
+
+    def run(self, dispatcher, tracker, domain):
+
+        if len(tracker.events) >= 3:
+                dispatcher.utter_message(tracker.events[-3].get('text'))
+
+        return []
