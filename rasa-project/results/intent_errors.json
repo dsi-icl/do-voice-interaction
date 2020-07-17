@@ -1,10 +1,18 @@
 [
   {
-    "text": "good afternoon",
-    "intent": "greet",
+    "text": "Could you open the browsers",
+    "intent": "open_browsers",
     "intent_prediction": {
-      "name": "deny",
-      "confidence": 0.5570043325424194
+      "name": "refresh_browsers",
+      "confidence": 0.27285653352737427
+    }
+  },
+  {
+    "text": "I want to open the browsers",
+    "intent": "open_browsers",
+    "intent_prediction": {
+      "name": "refresh_browsers",
+      "confidence": 0.33358776569366455
     }
   }
 ]
