@@ -29,6 +29,7 @@
 - goodbye
 - see you around
 - see you later
+- see you
 
 ## intent:help
 - help
@@ -49,7 +50,7 @@
 - [jagadovis](demo)
 - [datasparks20template](demo)
 - I would like to open [gaze](demo)
-- please open [amr](demo)
+- open [amr](demo)
 - launch [defra](demo)
 - activate [An open bucket new works](demo)
 - start [davidtest](demo)
@@ -59,7 +60,7 @@
 - [twitter](demo)
 - launch [london cycling map](demo)
 - open [cycling map](demo)
-- Start [anotherthest](demo), please
+- Start [anotherthest](demo)
 - Could you activate the [test](demo) ?
 - Open [DataSparks 2020 Project Luna](demo)
 - I'd like to launch the [datest](demo)
@@ -72,6 +73,7 @@
 - I need a job
 - I want to dance !
 - What's the day of birth of Julius Caesar ?
+- What's the weather today ?
 
 ## intent:search
 - Show me something on [london](demo)
@@ -95,18 +97,12 @@
 - I'd like to turn on the Global Data Observatory
 - Start the gdo
 - Turn on the screens
+- I would like to turn on the screens
 
 ## intent:new_try
 - restart
-- I'd like to restart please
+- I'd like to restart
 - Could you restart ?
-
-## intent:uniform_background
-- full black
-- I would like black screens
-- Please display black screens
-- I only want black screens
-- I want a black background
 
 ## intent:clear_space
 - Clear the screens
@@ -114,12 +110,17 @@
 - clear space
 - I'd like to clean the space
 - Could you clear the space
+- full black
+- I would like black screens
+- Display black screens
+- I only want black screens
+- I want a black background
 
 
 ## intent:control
 - [Play](control_command) the video
 - [play](control_command) the audio
-- [Pause](control_command) please
+- [Pause](control_command)
 - I would like to [pause](control_command) the video
 - I want to [stop](control_command) the audio file
 - [Stop](control_command) it
@@ -144,6 +145,31 @@
 - Show me available environments
 - List of available environments
 - Select [development](work_environment) environment
-- Could you open the [production](work_environment) please
+- Could you open the [production](work_environment)
 - I'd like to go on the [students](work_environment)
 - What's the current environment
+
+## intent:open_browsers
+- Open browsers
+- Could you open the browsers
+- I want to open the browsers
+- I'd like to open the browsers
+
+## intent:close_browsers
+- Close browsers
+- Could you close the browsers
+- I want to close the browsers
+- I'd like to close the browsers
+
+## intent:refresh_browsers
+- Reset browsers
+- Could you reset the browsers
+- I want to reset the browsers
+- I'd like to reset the browsers
+
+## intent:ask_repeat
+- repeat
+- Could you repeat
+- Say it again
+- I'd like you to repeat
+- What did you say

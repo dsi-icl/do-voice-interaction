@@ -140,10 +140,6 @@
   - action_turn_on_gdo
 * deny
 
-## uniform screens
-* uniform_background
-  - action_uniform_screens
-
 ## control
 * control
   - action_control
@@ -162,3 +158,55 @@
 * open_environment
   - action_open_environment
   - slot{"work_environment":null}
+
+# open browsers success
+* open_browsers
+  - action_open_browsers
+
+# open browsers, fail, try again
+* open_browsers
+  - action_open_browsers
+* affirm
+  - action_open_browsers
+
+# open browsers, fail
+* open_browsers
+  - action_open_browsers
+* deny
+  - utter_affirm
+
+# close browsers success
+* close_browsers
+  - action_close_browsers
+
+# close browsers, fail, try again
+* close_browsers
+  - action_close_browsers
+* affirm
+  - action_close_browsers
+
+# close browsers, fail
+* close_browsers
+  - action_close_browsers
+* deny
+  - utter_affirm
+
+# refresh browsers success
+* refresh_browsers
+  - action_refresh_browsers
+
+# refresh browsers, fail, try again
+* refresh_browsers
+  - action_refresh_browsers
+* affirm
+  - action_refresh_browsers
+
+# refresh browsers, fail
+* refresh_browsers
+  - action_refresh_browsers
+* deny
+  - utter_affirm
+
+# ask repeat
+* ask_repeat
+  - action_repeat
