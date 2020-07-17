@@ -34,7 +34,7 @@
   - utter_goodbye
 
 ## help 1
-* help: I've got a request for you
+* help: Help me 
   - action_help
 
 ## help 2
@@ -54,7 +54,7 @@
   - utter_out_of_scope
 
 ## out_of_scope 2
-* out_of_scope: What time is it ?
+* out_of_scope: What's the temperature outside ?
   - utter_out_of_scope
 
 ## open fail and list 1
@@ -151,15 +151,6 @@
 * deny: No
   - utter_affirm
 
-
-## uniform screens 1
-* uniform_background: Show me full black screens please
- - action_uniform_screens
-
-## uniform screens 2
-* uniform_background: Can I see a black background
-- action_uniform_screens
-
 ## control pause
 * control: I want to [pause](control_command) the video please
 - action_control
@@ -238,3 +229,55 @@
 # open environment 3
 * open_environment: What are the available environments ?
   - action_open_environment
+
+# open browsers 1
+* open_browsers: Open browsers please
+  - action_open_browsers
+
+# open browsers 2
+* open_browsers: Could you open the browsers
+  - action_open_browsers
+* affirm: Yes
+  - action_open_browsers
+
+# open browsers 3
+* open_browsers: I'd like to open the browsers
+  - action_open_browsers
+* deny: No
+  - utter_affirm
+
+# close browsers 1
+* close_browsers: Close browsers please
+  - action_close_browsers
+
+# close browsers 2
+* close_browsers: Could you close the browsers
+  - action_close_browsers
+* affirm: Yes
+  - action_close_browsers
+
+# close browsers 3
+* close_browsers: I'd like to close the browsers
+  - action_close_browsers
+* deny: No
+  - utter_affirm
+
+# refresh browsers 1
+* refresh_browsers: Reset browsers please
+  - action_refresh_browsers
+
+# refresh browsers 2
+* refresh_browsers: Could you reset the browsers
+  - action_refresh_browsers
+* affirm: Yes
+  - action_refresh_browsers
+
+# refresh browsers 3
+* refresh_browsers: I'd like to reset the browsers
+  - action_refresh_browsers
+* deny: No
+  - utter_affirm
+
+# ask repeat 1
+* ask_repeat: Could you repeat please
+ - action_repeat
