@@ -9,12 +9,15 @@ intents:
   - search
   - shutdown
   - new_try
-  - uniform_background
   - control
   - clear_space
   - switch_modes
   - turn_on_gdo
   - open_environment
+  - open_browsers
+  - close_browsers
+  - refresh_browsers
+  - ask_repeat
 
 entities:
   - demo
@@ -52,7 +55,6 @@ actions:
   - action_list_demos
   - action_shutdown
   - action_turn_on_gdo
-  - action_uniform_screens
   - action_control
   - action_search
   - action_clear_space
@@ -60,6 +62,10 @@ actions:
   - action_open_environment
   - action_help
   - action_reset_slot
+  - action_open_browsers
+  - action_close_browsers
+  - action_refresh_browsers
+  - action_repeat
 
 responses:
   utter_greet:
