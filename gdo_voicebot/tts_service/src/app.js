@@ -31,7 +31,8 @@ app.get("/gtts/audio", (req, res) => {
         generate_voice_message(response.data);
     });
 
-    res.send("done");
+    res.download("./src/audio/voice.wav");
 
 });
+
 export default app;

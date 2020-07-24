@@ -2,9 +2,8 @@ const Fs = require("fs");
 const Axios = require("axios");
 var FileWriter = require("wav").FileWriter;
 const DeepSpeech = require("deepspeech");
-/* 
-export  */
-function speech_to_text(audioFile) {
+
+export function speech_to_text(audioFile) {
 
     const BEAM_WIDTH = 1024;
     let modelPath = "./src/models/deepspeech-0.7.4-models.pbmm";
@@ -31,7 +30,7 @@ function speech_to_text(audioFile) {
 
 } 
 
-/* export async function getAudio() {
+export async function getAudio() {
 
     const writer = new FileWriter("./src/audio/test.wav", {
         sampleRate: 16000,
@@ -53,4 +52,3 @@ function speech_to_text(audioFile) {
     });
 
 } 
- */

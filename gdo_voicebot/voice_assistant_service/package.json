@@ -10,6 +10,7 @@
     "lint:fix": "eslint --fix ./src/**/*.js ./src/*.js"
   },
   "dependencies": {
+    "axios": "^0.19.2",
     "cookie-parser": "1.4.4",
     "cors": "2.8.5",
     "debug": "^2.6.9",
@@ -18,11 +19,13 @@
     "fs": "0.0.1-security",
     "http-errors": "1.6.3",
     "lodash": "4.17.19",
+    "mediaserver": "^0.1.1",
     "memory-stream": "^1.0.0",
     "morgan": "1.9.1",
     "node-record-lpcm16": "^1.0.1",
     "sox": "^0.1.0",
-    "uuid": "8.1.0"
+    "uuid": "8.1.0",
+    "wav": "^1.0.2"
   },
   "devDependencies": {
     "@zeit/ncc": "0.22.1",
