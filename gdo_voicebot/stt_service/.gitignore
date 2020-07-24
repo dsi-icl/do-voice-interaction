@@ -1,0 +1,16 @@
+node_modules/
+dist/
+src/models/
+src/audio
+
+package-lock.json
+
+.idea/
+*.iml
+
+.DS_Store
+
+*.log
+
+# do not commit the real config file, use the template instead
+config/config.json
