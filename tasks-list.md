@@ -25,5 +25,10 @@
 
 # Week of July 13th to July 17th
 - [x] Send the 2nd survey
-- [ ] Design the modular architecture 
-- [ ] Make UML diagrams
+- [x] Design the modular architecture 
+- [x] Make UML diagrams
+
+# Week of July 20th to July 24th
+- [ ] Implement the three following services : tts, stt, voice-assistant
+
+
