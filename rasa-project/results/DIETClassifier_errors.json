@@ -1,20 +1,27 @@
 [
   {
-    "text": "Can you show me something on the data science institute",
+    "text": "activate An open bucket new works",
     "entities": [
       {
-        "start": 29,
-        "end": 55,
-        "value": "the data science institute",
+        "start": 9,
+        "end": 33,
+        "value": "An open bucket new works",
         "entity": "demo"
       }
     ],
     "predicted_entities": [
       {
         "entity": "demo",
-        "start": 33,
-        "end": 55,
-        "value": "data science institute",
+        "start": 9,
+        "end": 11,
+        "value": "An",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "demo",
+        "start": 17,
+        "end": 33,
+        "value": "bucket new works",
         "extractor": "DIETClassifier"
       }
     ]

@@ -10,7 +10,7 @@ def write_demos_entities():
     if not my_graphQL.environment_is_opened():
         my_graphQL.open_environment('students')
 
-    available_demos = list(my_graphQL.get_projects().values())
+    available_demos = list(GraphQL.get_projects().values())
 
     #we open the nlu.md file in read mode to retrieve all the lines of the file
     file = open("./data/nlu.md","r")

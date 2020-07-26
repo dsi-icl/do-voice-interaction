@@ -4,15 +4,7 @@
     "intent": "open_browsers",
     "intent_prediction": {
       "name": "refresh_browsers",
-      "confidence": 0.27285653352737427
-    }
-  },
-  {
-    "text": "I want to open the browsers",
-    "intent": "open_browsers",
-    "intent_prediction": {
-      "name": "refresh_browsers",
-      "confidence": 0.33358776569366455
+      "confidence": 0.24545295536518097
     }
   }
 ]

@@ -34,7 +34,7 @@
   - utter_goodbye
 
 ## help 1
-* help: Help me 
+* help: Help me
   - action_help
 
 ## help 2
@@ -54,7 +54,7 @@
   - utter_out_of_scope
 
 ## out_of_scope 2
-* out_of_scope: What's the temperature outside ?
+* out_of_scope: When it's your birthday ?
   - utter_out_of_scope
 
 ## open fail and list 1
@@ -280,4 +280,12 @@
 
 # ask repeat 1
 * ask_repeat: Could you repeat please
- - action_repeat
+  - action_repeat
+
+# list of available demos 1
+* list_available_demos: Could you show me the list of projects
+  - action_list_demos
+
+# list of available demos 2
+* list_available_demos: Give me all available demos
+  - action_list_demos

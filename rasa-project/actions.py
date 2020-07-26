@@ -29,6 +29,10 @@ class ActionOpen(Action):
 
         if tracker.get_slot("demo_name") != None:
             response = my_graphQL.load_project(tracker.get_slot("demo_name"))
+        elif tracker.get_slot("demo")==None:
+            dispatcher.utter_message(text="There is no such demo available. Would you like to hear the list ?")
+            my_graphQL.client.close()
+            return [SlotSet("demo",None),SlotSet("demo_name",None)]
         else:
             response = my_graphQL.load_project(tracker.get_slot("demo"))
 
@@ -41,17 +45,12 @@ class ActionOpen(Action):
             dispatcher.utter_message(text="Please, select a mode between cluster and section")
 
         if response=="NO PROJECT WITH THIS NAME":
-            if tracker.get_slot("demo")!=None:
-                #available_demos = my_graphQL.get_projects()
-                available_demos = ['airesearch','amr','test-controller']
-                #name = my_graphQL.find_string_in_other_string(tracker.get_slot("demo"),list(available_demos.values()))
-                name = my_graphQL.find_string_in_other_string(tracker.get_slot("demo"),available_demos)
-                if name != None:
-                    dispatcher.utter_message(text="I've found this demo : "+str(name)+". If you want me to open it, please say open?")
-                    return [SlotSet("demo",None), SlotSet("demo_name",name)]
-                else:
-                    dispatcher.utter_message(text="There is no such demo available. Would you like to hear the list ?")
-            else :
+            available_demos = GraphQL.get_projects()
+            name = GraphQL.find_string_in_other_string(tracker.get_slot("demo"),list(available_demos.values()))
+            if name != None:
+                dispatcher.utter_message(text="I've found this demo : "+str(name)+". If you want me to open it, please say open?")
+                return [SlotSet("demo",None), SlotSet("demo_name",name)]
+            else:
                 dispatcher.utter_message(text="There is no such demo available. Would you like to hear the list ?")
 
         if response=="OK":
@@ -72,7 +71,7 @@ class ActionListDemos(Action):
 
         my_graphQL = GraphQL()
 
-        response = my_graphQL.get_projects()
+        response = GraphQL.get_projects()
 
         if response == None :
             list_environments = my_graphQL.get_available_environments()
@@ -193,7 +192,7 @@ class ActionSearch(Action):
 
             my_graphQL = GraphQL()
 
-            available_demos = my_graphQL.get_projects()
+            available_demos = GraphQL.get_projects()
 
             if available_demos == None:
                 dispatcher.utter_message(text="First, open an environment please")

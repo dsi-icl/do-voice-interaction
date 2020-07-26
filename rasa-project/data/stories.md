@@ -210,3 +210,7 @@
 # ask repeat
 * ask_repeat
   - action_repeat
+
+# list of available projects
+* list_available_demos
+  - action_list_demos

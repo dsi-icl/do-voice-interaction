@@ -138,6 +138,7 @@
 - I would like to take the [section](mode)
 - I choose [cluster](mode)
 - Change the mode
+- What's the current mode
 
 ## intent:open_environment
 - Open [students](work_environment) environment
@@ -154,18 +155,21 @@
 - Could you open the browsers
 - I want to open the browsers
 - I'd like to open the browsers
+- I would like to open browsers
 
 ## intent:close_browsers
 - Close browsers
 - Could you close the browsers
 - I want to close the browsers
 - I'd like to close the browsers
+- I would like to close browsers
 
 ## intent:refresh_browsers
 - Reset browsers
 - Could you reset the browsers
 - I want to reset the browsers
 - I'd like to reset the browsers
+- I would like to reset browsers
 
 ## intent:ask_repeat
 - repeat
@@ -173,3 +177,10 @@
 - Say it again
 - I'd like you to repeat
 - What did you say
+
+## intent:list_available_demos
+- Give me the list of available demos
+- Show me all the projects
+- Available demos
+- What's the list of available environments
+- Available projects

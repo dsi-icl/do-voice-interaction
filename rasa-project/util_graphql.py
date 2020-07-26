@@ -1,7 +1,6 @@
 from gql import gql, Client
 from gql.transport.requests import RequestsHTTPTransport
 from functools import lru_cache
-from cachetools import LRUCache, cachedmethod
 import operator
 
 class GraphQL:
@@ -12,7 +11,8 @@ class GraphQL:
     def __init__(self):
 
         sample_transport=RequestsHTTPTransport(
-            url='http://192.168.0.35:4000/graphql',
+            #url='http://192.168.0.35:4000/graphql',
+            url='http://10.0.2.15:4000/graphql',
             verify=False,
             retries=3,
         )
@@ -21,7 +21,7 @@ class GraphQL:
             fetch_schema_from_transport=True,
         )
 
-        self.cache = LRUCache(maxsize=128)
+        # self.cache = LRUCache(maxsize=128)
 
     def open_environment(self,name_environment):
         "Function that opens the chosen environment"
@@ -203,10 +203,22 @@ class GraphQL:
 
         return False
 
-    #@lru_cache(user_function)
-    @cachedmethod(operator.attrgetter('cache'))
-    def get_projects(self):
+    @staticmethod
+    @lru_cache(maxsize=None)
+    def get_projects():
         "Function that returns a map with all available projects (id->name) and None if no environment is selected"
+
+        sample_transport=RequestsHTTPTransport(
+            #url='http://192.168.0.35:4000/graphql',
+            url='http://10.0.2.15:4000/graphql',
+            verify=False,
+            retries=3,
+        )
+
+        client = Client(
+            transport=sample_transport,
+            fetch_schema_from_transport=True,
+        )
 
         query = gql('''
             query current {
@@ -219,7 +231,7 @@ class GraphQL:
         '''
         )
 
-        result = self.client.execute(query)
+        result = client.execute(query)
 
         if result['current'] == None:
             return None
@@ -228,6 +240,8 @@ class GraphQL:
 
         for project in result["current"]["projects"]:
             map_projects[project['id']] = project['name'].lower()
+
+        client.close()
 
         return map_projects
 
@@ -240,7 +254,7 @@ class GraphQL:
         if not self.mode_is_selected():
             return "NO MODE IS SELECTED"
 
-        map_projects = self.get_projects()
+        map_projects = GraphQL.get_projects()
 
         if not name_project in map_projects.values():
             return "NO PROJECT WITH THIS NAME"
@@ -301,7 +315,8 @@ class GraphQL:
 
         return result["environments"][0]["amUser"]
 
-    def find_string_in_other_string(self,input_name,available_demos):
+    @staticmethod
+    def find_string_in_other_string(input_name,available_demos):
         "Function that checks if each word of a string is contained in an other string"
 
         words = input_name.split()
@@ -354,15 +369,75 @@ class GraphQL:
 
         return result["current"]["project"]["videoController"]
 
+    def open_browsers(self):
+        "Function that opens browsers"
+
+        mutation = gql('''
+            mutation executeHwAction($action:String!) {
+                executeHwAction(action:$action)
+            }
+        '''
+        )
+
+        params = {
+            "action":"open"
+        }
+
+        result = self.client.execute(mutation,variable_values=params)
+
+        return result["executeHwAction"]=="done"
+
+    def close_browsers(self):
+        "Function that closes browsers"
+
+        mutation = gql('''
+            mutation executeHwAction($action:String!) {
+                executeHwAction(action:$action)
+            }
+        '''
+        )
+
+        params = {
+            "action":"kill"
+        }
+
+        result = self.client.execute(mutation,variable_values=params)
+
+        return result["executeHwAction"]=="done"
+
+    def refresh_browsers(self):
+        "Function that refreshs browsers"
+
+        mutation = gql('''
+            mutation executeHwAction($action:String!) {
+                executeHwAction(action:$action)
+            }
+        '''
+        )
+
+        params = {
+            "action":"refresh"
+        }
+
+        result = self.client.execute(mutation,variable_values=params)
+
+        return result["executeHwAction"]=="done"
 
 
 
 if __name__ == '__main__':
     my_graphQL = GraphQL()
-    # print(my_graphQL.open_environment("students"))
-    # my_graphQL.login('guest','guest')
+    print(my_graphQL.open_environment("students"))
+    #my_graphQL.login('admin','adminadmin')
     # my_graphQL.logout()
     # my_graphQL.turn_on_gdo()
     # my_graphQL.turn_off_gdo()
-    # print(my_graphQL.choose_mode("cluster"))
-    print(my_graphQL.project_has_video('dev-store#airesearch'))
+    print(my_graphQL.choose_mode("cluster"))
+    # print(GraphQL.get_projects())
+    # print(GraphQL.get_projects())
+    # print(GraphQL.get_projects())
+    # print(my_graphQL.load_project('airesearch'))
+    print(my_graphQL.open_browsers())
+    print(my_graphQL.close_browsers())
+    print(my_graphQL.refresh_browsers())
+    #print(my_graphQL.project_has_video('dev-store#airesearch'))

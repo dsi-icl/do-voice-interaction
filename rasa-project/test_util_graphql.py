@@ -125,7 +125,7 @@ class TestRequestsGDO(unittest.TestCase):
 
         my_graphQL.open_environment("students")
 
-        map = my_graphQL.get_projects()
+        map = GraphQL.get_projects()
 
         list_projects = ['airesearch','amr','test-controllers']
         for ind,project in enumerate(map.values()):
@@ -157,14 +157,51 @@ class TestRequestsGDO(unittest.TestCase):
 
     def test_find_string_in_other_string(self):
 
-        my_graphQL = GraphQL()
-        name = my_graphQL.find_string_in_other_string("mars selfies",["mars screenshot","marsselfies","mars"])
+        name = GraphQL.find_string_in_other_string("mars selfies",["mars screenshot","marsselfies","mars"])
 
         self.assertEqual(name,"marsselfies")
 
+    def test_open_browsers(self):
+
+        my_graphQL = GraphQL()
+
+        if not my_graphQL.environment_is_opened():
+            my_graphQL.open_environment("students")
+
+        if not my_graphQL.mode_is_selected():
+            my_graphQL.choose_mode("section")
+
+        self.assertEqual(my_graphQL.open_browsers(),True)
+
         my_graphQL.client.close()
 
+    def test_close_browsers(self):
 
+        my_graphQL = GraphQL()
+
+        if not my_graphQL.environment_is_opened():
+            my_graphQL.open_environment("students")
+
+        if not my_graphQL.mode_is_selected():
+            my_graphQL.choose_mode("section")
+
+        self.assertEqual(my_graphQL.close_browsers(),True)
+
+        my_graphQL.client.close()
+
+    def test_refresh_browsers(self):
+
+        my_graphQL = GraphQL()
+
+        if not my_graphQL.environment_is_opened():
+            my_graphQL.open_environment("students")
+
+        if not my_graphQL.mode_is_selected():
+            my_graphQL.choose_mode("section")
+
+        self.assertEqual(my_graphQL.refresh_browsers(),True)
+
+        my_graphQL.client.close()
 
 
 if __name__ == '__main__':
