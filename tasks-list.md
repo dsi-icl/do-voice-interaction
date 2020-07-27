@@ -30,5 +30,11 @@
 
 # Week of July 20th to July 24th
 - [ ] Implement the three following services : tts, stt, voice-assistant
+---------------------------------
+- [x] Start of implementation of the 3 services
+- [x] Technical issues management
 
+# Week of July 27th to July 31st
+- [ ] Change to be made in the initial architecture (socket)
+- [ ] Implement the echo service with Client-Server architecture using Socket
 
