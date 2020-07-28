@@ -1,11 +1,10 @@
-const Recorder = require("node-record-lpcm16");
+/* const Recorder = require("node-record-lpcm16");
 const MemoryStream = require("memory-stream");
-const Fs = require("fs");
-const Axios = require("axios");
-var FileWriter = require("wav").FileWriter;
-
+const Fs = require("fs"); */
+/* const Axios = require("axios");
+var FileWriter = require("wav").FileWriter; */
 //Function to be used to record the user's request
-function record(){
+/* function record(){
 
     //We create a binary stream with the name of the file were the record will be saved.
     const file = Fs.createWriteStream("./audio/test.wav", { encoding: "binary" });
@@ -45,12 +44,12 @@ function record(){
     return audioStream.toBuffer();
 
 }
-
+ */
 /* record(); */
 
 // Function to get an audio file from an API request and save it audio repertory
 // This function will be used to get the voice robot answer in a wav file
-export async function getAudio() {
+/* export async function getAudio() {
 
     const writer = new FileWriter("./src/audio/voice.wav", {
         sampleRate: 16000,
@@ -71,4 +70,4 @@ export async function getAudio() {
         writer.on("error", reject);
     });
 
-} 
+}  */

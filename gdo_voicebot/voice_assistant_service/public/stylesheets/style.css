@@ -6,3 +6,13 @@ body {
 a {
   color: #00B7FF;
 }
+
+.fa {
+  font-size: 25px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.fa:hover {
+  color: rgb(201, 36, 36);
+}
