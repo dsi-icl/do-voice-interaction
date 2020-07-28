@@ -43,17 +43,17 @@ httpServer.listen(4000, () => {
 });
 
 var io = socketio.listen(httpServer);
-/* io.of("/api/echo").on("connect",(client) =>{ */
+
 io.on("connect",(client) =>{
 
-    console.log("Client connected ");/* +String.valueOf(client.request.connection) */
-    //client.emit("server_setup", "Server connected [id=${client.id}]");
+    console.log("Client connected ");
+    
     client.on("message", async function(data) {
         console.log("record done");
         const dataURL = data.audio.dataURL.split(",").pop();
         let fileBuffer = Buffer.from(dataURL, "base64");
-        client.emit("test",{"msg":"it's ok"});
-    
+        client.emit("result",fileBuffer);
+        console.log(fileBuffer);
     });
 });
 
