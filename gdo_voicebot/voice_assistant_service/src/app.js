@@ -3,7 +3,6 @@ import cors from "cors";
 import logger from "morgan";
 import fs from "fs";
 import http from "http";
-/* import ss from "socket.io-stream"; */
 import path from "path";
 import socketio from "socket.io";
 
@@ -28,15 +27,17 @@ import {sampleData} from "./routes/index.js";
 
 app.get("/api/status", (req, res) => res.send("Service is running"));
 app.get("/api/json", sampleData);
-app.get("/api/echo", (req,res)=> {
+/* app.get("/api/echo", (req,res)=> {
     res.sendFile(__dirname +"/public/index.html");
 });
 
 app.get("/api/stylesheets/style.css", (req,res)=>{
     res.sendFile(__dirname +"/public/stylesheets/style.css");
-});
-
+}); */
 app.use("/node_modules", express.static(__dirname + "/node_modules"));
+app.use("/api/echo", express.static('public'));
+
+
 
 httpServer.listen(4000, () => {
     console.log("listening on *:4000");
@@ -47,13 +48,12 @@ var io = socketio.listen(httpServer);
 io.on("connect",(client) =>{
 
     console.log("Client connected ");
-    
+
     client.on("message", async function(data) {
         console.log("record done");
         const dataURL = data.audio.dataURL.split(",").pop();
         let fileBuffer = Buffer.from(dataURL, "base64");
         client.emit("result",fileBuffer);
-        console.log(fileBuffer);
     });
 });
 

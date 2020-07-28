@@ -7,8 +7,6 @@
   <link href="./stylesheets/style.css" rel="stylesheet" media="screen" charset="utf-8" type="text/css" />
   <script src="/socket.io/socket.io.js"></script>
   <script src="../../node_modules/recordrtc/RecordRTC.js"></script>
-  <script src="../../node_modules/hark/hark.bundle.js"></script>
-  <script src="index.js"></script>
   <title>Voicebot Record Platform</title>
 </head>
 
@@ -20,24 +18,16 @@
     <button id="recordButton" disabled><i class="fa fa-microphone"></i></button>
     <button id="stopButton" disabled><i class="fa fa-stop"></i></button>
   </div>
-  </br>
-  <span id="message"></span>
-  </br>
-  </br>
-  <span>You can use stop to cancel the record</span>
 </body>
 <script type="text/javascript">
 
+  //window.onload = init;
   const recordButton = document.getElementById("recordButton");
   const stopButton = document.getElementById("stopButton");
   let recorder = null;
   let audioContext;
   let source;
   let audioBuffer;
-  let options = {};
-  var speechEvents;
-  var voiceActivityDetected;
-  var message = document.getElementById("message");
 
   const socket = io();
 
@@ -65,19 +55,15 @@
   socket.on("connect", function () {
     recordButton.disabled = false;
     init();
-  }) 
+  })
 
   recordButton.onclick = function () {
     recordButton.disabled = true;
-    stopButton.disabled = false;
-    voiceActivityDetected = false;
 
     navigator.getUserMedia({
       audio: true
     }, function (stream) {
       mediaStream = stream;
-
-      speechEvents = Hark(stream, options);
 
       try {
         recorder = RecordRTC(stream, {
@@ -85,38 +71,16 @@
           mimeType: 'audio/wav',
           recorderType: StereoAudioRecorder,
           desiredSampleRate: 16000,
-          numberOfAudioChannels: 1,
+          numberOfAudioChannels: 1, 
         });
-      } catch (err) {
+      } catch(err) {
         alert(err.name);
       }
-      message.innerHTML = "You can speak";
+
       recorder.startRecording();
-      speechEvents.on("speaking", function () {
-        voiceActivityDetected = true;
-        message.innerHTML = "You're speaking ;)";
-      })
+      stopButton.disabled = false;
 
-      if (!stopButton.disabled) {
-          speechEvents.on("stopped_speaking", function () {
-            message.innerHTML = "<font color='green'>You stopped talking. Your message has been sent to the server</font>";
-            recorder.stopRecording(function () {
 
-              recorder.getDataURL(function (audioDataURL) {
-                var files = {
-                  audio: {
-                    type: recorder.getBlob().type || 'audio/wav',
-                    dataURL: audioDataURL
-                  }
-                };
-                socket.emit("message", files);
-                if (mediaStream) mediaStream.stop();
-              });
-            });
-            recorder.clearRecordedData();
-          });
-      };
-  
     }, function (error) {
       alert(JSON.stringify(error));
       console.error(JSON.stringify(error));
@@ -124,17 +88,27 @@
   };
   
   stopButton.onclick = function () {
-    message.innerHTML = "<font color='red'>Record cancelled</font>";
-    recorder.stopRecording(function(){});
-    recorder.clearRecordedData();
-    stopButton.disabled = true;
     recordButton.disabled = false;
+    stopButton.disabled = true;
+  
+    recorder.stopRecording(function () {
+      
+      recorder.getDataURL(function (audioDataURL) {
+        var files = {
+          audio: {
+            type: recorder.getBlob().type || 'audio/wav',
+            dataURL: audioDataURL
+          }
+        };
+        socket.emit("message", files);
+        if (mediaStream) mediaStream.stop();
+      });
+    });
+    recorder.clearRecordedData();
   };
 
   socket.on("result",function(data){
     play(data);
-    recordButton.disabled = false;
-    stopButton.disabled = true;
   })
 
 </script>
