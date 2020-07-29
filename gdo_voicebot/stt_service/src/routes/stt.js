@@ -28,7 +28,7 @@ export function speech_to_text(audioFile) {
 
     return result;
 
-} 
+}
 
 export async function getAudio() {
 
@@ -51,4 +51,4 @@ export async function getAudio() {
         writer.on("error", reject);
     });
 
-} 
+}

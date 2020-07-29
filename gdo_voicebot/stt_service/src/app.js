@@ -14,19 +14,26 @@ const app = express();
 
 app.use(cors());
 app.use(logger("dev"));
-app.use(express.json());
+app.use(express.text({limit:"50mb"}));
 app.use(express.urlencoded({extended: false}));
 
-import {speech_to_text, getAudio} from "./routes/stt.js";
+//import {speech_to_text, getAudio} from "./routes/stt.js";
 
-getAudio();
+import {sampleData,isEmpty} from "./routes/index.js";
 
-app.get("/deepspeech/text-message", function(req,res) {
+app.get("/api/status", (req, res) => res.send("Service is running"));
+app.get("/api/json", sampleData);
+app.post("/api/stt", (req,res) => {
 
-    let result = speech_to_text("./src/audio/test.wav");
-    console.log(result);
-    res.send(result);
+    if(isEmpty(req.body)){
+        res.statusCode=400;
+        res.json({"status":"fail","message":"The request body contains nothing"});
+    } else {
+        /* const buffer = req.body; */
+        res.json({"status":"ok","text":"Not implemented yet"});
+    }
 
+    
 });
 
 export default app;
