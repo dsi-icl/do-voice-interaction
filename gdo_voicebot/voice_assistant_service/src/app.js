@@ -5,6 +5,7 @@ import fs from "fs";
 import http from "http";
 import path from "path";
 import socketio from "socket.io";
+import fetch from "node-fetch";
 
 
 if (!fs.existsSync("./config/config.json")) {
@@ -18,6 +19,7 @@ const app = express();
 var httpServer = http.createServer(app);
 const __dirname = path.resolve();
 
+
 app.use(cors());
 app.use(logger("dev"));
 app.use(express.json());
@@ -27,17 +29,8 @@ import {sampleData} from "./routes/index.js";
 
 app.get("/api/status", (req, res) => res.send("Service is running"));
 app.get("/api/json", sampleData);
-/* app.get("/api/echo", (req,res)=> {
-    res.sendFile(__dirname +"/public/index.html");
-});
-
-app.get("/api/stylesheets/style.css", (req,res)=>{
-    res.sendFile(__dirname +"/public/stylesheets/style.css");
-}); */
 app.use("/node_modules", express.static(__dirname + "/node_modules"));
-app.use("/api/echo", express.static('public'));
-
-
+app.use("/api/echo", express.static("public"));
 
 httpServer.listen(4000, () => {
     console.log("listening on *:4000");
@@ -52,10 +45,51 @@ io.on("connect",(client) =>{
     client.on("message", async function(data) {
         console.log("record done");
         const dataURL = data.audio.dataURL.split(",").pop();
+
         let fileBuffer = Buffer.from(dataURL, "base64");
-        client.emit("result",fileBuffer);
+        let sttResponse =  await postData("http://localhost:3000/api/stt",fileBuffer);
+
+        if(sttResponse!=null && sttResponse["status"]=="ok"){
+            var voiceAnswer = await getData("http://localhost:5000/api/tts","Me gusta el chocolate");
+            client.emit("result",voiceAnswer);
+        } else {
+            console.log("status :",sttResponse["status"]);
+            console.log("error message :",sttResponse["message"]);
+        }
+        
     });
 });
+
+async function postData(url, data) {
+    let jsondata;
+    await fetch(url, {
+        method: "post",
+        headers: { "Content-type": "text/plain" },
+        body: data
+    })
+        .then(res => res.json())
+        .then(json => {
+            jsondata = json;
+        })
+        .catch(error => {
+            console.log("Error", error);
+            return null;
+        });
+
+    return jsondata;
+}
+
+async function getData(requestUrl,robotAnswer){
+
+    var url = new URL(requestUrl),
+        params = {text:robotAnswer,lang:"es"};
+    Object.keys(params).forEach(key =>
+        url.searchParams.append(key, params[key]));
+    let response = await fetch(url);
+    let data = await response.arrayBuffer();
+
+    return data;
+}
 
 /* app.get("/voice-assistant/record",(req,res) => res.download("./src/audio/show_me_paris.wav"), function (err) {
     console.log(err);
