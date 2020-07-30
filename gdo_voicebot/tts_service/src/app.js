@@ -1,4 +1,9 @@
 /**
+ * @file Manages routing of the text-to-speech service 
+ * @author Aurélie Beaugeard
+*/
+
+/**
  * @import { express } from "express"
  * @version 4.16.1
  */
@@ -63,6 +68,7 @@ app.get("/api/json", sampleData);
  * 
  * @name Text to Speech service
  * @route {GET} /api/tts
+ * @see {@link https://www.npmjs.com/package/gtts|Gtts}
  */
 app.get("/api/tts", (req, res) => {
 
