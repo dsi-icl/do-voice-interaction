@@ -22,7 +22,7 @@ export async function postData(url, data) {
         method: "post",
         headers: { "Content-type": "text/plain" },
         body: data
-        })
+    })
         .then(res => res.json())
         .then(json => {
             jsondata = json;

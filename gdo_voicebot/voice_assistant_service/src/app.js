@@ -16,6 +16,7 @@ global.config = JSON.parse(fs.readFileSync("./config/config.json").toString());
 
 const app = express();
 var httpServer = http.createServer(app);
+var voiceAnswer;
 const __dirname = path.resolve();
 
 
@@ -44,17 +45,16 @@ io.on("connect",(client) =>{
     client.on("message", async function(data) {
         console.log("RECORD DONE\n");
         const dataURL = data.audio.dataURL.split(",").pop();
-        const fileBuffer = Buffer.from(dataURL,"base64");
         let sttResponse =  await postData("http://localhost:3000/api/stt",dataURL);
 
         if(sttResponse!=null && sttResponse["status"]=="ok"){
-            console.log("Speech to text transcription : SUCCESS\n")
+            console.log("Speech to text transcription : SUCCESS\n");
             client.emit("user-request",{"user":sttResponse["text"]});
-            var voiceAnswer = await getData("http://localhost:5000/api/tts","The Data Observatory control service has not been integrated yet");
+            voiceAnswer = await getData("http://localhost:5000/api/tts","The Data Observatory control service has not been integrated yet");
             client.emit("result",voiceAnswer);
             client.emit("robot-answer",{"robot":"The DO control service has not been integrated yet"});
         } else {
-            var voiceAnswer = await getData("http://localhost:5000/api/tts","I encountered an error. Please consult technical support or try the request again");
+            voiceAnswer = await getData("http://localhost:5000/api/tts","I encountered an error. Please consult technical support or try the request again");
             client.emit("problem",sttResponse);
             client.emit("voice-alert",voiceAnswer);
             client.emit("user-request",{"user":"..."});
