@@ -5,7 +5,6 @@ import fs from "fs";
 import http from "http";
 import path from "path";
 import socketio from "socket.io";
-import fetch from "node-fetch";
 
 
 if (!fs.existsSync("./config/config.json")) {
@@ -25,7 +24,7 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
-import {sampleData} from "./routes/index.js";
+import {sampleData, postData, getData} from "./routes/index.js";
 
 app.get("/api/status", (req, res) => res.send("Service is running"));
 app.get("/api/json", sampleData);
@@ -33,79 +32,40 @@ app.use("/node_modules", express.static(__dirname + "/node_modules"));
 app.use("/api/echo", express.static("public"));
 
 httpServer.listen(4000, () => {
-    console.log("listening on *:4000");
+    console.log("listening on *:4000\n");
 });
 
 var io = socketio.listen(httpServer);
 
 io.on("connect",(client) =>{
 
-    console.log("Client connected ");
+    console.log("Client connected\n");
 
     client.on("message", async function(data) {
-        console.log("record done");
+        console.log("RECORD DONE\n");
         const dataURL = data.audio.dataURL.split(",").pop();
-
-        let fileBuffer = Buffer.from(dataURL, "base64");
-        let sttResponse =  await postData("http://localhost:3000/api/stt",fileBuffer);
+        const fileBuffer = Buffer.from(dataURL,"base64");
+        let sttResponse =  await postData("http://localhost:3000/api/stt",dataURL);
 
         if(sttResponse!=null && sttResponse["status"]=="ok"){
-            var voiceAnswer = await getData("http://localhost:5000/api/tts","Me gusta el chocolate");
+            console.log("Speech to text transcription : SUCCESS\n")
+            client.emit("user-request",{"user":sttResponse["text"]});
+            var voiceAnswer = await getData("http://localhost:5000/api/tts","The Data Observatory control service has not been integrated yet");
             client.emit("result",voiceAnswer);
+            client.emit("robot-answer",{"robot":"The DO control service has not been integrated yet"});
         } else {
-            console.log("status :",sttResponse["status"]);
-            console.log("error message :",sttResponse["message"]);
+            var voiceAnswer = await getData("http://localhost:5000/api/tts","I encountered an error. Please consult technical support or try the request again");
+            client.emit("problem",sttResponse);
+            client.emit("voice-alert",voiceAnswer);
+            client.emit("user-request",{"user":"..."});
+            client.emit("robot-answer",{"robot":"I encountered an error. Please consult technical support or try the request again."});
+            console.log("Speech to text transcription : FAIL\n");
+            console.log("Status :",sttResponse["status"]);
+            console.log("Concerned service : ",sttResponse["service"]);
+            console.log("Error message :",sttResponse["message"]+"\n");
         }
-        
+
     });
 });
-
-async function postData(url, data) {
-    let jsondata;
-    await fetch(url, {
-        method: "post",
-        headers: { "Content-type": "text/plain" },
-        body: data
-    })
-        .then(res => res.json())
-        .then(json => {
-            jsondata = json;
-        })
-        .catch(error => {
-            console.log("Error", error);
-            return null;
-        });
-
-    return jsondata;
-}
-
-async function getData(requestUrl,robotAnswer){
-
-    var url = new URL(requestUrl),
-        params = {text:robotAnswer,lang:"es"};
-    Object.keys(params).forEach(key =>
-        url.searchParams.append(key, params[key]));
-    let response = await fetch(url);
-    let data = await response.arrayBuffer();
-
-    return data;
-}
-
-/* app.get("/voice-assistant/record",(req,res) => res.download("./src/audio/show_me_paris.wav"), function (err) {
-    console.log(err);
-});
-
-var bot_message = "Welcome to the GDO. Can I help you ?";
-app.get("/voice-assistant/text-answer", (req,res) => res.send(bot_message));
-
-import {getAudio} from "./routes/voice_assistant.js";
-
-getAudio();
-
-app.get("voice-assistant/voice-answer", (req,res) => {
-
-    var voice_answer = "./src/audio/voice.wav";
-
-}); */
 
 export default app;

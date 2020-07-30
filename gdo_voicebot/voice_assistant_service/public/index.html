@@ -10,6 +10,11 @@
   <script src="../../node_modules/hark/hark.bundle.js"></script>
   <script src="javascripts/index.js"></script>
   <title>Voicebot Record Platform</title>
+  <style>
+    #messages { list-style-type: none; margin: 0; padding: 0; }
+    #messages li { padding: 5px 10px; }
+    #messages li:nth-child(odd) { background: #eee; }
+  </style>
 </head>
 
 <body>
@@ -25,11 +30,15 @@
   </br>
   </br>
   <span>You can use stop to cancel the record</span>
+  </br>
+  </br>
+  <ul id="messages"></ul>
 </body>
 <script type="text/javascript">
 
   const recordButton = document.getElementById("recordButton");
   const stopButton = document.getElementById("stopButton");
+  const listMessages = document.getElementById("messages");
   let recorder = null;
   let audioContext;
   let source;
@@ -37,6 +46,7 @@
   let options = {};
   var speechEvents;
   var voiceActivityDetected;
+  var errorData = {};
   var message = document.getElementById("message");
 
   const socket = io();
@@ -115,7 +125,6 @@
             });
             recorder.clearRecordedData();
           });
-          //recordButton.disabled = false;
       };
   
     }, function (error) {
@@ -136,6 +145,29 @@
     play(data);
     recordButton.disabled = false;
     stopButton.disabled = true;
+  })
+
+  socket.on("voice-alert",(data)=>{
+    play(data);
+    setTimeout(()=>{alert("ERROR :\nStatus : "+errorData["status"]+"\nService concerned : "+errorData["service"]+"\nDescription : "+errorData["message"]);},6000);
+  });
+
+  socket.on("problem",(data)=>{
+    errorData = data;
+    recordButton.disabled = false;
+    stopButton.disabled = true;
+  })
+
+  socket.on("user-request",(data)=>{
+    var message = document.createElement('li');
+    message.innerHTML = "YOU SAID : "+data["user"];
+    listMessages.appendChild(message);
+  })
+
+  socket.on("robot-answer",(data)=>{
+    var message = document.createElement('li');
+    message.innerHTML = "BOT ANSWER : "+data["robot"];
+    listMessages.appendChild(message);
   })
 
 </script>
