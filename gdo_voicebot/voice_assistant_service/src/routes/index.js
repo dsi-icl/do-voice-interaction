@@ -1,5 +1,5 @@
 /**
- * @file Manages some deepspeech utilities functions
+ * @file Manages some voice-assistant utilities functions
  * @author Aurélie Beaugeard
 */
 
