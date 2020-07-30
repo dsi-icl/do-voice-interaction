@@ -9,6 +9,7 @@
     "lint": "eslint ./src/**/*.js ./src/*.js",
     "lint:fix": "eslint --fix ./src/**/*.js ./src/*.js"
   },
+  "type": "module",
   "dependencies": {
     "axios": "^0.19.2",
     "cookie-parser": "1.4.4",
@@ -19,6 +20,7 @@
     "fs": "0.0.1-security",
     "hark": "^1.2.3",
     "http-errors": "1.6.3",
+    "jsdoc-route-plugin": "^0.1.0",
     "lodash": "4.17.19",
     "mediaserver": "^0.1.1",
     "memory-stream": "^1.0.0",
