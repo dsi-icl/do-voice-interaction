@@ -19,6 +19,7 @@
     "esm": "3.2.25",
     "express": "4.17.1",
     "http-errors": "1.6.3",
+    "jsdoc-route-plugin": "^0.1.0",
     "lodash": "4.17.19",
     "morgan": "1.9.1",
     "sox": "^0.1.0",
