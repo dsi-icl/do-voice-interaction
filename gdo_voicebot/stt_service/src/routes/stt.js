@@ -1,9 +1,24 @@
-const Fs = require("fs");
-const Axios = require("axios");
-var FileWriter = require("wav").FileWriter;
+/* const Fs = require("fs"); */
+/* var FileWriter = require("wav").FileWriter; */
 const DeepSpeech = require("deepspeech");
 
-export function speech_to_text(audioFile) {
+export function speech_to_text(arrayBuffer,model) {
+
+
+    /*  if (!Fs.existsSync(audioFile)) {
+        console.log("file missing:", audioFile);
+        process.exit();
+        }
+
+    const buffer = Fs.readFileSync(audioFile); */
+
+    let result = model.stt(arrayBuffer);
+    
+    return result;
+
+}
+
+export function loadDeepSpeechModel() {
 
     const BEAM_WIDTH = 1024;
     let modelPath = "./src/models/deepspeech-0.7.4-models.pbmm";
@@ -18,19 +33,12 @@ export function speech_to_text(audioFile) {
     model.enableExternalScorer(scorerPath);
     model.setScorerAlphaBeta(LM_ALPHA,LM_BETA);
 
-    if (!Fs.existsSync(audioFile)) {
-        console.log("file missing:", audioFile);
-        process.exit();
-    }
-
-    const buffer = Fs.readFileSync(audioFile);
-    let result = model.stt(buffer);
-
-    return result;
+    return model;
 
 }
 
-export async function getAudio() {
+
+/* export async function getAudio() {
 
     const writer = new FileWriter("./src/audio/test.wav", {
         sampleRate: 16000,
@@ -52,3 +60,4 @@ export async function getAudio() {
     });
 
 }
+ */
