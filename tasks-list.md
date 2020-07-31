@@ -35,6 +35,7 @@
 - [x] Technical issues management
 
 # Week of July 27th to July 31st
-- [ ] Change to be made in the initial architecture (socket)
-- [ ] Implement the echo service with Client-Server architecture using Socket
+- [x] Change to be made in the initial architecture (socket)
+- [x] Implement the echo service with Client-Server architecture using Socket
+- [x] tts, stt, voice-assistant services implemented
 
