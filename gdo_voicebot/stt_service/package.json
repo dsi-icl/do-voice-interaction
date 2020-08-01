@@ -21,7 +21,7 @@
     "http-errors": "1.8.0",
     "jsdoc-route-plugin": "0.1.0",
     "lodash": "4.17.19",
-    "morgan": "1.9.1",
+    "morgan": "1.10.0",
     "sox": "0.1.0",
     "uuid": "8.1.0",
     "wav": "1.0.2"
