@@ -30,7 +30,7 @@
     "recordrtc": "5.6.1",
     "socket.io": "2.3.0",
     "sox": "0.1.0",
-    "uuid": "8.1.0",
+    "uuid": "8.3.0",
     "wav": "1.0.2"
   },
   "devDependencies": {
