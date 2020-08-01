@@ -17,7 +17,7 @@
     "debug": "4.1.1",
     "esm": "3.2.25",
     "express": "4.17.1",
-    "fs": "0.0.1-security",
+    "fs": "0.0.2",
     "hark": "1.2.3",
     "http-errors": "1.6.3",
     "jsdoc-route-plugin": "0.1.0",
