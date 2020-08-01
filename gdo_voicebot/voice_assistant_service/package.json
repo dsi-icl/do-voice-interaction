@@ -19,7 +19,7 @@
     "express": "4.17.1",
     "fs": "0.0.2",
     "hark": "1.2.3",
-    "http-errors": "1.6.3",
+    "http-errors": "1.8.0",
     "jsdoc-route-plugin": "0.1.0",
     "lodash": "4.17.19",
     "mediaserver": "0.1.1",
