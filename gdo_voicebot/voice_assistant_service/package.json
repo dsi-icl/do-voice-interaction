@@ -5,9 +5,9 @@
   "scripts": {
     "start": "node -r esm ./bin/www",
     "start:dev": "nodemon -r esm ./bin/www",
-    "build": "ncc build ./bin/www -o dist -m",
-    "lint": "eslint ./src/**/*.js ./src/*.js",
-    "lint:fix": "eslint --fix ./src/**/*.js ./src/*.js"
+    "build": "npm run lint && ncc build ./bin/www -o dist -m",
+    "lint": "standard ./src/**/*.js ./src/*.js",
+    "lint:fix": "standard --fix ./src/**/*.js ./src/*.js"
   },
   "type": "module",
   "dependencies": {
@@ -37,7 +37,8 @@
     "@zeit/ncc": "0.22.1",
     "babel-eslint": "10.0.3",
     "eslint": "7.0.0",
-    "nodemon": "2.0.3"
+    "nodemon": "2.0.3",
+    "standard": "^14.3.4"
   },
   "jest": {
     "testPathIgnorePatterns": [
