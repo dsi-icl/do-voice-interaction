@@ -2,6 +2,7 @@ node_modules/
 dist/
 src/models/
 src/audio
+models/
 
 package-lock.json
 
