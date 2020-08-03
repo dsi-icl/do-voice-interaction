@@ -98,64 +98,6 @@
 
         
             
-<h4 class="name" id="DeepSpeech"><span class="type-signature">(constant) </span>DeepSpeech<span class="type-signature"></span></h4>
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="routes_stt.js.html">routes/stt.js</a>, <a href="routes_stt.js.html#line11">line 11</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-        
-            
 <h4 class="name" id="Gettingservicestatus"><span class="type-signature"></span>Getting service status<span class="type-signature"></span></h4>
 
 
@@ -200,7 +142,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="app.js.html">app.js</a>, <a href="app.js.html#line61">line 61</a>
+        <a href="app.js.html">app.js</a>, <a href="app.js.html#line46">line 46</a>
     </li></ul></dd>
     
 
@@ -262,7 +204,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="app.js.html">app.js</a>, <a href="app.js.html#line69">line 69</a>
+        <a href="app.js.html">app.js</a>, <a href="app.js.html#line54">line 54</a>
     </li></ul></dd>
     
 
@@ -324,7 +266,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="app.js.html">app.js</a>, <a href="app.js.html#line77">line 77</a>
+        <a href="app.js.html">app.js</a>, <a href="app.js.html#line62">line 62</a>
     </li></ul></dd>
     
 
@@ -345,6 +287,189 @@
 
     
         <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="executeSpeechToTextRequest"><span class="type-signature"></span>executeSpeechToTextRequest<span class="signature">(req, res, model)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Function that manages the post request from the stt service
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>req</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Request</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the received request from the voice-assistant service</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>res</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Response</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the response in json format</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>model</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">DeepSpeech.Model</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the DeepSppech model to make the speech to text transcription</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="routes_stt.js.html">routes/stt.js</a>, <a href="routes_stt.js.html#line58">line 58</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         
             
@@ -563,7 +688,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="routes_stt.js.html">routes/stt.js</a>, <a href="routes_stt.js.html#line47">line 47</a>
+        <a href="routes_stt.js.html">routes/stt.js</a>, <a href="routes_stt.js.html#line38">line 38</a>
     </li></ul></dd>
     
 
@@ -788,7 +913,7 @@
     
 
     
-    <h4 class="name" id="speech_to_text"><span class="type-signature"></span>speech_to_text<span class="signature">(audioBuffer, model)</span><span class="type-signature"> &rarr; {String}</span></h4>
+    <h4 class="name" id="speechToText"><span class="type-signature"></span>speechToText<span class="signature">(audioBuffer, model)</span><span class="type-signature"> &rarr; {String}</span></h4>
     
 
     
@@ -912,7 +1037,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="routes_stt.js.html">routes/stt.js</a>, <a href="routes_stt.js.html#line21">line 21</a>
+        <a href="routes_stt.js.html">routes/stt.js</a>, <a href="routes_stt.js.html#line22">line 22</a>
     </li></ul></dd>
     
 
@@ -987,13 +1112,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#DeepSpeech">DeepSpeech</a></li><li><a href="global.html#Gettingservicestatus">Getting service status</a></li><li><a href="global.html#Gettingthetestresult">Getting the test result</a></li><li><a href="global.html#isEmpty">isEmpty</a></li><li><a href="global.html#loadDeepSpeechModel">loadDeepSpeechModel</a></li><li><a href="global.html#sampleData">sampleData</a></li><li><a href="global.html#Speech-To-Texttranscriptionpost">Speech-To-Text transcription post</a></li><li><a href="global.html#speech_to_text">speech_to_text</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#executeSpeechToTextRequest">executeSpeechToTextRequest</a></li><li><a href="global.html#Gettingservicestatus">Getting service status</a></li><li><a href="global.html#Gettingthetestresult">Getting the test result</a></li><li><a href="global.html#isEmpty">isEmpty</a></li><li><a href="global.html#loadDeepSpeechModel">loadDeepSpeechModel</a></li><li><a href="global.html#sampleData">sampleData</a></li><li><a href="global.html#Speech-To-Texttranscriptionpost">Speech-To-Text transcription post</a></li><li><a href="global.html#speechToText">speechToText</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.5</a> on Thu Jul 30 2020 21:23:12 GMT+0200 (heure d’été d’Europe centrale)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.5</a> on Mon Aug 03 2020 14:01:06 GMT+0200 (heure d’été d’Europe centrale)
 </footer>
 
 <script> prettyPrint(); </script>
