@@ -1,73 +1,59 @@
-/* const Recorder = require("node-record-lpcm16");
-const MemoryStream = require("memory-stream");
-const Fs = require("fs"); */
-/* const Axios = require("axios");
-var FileWriter = require("wav").FileWriter; */
-//Function to be used to record the user's request
-/* function record(){
+import { getData, postData } from './index.js'
 
-    //We create a binary stream with the name of the file were the record will be saved.
-    const file = Fs.createWriteStream("./audio/test.wav", { encoding: "binary" });
-    const audioStream = new MemoryStream();
+export async function successProcess (client, sttResponse) {
+  console.log('Speech to text transcription : SUCCESS\n')
 
-    //DeepSpeech works with 16000Hz/s, monochannel, 16 Bit, wav formats
-    const recording = Recorder.record({
-        sampleRate: 16000,
-        channels: 1,
-        audioType: "wav"
-    });
+  // The user receives a transcript of her or his voice message for verification.
+  client.emit('user-request', { user: sttResponse.text })
 
-    console.log("* Recording");
+  // We send the text message to the tts service to get back the voice answer.
+  const voiceAnswer = await getData(global.config.tts_service, 'The Data Observatory control service has not been integrated yet')
 
-    // // Pause recording after one second
-    // setTimeout(() => {
-    //   recording.pause()
-    // }, 1000)
-    //
-    // // Resume another second later
-    // setTimeout(() => {
-    //   recording.resume()
-    // }, 2000)
+  // Voice answer sent to the client through the socket
+  client.emit('result', voiceAnswer)
 
-    recording.stream()
-        .on("error", err => {
-            console.error("recorder threw an error:", err);
-        })
-        .pipe(file);
-
-    // Stop recording after five seconds
-    setTimeout(() => {
-        recording.stop();
-        console.log("* End of recording");
-    }, 5000);
-
-    return audioStream.toBuffer();
-
+  // The text version of the bot answer is also sent and displayed on the user interface
+  client.emit('robot-answer', { robot: 'The DO control service has not been integrated yet' })
 }
- */
-/* record(); */
 
-// Function to get an audio file from an API request and save it audio repertory
-// This function will be used to get the voice robot answer in a wav file
-/* export async function getAudio() {
+export async function errorProcess (client, sttResponse) {
+  // We geerate an error voice message
+  const voiceAnswer = await getData(global.config.tts_service, 'I encountered an error. Please consult technical support or try the request again')
 
-    const writer = new FileWriter("./src/audio/voice.wav", {
-        sampleRate: 16000,
-        channels: 1,
-        bitDepth: 16
-    });
+  // We send the json content response to the client, to give a description to the user in an alert box
+  client.emit('problem', sttResponse)
 
-    const response = await Axios({
-        method: "GET",
-        url: "http://localhost:5000/gtts/audio",
-        responseType: "stream"
-    });
+  // The voice alert is sent to the client to be played
+  client.emit('voice-alert', voiceAnswer)
 
-    response.data.pipe(writer);
+  // We indicate to the user that its message is not perceived.
+  client.emit('user-request', { user: '...' })
 
-    return new Promise((resolve, reject) => {
-        writer.on("finish", resolve);
-        writer.on("error", reject);
-    });
+  // Console error messages
+  console.log('Speech to text transcription : FAIL\n')
+  console.log('Status :', sttResponse.status)
+  console.log('Concerned service : ', sttResponse.service)
+  console.log('Error message :', sttResponse.message + '\n')
+}
 
-}  */
+export function echoProcess (client) {
+  console.log('Client connected\n')
+
+  // The user has recorded a message and the client sent it to the server
+  client.on('message', async function (data) {
+    console.log('RECORD DONE\n')
+
+    // We get the audio blob and send it to the stt service
+    const dataURL = data.audio.dataURL.split(',').pop()
+
+    const sttResponse = await postData(global.config.stt_service, dataURL)
+
+    // If an error was encountered during the request or the string response is empty we inform the user through the event problem with the socket.
+    // Else we can send the text transcript to the the text to speech service and sending the audiobuffer received to the client.
+    if (sttResponse != null && sttResponse.status === 'ok') {
+      successProcess(client, sttResponse)
+    } else {
+      errorProcess(client, sttResponse)
+    }
+  })
+}

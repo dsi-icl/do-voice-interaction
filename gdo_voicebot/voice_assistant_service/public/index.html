@@ -3,7 +3,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="./stylesheets/all.css" rel="stylesheet">
   <link href="./stylesheets/style.css" rel="stylesheet" media="screen" charset="utf-8" type="text/css" />
   <script src="/socket.io/socket.io.js"></script>
   <script src="../../node_modules/recordrtc/RecordRTC.js"></script>
@@ -197,7 +197,9 @@
   //Voice alert in case of error during the stt transcription
   socket.on("voice-alert",(data)=>{
     play(data);
-    setTimeout(()=>{alert("ERROR :\nStatus : "+errorData["status"]+"\nService concerned : "+errorData["service"]+"\nDescription : "+errorData["message"]);},6000);
+    var message = document.createElement('li');
+    message.innerHTML = "BOT ANSWER : I encountered this error ''"+errorData["message"]+"'' in the "+errorData["service"]+". Error status : "+errorData["status"]+".";
+    setTimeout(()=>{listMessages.appendChild(message)},6000);
   });
 
   //Event to receive the error json description and to update the buttons state to default

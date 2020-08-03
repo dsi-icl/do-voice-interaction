@@ -7,6 +7,10 @@ a {
   color: #00B7FF;
 }
 
+.fa-microphone:before{
+  content:"\f130"
+}
+
 .fa {
   font-size: 25px;
   cursor: pointer;
