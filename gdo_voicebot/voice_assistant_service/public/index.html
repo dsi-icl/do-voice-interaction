@@ -11,9 +11,19 @@
   <script src="javascripts/index.js"></script>
   <title>Voicebot Record Platform</title>
   <style>
-    #messages { list-style-type: none; margin: 0; padding: 0; }
-    #messages li { padding: 5px 10px; }
-    #messages li:nth-child(odd) { background: #eee; }
+    #messages {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    #messages li {
+      padding: 5px 10px;
+    }
+
+    #messages li:nth-child(odd) {
+      background: #eee;
+    }
   </style>
 </head>
 
@@ -55,13 +65,10 @@
   //Harker variables inicialization (voice activity detectection)
   let options = {};
   var speechEvents;
-  
-  //Boolean variable to be used (stopButton managment to be figured out)
-  var voiceActivityDetected;
 
   //Json variable to be used to display error description in an alert pop-up box
   var errorData = {};
- 
+
   //Socket for the communication with the server of the voica-assistant service
   const socket = io();
 
@@ -77,39 +84,18 @@
     audioContext = new AudioContext();
   };
 
-  //Playing the gtts audio voice message
-  function play(audioData) {
-    source = audioContext.createBufferSource();
-    audioContext.decodeAudioData(audioData, function(buffer){
-        source.buffer = buffer;
-        source.connect(audioContext.destination);
-        source.start(0);
-      },
-      function(e){console.log("Error with decoding audio data" + e.err); });
-  };
-
   //At each connection of a new client, the recordButton is disabled. If no socket is connected the user can't record anything
   socket.on("connect", function () {
-    recordButton.disabled = false;
+    resetButtonsState(recordButton, stopButton);
     //audioContext initialization (just once during the client connection)
     init();
-  }) 
+    checkNavigator(navigator);
+  })
 
   //Record Button processus. Voice activity detection has been integrated to the platform.
   recordButton.onclick = function () {
-    
-    //Buttons state update
-    recordButton.disabled = true;
-    stopButton.disabled = false;
-    voiceActivityDetected = false;
 
-    if(typeof navigator.mediaDevices === 'undefined' || !navigator.mediaDevices.getUserMedia) {
-        alert('This browser does not supports WebRTC getUserMedia API.');
-
-        if(!!navigator.getUserMedia) {
-            alert('This browser seems supporting deprecated getUserMedia API.');
-        }
-    }
+    buttonsStateRecord(recordButton, stopButton);
 
     navigator.getUserMedia({
       audio: true
@@ -121,17 +107,8 @@
 
       //An error is raised if we couldn't create the RecordRTC object properly
       //RecordRTC options must be adapted according to the used Speech-To-Text tool (default :DeepSpeech)
-      try {
-        recorder = RecordRTC(stream, {
-          recorderType: StereoAudioRecorder,
-          type: 'audio',
-          mimeType: 'audio/wav',
-          numberOfAudioChannels: 1,
-          desiredSampRate: 16000,
-        });
-      } catch (err) {
-        alert(err.name);
-      }
+      initRecorder(stream);
+
       //Indicates to the use when to start speaking
       message.innerHTML = "You can speak";
 
@@ -139,87 +116,59 @@
 
       //On activity available we indicate the detection to the user. (Goal : control if everything goes well)
       speechEvents.on("speaking", function () {
-        voiceActivityDetected = true;
         message.innerHTML = "You're speaking ;)";
       })
 
-      //If the stopButton has not been used, the record has not been cancel
-      if (!stopButton.disabled) {
-          
-          speechEvents.on("stopped_speaking", function () {
-            //Indicate the end of speech detection to the user
-            message.innerHTML = "<font color='green'>You stopped talking. Your message will be sent to the server</font>";
-            
-            //We stop the recorder
-            recorder.stopRecording(function () {
+      speechEvents.on("stopped_speaking", function () {
+        sendRecord(message,recorder,mediaStream,socket);
+      });
 
-              recorder.getDataURL(function (audioDataURL) {
-                var files = {
-                  audio: {
-                    type: recorder.getBlob().type || 'audio/wav',
-                    dataURL: audioDataURL
-                  }
-                };
-
-                //We send the audioData blob to the server which will be used for the Speech to Text transcription
-                socket.emit("message", files);
-
-                //Stop the stream...
-                if (mediaStream) mediaStream.stop();
-              });
-            });
-            recorder.clearRecordedData();
-          });
-      };
-  
     }, function (error) {
       alert(JSON.stringify(error));
       console.error(JSON.stringify(error));
     });
   };
-  
+
   //To be checked... not good implemented. The purpose is to cancel the record with the stop button
   stopButton.onclick = function () {
+    speechEvents.stop();
     message.innerHTML = "<font color='red'>Record cancelled</font>";
-    recorder.stopRecording(function(){});
+    recorder.stopRecording(function () { });
     recorder.clearRecordedData();
-    stopButton.disabled = true;
-    recordButton.disabled = false;
+    resetButtonsState(recordButton, stopButton);
   };
 
   //Event to receive and play the bot audio answer output 
-  socket.on("result",function(data){
-    play(data);
-    recordButton.disabled = false;
-    stopButton.disabled = true;
+  socket.on("result", function (data) {
+    play(data, audioContext, source);
+    resetButtonsState(recordButton, stopButton);
   })
 
   //Voice alert in case of error during the stt transcription
-  socket.on("voice-alert",(data)=>{
-    play(data);
+  socket.on("voice-alert", (data) => {
+    play(data, audioContext, source);
     var message = document.createElement('li');
-    message.innerHTML = "BOT ANSWER : I encountered this error ''"+errorData["message"]+"'' in the "+errorData["service"]+". Error status : "+errorData["status"]+".";
-    setTimeout(()=>{listMessages.appendChild(message)},6000);
+    message.innerHTML = "BOT ANSWER : I encountered this error ''" + errorData["message"] + "'' in the " + errorData["service"] + ". Error status : " + errorData["status"] + ".";
+    setTimeout(() => { listMessages.appendChild(message) }, 6000);
   });
 
   //Event to receive the error json description and to update the buttons state to default
-  socket.on("problem",(data)=>{
+  socket.on("problem", (data) => {
     errorData = data;
-    recordButton.disabled = false;
-    stopButton.disabled = true;
+    resetButtonsState(recordButton, stopButton);
   })
 
   //Display the user text request on the hml page
-  socket.on("user-request",(data)=>{
+  socket.on("user-request", (data) => {
     var message = document.createElement('li');
-    message.innerHTML = "YOU SAID : "+data["user"];
+    message.innerHTML = "YOU SAID : " + data["user"];
     listMessages.appendChild(message);
   })
 
   //Display the robot text answer on the hml page
-  socket.on("robot-answer",(data)=>{
+  socket.on("robot-answer", (data) => {
     var message = document.createElement('li');
-    message.innerHTML = "BOT ANSWER : "+data["robot"];
+    message.innerHTML = "BOT ANSWER : " + data["robot"];
     listMessages.appendChild(message);
   })
 
