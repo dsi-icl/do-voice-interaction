@@ -59,8 +59,8 @@ app.use('/node_modules', express.static(path.join(__dirname, '/node_modules')))
  */
 app.use('/api/echo', express.static('public'))
 
-httpServer.listen(4000, () => {
-  console.log('listening on *:4000\n')
+httpServer.listen(2000, () => {
+  console.log('listening on *:2000\n')
 })
 
 // instanciation of a socket listening to the httpServer connected to the app
