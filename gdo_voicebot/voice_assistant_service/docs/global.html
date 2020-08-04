@@ -598,6 +598,303 @@
     
 
     
+    <h4 class="name" id="echoProcess"><span class="type-signature"></span>echoProcess<span class="signature">(client)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Function that manage the entire communication process between the server and the client
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>client</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">SocketIO.Client</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The client with which the server comunicates</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="src_routes_voice_assistant.js.html">src/routes/voice_assistant.js</a>, <a href="src_routes_voice_assistant.js.html#line62">line 62</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="errorProcess"><span class="type-signature"></span>errorProcess<span class="signature">(client, sttResponse)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Function that manages the actions to do if the deepspeech transcription failed
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>client</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">SocketIO.Client</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The client with which the server comunicates</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>sttResponse</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">JSON</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The deepspeech json response</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="src_routes_voice_assistant.js.html">src/routes/voice_assistant.js</a>, <a href="src_routes_voice_assistant.js.html#line38">line 38</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="getData"><span class="type-signature"></span>getData<span class="signature">(requestUrl, robotAnswer)</span><span class="type-signature"> &rarr; {ArrayBuffer}</span></h4>
     
 
@@ -722,7 +1019,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="src_routes_index.js.html">src/routes/index.js</a>, <a href="src_routes_index.js.html#line31">line 31</a>
+        <a href="src_routes_index.js.html">src/routes/index.js</a>, <a href="src_routes_index.js.html#line27">line 27</a>
     </li></ul></dd>
     
 
@@ -1415,7 +1712,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="src_routes_index.js.html">src/routes/index.js</a>, <a href="src_routes_index.js.html#line56">line 56</a>
+        <a href="src_routes_index.js.html">src/routes/index.js</a>, <a href="src_routes_index.js.html#line52">line 52</a>
     </li></ul></dd>
     
 
@@ -1465,6 +1762,324 @@
     <dd>
         
 <span class="param-type">JSON</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="prepareBotTextAnswer"><span class="type-signature"></span>prepareBotTextAnswer<span class="signature">(botResult)</span><span class="type-signature"> &rarr; {String}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Function used to shape the bot text answer displayed on the UI
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>botResult</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">JSON</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The json response from the chatbot</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="src_routes_voice_assistant.js.html">src/routes/voice_assistant.js</a>, <a href="src_routes_voice_assistant.js.html#line89">line 89</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    The bot text answer
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">String</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="prepareBotVoiceAnswer"><span class="type-signature"></span>prepareBotVoiceAnswer<span class="signature">(botResult)</span><span class="type-signature"> &rarr; {String}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Function used to shape the bot text answer sent to the tts service. All has to be in one line to get an entire voice response from gtts
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>botResult</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">JSON</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The json response from the chatbot</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="src_routes_voice_assistant.js.html">src/routes/voice_assistant.js</a>, <a href="src_routes_voice_assistant.js.html#line102">line 102</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    The bot text answer sent to the tts service
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">String</span>
 
 
     </dd>
@@ -1766,7 +2381,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="src_routes_index.js.html">src/routes/index.js</a>, <a href="src_routes_index.js.html#line18">line 18</a>
+        <a href="src_routes_index.js.html">src/routes/index.js</a>, <a href="src_routes_index.js.html#line14">line 14</a>
     </li></ul></dd>
     
 
@@ -2003,6 +2618,166 @@
 
 
         
+            
+
+    
+
+    
+    <h4 class="name" id="successProcess"><span class="type-signature"></span>successProcess<span class="signature">(client, sttResponse)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Function that manages the actions to do if the deepspeech transcription has been successfully done
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>client</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">SocketIO.Client</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The client with which the server comunicates</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>sttResponse</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">JSON</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The deepspeech json response</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="src_routes_voice_assistant.js.html">src/routes/voice_assistant.js</a>, <a href="src_routes_voice_assistant.js.html#line13">line 13</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
     
 
     
@@ -2018,13 +2793,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#buttonsStateRecord">buttonsStateRecord</a></li><li><a href="global.html#checkNavigator">checkNavigator</a></li><li><a href="global.html#getData">getData</a></li><li><a href="global.html#Gettingservicestatus">Getting service status</a></li><li><a href="global.html#Gettingthetestresult">Getting the test result</a></li><li><a href="global.html#Hark">Hark</a></li><li><a href="global.html#initRecorder">initRecorder</a></li><li><a href="global.html#play">play</a></li><li><a href="global.html#postData">postData</a></li><li><a href="global.html#resetButtonsState">resetButtonsState</a></li><li><a href="global.html#sampleData">sampleData</a></li><li><a href="global.html#sendRecord">sendRecord</a></li><li><a href="global.html#ServingstaticfilesinExpress">Serving static files in Express</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#buttonsStateRecord">buttonsStateRecord</a></li><li><a href="global.html#checkNavigator">checkNavigator</a></li><li><a href="global.html#echoProcess">echoProcess</a></li><li><a href="global.html#errorProcess">errorProcess</a></li><li><a href="global.html#getData">getData</a></li><li><a href="global.html#Gettingservicestatus">Getting service status</a></li><li><a href="global.html#Gettingthetestresult">Getting the test result</a></li><li><a href="global.html#Hark">Hark</a></li><li><a href="global.html#initRecorder">initRecorder</a></li><li><a href="global.html#play">play</a></li><li><a href="global.html#postData">postData</a></li><li><a href="global.html#prepareBotTextAnswer">prepareBotTextAnswer</a></li><li><a href="global.html#prepareBotVoiceAnswer">prepareBotVoiceAnswer</a></li><li><a href="global.html#resetButtonsState">resetButtonsState</a></li><li><a href="global.html#sampleData">sampleData</a></li><li><a href="global.html#sendRecord">sendRecord</a></li><li><a href="global.html#ServingstaticfilesinExpress">Serving static files in Express</a></li><li><a href="global.html#successProcess">successProcess</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.5</a> on Mon Aug 03 2020 18:58:52 GMT+0200 (heure d’été d’Europe centrale)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.5</a> on Tue Aug 04 2020 17:26:28 GMT+0200 (heure d’été d’Europe centrale)
 </footer>
 
 <script> prettyPrint(); </script>
