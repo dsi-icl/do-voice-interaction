@@ -1,21 +1,40 @@
+/**
+ * @file Manages some voice-assistant utilities functions
+ * @author Aurélie Beaugeard
+*/
+
 import { getData, postData } from './index.js'
 
+/**
+ * Function that manages the actions to do if the deepspeech transcription has been successfully done
+ * @param {SocketIO.Client} client The client with which the server comunicates
+ * @param {JSON} sttResponse The deepspeech json response
+ */
 export async function successProcess (client, sttResponse) {
   console.log('Speech to text transcription : SUCCESS\n')
+
+  var botResult = await postData(global.config.do_control_service, '{"message":"' + sttResponse.text + '"}')
+  var botResponseText = prepareBotTextAnswer(botResult)
+  var botResponseVoice = prepareBotVoiceAnswer(botResult)
 
   // The user receives a transcript of her or his voice message for verification.
   client.emit('user-request', { user: sttResponse.text })
 
   // We send the text message to the tts service to get back the voice answer.
-  const voiceAnswer = await getData(global.config.tts_service, 'The Data Observatory control service has not been integrated yet')
+  const voiceAnswer = await getData(global.config.tts_service, botResponseVoice)
 
   // Voice answer sent to the client through the socket
   client.emit('result', voiceAnswer)
 
   // The text version of the bot answer is also sent and displayed on the user interface
-  client.emit('robot-answer', { robot: 'The DO control service has not been integrated yet' })
+  client.emit('robot-answer', { robot: botResponseText })
 }
 
+/**
+ * Function that manages the actions to do if the deepspeech transcription failed
+ * @param {SocketIO.Client} client The client with which the server comunicates
+ * @param {JSON} sttResponse The deepspeech json response
+ */
 export async function errorProcess (client, sttResponse) {
   // We geerate an error voice message
   const voiceAnswer = await getData(global.config.tts_service, 'I encountered an error. Please consult technical support or try the request again')
@@ -36,6 +55,10 @@ export async function errorProcess (client, sttResponse) {
   console.log('Error message :', sttResponse.message + '\n')
 }
 
+/**
+ * Function that manage the entire communication process between the server and the client
+ * @param {SocketIO.Client} client The client with which the server comunicates
+ */
 export function echoProcess (client) {
   console.log('Client connected\n')
 
@@ -56,4 +79,30 @@ export function echoProcess (client) {
       errorProcess(client, sttResponse)
     }
   })
+}
+
+/**
+ * Function used to shape the bot text answer displayed on the UI
+ * @param {JSON} botResult The json response from the chatbot
+ * @returns {String} The bot text answer
+ */
+function prepareBotTextAnswer (botResult) {
+  var result = ''
+  botResult.forEach(element => {
+    result += element.text + '</br>'
+  })
+  return result
+}
+
+/**
+ * Function used to shape the bot text answer sent to the tts service. All has to be in one line to get an entire voice response from gtts
+ * @param {JSON} botResult The json response from the chatbot
+ * @returns {String} The bot text answer sent to the tts service
+ */
+function prepareBotVoiceAnswer (botResult) {
+  var result = ''
+  botResult.forEach(element => {
+    result += element.text + ', '
+  })
+  return result
 }
