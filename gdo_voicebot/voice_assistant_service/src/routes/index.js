@@ -3,10 +3,6 @@
  * @author Aurélie Beaugeard
 */
 
-/**
- * @import { fetch } from "node-fetch"
- * @version 2.6.0
- */
 import fetch from 'node-fetch'
 
 /**
