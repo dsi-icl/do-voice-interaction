@@ -34,9 +34,16 @@ export async function getData (requestUrl, robotAnswer) {
 
   // We make the get request with the correct url (.../api/tts) and with the chosen parameters
   const response = await fetch(url)
-  const data = await response.arrayBuffer()
 
-  // We return the array buffer
+  const status = await response.status
+
+  console.log(status)
+  if(status==400){
+    var data = await response.json()
+  } else {
+    var data = await response.arrayBuffer()
+  }
+  // We return the array buffer or the error
   return data
 }
 
