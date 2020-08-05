@@ -30,10 +30,9 @@ export async function successProcess (client, sttResponse) {
     client.emit('robot-answer', { robot: botResponseText })
   } else {
     // If Gtts raised an error, we send it to the client
-    errorProcess(client,voiceAnswer)
+    errorProcess(client, voiceAnswer)
   }
 }
-
 
 /**
  * Function that manages the actions to do if one of the service failed

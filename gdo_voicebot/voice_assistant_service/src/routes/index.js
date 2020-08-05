@@ -37,11 +37,12 @@ export async function getData (requestUrl, robotAnswer) {
 
   const status = await response.status
 
-  console.log(status)
-  if(status==400){
-    var data = await response.json()
+  let data = ''
+
+  if (status === 400) {
+    data = await response.json()
   } else {
-    var data = await response.arrayBuffer()
+    data = await response.arrayBuffer()
   }
   // We return the array buffer or the error
   return data
