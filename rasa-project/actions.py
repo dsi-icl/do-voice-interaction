@@ -71,7 +71,10 @@ class ActionListDemos(Action):
 
         my_graphQL = GraphQL()
 
-        response = GraphQL.get_projects()
+        response = None 
+
+        if my_graphQL.environment_is_opened():
+            response = GraphQL.get_projects()
 
         if response == None :
             list_environments = my_graphQL.get_available_environments()
@@ -192,7 +195,10 @@ class ActionSearch(Action):
 
             my_graphQL = GraphQL()
 
-            available_demos = GraphQL.get_projects()
+            available_demos = None
+
+            if my_graphQL.environment_is_opened():
+                available_demos = GraphQL.get_projects()
 
             if available_demos == None:
                 dispatcher.utter_message(text="First, open an environment please")
@@ -303,7 +309,7 @@ class ActionOpenEnvironment(Action):
                     dispatcher.utter_message(text="There's no such available environment")
                     dispatcher.utter_message(text="The available environments are : "+", ".join(list_available_environments))
                 else:
-                    dispatcher.utter_message(text="The environement has been set to {}".format(my_graphQL.open_environment(environment)["changeEnvironment"]["id"]))
+                    dispatcher.utter_message(text="The environment has been set to {}".format(my_graphQL.open_environment(environment)["changeEnvironment"]["id"]))
 
             my_graphQL.client.close()
 
@@ -324,7 +330,6 @@ class ActionHelp(Action):
             dispatcher.utter_message(text="Launch demo")
             dispatcher.utter_message(text="Activate demo")
             dispatcher.utter_message(text="Shutdown screens")
-            dispatcher.utter_message(text="Reset browsers")
             dispatcher.utter_message(text="Do a clearspace")
             dispatcher.utter_message(text="Refresh the screens")
             dispatcher.utter_message(text="Pause the video/the audio")
