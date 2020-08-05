@@ -13,7 +13,7 @@ import { getData, postData } from './index.js'
 export async function successProcess (client, sttResponse) {
   console.log('Speech to text transcription : SUCCESS\n')
 
-  var botResult = await postData(global.config.do_control_service, '{"message":"' + sttResponse.text + '"}')
+  var botResult = await postData(global.config.services.doControlService, '{"message":"' + sttResponse.text + '"}')
   var botResponseText = prepareBotTextAnswer(botResult)
   var botResponseVoice = prepareBotVoiceAnswer(botResult)
 
@@ -21,7 +21,7 @@ export async function successProcess (client, sttResponse) {
   client.emit('user-request', { user: sttResponse.text })
 
   // We send the text message to the tts service to get back the voice answer.
-  const voiceAnswer = await getData(global.config.tts_service, botResponseVoice)
+  const voiceAnswer = await getData(global.config.services.ttsService, botResponseVoice)
 
   if (voiceAnswer instanceof ArrayBuffer) {
     // Voice answer sent to the client through the socket
@@ -41,7 +41,7 @@ export async function successProcess (client, sttResponse) {
  */
 export async function errorProcess (client, errorResponse) {
   // We geerate an error voice message
-  const voiceAnswer = await getData(global.config.tts_service, 'I encountered an error. Please consult technical support or try the request again')
+  const voiceAnswer = await getData(global.config.services.ttsService, 'I encountered an error. Please consult technical support or try the request again')
 
   // We send the json content response to the client, to give a description to the user in an alert box
   client.emit('problem', errorResponse)
@@ -72,7 +72,7 @@ export function echoProcess (client) {
     // We get the audio blob and send it to the stt service
     const dataURL = data.audio.dataURL.split(',').pop()
 
-    const sttResponse = await postData(global.config.stt_service, dataURL)
+    const sttResponse = await postData(global.config.services.sttService, dataURL)
 
     // If an error was encountered during the request or the string response is empty we inform the user through the event problem with the socket.
     // Else we can send the text transcript to the the text to speech service and sending the audiobuffer received to the client.
