@@ -97,6 +97,12 @@
 
     buttonsStateRecord(recordButton, stopButton);
 
+    if(listMessages.getElementsByTagName("li").length >= 7){
+      for(var i=0; i<5; i++){
+        listMessages.removeChild(listMessages.childNodes[0]);
+      }
+    }
+
     navigator.getUserMedia({
       audio: true
     }, function (stream) {
@@ -148,7 +154,7 @@
   socket.on("voice-alert", (data) => {
     play(data, audioContext, source);
     var message = document.createElement('li');
-    message.innerHTML = "BOT ANSWER : I encountered this error ''" + errorData["message"] + "'' in the " + errorData["service"] + ". Error status : " + errorData["status"] + ".";
+    message.innerHTML = "BOT ANSWER : I encountered this error ''" + errorData["message"] + "'' in the " + errorData["service"] + ". Request status : " + errorData["status"] + ".";
     setTimeout(() => { listMessages.appendChild(message) }, 6000);
   });
 
