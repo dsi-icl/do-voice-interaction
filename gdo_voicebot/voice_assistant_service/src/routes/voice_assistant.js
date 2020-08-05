@@ -23,24 +23,29 @@ export async function successProcess (client, sttResponse) {
   // We send the text message to the tts service to get back the voice answer.
   const voiceAnswer = await getData(global.config.tts_service, botResponseVoice)
 
-  // Voice answer sent to the client through the socket
-  client.emit('result', voiceAnswer)
-
-  // The text version of the bot answer is also sent and displayed on the user interface
-  client.emit('robot-answer', { robot: botResponseText })
+  if (voiceAnswer instanceof ArrayBuffer) {
+    // Voice answer sent to the client through the socket
+    client.emit('result', voiceAnswer)
+    // The text version of the bot answer is also sent and displayed on the user interface
+    client.emit('robot-answer', { robot: botResponseText })
+  } else {
+    // If Gtts raised an error, we send it to the client
+    errorProcess(client,voiceAnswer)
+  }
 }
 
+
 /**
- * Function that manages the actions to do if the deepspeech transcription failed
+ * Function that manages the actions to do if one of the service failed
  * @param {SocketIO.Client} client The client with which the server comunicates
- * @param {JSON} sttResponse The deepspeech json response
+ * @param {JSON} errorResponse The error json response
  */
-export async function errorProcess (client, sttResponse) {
+export async function errorProcess (client, errorResponse) {
   // We geerate an error voice message
   const voiceAnswer = await getData(global.config.tts_service, 'I encountered an error. Please consult technical support or try the request again')
 
   // We send the json content response to the client, to give a description to the user in an alert box
-  client.emit('problem', sttResponse)
+  client.emit('problem', errorResponse)
 
   // The voice alert is sent to the client to be played
   client.emit('voice-alert', voiceAnswer)
@@ -49,10 +54,9 @@ export async function errorProcess (client, sttResponse) {
   client.emit('user-request', { user: '...' })
 
   // Console error messages
-  console.log('Speech to text transcription : FAIL\n')
-  console.log('Status :', sttResponse.status)
-  console.log('Concerned service : ', sttResponse.service)
-  console.log('Error message :', sttResponse.message + '\n')
+  console.log('Status :', errorResponse.status)
+  console.log('Concerned service : ', errorResponse.service)
+  console.log('Error message :', errorResponse.message + '\n')
 }
 
 /**
