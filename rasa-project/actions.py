@@ -365,7 +365,7 @@ class ActionOpenBrowsers(Action):
         my_graphQL = GraphQL()
 
         if not my_graphQL.environment_is_opened():
-            dispatcher.utter_message(text="Please, open en environment before")
+            dispatcher.utter_message(text="Please, open an environment before")
         elif not my_graphQL.mode_is_selected():
             dispatcher.utter_message(text="Please, select a mode before")
         elif my_graphQL.open_browsers():
