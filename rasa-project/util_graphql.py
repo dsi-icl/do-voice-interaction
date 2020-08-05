@@ -21,7 +21,6 @@ class GraphQL:
             fetch_schema_from_transport=True,
         )
 
-        # self.cache = LRUCache(maxsize=128)
 
     def open_environment(self,name_environment):
         "Function that opens the chosen environment"
