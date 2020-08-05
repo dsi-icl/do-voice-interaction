@@ -36,15 +36,11 @@ function speechToText (audioBuffer, model) {
  * @returns {DeepSpeech.Model} The model to be used for the transcription
  */
 export function loadDeepSpeechModel () {
-  const modelPath = './models/deepspeech-0.8.0-models.pbmm'
+  const model = new DeepSpeech.Model(global.config.deepSpeechParameters.modelPath)
+  model.setBeamWidth(global.config.deepSpeechParameters.BEAM_WIDTH)
 
-  const model = new DeepSpeech.Model(modelPath)
-  model.setBeamWidth(global.config.BEAM_WIDTH)
-
-  const scorerPath = './models/deepspeech-0.8.0-models.scorer'
-
-  model.enableExternalScorer(scorerPath)
-  model.setScorerAlphaBeta(global.config.LM_ALPHA, global.config.LM_BETA)
+  model.enableExternalScorer(global.config.deepSpeechParameters.scorerPath)
+  model.setScorerAlphaBeta(global.config.deepSpeechParameters.LM_ALPHA, global.config.deepSpeechParameters.LM_BETA)
 
   return model
 }
@@ -67,7 +63,7 @@ export function executeSpeechToTextRequest (req, res, model) {
 
     // If deepspeech transcription is empty we send back an error to the voice assistant service.
     if (textMessage.length === 0) {
-      res.status(400).json({ status: 'fail', service: 'Speech To Text service', message: 'no transcription for this' })
+      res.status(400).json({ status: 'fail', service: 'Speech To Text service', message: 'No transcription for this' })
     } else {
       // Everything is fine, we send back the textMessage
       res.status(200).json({ status: 'ok', text: textMessage })
