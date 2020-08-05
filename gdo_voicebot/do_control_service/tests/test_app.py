@@ -19,7 +19,6 @@ def test_status(client):
 def test_json(client):
 
     response = client.simulate_get('/api/json')
-    print(response.text)
     assert response.text == '{"data": "sampleData"}'
     assert response.status == falcon.HTTP_200
 
@@ -27,13 +26,11 @@ def test_chatbot(client):
 
     response = client.simulate_post('/api/chatbot',body='{"message":"Hello"}')
     result = response.json[0]
-    print(result)
     assert result["text"] == "Welcome to the Data Observatory. I am your voice assistant. Can I help you ?"
     assert response.status == falcon.HTTP_OK
 
     response = client.simulate_post('/api/chatbot',body='{"message":"Bye"}')
     result = response.json[0]
-    print(result)
     assert result["text"] == "The Data Observatory thanks you for your presentation. I hope to see you soon :)"
     assert response.status == falcon.HTTP_OK
 
