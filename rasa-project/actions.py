@@ -40,7 +40,7 @@ class ActionOpen(Action):
         if response=="NO ENVIRONMENT IS OPENED":
             list_environments = my_graphQL.get_available_environments()
             dispatcher.utter_message("Please, choose an environment before. Here are the available environments : "+", ".join(list_environments))
-            dispatcher.utter_message("You'll might have to choose a mode before launching ",tracker.get_slot("demo"))
+            dispatcher.utter_message("You'll might have to choose a mode before launching {}".format(tracker.get_slot("demo")))
         if response=="NO MODE IS SELECTED":
             dispatcher.utter_message(text="Please, select a mode between cluster and section")
 
@@ -71,7 +71,7 @@ class ActionListDemos(Action):
 
         my_graphQL = GraphQL()
 
-        response = None 
+        response = None
 
         if my_graphQL.environment_is_opened():
             response = GraphQL.get_projects()
