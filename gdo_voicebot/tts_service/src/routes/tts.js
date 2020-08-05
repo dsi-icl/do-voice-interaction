@@ -7,6 +7,11 @@ const Gtts = require('gtts')
  * @see {@link https://www.npmjs.com/package/gtts|Gtts}
  */
 export function textToSpeech (req, res) {
-  const gtts = new Gtts(req.query.text, req.query.lang)
-  gtts.stream().pipe(res)
+  try {
+    const gtts = new Gtts(req.query.text, req.query.lang)
+    gtts.stream().pipe(res)
+  } catch(err){
+    res.status(400).json({status: 'fail', service: 'Text To Speech  service', message: err.toString() })
+  }
+  
 }
