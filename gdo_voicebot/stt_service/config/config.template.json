@@ -1,3 +1,9 @@
-{
-
+{  
+    "deepSpeechParameters":{
+        "LM_ALPHA":0.75,
+        "LM_BETA":1.85,
+        "BEAM_WIDTH":1024,
+        "modelPath":"./models/deepspeech-0.8.0-models.pbmm",
+        "scorerPath":"./models/deepspeech-0.8.0-models.scorer"
+    }   
 }
