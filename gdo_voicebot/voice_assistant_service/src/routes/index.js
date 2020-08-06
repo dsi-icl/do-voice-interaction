@@ -53,26 +53,24 @@ export async function getData (requestUrl, robotAnswer) {
  *
  * @param {URL} url The url to make the post request (.../api/stt)
  * @param {Blob} data The blob to be sent through the req body.
+ * @param {String} serviceName The service concerned
  * @returns {JSON} The json response containing the status, the text transcription or the error message and the concerned service in case of error
  * @see {@link https://www.npmjs.com/package/node-fetch|Fetch}
  * @see {@link https://deepspeech.readthedocs.io/en/v0.7.4/NodeJS-API.html|DeepSpeech}
  */
-export async function postData (url, data) {
+export async function postData (url, data, serviceName) {
   let jsondata
-  await fetch(url, {
-    method: 'post',
-    // The content-type is important to be able to send the audio blob properly
-    headers: { 'Content-type': 'text/plain' },
-    body: data
-  })
-    .then(res => res.json())
-    .then(json => {
-      jsondata = json
-    })
-    .catch(error => {
-      console.log('Error', error)
-      return null
-    })
 
+  const response = await fetch(url, {
+                      method: 'post',
+                      // The content-type is important to be able to send the audio blob properly
+                      headers: { 'Content-type': 'text/plain' },
+                      body: data
+                  })
+  try{
+    jsondata = await response.json()
+  } catch(error){
+    jsondata =  [{"text":"I encountered this error ''" + response.status +" : "+ response.statusText + "'' in the "+serviceName+". Request status : fail."}]
+  }
   return jsondata
 }
