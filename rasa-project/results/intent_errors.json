@@ -1,10 +1,10 @@
 [
   {
-    "text": "Could you open the browsers",
-    "intent": "open_browsers",
+    "text": "What's the list of available environments",
+    "intent": "list_available_demos",
     "intent_prediction": {
-      "name": "refresh_browsers",
-      "confidence": 0.24545295536518097
+      "name": "open_environment",
+      "confidence": 0.35867369174957275
     }
   }
 ]
