@@ -53,6 +53,7 @@
   //HTML elements for conversation display
   const listMessages = document.getElementById("messages");
   var message = document.getElementById("message");
+  var dataRobot = ""
 
   //Recorder object to be used (see RecordRTC.js)
   let recorder = null;
@@ -137,31 +138,26 @@
 
   //To be checked... not good implemented. The purpose is to cancel the record with the stop button
   stopButton.onclick = function () {
-    speechEvents.stop();
     message.innerHTML = "<font color='red'>Record cancelled</font>";
     recorder.stopRecording(function () { });
+    speechEvents.stop();
     recorder.clearRecordedData();
     resetButtonsState(recordButton, stopButton);
   };
 
-  //Event to receive and play the bot audio answer output 
+  //Event to receive and play the bot audio answer output
   socket.on("result", function (data) {
-    play(data, audioContext, source);
-    resetButtonsState(recordButton, stopButton);
+    source = play(data, audioContext, source, dataRobot, listMessages,recordButton,stopButton);
   })
 
   //Voice alert in case of error during the stt transcription
   socket.on("voice-alert", (data) => {
-    play(data, audioContext, source);
-    var message = document.createElement('li');
-    message.innerHTML = "BOT ANSWER : I encountered this error ''" + errorData["message"] + "'' in the " + errorData["service"] + ". Request status : " + errorData["status"] + ".";
-    setTimeout(() => { listMessages.appendChild(message) }, 6000);
+    playError(data, audioContext, source, errorData, listMessages,recordButton,stopButton);
   });
 
   //Event to receive the error json description and to update the buttons state to default
   socket.on("problem", (data) => {
     errorData = data;
-    resetButtonsState(recordButton, stopButton);
   })
 
   //Display the user text request on the hml page
@@ -173,9 +169,7 @@
 
   //Display the robot text answer on the hml page
   socket.on("robot-answer", (data) => {
-    var message = document.createElement('li');
-    message.innerHTML = "BOT ANSWER : " + data["robot"];
-    listMessages.appendChild(message);
+    dataRobot = data["robot"];
   })
 
 </script>
