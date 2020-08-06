@@ -5,8 +5,6 @@
 # https://rasa.com/docs/rasa/core/actions/#custom-actions/
 
 
-# This is a simple example for a custom action which utters "Hello World!"
-
 from typing import Any, Text, Dict, List
 
 from rasa_sdk import Action, Tracker
@@ -29,35 +27,36 @@ class ActionOpen(Action):
 
         if tracker.get_slot("demo_name") != None:
             response = my_graphQL.load_project(tracker.get_slot("demo_name"))
+            demo = tracker.get_slot("demo_name")
         elif tracker.get_slot("demo")==None:
             dispatcher.utter_message(text="There is no such demo available. Would you like to hear the list ?")
             my_graphQL.client.close()
             return [SlotSet("demo",None),SlotSet("demo_name",None)]
         else:
             response = my_graphQL.load_project(tracker.get_slot("demo"))
-
+            demo = tracker.get_slot("demo")
 
         if response=="NO ENVIRONMENT IS OPENED":
             list_environments = my_graphQL.get_available_environments()
             dispatcher.utter_message("Please, choose an environment before. Here are the available environments : "+", ".join(list_environments))
             dispatcher.utter_message("You'll might have to choose a mode before launching {}".format(tracker.get_slot("demo")))
-        if response=="NO MODE IS SELECTED":
+        elif response=="NO MODE IS SELECTED":
             dispatcher.utter_message(text="Please, select a mode between cluster and section")
-
-        if response=="NO PROJECT WITH THIS NAME":
+        elif response=="NO PROJECT WITH THIS NAME":
             available_demos = GraphQL.get_projects()
             name = GraphQL.find_string_in_other_string(tracker.get_slot("demo"),list(available_demos.values()))
             if name != None:
                 dispatcher.utter_message(text="I've found this demo : "+str(name)+". If you want me to open it, please say open?")
+                my_graphQL.client.close()
                 return [SlotSet("demo",None), SlotSet("demo_name",name)]
             else:
                 dispatcher.utter_message(text="There is no such demo available. Would you like to hear the list ?")
-
-        if response=="OK":
+        elif response=="OK":
             dispatcher.utter_message(text="Opening demo...")
+            my_graphQL.client.close()
+            return [SlotSet("demo",None),SlotSet("demo_name",None),SlotSet("current_demo",demo)]
 
         my_graphQL.client.close()
-
         return [SlotSet("demo",None),SlotSet("demo_name",None)]
 
 class ActionListDemos(Action):
@@ -142,30 +141,43 @@ class ActionControl(Action):
         def run(self, dispatcher: CollectingDispatcher,
                 tracker: Tracker,
                 domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+            
+            my_graphQL = GraphQL()
 
             control = tracker.get_slot("control_command")
 
-            if control != None:
+            if tracker.get_slot("current_demo") == None:
+                dispatcher.utter_message("This command isn't available since no demo has been launched")
+                return [SlotSet("control_command",None)]
+            if control == None:
+                dispatcher.utter_message("Sorry I didn't get the command")
+                return [SlotSet("control_command",None)]
+            else:
                 control = control.lower()
+                map_demos = GraphQL.get_projects()
+                demo_id = list(map_demos.keys())[list(map_demos.values()).index(tracker.get_slot("current_demo"))]
+                video_controller = my_graphQL.project_has_video(demo_id)
+                html_controller = my_graphQL.project_has_html_controller(demo_id)
 
-            if control=="play":
+
+            if control=="play" and video_controller: 
                 print("Playing the video/audio...")
                 dispatcher.utter_message("I'm playing the video/audio")
-            elif control=="pause":
+            elif control=="pause" and video_controller:
                 print("The video/audio is paused")
                 dispatcher.utter_message("The video/audio is paused")
-            elif control=="stop":
+            elif control=="stop" and video_controller:
                 print("The video/audio is stopped")
                 dispatcher.utter_message("I stopped the video/audio")
-            elif control=="mute":
+            elif control=="mute" and video_controller:
                 print("The video/audio is muted")
                 dispatcher.utter_message("I've muted the video/audio")
-            elif control=="refresh":
+            elif control=="refresh" and html_controller:
                 print("Refreshing the webpage...")
                 dispatcher.utter_message("Webpage refreshing in progress")
             else :
                 print("Unknown control command")
-                dispatcher.utter_message("I'm sorry, I can't execute this command. Either I misunderstood it (in that case, please repeat it) or it's not part of my features (ask help to have more information).")
+                dispatcher.utter_message("I'm sorry, I can't execute the following command, ''"+str(control)+"''. There is no controller for this in the demo.")
 
             return [SlotSet("control_command",None)]
 
