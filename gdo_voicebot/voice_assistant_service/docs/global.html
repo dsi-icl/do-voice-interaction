@@ -142,7 +142,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="src_app.js.html">src/app.js</a>, <a href="src_app.js.html#line37">line 37</a>
+        <a href="src_app.js.html">src/app.js</a>, <a href="src_app.js.html#line38">line 38</a>
     </li></ul></dd>
     
 
@@ -204,7 +204,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="src_app.js.html">src/app.js</a>, <a href="src_app.js.html#line44">line 44</a>
+        <a href="src_app.js.html">src/app.js</a>, <a href="src_app.js.html#line45">line 45</a>
     </li></ul></dd>
     
 
@@ -266,7 +266,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="src_app.js.html">src/app.js</a>, <a href="src_app.js.html#line53">line 53</a>
+        <a href="src_app.js.html">src/app.js</a>, <a href="src_app.js.html#line54">line 54</a>
     </li></ul></dd>
     
 
@@ -598,6 +598,166 @@
     
 
     
+    <h4 class="name" id="displayErrorMessage"><span class="type-signature"></span>displayErrorMessage<span class="signature">(textMessage, listMessages)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Function that displays the error message
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>textMessage</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The message to be displayed on the user interface</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>listMessages</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">HTMLUListElement</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The list that contains the conversation</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="public_javascripts_index.js.html">public/javascripts/index.js</a>, <a href="public_javascripts_index.js.html#line178">line 178</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="echoProcess"><span class="type-signature"></span>echoProcess<span class="signature">(client)</span><span class="type-signature"></span></h4>
     
 
@@ -699,7 +859,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="src_routes_voice_assistant.js.html">src/routes/voice_assistant.js</a>, <a href="src_routes_voice_assistant.js.html#line66">line 66</a>
+        <a href="src_routes_voice_assistant.js.html">src/routes/voice_assistant.js</a>, <a href="src_routes_voice_assistant.js.html#line70">line 70</a>
     </li></ul></dd>
     
 
@@ -735,7 +895,7 @@
     
 
     
-    <h4 class="name" id="errorProcess"><span class="type-signature"></span>errorProcess<span class="signature">(client, errorResponse)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="errorProcess"><span class="type-signature"></span>errorProcess<span class="signature">(client, errorResponse, sttResponseText)</span><span class="type-signature"></span></h4>
     
 
     
@@ -822,6 +982,29 @@
         </tr>
 
     
+
+        <tr>
+            
+                <td class="name"><code>sttResponseText</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The text received from the Speech To Text service</td>
+        </tr>
+
+    
     </tbody>
 </table>
 
@@ -859,7 +1042,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="src_routes_voice_assistant.js.html">src/routes/voice_assistant.js</a>, <a href="src_routes_voice_assistant.js.html#line43">line 43</a>
+        <a href="src_routes_voice_assistant.js.html">src/routes/voice_assistant.js</a>, <a href="src_routes_voice_assistant.js.html#line42">line 42</a>
     </li></ul></dd>
     
 
@@ -1405,7 +1588,7 @@
     
 
     
-    <h4 class="name" id="play"><span class="type-signature"></span>play<span class="signature">(audioData, audioContext, source)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="play"><span class="type-signature"></span>play<span class="signature">(audioData, audioContext, source, dataBot, listMessages, recordButton, stopButton)</span><span class="type-signature"></span></h4>
     
 
     
@@ -1515,6 +1698,98 @@
         </tr>
 
     
+
+        <tr>
+            
+                <td class="name"><code>dataBot</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The bot answer</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>listMessages</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">HTMLUListElement</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The list that contains the conversation</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>recordButton</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">HTMLButtonElement</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The record button to be enabled</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>stopButton</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">HTMLButtonElement</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The stop button to be disabled</td>
+        </tr>
+
+    
     </tbody>
 </table>
 
@@ -1552,7 +1827,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="public_javascripts_index.js.html">public/javascripts/index.js</a>, <a href="public_javascripts_index.js.html#line86">line 86</a>
+        <a href="public_javascripts_index.js.html">public/javascripts/index.js</a>, <a href="public_javascripts_index.js.html#line90">line 90</a>
     </li></ul></dd>
     
 
@@ -1588,7 +1863,282 @@
     
 
     
-    <h4 class="name" id="postData"><span class="type-signature"></span>postData<span class="signature">(url, data)</span><span class="type-signature"> &rarr; {JSON}</span></h4>
+    <h4 class="name" id="playError"><span class="type-signature"></span>playError<span class="signature">(audioData, audioContext, source, errorData, listMessages, recordButton, stopButton)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Function that plays the gtts audio voice message
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>audioData</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">ArrayBuffer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The audio buffer received from the voice-assistant server</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>audioContext</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">AudioContext</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The client AudioContext</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>source</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">AudioBufferSourceNode</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The client AudioBufferSourceNode</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>errorData</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Dictionnary</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The error details</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>listMessages</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">HTMLUListElement</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The list that contains the conversation</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>recordButton</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">HTMLButtonElement</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The record button to be enabled</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>stopButton</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">HTMLButtonElement</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The stop button to be disabled</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="public_javascripts_index.js.html">public/javascripts/index.js</a>, <a href="public_javascripts_index.js.html#line116">line 116</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="postData"><span class="type-signature"></span>postData<span class="signature">(url, data, serviceName)</span><span class="type-signature"> &rarr; {JSON}</span></h4>
     
 
     
@@ -1675,6 +2225,29 @@
         </tr>
 
     
+
+        <tr>
+            
+                <td class="name"><code>serviceName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The service concerned</td>
+        </tr>
+
+    
     </tbody>
 </table>
 
@@ -1712,7 +2285,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="src_routes_index.js.html">src/routes/index.js</a>, <a href="src_routes_index.js.html#line59">line 59</a>
+        <a href="src_routes_index.js.html">src/routes/index.js</a>, <a href="src_routes_index.js.html#line61">line 61</a>
     </li></ul></dd>
     
 
@@ -1880,7 +2453,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="src_routes_voice_assistant.js.html">src/routes/voice_assistant.js</a>, <a href="src_routes_voice_assistant.js.html#line93">line 93</a>
+        <a href="src_routes_voice_assistant.js.html">src/routes/voice_assistant.js</a>, <a href="src_routes_voice_assistant.js.html#line97">line 97</a>
     </li></ul></dd>
     
 
@@ -2039,7 +2612,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="src_routes_voice_assistant.js.html">src/routes/voice_assistant.js</a>, <a href="src_routes_voice_assistant.js.html#line106">line 106</a>
+        <a href="src_routes_voice_assistant.js.html">src/routes/voice_assistant.js</a>, <a href="src_routes_voice_assistant.js.html#line110">line 110</a>
     </li></ul></dd>
     
 
@@ -2587,7 +3160,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="public_javascripts_index.js.html">public/javascripts/index.js</a>, <a href="public_javascripts_index.js.html#line103">line 103</a>
+        <a href="public_javascripts_index.js.html">public/javascripts/index.js</a>, <a href="public_javascripts_index.js.html#line138">line 138</a>
     </li></ul></dd>
     
 
@@ -2778,6 +3351,166 @@
 
 
         
+            
+
+    
+
+    
+    <h4 class="name" id="updateListMessages"><span class="type-signature"></span>updateListMessages<span class="signature">(textMessage, listMessages)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Function that updates the conversation
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>textMessage</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The message to be displayed on the user interface</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>listMessages</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">HTMLUListElement</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The list that contains the conversation</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="public_javascripts_index.js.html">public/javascripts/index.js</a>, <a href="public_javascripts_index.js.html#line167">line 167</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
     
 
     
@@ -2793,13 +3526,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#buttonsStateRecord">buttonsStateRecord</a></li><li><a href="global.html#checkNavigator">checkNavigator</a></li><li><a href="global.html#echoProcess">echoProcess</a></li><li><a href="global.html#errorProcess">errorProcess</a></li><li><a href="global.html#getData">getData</a></li><li><a href="global.html#Gettingservicestatus">Getting service status</a></li><li><a href="global.html#Gettingthetestresult">Getting the test result</a></li><li><a href="global.html#Hark">Hark</a></li><li><a href="global.html#initRecorder">initRecorder</a></li><li><a href="global.html#play">play</a></li><li><a href="global.html#postData">postData</a></li><li><a href="global.html#prepareBotTextAnswer">prepareBotTextAnswer</a></li><li><a href="global.html#prepareBotVoiceAnswer">prepareBotVoiceAnswer</a></li><li><a href="global.html#resetButtonsState">resetButtonsState</a></li><li><a href="global.html#sampleData">sampleData</a></li><li><a href="global.html#sendRecord">sendRecord</a></li><li><a href="global.html#ServingstaticfilesinExpress">Serving static files in Express</a></li><li><a href="global.html#successProcess">successProcess</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#buttonsStateRecord">buttonsStateRecord</a></li><li><a href="global.html#checkNavigator">checkNavigator</a></li><li><a href="global.html#displayErrorMessage">displayErrorMessage</a></li><li><a href="global.html#echoProcess">echoProcess</a></li><li><a href="global.html#errorProcess">errorProcess</a></li><li><a href="global.html#getData">getData</a></li><li><a href="global.html#Gettingservicestatus">Getting service status</a></li><li><a href="global.html#Gettingthetestresult">Getting the test result</a></li><li><a href="global.html#Hark">Hark</a></li><li><a href="global.html#initRecorder">initRecorder</a></li><li><a href="global.html#play">play</a></li><li><a href="global.html#playError">playError</a></li><li><a href="global.html#postData">postData</a></li><li><a href="global.html#prepareBotTextAnswer">prepareBotTextAnswer</a></li><li><a href="global.html#prepareBotVoiceAnswer">prepareBotVoiceAnswer</a></li><li><a href="global.html#resetButtonsState">resetButtonsState</a></li><li><a href="global.html#sampleData">sampleData</a></li><li><a href="global.html#sendRecord">sendRecord</a></li><li><a href="global.html#ServingstaticfilesinExpress">Serving static files in Express</a></li><li><a href="global.html#successProcess">successProcess</a></li><li><a href="global.html#updateListMessages">updateListMessages</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.5</a> on Wed Aug 05 2020 15:52:04 GMT+0200 (heure d’été d’Europe centrale)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.5</a> on Thu Aug 06 2020 19:39:59 GMT+0200 (heure d’été d’Europe centrale)
 </footer>
 
 <script> prettyPrint(); </script>
