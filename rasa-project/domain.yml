@@ -50,6 +50,8 @@ slots:
     - development
   demo_name:
     type: unfeaturized
+  current_demo:
+    type: unfeaturized
 
 actions:
   - action_open
