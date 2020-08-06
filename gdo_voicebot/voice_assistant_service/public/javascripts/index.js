@@ -81,14 +81,49 @@ function buttonsStateRecord (recordButton, stopButton) {
  * @param {ArrayBuffer} audioData The audio buffer received from the voice-assistant server
  * @param {AudioContext} audioContext The client AudioContext
  * @param {AudioBufferSourceNode} source The client AudioBufferSourceNode
+ * @param {String} dataBot The bot answer
+ * @param {HTMLUListElement} listMessages The list that contains the conversation
+ * @param {HTMLButtonElement} recordButton The record button to be enabled
+ * @param {HTMLButtonElement} stopButton The stop button to be disabled
  * @see{@link https://developer.mozilla.org/fr/docs/Web/API/AudioContext|AudioContext}
  */
-function play (audioData, audioContext, source) {
+function play (audioData, audioContext, source, dataRobot, listMessages, recordButton, stopButton) {
   source = audioContext.createBufferSource()
   audioContext.decodeAudioData(audioData, function (buffer) {
     source.buffer = buffer
     source.connect(audioContext.destination)
     source.start(0)
+    source.onended = function() {
+      updateListMessages(dataRobot,listMessages)
+      resetButtonsState(recordButton,stopButton)
+    }
+    return source
+  },
+  function (e) { console.log('Error with decoding audio data' + e.err) })
+};
+
+/**
+ * Function that plays the gtts audio voice message
+ * @param {ArrayBuffer} audioData The audio buffer received from the voice-assistant server
+ * @param {AudioContext} audioContext The client AudioContext
+ * @param {AudioBufferSourceNode} source The client AudioBufferSourceNode
+ * @param {Dictionnary} errorData The error details
+ * @param {HTMLUListElement} listMessages The list that contains the conversation
+ * @param {HTMLButtonElement} recordButton The record button to be enabled
+ * @param {HTMLButtonElement} stopButton The stop button to be disabled
+ * @see{@link https://developer.mozilla.org/fr/docs/Web/API/AudioContext|AudioContext}
+ */
+function playError (audioData, audioContext, source, errorData, listMessages, recordButton, stopButton) {
+  source = audioContext.createBufferSource()
+  audioContext.decodeAudioData(audioData, function (buffer) {
+    source.buffer = buffer
+    source.connect(audioContext.destination)
+    source.start(0)
+    source.onended = function() {
+      displayErrorMessage(errorData,listMessages)
+      resetButtonsState(recordButton,stopButton)
+    }
+    return source
   },
   function (e) { console.log('Error with decoding audio data' + e.err) })
 };
@@ -122,4 +157,26 @@ function sendRecord (message, recorder, mediaStream, socket) {
     })
   })
   recorder.clearRecordedData()
+}
+
+/**
+ * Function that updates the conversation
+ * @param {String} textMessage The message to be displayed on the user interface
+ * @param {HTMLUListElement} listMessages The list that contains the conversation
+ */
+function updateListMessages(textMessage, listMessages){
+  var message = document.createElement('li');
+  message.innerHTML = "BOT ANSWER : " + textMessage
+  listMessages.appendChild(message)
+}
+
+/**
+ * Function that displays the error message
+ * @param {String} textMessage The message to be displayed on the user interface
+ * @param {HTMLUListElement} listMessages The list that contains the conversation
+ */
+function displayErrorMessage(textMessage, listMessages){
+  var message = document.createElement('li')
+  message.innerHTML = "BOT ANSWER : I encountered this error ''" + textMessage["message"] + "'' in the " + textMessage["service"] + ". Request status : " + textMessage["status"] + "."
+  listMessages.appendChild(message)
 }
