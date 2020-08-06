@@ -3,3 +3,4 @@ gunicorn
 pytest
 requests
 requests-cache
+gql
