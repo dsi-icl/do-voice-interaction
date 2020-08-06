@@ -141,7 +141,7 @@ class ActionControl(Action):
         def run(self, dispatcher: CollectingDispatcher,
                 tracker: Tracker,
                 domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-            
+
             my_graphQL = GraphQL()
 
             control = tracker.get_slot("control_command")
@@ -160,7 +160,7 @@ class ActionControl(Action):
                 html_controller = my_graphQL.project_has_html_controller(demo_id)
 
 
-            if control=="play" and video_controller: 
+            if control=="play" and video_controller:
                 print("Playing the video/audio...")
                 dispatcher.utter_message("I'm playing the video/audio")
             elif control=="pause" and video_controller:
@@ -246,7 +246,7 @@ class ActionClearSpace(Action):
             my_graphQL = GraphQL()
 
             if not my_graphQL.clear_screen():
-                dispatcher.utter_message(text="No environment is opened. I can't display clear the screens")
+                dispatcher.utter_message(text="No environment is opened. I can't clear the screens")
             else:
                 print("Clear space")
                 dispatcher.utter_message("The space is cleaned")
