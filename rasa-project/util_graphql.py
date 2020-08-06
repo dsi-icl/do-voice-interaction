@@ -12,7 +12,8 @@ class GraphQL:
 
         sample_transport=RequestsHTTPTransport(
             #url='http://192.168.0.35:4000/graphql',
-            url='http://10.0.2.15:4000/graphql',
+            #url='http://10.0.2.15:4000/graphql',
+            url='http://129.31.142.23:4000/graphql',
             verify=False,
             retries=3,
         )
@@ -209,7 +210,8 @@ class GraphQL:
 
         sample_transport=RequestsHTTPTransport(
             #url='http://192.168.0.35:4000/graphql',
-            url='http://10.0.2.15:4000/graphql',
+            #url='http://10.0.2.15:4000/graphql',
+            url='http://129.31.142.23:4000/graphql',
             verify=False,
             retries=3,
         )
@@ -367,6 +369,28 @@ class GraphQL:
         result = self.client.execute(query,variable_values=params)
 
         return result["current"]["project"]["videoController"]
+    
+    def project_has_html_controller(self,id):
+        "Function that checks if a project has a html page or not"
+
+        query = gql('''
+            query has_html_controller($id:String!) {
+                current {
+                    project(id:$id){
+                        htmlController
+                    }
+                }
+            }
+        '''
+        )
+
+        params = {
+            "id":id
+        }
+
+        result = self.client.execute(query,variable_values=params)
+
+        return result["current"]["project"]["htmlController"]
 
     def open_browsers(self):
         "Function that opens browsers"
