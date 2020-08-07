@@ -7,7 +7,7 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - "./stt_service/config/config.json:/app/config/config.json"
+      - "./stt_service/config/config.json:/app/config/config.json:ro"
 
   do-voice-tts-service:
     image: dsi-icl/do-voice-tts-service:latest
@@ -16,4 +16,4 @@ services:
     ports:
       - "5001:5000"
     volumes:
-      - "./tts_service/config/config.json:/app/config/config.json"
+      - "./tts_service/config/config.json:/app/config/config.json:ro"
