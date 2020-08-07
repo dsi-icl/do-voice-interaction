@@ -1,25 +1,32 @@
 import {createSlice} from "@reduxjs/toolkit";
+import {PlayerStatus} from "./const";
 
 export const media = createSlice({
     name: "media",
     initialState: {
-        status: "",
-        actions: []
+        status: PlayerStatus.IDLE,
+        responseList: [],
+        audio: null
     },
     reducers: {
         changeStatus: (state, action) => {
-            console.log("change status", action)
             state.status = action.payload.status;
         },
-        addAction:(state, action) => {
-            state.actions = [...state.actions, action.payload];
-        }
+        addResponse: (state, action) => {
+            state.responseList = [...state.responseList, {text: action.payload.text, error: action.payload.error}];
+            state.audio = action.payload.audio.data;
+        },
+        clearAudio: (state) => {
+            state.status = PlayerStatus.IDLE;
+            state.audio = null;
+        },
     },
 });
 
-export const {changeStatus, addAction} = media.actions;
+export const {changeStatus, addResponse, clearAudio} = media.actions;
 
 export const selectStatus = state => state.media.status;
-export const selectActions = state => state.media.actions;
+export const selectResponses = state => state.media.responseList;
+export const selectAudio = state => state.media.audio;
 
 export default media.reducer;

@@ -1,35 +1,41 @@
 import React from "react";
 import {useSelector} from "react-redux";
 
+import Loader from "react-loader-spinner";
 import {Card, Container} from "semantic-ui-react";
 
-import {selectActions, selectStatus} from "../reducers/media";
 import SimpleRecorder from "../components/SimpleRecorder";
-import Loader from "react-loader-spinner";
+import SimplePlayer from "../components/SimplePlayer";
 
-function App() {
-    const status = useSelector(selectStatus);
-    const actions = useSelector(selectActions);
+import {selectStatus} from "../reducers/media";
+import {PlayerStatus} from "../reducers/const";
 
-    console.log("status", status);
-    console.log("actions", actions);
-
+const App = () => {
     return <Container>
         <Card centered>
-            <Loader type="Bars" color={loaderColor(status)} height={100} width={300}/>
-            <Card.Content>
-                <Card.Header>{status}</Card.Header>
-            </Card.Content>
+            <StatusBar/>
             <Card.Description>
                 <SimpleRecorder/>
             </Card.Description>
         </Card>
+        <SimplePlayer/>
     </Container>;
-}
+};
+
+const StatusBar = () => {
+    const status = useSelector(selectStatus);
+
+    return <>
+        <Loader type="Bars" color={loaderColor(status)} height={100} width={300}/>
+        <Card.Content>
+            <Card.Header>{status}</Card.Header>
+        </Card.Content>
+    </>;
+};
 
 const loaderColor = (status) => {
     switch (status) {
-        case "listening":
+        case PlayerStatus.LISTENING:
             return "#21ba45";
         default:
             return "#FFFFFF";

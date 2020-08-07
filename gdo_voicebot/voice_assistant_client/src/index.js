@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import {Provider} from "react-redux";
 
 import App from "./pages/App";
-import {setupAudioRecorder, setupStore} from "./util";
+import {setupStore} from "./util";
 import {setupSocket} from "./reducers/socket";
 
 import "semantic-ui-css/semantic.min.css";
@@ -11,8 +11,6 @@ import "./index.css";
 
 const store = setupStore();
 setupSocket("http://localhost:8080/sharedsocket", store.dispatch);
-
-setupAudioRecorder();
 
 const RootNode = () => <React.StrictMode>
     <Provider store={store}>
