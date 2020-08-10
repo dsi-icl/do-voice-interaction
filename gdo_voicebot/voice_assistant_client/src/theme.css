@@ -1,0 +1,120 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    background: #002147;
+}
+
+.content {
+    flex: 1 0 auto;
+}
+
+.footer {
+    flex-shrink: 0;
+}
+
+.footer .header {
+    color: #EBEEEE !important;
+}
+
+.no-padding {
+    padding: 0 !important;
+}
+
+.no-margin {
+    margin: 0 !important;
+}
+
+.no-border {
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.ui.container {
+    background: #002147;
+}
+
+.ui.segment, .ui.segments {
+    background: #002147 !important;
+    border: 1px solid #EBEEEE;
+}
+
+.ui.raised.segments, .ui.raised.segment, .ui.card.raised {
+    box-shadow: 0 2px 4px 0 rgba(235, 238, 238, 0.2), 0 2px 10px 0 rgba(235, 238, 238, 0.25);
+}
+
+.ui.card > .content, .ui.card > .content > .header, .ui.card > .content > .meta, .ui.card > .content > .extra,
+.ui.cards > .content, .ui.cards > .content > .header, .ui.cards > .content > .meta, .ui.cards > .content > .extra {
+    color: #002147;
+    border-top: none !important;
+}
+
+.ui.card > .content > .meta, .ui.cards > .content > .meta {
+    margin-top: 0.75em;
+}
+
+.ui.modal, .ui.modal > .header, .ui.modal > .content, .ui.modal > .content > .description,
+.ui.modal > .content > .description > .header {
+    color: #002147;
+}
+
+.ui.modal > .header {
+    border-bottom: 1px solid rgba(235, 238, 238, 0.4);
+}
+
+.ui.label.red, .ui.labels.red {
+    background: #DD2501 !important;
+    color: #EBEEEE !important;
+    border: 1px solid rgba(235, 238, 238, 0.4) !important;
+}
+
+.ui.label.blue, .ui.labels.blue {
+    background: #006EAF !important;
+    color: #EBEEEE !important;
+    border: 1px solid rgba(235, 238, 238, 0.4) !important;
+}
+
+.ui.label.violet, .ui.labels.violet {
+    background: #321E6D !important;
+    color: #EBEEEE !important;
+    border: 1px solid rgba(235, 238, 238, 0.4) !important;
+}
+
+.ui.button.blue {
+    background: #006EAF !important;
+    color: #EBEEEE !important;
+}
+
+.ui.button.grey {
+    background: #9D9D9D !important;
+    color: #EBEEEE !important;
+}
+
+.ui.button.violet {
+    background: #321E6D !important;
+    color: #EBEEEE !important;
+}
+
+.ui.coolGrey {
+    background: #9D9D9D;
+}
+
+.ui.lightGrey {
+    background: #EBEEEE;
+}
+
+.toggleTagGroupingButtons {
+    position: absolute;
+    top: 75px;
+    right: 0;
+}
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
