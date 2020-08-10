@@ -13,8 +13,18 @@ export const media = createSlice({
             state.status = action.payload.status;
         },
         addResponse: (state, action) => {
-            state.responseList = [...state.responseList, {text: action.payload.text, error: action.payload.error}];
-            state.audio = action.payload.audio.data;
+            state.responseList = [...state.responseList, {
+                id: action.payload.id,
+                date: action.payload.date,
+                command: action.payload.command,
+                response: action.payload.command,
+                error: action.payload.error
+            }];
+            state.audio = action.payload.audio ? action.payload.audio.data : null;
+
+            if (!state.audio) {
+                state.status = PlayerStatus.IDLE;
+            }
         },
         clearAudio: (state) => {
             state.status = PlayerStatus.IDLE;

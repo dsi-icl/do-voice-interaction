@@ -9,7 +9,6 @@
     "lint": "standard ./src/**/*.js ./src/*.js",
     "lint:fix": "standard --fix ./src/**/*.js ./src/*.js"
   },
-  "type": "module",
   "dependencies": {
     "axios": "0.19.2",
     "cookie-parser": "1.4.5",

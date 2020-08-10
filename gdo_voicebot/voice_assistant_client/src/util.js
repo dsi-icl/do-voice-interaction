@@ -1,4 +1,5 @@
 import RecordRTC, {StereoAudioRecorder} from "recordrtc";
+import hark from "hark";
 
 import {configureStore} from "@reduxjs/toolkit";
 
@@ -12,18 +13,19 @@ export function setupStore() {
     });
 }
 
-export function setupAudioRecorder() {
-    let streamPromise;
+function setupStream() {
     if (window.audioStream) {
-        streamPromise = Promise.resolve(window.audioStream);
+        return Promise.resolve(window.audioStream);
     } else {
-        streamPromise = navigator.mediaDevices.getUserMedia({video: false, audio: true}).then(stream => {
+        return navigator.mediaDevices.getUserMedia({video: false, audio: true}).then(stream => {
             window.audioStream = stream;
             return stream;
         });
     }
+}
 
-    return streamPromise.then(stream =>
+export function setupAudioRecorder() {
+    return setupStream().then(stream =>
         RecordRTC(stream, {
             recorderType: StereoAudioRecorder,
             type: "audio",
@@ -32,4 +34,8 @@ export function setupAudioRecorder() {
             desiredSampRate: 16000,
         })
     );
+}
+
+export function setupHark() {
+    return setupStream().then(stream => hark(stream, {play: false}));
 }

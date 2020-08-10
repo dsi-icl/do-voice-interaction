@@ -8,9 +8,10 @@ import {setupSocket} from "./reducers/socket";
 
 import "semantic-ui-css/semantic.min.css";
 import "./index.css";
+import "./theme.css";
 
 const store = setupStore();
-setupSocket("http://localhost:8080/sharedsocket", store.dispatch);
+setupSocket(window.BACKEND_URL, store.dispatch);
 
 const RootNode = () => <React.StrictMode>
     <Provider store={store}>

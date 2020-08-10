@@ -5,7 +5,7 @@ import {Button, Icon} from "semantic-ui-react";
 
 import {changeStatus} from "../reducers/media";
 import {submitRecording} from "../reducers/socket";
-import {setupAudioRecorder} from "../util";
+import {setupAudioRecorder, setupHark} from "../util";
 import {PlayerStatus} from "../reducers/const";
 
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
@@ -15,7 +15,7 @@ class SimpleRecorder extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {recorder: null};
+        this.state = {recorder: null, hark: null};
     }
 
     onRecordClick() {
@@ -30,6 +30,23 @@ class SimpleRecorder extends React.Component {
                 this.setState({recorder});
                 recorder.clearRecordedData();
                 recorder.startRecording();
+            });
+
+            if (this.state.hark) {
+                this.state.hark.stop();
+                this.setState({hark: null});
+            }
+
+            setupHark().then(hark => {
+                this.setState({hark});
+                hark.on("speaking", () => {
+                    console.log("speaking");
+                });
+
+                hark.on("stopped_speaking", () => {
+                    console.log("stopped talking");
+                    this.onStopClick();
+                });
             });
         }
     }
@@ -48,6 +65,10 @@ class SimpleRecorder extends React.Component {
                     }));
                 });
             });
+        }
+
+        if (this.state.hark) {
+            this.state.hark.stop();
         }
     }
 
