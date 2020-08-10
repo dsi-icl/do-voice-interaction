@@ -10,8 +10,7 @@ export function textToSpeech (req, res) {
   try {
     const gtts = new Gtts(req.query.text, req.query.lang)
     gtts.stream().pipe(res)
-  } catch(err){
-    res.status(400).json({status: 'fail', service: 'Text To Speech  service', message: err.toString() })
+  } catch (err) {
+    res.status(400).json({ status: 'fail', service: 'Text To Speech  service', message: err.toString() })
   }
-  
 }
