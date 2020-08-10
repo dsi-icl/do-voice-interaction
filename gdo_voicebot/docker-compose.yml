@@ -14,6 +14,15 @@ services:
     container_name: do-voice-tts-service
     build: tts_service/
     ports:
-      - "5001:5000"
+      - "5000:5000"
     volumes:
       - "./tts_service/config/config.json:/app/config/config.json:ro"
+
+  do-voice-assistant-service:
+    image: dsi-icl/do-voice-assistant-service:latest
+    container_name: do-voice-assistant-service
+    build: voice_assistant_service/
+    ports:
+      - "2000:2000"
+    volumes:
+      - "./voice_assistant_service/config/config.docker.json:/app/config/config.json:ro"
