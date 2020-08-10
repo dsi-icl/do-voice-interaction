@@ -11,7 +11,7 @@ services:
 
   do-voice-tts-service:
     image: dsi-icl/do-voice-tts-service:latest
-    container_name: do-voice-tss-service
+    container_name: do-voice-tts-service
     build: tts_service/
     ports:
       - "5001:5000"
