@@ -1,7 +1,7 @@
 /**
  * @file Manages some voice-assistant utilities functions
  * @author Aurélie Beaugeard
-*/
+ */
 
 import fetch from 'node-fetch'
 
@@ -26,8 +26,8 @@ export function sampleData (req, res) {
  */
 export async function getData (requestUrl, robotAnswer) {
   // The payload parameters : text and lang (can be different from english)
-  var url = new URL(requestUrl)
-  var params = { text: robotAnswer, lang: 'en' }
+  const url = new URL(requestUrl)
+  const params = { text: robotAnswer, lang: 'en' }
 
   Object.keys(params).forEach(key =>
     url.searchParams.append(key, params[key]))
@@ -37,15 +37,16 @@ export async function getData (requestUrl, robotAnswer) {
 
   const status = await response.status
 
-  let data = ''
+  let data
 
   if (status === 400) {
     data = await response.json()
   } else {
+    //todo; validate in case of 404 (server not found)
     data = await response.arrayBuffer()
   }
   // We return the array buffer or the error
-  return data
+  return new Buffer(data).toString('base64');
 }
 
 /**
@@ -62,15 +63,15 @@ export async function postData (url, data, serviceName) {
   let jsondata
 
   const response = await fetch(url, {
-                      method: 'post',
-                      // The content-type is important to be able to send the audio blob properly
-                      headers: { 'Content-type': 'text/plain' },
-                      body: data
-                  })
-  try{
+    method: 'post',
+    // The content-type is important to be able to send the audio blob properly
+    headers: { 'Content-type': 'text/plain' },
+    body: data
+  })
+  try {
     jsondata = await response.json()
-  } catch(error){
-    jsondata =  [{"text":"I encountered this error ''" + response.status +" : "+ response.statusText + "'' in the "+serviceName+". Request status : fail."}]
+  } catch (error) {
+    jsondata = [{ text: 'I encountered this error \'\'' + response.status + ' : ' + response.statusText + '\'\' in the ' + serviceName + '. Request status : fail.' }]
   }
   return jsondata
 }
