@@ -22,8 +22,8 @@ const FeedItem = ({date, command, response, error}) => <Feed.Event>
     <Feed.Content>
         <Feed.Date className="feed-text">{date}</Feed.Date>
         <Feed.Summary className="feed-text">You: {command}</Feed.Summary>
-        <Feed.Extra text className="feed-text">Assistant: {response}</Feed.Extra>
-        <Feed.Extra text className="feed-text-error">Error: {error}</Feed.Extra>
+        {response && <Feed.Extra text className="feed-text">Assistant: {response}</Feed.Extra>}
+        {error && <Feed.Extra text className="feed-text-error">Error: {error}</Feed.Extra>}
     </Feed.Content>
 </Feed.Event>;
 

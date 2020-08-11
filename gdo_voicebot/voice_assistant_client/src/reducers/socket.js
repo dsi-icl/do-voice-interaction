@@ -10,6 +10,8 @@ export function setupSocket(backendUrl, dispatch) {
 
     window.socket.on("connect", () => console.log("Socket connected ..."));
     window.socket.on("response", (data) => {
+        console.log("received", data)
+
         dispatch(addResponse({
             ...data,
             id: data.id || uuidv4(),
@@ -21,7 +23,7 @@ export function setupSocket(backendUrl, dispatch) {
 
 export function submitRecording(payload) {
     return dispatch => {
-        window.socket.emit("message", {
+        window.socket.emit("audio-command", {
             type: "audio",
             ...payload,
             id: payload.id || uuidv4(),
@@ -33,7 +35,7 @@ export function submitRecording(payload) {
 
 export function submitCommand(payload) {
     return dispatch => {
-        window.socket.emit("message", {
+        window.socket.emit("text-command", {
             type: "command",
             ...payload,
             id: payload.id || uuidv4(),

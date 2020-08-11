@@ -4,6 +4,7 @@
  */
 
 import fetch from 'node-fetch'
+import { mergeUrlParams } from '../util'
 
 /**
  * This function returns a json response to be sent at the /api/json route.
@@ -25,28 +26,21 @@ export function sampleData (req, res) {
  * @see {@link https://www.npmjs.com/package/gtts|Gtts}
  */
 export async function getData (requestUrl, robotAnswer) {
-  // The payload parameters : text and lang (can be different from english)
-  const url = new URL(requestUrl)
-  const params = { text: robotAnswer, lang: 'en' }
-
-  Object.keys(params).forEach(key =>
-    url.searchParams.append(key, params[key]))
-
   // We make the get request with the correct url (.../api/tts) and with the chosen parameters
-  const response = await fetch(url)
+  try {
+    const response = await fetch(mergeUrlParams(requestUrl, { text: robotAnswer, lang: 'en' }))
 
-  const status = await response.status
-
-  let data
-
-  if (status === 400) {
-    data = await response.json()
-  } else {
-    //todo; validate in case of 404 (server not found)
-    data = await response.arrayBuffer()
+    const status = await response.status
+    if (status === 200) {
+      return { success: true, data: new Buffer(response.arrayBuffer()).toString('base64') }
+    } else if (status === 400) {
+      return { success: false, ...response.json() }
+    } else {
+      return { success: false, ...response.json() }
+    }
+  } catch (exc) {
+    return { success: false, text: exc.message }
   }
-  // We return the array buffer or the error
-  return new Buffer(data).toString('base64');
 }
 
 /**
@@ -71,7 +65,12 @@ export async function postData (url, data, serviceName) {
   try {
     jsondata = await response.json()
   } catch (error) {
-    jsondata = [{ text: 'I encountered this error \'\'' + response.status + ' : ' + response.statusText + '\'\' in the ' + serviceName + '. Request status : fail.' }]
+    jsondata = {
+      status: 'fail',
+      service: serviceName,
+      text: 'I encountered this error \'\'' + response.status + ' : ' + response.statusText + '\'\' in the ' + serviceName
+    }
   }
+  //todo; refactor this to be same as getData
   return jsondata
 }
