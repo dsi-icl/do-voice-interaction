@@ -25,7 +25,7 @@
     "eslint-plugin-react": "7.20.5"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "PORT=6060 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "lint": "eslint ./src/**/*.js ./src/*.js",
