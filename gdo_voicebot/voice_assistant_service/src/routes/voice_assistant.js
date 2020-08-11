@@ -51,8 +51,6 @@ export async function errorProcess (client, errorResponse, sttResponseText, requ
 
   // We send the json content response to the client, to give a description to the user in an alert box
   // The voice alert is sent to the client to be played
-console.log("error process", errorResponse, sttResponseText, voiceAnswer)
-
   client.emit('response', {
     id: request.id,
     date: request.date,
@@ -62,7 +60,6 @@ console.log("error process", errorResponse, sttResponseText, voiceAnswer)
     },
     error: errorResponse.text
   })
-
   // Console error messages
   console.log('Status :', errorResponse.status)
   console.log('Concerned service : ', errorResponse.service)
@@ -91,23 +88,10 @@ export async function processAudioCommand (client, request) {
   }
 }
 
-export async function processTextCommand (client, request) {
+async function processTextCommand (client, request) {
   //todo; implement this similar to audio data
 
   const commandData = request.command
-}
-
-/**
- * Function used to shape the bot text answer displayed on the UI
- * @param {JSON} botResult The json response from the chatbot
- * @returns {String} The bot text answer
- */
-function prepareBotTextAnswer (botResult) {
-  let result = ''
-  botResult.forEach(element => {
-    result += element.text + '</br>'
-  })
-  return result
 }
 
 /**

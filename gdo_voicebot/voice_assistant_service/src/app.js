@@ -63,4 +63,4 @@ export function setupClient (client) {
   client.on('text-command', (request) => processTextCommand(client, request))
 }
 
-export default app
+export default app;

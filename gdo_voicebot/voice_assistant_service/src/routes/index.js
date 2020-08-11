@@ -26,7 +26,7 @@ export function sampleData (req, res) {
  * @see {@link https://www.npmjs.com/package/gtts|Gtts}
  */
 export async function getData (requestUrl, robotAnswer) {
-  // We make the get request with the correct url (.../api/tts) and with the chosen parameters
+// We make the get request with the correct url (.../api/tts) and with the chosen parameters
   try {
     const response = await fetch(mergeUrlParams(requestUrl, { text: robotAnswer, lang: 'en' }))
 

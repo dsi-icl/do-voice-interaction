@@ -1,0 +1,15 @@
+node_modules/
+dist/
+
+package-lock.json
+
+.idea/
+*.iml
+
+.DS_Store
+
+*.log
+
+Dockerfile
+config/
+docs/
