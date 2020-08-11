@@ -77,7 +77,7 @@ export async function processAudioCommand (client, request) {
   */
   const sttResponse = await postData(global.config.services.sttService, audioData, 'Speech To Text Service')
 
-  console.log("sttresponse", sttResponse)
+  console.log('sttresponse', sttResponse)
 
   // If an error was encountered during the request or the string response is empty we inform the user through the event problem with the socket.
   // Else we can send the text transcript to the the text to speech service and sending the audiobuffer received to the client.
@@ -88,10 +88,12 @@ export async function processAudioCommand (client, request) {
   }
 }
 
-async function processTextCommand (client, request) {
+export async function processTextCommand (client, request) {
   //todo; implement this similar to audio data
 
   const commandData = request.command
+
+  return errorProcess(client, { status: 'fail', service: 'voice assistant', text: 'Not yet implemented' }, '', request)
 }
 
 /**

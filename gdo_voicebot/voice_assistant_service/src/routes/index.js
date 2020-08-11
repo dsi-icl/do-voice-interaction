@@ -34,9 +34,9 @@ export async function getData (requestUrl, robotAnswer) {
     if (status === 200) {
       return { success: true, data: new Buffer(response.arrayBuffer()).toString('base64') }
     } else if (status === 400) {
-      return { success: false, ...response.json() }
+      return { success: false, ...(await response.json()) }
     } else {
-      return { success: false, ...response.json() }
+      return { success: false, ...(await response.json()) }
     }
   } catch (exc) {
     return { success: false, text: exc.message }
@@ -54,23 +54,20 @@ export async function getData (requestUrl, robotAnswer) {
  * @see {@link https://deepspeech.readthedocs.io/en/v0.7.4/NodeJS-API.html|DeepSpeech}
  */
 export async function postData (url, data, serviceName) {
-  let jsondata
-
-  const response = await fetch(url, {
-    method: 'post',
-    // The content-type is important to be able to send the audio blob properly
-    headers: { 'Content-type': 'text/plain' },
-    body: data
-  })
+  //todo; refactor this to be same as getData
   try {
-    jsondata = await response.json()
+    const response = await fetch(url, {
+      method: 'post',
+      // The content-type is important to be able to send the audio blob properly
+      headers: { 'Content-type': 'text/plain' },
+      body: data
+    })
+    return await response.json()
   } catch (error) {
-    jsondata = {
+    return {
       status: 'fail',
       service: serviceName,
-      text: 'I encountered this error \'\'' + response.status + ' : ' + response.statusText + '\'\' in the ' + serviceName
+      text: `I encountered this error '${error.message}' in the '${serviceName}'`
     }
   }
-  //todo; refactor this to be same as getData
-  return jsondata
 }
