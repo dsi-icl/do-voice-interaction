@@ -152,7 +152,7 @@
 # switch modes
 * switch_modes
   - action_switch_modes
-  - slot{"mode":null}
+  - slot{"mode":null,"switch_action":null}
 
 # open environment
 * open_environment

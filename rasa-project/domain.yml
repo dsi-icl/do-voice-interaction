@@ -25,6 +25,7 @@ entities:
   - control_command
   - mode
   - work_environment
+  - switch_action
 
 slots:
   demo:
@@ -37,6 +38,7 @@ slots:
     - play
     - mute
     - pause
+    - play loop
   mode:
     type: categorical
     values:
@@ -51,6 +53,8 @@ slots:
   demo_name:
     type: unfeaturized
   current_demo:
+    type: unfeaturized
+  switch_action:
     type: unfeaturized
 
 actions:
@@ -81,9 +85,10 @@ responses:
   utter_out_of_scope:
   - text: "Sorry, I can't handle that request."
   utter_confirm_shutdown:
-  - text: "Do you really want to shut down the screens ?"
+  - text: "Do you really want to shutdown the screens ?"
+  - text: "Do you really want to shutdown the GDO ?"
   utter_confirm_turn_on_gdo:
-  - text: "Do you really want to turn on the Global Data Observatory ? ?"
+  - text: "Do you really want to turn on the Global Data Observatory ?"
   utter_ask_new_search:
   - text: "Fine, please repeat your request with the new tag"
 

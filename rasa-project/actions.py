@@ -15,42 +15,67 @@ from functools import lru_cache
 from util_graphql import GraphQL
 
 class ActionOpen(Action):
+    """A class used to open demos"""
 
     def name(self) -> Text:
+        """Function that returns the name of the action
+
+        Returns:
+        Text:The name of the action"""
+
         return "action_open"
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        """Function that manages the robot's behavior for the ''open''action.
+
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
+
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]"""
 
         my_graphQL = GraphQL()
 
+        #demo_name is a slot used to store the demo name suggested by the bot according to the user request.
+        #If it's not empty the it means that the user accepted to open the suggested demo
         if tracker.get_slot("demo_name") != None:
             response = my_graphQL.load_project(tracker.get_slot("demo_name"))
+            #We store the demo name to be open
             demo = tracker.get_slot("demo_name")
+        #The demo slot is an entity and a text slot. Each day, demo values will be updated in the nlu.md file executing the utils file.
+        #If the slot is empty it means that user request doesn't contain any available project name.
         elif tracker.get_slot("demo")==None:
             dispatcher.utter_message(text="There is no such demo available. Would you like to hear the list ?")
             my_graphQL.client.close()
             return [SlotSet("demo",None),SlotSet("demo_name",None)]
         else:
             response = my_graphQL.load_project(tracker.get_slot("demo"))
+            #We store the demo name to be open
             demo = tracker.get_slot("demo")
 
         if response=="NO ENVIRONMENT IS OPENED":
             list_environments = my_graphQL.get_available_environments()
             dispatcher.utter_message("Please, choose an environment before. Here are the available environments : "+", ".join(list_environments))
             dispatcher.utter_message("You'll might have to choose a mode before launching {}".format(tracker.get_slot("demo")))
+
         elif response=="NO MODE IS SELECTED":
             dispatcher.utter_message(text="Please, select a mode between cluster and section")
+
         elif response=="NO PROJECT WITH THIS NAME":
             available_demos = GraphQL.get_projects()
-            name = GraphQL.find_string_in_other_string(tracker.get_slot("demo"),list(available_demos.values()))
+            name = GraphQL.find_string_in_other_string(demo,list(available_demos.values()))
+            #If a demo contains this name it will be suggested
             if name != None:
                 dispatcher.utter_message(text="I've found this demo : "+str(name)+". If you want me to open it, please say open?")
                 my_graphQL.client.close()
                 return [SlotSet("demo",None), SlotSet("demo_name",name)]
             else:
                 dispatcher.utter_message(text="There is no such demo available. Would you like to hear the list ?")
+
         elif response=="OK":
             dispatcher.utter_message(text="Opening demo...")
             my_graphQL.client.close()
@@ -60,28 +85,46 @@ class ActionOpen(Action):
         return [SlotSet("demo",None),SlotSet("demo_name",None)]
 
 class ActionListDemos(Action):
+    """A class used to list available demos"""
 
     def name(self) -> Text:
+        """Function that returns the name of the action
+
+        Returns:
+        Text:The name of the action"""
+
         return "action_list_demos"
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        """Function that manages the robot's behavior to display available demos.
 
-        my_graphQL = GraphQL()
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
+
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]"""
+
+        try:
+            my_graphQL = GraphQL()
+        except Exception as e:
+            dispatcher.utter_message(text="I'm sorry, something went wrong. {}".format(e))
+            return []
 
         response = None
 
         if my_graphQL.environment_is_opened():
             response = GraphQL.get_projects()
 
+        #No environment is opened we can't display the demo list
         if response == None :
             list_environments = my_graphQL.get_available_environments()
             dispatcher.utter_message("I'm sorry, something went wrong. It seems that no environment is opened. Please choose an environment before. Here are all available environments : "+" ,".join(list_environments))
-
         elif len(response.values()) == 0:
             dispatcher.utter_message(text="There are no available demo.")
-
         else :
             dispatcher.utter_message("Here is the list of available demos : "+", ".join(response.values()))
 
@@ -91,351 +134,610 @@ class ActionListDemos(Action):
 
 
 class ActionShutDown(Action):
+    """A class used to shutdown the GDO"""
 
     def name(self) -> Text:
+        """Function that returns the name of the action
+
+        Returns:
+        Text:The name of the action"""
+
         return "action_shutdown"
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        """Function that manages the robot's behavior to shutdown the GDO
 
-        my_graphQL = GraphQL()
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
 
-        if my_graphQL.turn_off_gdo()=="off":
-            print("The screens are shut down")
-            dispatcher.utter_message("The screens are shut down")
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]"""
+
+        try:
+            my_graphQL = GraphQL()
+        except Exception as e:
+            dispatcher.utter_message(text="I'm sorry, something went wrong. {}".format(e))
+            return []
+
+        response = my_graphQL.turn_off_gdo()
+
+        print("Trying to shutdown the GDO...")
+        if response['success'] and response['executePowerAction']=="off":
+            dispatcher.utter_message(text="The Global Data Observatory is off")
+            print("The GDO is off :)")
+        elif not response['success']:
+            dispatcher.utter_message(text="Something went wrong. {}".format(response['message']))
+            dispatcher.utter_message(text="Do you want me to try again ?")
+            print(response["message"])
         else:
-            dispatcher.utter_message(text="Something went wrong. Do you want me to restart ?")
+            dispatcher.utter_message(text="Something went wrong. Do you want me to try again ?")
+            print("Fail :(")
 
         my_graphQL.client.close()
 
-        return []
-
 class ActionTurnOnGDO(Action):
+    """A class used to turn on the GDO"""
 
     def name(self) -> Text:
+        """Function that returns the name of the action
+
+        Returns:
+        Text:The name of the action"""
+
         return "action_turn_on_gdo"
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        """Function that manages the robot's behavior to turn on the GDO.
 
-        my_graphQL = GraphQL()
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
 
-        if my_graphQL.turn_on_gdo()=="on":
-            print("The GDO is on")
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]"""
+
+        try:
+            my_graphQL = GraphQL()
+        except Exception as e:
+            dispatcher.utter_message(text="I'm sorry, something went wrong. {}".format(e))
+            return []
+
+        response = my_graphQL.turn_on_gdo()
+
+        print("Trying to turn on the GDO...")
+        print(response)
+        if response['success'] and response['executePowerAction']=="on":
             dispatcher.utter_message(text="The Global Data Observatory is on")
+            print("The GDO is on :)")
+        elif not response['success']:
+            dispatcher.utter_message(text="Something went wrong. {}".format(response['message']))
+            dispatcher.utter_message(text="Do you want me to try again ?")
+            print(response["message"])
         else:
-            dispatcher.utter_message(text="Something went wrong. Do you want me to restart ?")
+            dispatcher.utter_message(text="Something went wrong. Do you want me to try again ?")
+            print("Fail :(")
 
         my_graphQL.client.close()
 
         return []
 
 class ActionControl(Action):
+    """A class used to execute a controller action"""
 
-        def name(self) -> Text:
-            return "action_control"
+    def name(self) -> Text:
+        """Function that returns the name of the action
+
+        Returns:
+        Text:The name of the action"""
+
+        return "action_control"
+
+    def process_response(self, dispatcher: CollectingDispatcher, message_success: str, message_fail: str, response):
+        if response['success'] == True and response['executeAppAction']=='done':
+            dispatcher.utter_message(message_success)
+            print("Done ! :)")
+        elif response['success'] == True:
+            dispatcher.utter_message(message_fail)
+            print("The action has not been executed :(")
+        else:
+            dispatcher.utter_message("I'm sorry. Something went wrong.")
+            dispatcher.utter_message(response['message'])
+            print(response['message'])
 
 
-        def run(self, dispatcher: CollectingDispatcher,
-                tracker: Tracker,
-                domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        """Function that manages the robot's behavior to execute a control command.
 
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
+
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]"""
+
+        try:
             my_graphQL = GraphQL()
+        except Exception as e:
+            dispatcher.utter_message(text="I'm sorry, something went wrong. {}".format(e))
+            return []
 
-            control = tracker.get_slot("control_command")
+        control = tracker.get_slot("control_command")
 
-            if tracker.get_slot("current_demo") == None:
-                dispatcher.utter_message("This command isn't available since no demo has been launched")
-                return [SlotSet("control_command",None)]
-            if control == None:
-                dispatcher.utter_message("Sorry I didn't get the command")
-                return [SlotSet("control_command",None)]
-            else:
-                control = control.lower()
-                map_demos = GraphQL.get_projects()
-                demo_id = list(map_demos.keys())[list(map_demos.values()).index(tracker.get_slot("current_demo"))]
-                video_controller = my_graphQL.project_has_video(demo_id)
-                html_controller = my_graphQL.project_has_html_controller(demo_id)
-
-
-            if control=="play" and video_controller:
-                print("Playing the video/audio...")
-                dispatcher.utter_message("I'm playing the video/audio")
-            elif control=="pause" and video_controller:
-                print("The video/audio is paused")
-                dispatcher.utter_message("The video/audio is paused")
-            elif control=="stop" and video_controller:
-                print("The video/audio is stopped")
-                dispatcher.utter_message("I stopped the video/audio")
-            elif control=="mute" and video_controller:
-                print("The video/audio is muted")
-                dispatcher.utter_message("I've muted the video/audio")
-            elif control=="refresh" and html_controller:
-                print("Refreshing the webpage...")
-                dispatcher.utter_message("Webpage refreshing in progress")
-            else :
-                print("Unknown control command")
-                dispatcher.utter_message("I'm sorry, I can't execute the following command, ''"+str(control)+"''. There is no controller for this in the demo.")
-
+        #If the control command is not recognized, we inform the user
+        if control == None:
+            dispatcher.utter_message("Sorry I didn't get the command")
             return [SlotSet("control_command",None)]
+        else:
+            control = control.lower()
+
+        if control=="play":
+            print("Trying to play the video/audio...")
+            response = my_graphQL.play()
+            self.process_response(dispatcher,"I'm playing the video","I didn't start playing the video. Try again please",response)
+        elif control=="pause":
+            print("Trying to pause the video/audio...")
+            response = my_graphQL.pause()
+            self.process_response(dispatcher,"I paused the video","I didn't pause the video. Try again please",response)
+        elif control=="stop":
+            print("Trying to stop the video/audio...")
+            response = my_graphQL.stop()
+            self.process_response(dispatcher,"I stopped the video","I didn't stop the video. Try again please",response)
+        elif control=="reset":
+            print("Trying to reset the video/audio...")
+            response = my_graphQL.reset()
+            self.process_response(dispatcher,"I reset the video","I didn't reset the video. Try again please",response)
+        elif control=="play loop":
+            print("Trying to play loop the video/audio...")
+            response = my_graphQL.play_loop()
+            self.process_response(dispatcher,"I played loop the video","I didn't play loop the video. Try again please",response)
+        elif control=="refresh":
+            print("Trying to refresh the webpage...")
+            response = my_graphQL.refresh()
+            self.process_response(dispatcher,"I refreshed the page","I didn't refresh the page. Try again please",response)
+
+
+        return [SlotSet("control_command",None)]
 
 class ActionSearch(Action):
+    """A class used to search a demo"""
 
-        def name(self) -> Text:
-            return "action_search"
+    def name(self) -> Text:
+        """Function that returns the name of the action
 
-        def demo_contains_tag(self,tag, available_demos):
+        Returns:
+        Text:The name of the action"""
 
-            tag_found = False
-            list_chosen_demos = []
-            for demo_name in available_demos:
-                if tag in demo_name.lower():
-                    list_chosen_demos.append(demo_name)
-                    if not tag_found:
-                        tag_found = True
+        return "action_search"
 
-            return tag_found,list_chosen_demos
+    def demo_contains_tag(self,tag, available_demos):
+        """Function that indicates if one of the demo contains a tag and returns all demos containing the tag
+
+        Parameters:
+        tag (String): The tag
+        available_demos (List[String]): The list of available demos in the current environments
+
+        Returns:
+        [Boolean, List[String]]: The booleand and the list of found demos"""
+
+        tag_found = False
+        list_chosen_demos = []
+        for demo_name in available_demos:
+            if tag in demo_name.lower():
+                list_chosen_demos.append(demo_name)
+                if not tag_found:
+                    tag_found = True
+
+        return tag_found,list_chosen_demos
 
 
-        def run(self, dispatcher: CollectingDispatcher,
-                tracker: Tracker,
-                domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        """Function that manages the robot's behavior to search a demo.
 
-            tag = tracker.get_slot("demo")
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
 
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]"""
+
+        tag = tracker.get_slot("demo")
+
+        try:
             my_graphQL = GraphQL()
+        except Exception as e:
+            dispatcher.utter_message(text="I'm sorry, something went wrong. {}".format(e))
+            return []
 
-            available_demos = None
+        available_demos = None
 
-            if my_graphQL.environment_is_opened():
-                available_demos = GraphQL.get_projects()
+        if my_graphQL.environment_is_opened():
+            available_demos = GraphQL.get_projects()
 
-            if available_demos == None:
-                dispatcher.utter_message(text="First, open an environment please")
-            elif tag == None:
-                dispatcher.utter_message(text="I'm sorry, there is no demos on this topic")
-            else:
-                dispatcher.utter_message(text="Reading the demos...")
-                available_demos_names = available_demos.values()
-                result_search = self.demo_contains_tag(tag.lower(),available_demos_names)
-                if result_search[0]:
-                    ids_demos_tag =result_search[1]
-                    if len(ids_demos_tag)<=10:
-                        dispatcher.utter_message("Results for "+str(tracker.get_slot("demo"))+" : "+", ".join(ids_demos_tag))
-                    else:
-                        dispatcher.utter_message(text="The list of demos is too long to read out. Would you like to refine it by other tags?")
+        if available_demos == None:
+            dispatcher.utter_message(text="First, open an environment please")
+        elif tag == None:
+            dispatcher.utter_message(text="I'm sorry, there is no demo on this topic")
+        else:
+            dispatcher.utter_message(text="Reading demos...")
+            available_demos_names = available_demos.values()
+            result_search = self.demo_contains_tag(tag.lower(),available_demos_names)
+            #if something corresponds to the tag
+            if result_search[0]:
+                ids_demos_tag =result_search[1]
+                if len(ids_demos_tag)<=10:
+                    dispatcher.utter_message("Results for "+str(tracker.get_slot("demo"))+" : "+", ".join(ids_demos_tag))
                 else:
-                    dispatcher.utter_message(text="I'm sorry, there is no demos on this topic")
+                    dispatcher.utter_message(text="The list of demos is too long to read out. Would you like to refine it by other tags?")
+            else:
+                dispatcher.utter_message(text="I'm sorry, there is no demo on this topic")
 
-            my_graphQL.client.close()
+        my_graphQL.client.close()
 
-            return [SlotSet("demo",None)]
+        return [SlotSet("demo",None)]
 
 
 class ActionClearSpace(Action):
+    """A class used to clear the space"""
 
-        def name(self) -> Text:
-            return "action_clear_space"
+    def name(self) -> Text:
+        """Function that returns the name of the action
 
-        def run(self, dispatcher: CollectingDispatcher,
-                tracker: Tracker,
+        Returns:
+        Text:The name of the action"""
+
+        return "action_clear_space"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        """Function that manages the robot's behavior to clear the space.
 
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
+
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]"""
+
+        try:
             my_graphQL = GraphQL()
-
-            if not my_graphQL.clear_screen():
-                dispatcher.utter_message(text="No environment is opened. I can't clear the screens")
-            else:
-                print("Clear space")
-                dispatcher.utter_message("The space is cleaned")
-
-            my_graphQL.client.close()
-
+        except Exception as e:
+            dispatcher.utter_message(text="I'm sorry, something went wrong. {}".format(e))
             return []
+
+        response = my_graphQL.clear_screen()
+
+        print("Trying to clear the space...")
+        if response['success']:
+            dispatcher.utter_message("The space is cleaned")
+            print("Clear space done ;)")
+        else:
+            dispatcher.utter_message(text="I'm sorry, something went wrong. I can't clear the screens. {}".format(response['message']))
+            print(response['message'])
+
+        my_graphQL.client.close()
+
+        return []
 
 class ActionSwitchMode(Action):
+    """A class used to switch the mode"""
 
-        def name(self) -> Text:
-            return "action_switch_modes"
+    def name(self) -> Text:
+        """Function that returns the name of the action
 
-        def run(self, dispatcher: CollectingDispatcher,
-                tracker: Tracker,
-                domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        Returns:
+        Text:The name of the action"""
 
+        return "action_switch_modes"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        """Function that manages the robot's behavior to switch the mode.
+
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
+
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]"""
+
+        try:
             my_graphQL = GraphQL()
-
-            mode = tracker.get_slot('mode')
-            current_mode = my_graphQL.get_current_mode()
-
-            if mode == None:
-                if current_mode == None:
-                    dispatcher.utter_message(text="No mode has been selected. You can choose between cluster or section")
-                else :
-                    dispatcher.utter_message(text="The current mode is {}".format(current_mode))
-                    if current_mode == "section":
-                        new_mode = my_graphQL.choose_mode("cluster")
-                        dispatcher.utter_message(text="The mode has been changed to {}".format(new_mode['changeMode']['id']))
-                    elif current_mode == "cluster":
-                        new_mode = my_graphQL.choose_mode("section")
-                        dispatcher.utter_message(text="The mode has been changed to {}".format(new_mode['changeMode']['id']))
-            else:
-                if current_mode == mode:
-                    dispatcher.utter_message(text="The mode is already {}".format(current_mode))
-                else:
-                    new_mode = my_graphQL.choose_mode(mode)
-                    dispatcher.utter_message(text="The mode has been changed to {}".format(new_mode['changeMode']['id']))
-
-            my_graphQL.client.close()
-
-            return [SlotSet("mode",None)]
-
-class ActionOpenEnvironment(Action):
-
-        def name(self) -> Text:
-            return "action_open_environment"
-
-        def run(self, dispatcher: CollectingDispatcher,
-                tracker: Tracker,
-                domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
-            my_graphQL = GraphQL()
-
-            environment = tracker.get_slot('work_environment')
-
-            current_environment = my_graphQL.get_current_environment()
-
-            list_available_environments = my_graphQL.get_available_environments()
-
-            if environment==None:
-                if my_graphQL.environment_is_opened():
-                    dispatcher.utter_message(text="The current environment is {}".format(current_environment))
-                else :
-                    dispatcher.utter_message("No environment is open")
-                dispatcher.utter_message(text="The available environments are : "+", ".join(list_available_environments))
-            else:
-                if environment == current_environment:
-                    dispatcher.utter_message(text="The environment is already the "+str(environment)+" one")
-                elif environment not in list_available_environments:
-                    dispatcher.utter_message(text="There's no such available environment")
-                    dispatcher.utter_message(text="The available environments are : "+", ".join(list_available_environments))
-                else:
-                    dispatcher.utter_message(text="The environment has been set to {}".format(my_graphQL.open_environment(environment)["changeEnvironment"]["id"]))
-
-            my_graphQL.client.close()
-
-            return [SlotSet("work_environment",None)]
-
-class ActionHelp(Action):
-
-        def name(self) -> Text:
-            return "action_help"
-
-        def run(self, dispatcher: CollectingDispatcher,
-                tracker: Tracker,
-                domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
-            dispatcher.utter_message(text="I can execute the following commands :")
-            dispatcher.utter_message(text="Open demo")
-            dispatcher.utter_message(text="Show me something on tag")
-            dispatcher.utter_message(text="Launch demo")
-            dispatcher.utter_message(text="Activate demo")
-            dispatcher.utter_message(text="Shutdown screens")
-            dispatcher.utter_message(text="Do a clearspace")
-            dispatcher.utter_message(text="Refresh the screens")
-            dispatcher.utter_message(text="Pause the video/the audio")
-            dispatcher.utter_message(text="Play video")
-            dispatcher.utter_message(text="Start animation")
-            dispatcher.utter_message(text="Stop animation")
-            dispatcher.utter_message(text="Quit video/audio")
-            dispatcher.utter_message(text="Mute video/audio")
-            dispatcher.utter_message(text="Full black screens")
-            dispatcher.utter_message(text="Open environment")
-            dispatcher.utter_message(text="Switch mode")
-            dispatcher.utter_message(text="Turn on the Global Data Observatory")
-            dispatcher.utter_message(text="Shutdown the Global Data Observatory")
-            dispatcher.utter_message(text="Open/Close/Reset browsers")
-
+        except Exception as e:
+            dispatcher.utter_message(text="I'm sorry, something went wrong. {}".format(e))
             return []
 
+        response = my_graphQL.switch_mode(tracker.get_slot('mode'),tracker.get_slot('switch_action'))
+        print("Switch mode action in process...")
+        if response['success']:
+            dispatcher.utter_message(text=response['message'])
+            print(response['message'])
+        else:
+            dispatcher.utter_message(text="I'm sorry, I can't do that. {}".format(response['message']))
+            print("Fail :(")
+
+        my_graphQL.client.close()
+        return [SlotSet("mode",None),SlotSet("switch_action",None)]
+
+class ActionOpenEnvironment(Action):
+    """A class used to open an environment"""
+
+    def name(self) -> Text:
+        """Function that returns the name of the action
+
+        Returns:
+        Text:The name of the action"""
+
+        return "action_open_environment"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        """Function that manages the robot's behavior to open an environment.
+
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
+
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]"""
+
+        try:
+            my_graphQL = GraphQL()
+        except Exception as e:
+            dispatcher.utter_message(text="I'm sorry, something went wrong. {}".format(e))
+            return []
+
+        environment = tracker.get_slot('work_environment')
+
+        response = my_graphQL.open_environment_action(environment)
+        print("Open environment action in process...")
+        if response['success']:
+            dispatcher.utter_message(text=response['message'])
+            print("Successfully accomplished :)")
+        else:
+            dispatcher.utter_message(text="I'm sorry, something went wrong. {}".format(response['message']))
+            print(reponse['message'])
+
+        my_graphQL.client.close()
+        return [SlotSet("work_environment",None)]
+
+class ActionHelp(Action):
+    """A class used to give information"""
+
+    def name(self) -> Text:
+        """Function that returns the name of the action
+
+        Returns:
+        Text:The name of the action"""
+        return "action_help"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        """Function that manages the robot's behavior to give help information.
+
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
+
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]"""
+
+        dispatcher.utter_message(text="I can execute the following commands :")
+        dispatcher.utter_message(text="Open demo")
+        dispatcher.utter_message(text="Show me something on tag")
+        dispatcher.utter_message(text="Launch demo")
+        dispatcher.utter_message(text="Activate demo")
+        dispatcher.utter_message(text="Shutdown screens")
+        dispatcher.utter_message(text="Do a clearspace")
+        dispatcher.utter_message(text="Refresh the screens")
+        dispatcher.utter_message(text="Pause the video/the audio")
+        dispatcher.utter_message(text="Play video")
+        dispatcher.utter_message(text="Start animation")
+        dispatcher.utter_message(text="Stop animation")
+        dispatcher.utter_message(text="Quit video/audio")
+        dispatcher.utter_message(text="Mute video/audio")
+        dispatcher.utter_message(text="Full black screens")
+        dispatcher.utter_message(text="Open environment")
+        dispatcher.utter_message(text="Switch mode")
+        dispatcher.utter_message(text="Turn on the Global Data Observatory")
+        dispatcher.utter_message(text="Shutdown the Global Data Observatory")
+        dispatcher.utter_message(text="Open/Close/Reset browsers")
+
+        return []
+
 class ActionResetSlot(Action):
+    """A class used to reset slots"""
 
     def name(self):
+        """Function that returns the name of the action
+
+        Returns:
+        Text:The name of the action"""
+
         return "action_reset_slot"
 
     def run(self, dispatcher, tracker, domain):
+        """Function that resets slots.
+
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
+
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]"""
+
         return [SlotSet("demo", None), SlotSet("demo_name",None)]
 
 class ActionOpenBrowsers(Action):
+    """A class used to open browsers"""
 
     def name(self):
+        """Function that returns the name of the action
+
+        Returns:
+        Text:The name of the action"""
+
         return "action_open_browsers"
 
     def run(self, dispatcher, tracker, domain):
+        """Function that manages the robot's behavior to open browsers.
 
-        my_graphQL = GraphQL()
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
 
-        if not my_graphQL.environment_is_opened():
-            dispatcher.utter_message(text="Please, open an environment before")
-        elif not my_graphQL.mode_is_selected():
-            dispatcher.utter_message(text="Please, select a mode before")
-        elif my_graphQL.open_browsers():
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]"""
+
+        try:
+            my_graphQL = GraphQL()
+        except Exception as e:
+            dispatcher.utter_message(text="I'm sorry, something went wrong. {}".format(e))
+            return []
+
+        response = my_graphQL.open_browsers();
+        print("Trying to open browsers...")
+        if response['success'] and response["executeHwAction"]=="done":
             dispatcher.utter_message(text="The browsers are open")
-        else:
+            print("Browsers are open ;)")
+        elif response['success']:
             dispatcher.utter_message(text="Something went wrong. Do you want me to try again ?")
+            print("Fail :(")
+        else:
+            dispatcher.utter_message(text="I'm sorry, something went wrong. {}".format(response['message']))
+            print(response['message'])
 
         my_graphQL.client.close()
         return []
 
 class ActionCloseBrowsers(Action):
+    """A class used to close browsers"""
 
     def name(self):
+        """Function that returns the name of the action
+
+        Returns:
+        Text:The name of the action"""
+
         return "action_close_browsers"
 
     def run(self, dispatcher, tracker, domain):
+        """Function that manages the robot's behavior to close browsers.
 
-        my_graphQL = GraphQL()
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
 
-        if not my_graphQL.environment_is_opened():
-            dispatcher.utter_message(text="Please, open en environment before")
-        elif not my_graphQL.mode_is_selected():
-            dispatcher.utter_message(text="Please, select a mode before")
-        elif my_graphQL.close_browsers():
-            dispatcher.utter_message(text="The browsers are closed")
-        else:
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]"""
+
+        try:
+            my_graphQL = GraphQL()
+        except Exception as e:
+            dispatcher.utter_message(text="I'm sorry, something went wrong. {}".format(e))
+            return []
+
+        response = my_graphQL.close_browsers();
+        print("Trying to close browsers...")
+        if response['success'] and response["executeHwAction"]=="done":
+            dispatcher.utter_message(text="The browsers are close")
+            print("Browsers are close ;)")
+        elif response['success']:
             dispatcher.utter_message(text="Something went wrong. Do you want me to try again ?")
+            print("Fail :(")
+        else:
+            dispatcher.utter_message(text="I'm sorry, something went wrong. {}".format(response['message']))
+            print(response['message'])
 
         my_graphQL.client.close()
         return []
 
 class ActionRefreshBrowsers(Action):
+    """A class used to refresh browsers"""
 
     def name(self):
+        """Function that returns the name of the action
+
+        Returns:
+        Text:The name of the action"""
+
         return "action_refresh_browsers"
 
     def run(self, dispatcher, tracker, domain):
+        """Function that manages the robot's behavior to refresh browsers.
 
-        my_graphQL = GraphQL()
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
 
-        if not my_graphQL.environment_is_opened():
-            dispatcher.utter_message(text="Please, open en environment before")
-        elif not my_graphQL.mode_is_selected():
-            dispatcher.utter_message(text="Please, select a mode before")
-        elif my_graphQL.refresh_browsers():
-            dispatcher.utter_message(text="The browsers are refreshed")
-        else:
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]"""
+
+        try:
+            my_graphQL = GraphQL()
+        except Exception as e:
+            dispatcher.utter_message(text="I'm sorry, something went wrong. {}".format(e))
+            return []
+
+        response = my_graphQL.refresh_browsers();
+        print("Trying to refresh browsers...")
+        if response['success'] and response["executeHwAction"]=="done":
+            dispatcher.utter_message(text="The browsers are reset")
+            print("Browsers are reset ;)")
+        elif response['success']:
             dispatcher.utter_message(text="Something went wrong. Do you want me to try again ?")
+            print("Fail :(")
+        else:
+            dispatcher.utter_message(text="I'm sorry, something went wrong. {}".format(response['message']))
+            print(response['message'])
 
         my_graphQL.client.close()
         return []
 
 class ActionRepeat(Action):
+    """A class used to repeat the last bot answer"""
 
     def name(self):
+        """Function that returns the name of the action
+
+        Returns:
+        Text:The name of the action"""
         return "action_repeat"
 
     def run(self, dispatcher, tracker, domain):
+        """Function that repeats the last utter_message.
+
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
+
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]"""
 
         if len(tracker.events) >= 3:
                 dispatcher.utter_message(tracker.events[-3].get('text'))

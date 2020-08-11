@@ -30,6 +30,7 @@
 - see you around
 - see you later
 - see you
+- good bye
 
 ## intent:help
 - help
@@ -126,10 +127,12 @@
 - [Stop](control_command) it
 - Could you [mute](control_command) the video
 - I'd like to [refresh](control_command) the screen
+- [Play loop](control_command) the video
+- Can you [play loop](control_command) the audio
 
 ## intent:switch_modes
 - I'd like to switch the mode
-- Switch the mode
+- [switch](switch_action) the mode
 - Mode [cluster](mode)
 - mode [section](mode)
 - Select [section](mode)
@@ -137,7 +140,10 @@
 - The [section](mode) mode would be fine
 - I would like to take the [section](mode)
 - I choose [cluster](mode)
-- Change the mode
+- [change]{"entity":"switch_action","value":"switch"} the mode
+- [reverse]{"entity":"switch_action","value":"switch"} modes
+- [permute]{"entity":"switch_action","value":"switch"} modes
+- [swap]{"entity":"switch_action","value":"switch"} modes
 - What's the current mode
 
 ## intent:open_environment
