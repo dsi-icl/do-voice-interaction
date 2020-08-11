@@ -5,7 +5,7 @@ import https from "https";
 import fs from "fs";
 import socketio from 'socket.io';
 
-import app, {socketHandler} from "../src/app";
+import app, {setupClient} from "../src/app";
 
 app.use((err, req, res, _) => {
     console.error("Error", err);
@@ -57,7 +57,7 @@ function startServer(server, port) {
         console.log("Listening on " + bind);
     });
 
-    socketio.listen(server).on("connect", socketHandler);
+    socketio.listen(server).on("connect", setupClient);
 }
 
 

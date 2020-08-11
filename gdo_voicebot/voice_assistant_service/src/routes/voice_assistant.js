@@ -20,7 +20,7 @@ export async function successProcess (client, sttResponse, request) {
   // We send the text message to the tts service to get back the voice answer.
   const voiceAnswer = await getData(global.config.services.ttsService, botResponseVoice)
 
-  if (voiceAnswer instanceof ArrayBuffer) {
+  if (voiceAnswer.success) {
     // The user receives a transcript of her or his voice message for verification.
     // The text version of the bot answer is also sent and displayed on the user interface
     // Voice answer sent to the client through the socket
@@ -30,7 +30,7 @@ export async function successProcess (client, sttResponse, request) {
       command: sttResponse.text,
       response: botResponseText,
       audio: {
-        data: voiceAnswer
+        data: voiceAnswer.data
       }
     })
   } else {
@@ -51,46 +51,22 @@ export async function errorProcess (client, errorResponse, sttResponseText, requ
 
   // We send the json content response to the client, to give a description to the user in an alert box
   // The voice alert is sent to the client to be played
-
   client.emit('response', {
     id: request.id,
     date: request.date,
     command: sttResponseText !== '' ? sttResponseText : '...',
     audio: {
-      data: voiceAnswer
+      data: voiceAnswer.success ? voiceAnswer.data : null
     },
     error: errorResponse.text
-  });
-
+  })
   // Console error messages
   console.log('Status :', errorResponse.status)
   console.log('Concerned service : ', errorResponse.service)
   console.log('Error message :', errorResponse.text + '\n')
 }
 
-/**
- * Function that manage the entire communication process between the server and the client
- * @param {SocketIO.Client} client The client with which the server comunicates
- */
-export function echoProcess (client) {
-  console.log('Client connected\n')
-
-  // The user has recorded a message and the client sent it to the server
-  client.on('message', async function (request) {
-    console.log('RECORD DONE\n')
-
-    const commandType = request.type
-    if (commandType === 'audio') {
-      return processAudioCommand(client, request)
-    } else if (commandType === 'command') {
-      return processTextCommand(client, request)
-    } else {
-      //todo; implement error handling
-    }
-  })
-}
-
-async function processAudioCommand (client, request) {
+export async function processAudioCommand (client, request) {
   // We get the audio blob and send it to the stt service
   const audioData = request.audio.data.split(',').pop()
 
@@ -101,6 +77,8 @@ async function processAudioCommand (client, request) {
   */
   const sttResponse = await postData(global.config.services.sttService, audioData, 'Speech To Text Service')
 
+  console.log('sttresponse', sttResponse)
+
   // If an error was encountered during the request or the string response is empty we inform the user through the event problem with the socket.
   // Else we can send the text transcript to the the text to speech service and sending the audiobuffer received to the client.
   if (sttResponse.status === 'ok') {
@@ -110,23 +88,12 @@ async function processAudioCommand (client, request) {
   }
 }
 
-async function processTextCommand (client, request) {
+export async function processTextCommand (client, request) {
   //todo; implement this similar to audio data
 
   const commandData = request.command
-}
 
-/**
- * Function used to shape the bot text answer displayed on the UI
- * @param {JSON} botResult The json response from the chatbot
- * @returns {String} The bot text answer
- */
-function prepareBotTextAnswer (botResult) {
-  let result = ''
-  botResult.forEach(element => {
-    result += element.text + '</br>'
-  })
-  return result
+  return errorProcess(client, { status: 'fail', service: 'voice assistant', text: 'Not yet implemented' }, '', request)
 }
 
 /**

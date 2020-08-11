@@ -9,12 +9,8 @@ import logger from 'morgan'
 import fs from 'fs'
 import path from 'path'
 
-/**
- * @import { sampleData, postData, getData } from "./routes/index.js"
- * @see {@link "./routes/index.js"|index.js}
- */
 import { sampleData } from './routes'
-import { echoProcess } from './routes/voice_assistant.js'
+import { processAudioCommand, processTextCommand } from './routes/voice_assistant.js'
 
 if (!fs.existsSync('./config/config.json')) {
   console.error('Could not find the configuration file: \'./config/config.json\'')
@@ -56,6 +52,15 @@ app.use('/node_modules', express.static(path.join(__dirname, '/node_modules')))
  */
 app.use('/api/echo', express.static('public'))
 
-export const socketHandler = (client) =>  echoProcess(client);
+/**
+ * Function that manage the entire communication process between the server and the client
+ * @param {SocketIO.Client} client The client with which the server comunicates
+ */
+export function setupClient (client) {
+  console.log('Client connected\n')
+
+  client.on('audio-command', (request) => processAudioCommand(client, request))
+  client.on('text-command', (request) => processTextCommand(client, request))
+}
 
 export default app;

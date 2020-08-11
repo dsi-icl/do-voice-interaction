@@ -4,6 +4,7 @@
  */
 
 import fetch from 'node-fetch'
+import { mergeUrlParams } from '../util'
 
 /**
  * This function returns a json response to be sent at the /api/json route.
@@ -25,28 +26,21 @@ export function sampleData (req, res) {
  * @see {@link https://www.npmjs.com/package/gtts|Gtts}
  */
 export async function getData (requestUrl, robotAnswer) {
-  // The payload parameters : text and lang (can be different from english)
-  const url = new URL(requestUrl)
-  const params = { text: robotAnswer, lang: 'en' }
+// We make the get request with the correct url (.../api/tts) and with the chosen parameters
+  try {
+    const response = await fetch(mergeUrlParams(requestUrl, { text: robotAnswer, lang: 'en' }))
 
-  Object.keys(params).forEach(key =>
-    url.searchParams.append(key, params[key]))
-
-  // We make the get request with the correct url (.../api/tts) and with the chosen parameters
-  const response = await fetch(url)
-
-  const status = await response.status
-
-  let data
-
-  if (status === 400) {
-    data = await response.json()
-  } else {
-    //todo; validate in case of 404 (server not found)
-    data = await response.arrayBuffer()
+    const status = await response.status
+    if (status === 200) {
+      return { success: true, data: new Buffer(response.arrayBuffer()).toString('base64') }
+    } else if (status === 400) {
+      return { success: false, ...(await response.json()) }
+    } else {
+      return { success: false, ...(await response.json()) }
+    }
+  } catch (exc) {
+    return { success: false, text: exc.message }
   }
-  // We return the array buffer or the error
-  return new Buffer(data).toString('base64');
 }
 
 /**
@@ -60,18 +54,20 @@ export async function getData (requestUrl, robotAnswer) {
  * @see {@link https://deepspeech.readthedocs.io/en/v0.7.4/NodeJS-API.html|DeepSpeech}
  */
 export async function postData (url, data, serviceName) {
-  let jsondata
-
-  const response = await fetch(url, {
-    method: 'post',
-    // The content-type is important to be able to send the audio blob properly
-    headers: { 'Content-type': 'text/plain' },
-    body: data
-  })
+  //todo; refactor this to be same as getData
   try {
-    jsondata = await response.json()
+    const response = await fetch(url, {
+      method: 'post',
+      // The content-type is important to be able to send the audio blob properly
+      headers: { 'Content-type': 'text/plain' },
+      body: data
+    })
+    return await response.json()
   } catch (error) {
-    jsondata = [{ text: 'I encountered this error \'\'' + response.status + ' : ' + response.statusText + '\'\' in the ' + serviceName + '. Request status : fail.' }]
+    return {
+      status: 'fail',
+      service: serviceName,
+      text: `I encountered this error '${error.message}' in the '${serviceName}'`
+    }
   }
-  return jsondata
 }
