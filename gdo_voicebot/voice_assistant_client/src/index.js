@@ -13,10 +13,4 @@ import "./theme.css";
 const store = setupStore();
 setupSocket(window.BACKEND_URL, store.dispatch);
 
-const RootNode = () => <React.StrictMode>
-    <Provider store={store}>
-        <App/>
-    </Provider>
-</React.StrictMode>;
-
-ReactDOM.render(<RootNode/>, document.getElementById("app"));
+ReactDOM.render(<Provider store={store}><App/></Provider>, document.getElementById("app"));
