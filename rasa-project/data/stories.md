@@ -214,3 +214,15 @@
 # list of available projects
 * list_available_demos
   - action_list_demos
+
+# list of available projects and try again
+* list_available_demos
+  - action_list_demos
+* affirm
+  - action_list_demos
+
+# list of available projects and cancel
+* list_available_demos
+  - action_list_demos
+* deny
+  - utter_affirm
