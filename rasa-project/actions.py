@@ -320,27 +320,6 @@ class ActionSearch(Action):
 
         return "action_search"
 
-    def demo_contains_tag(self,tag, available_demos):
-        """Function that indicates if one of the demo contains a tag and returns all demos containing the tag
-
-        Parameters:
-        tag (String): The tag
-        available_demos (List[String]): The list of available demos in the current environments
-
-        Returns:
-        [Boolean, List[String]]: The booleand and the list of found demos"""
-
-        tag_found = False
-        list_chosen_demos = []
-        for demo_name in available_demos:
-            if tag in demo_name.lower():
-                list_chosen_demos.append(demo_name)
-                if not tag_found:
-                    tag_found = True
-
-        return tag_found,list_chosen_demos
-
-
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
@@ -354,41 +333,37 @@ class ActionSearch(Action):
         Returns:
         List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]"""
 
-        tag = tracker.get_slot("demo")
-
         try:
             my_graphQL = GraphQL()
         except Exception as e:
             dispatcher.utter_message(text="I'm sorry, something went wrong. {}".format(e))
             print(e)
-            return []
+            return [SlotSet("demo",None),SlotSet("tag",None),SlotSet("search_mode",None)]
 
-        available_demos = None
 
-        if my_graphQL.environment_is_opened():
-            available_demos = GraphQL.get_projects()
+        tag = tracker.get_slot("tag")
+        key_word = tracker.get_slot("demo")
+        search_mode = tracker.get_slot("search_mode")
 
-        if available_demos == None:
-            dispatcher.utter_message(text="First, open an environment please")
-        elif tag == None:
-            dispatcher.utter_message(text="I'm sorry, there is no demo on this topic")
+        if search_mode == None:
+            search_mode = ""
+
+
+        result = my_graphQL.search_action(key_word,tag,search_mode)
+        print("Trying to execute search action...")
+
+        if result['success']:
+            dispatcher.utter_message(text=result['message'])
+            print("Success :)")
         else:
-            dispatcher.utter_message(text="Reading demos...")
-            available_demos_names = available_demos.values()
-            result_search = self.demo_contains_tag(tag.lower(),available_demos_names)
-            #if something corresponds to the tag
-            if result_search[0]:
-                ids_demos_tag =result_search[1]
-                if len(ids_demos_tag)<=10:
-                    dispatcher.utter_message("Results for "+str(tracker.get_slot("demo"))+" : "+", ".join(ids_demos_tag))
-                else:
-                    dispatcher.utter_message(text="The list of demos is too long to read out. Would you like to refine it by other tags?")
-            else:
-                dispatcher.utter_message(text="I'm sorry, there is no demo on this topic")
+            dispatcher.utter_message(text="I'm sorry, something went wrong. {}".format(result['message']))
+            dispatcher.utter_message(text="Do you want me to try again ?")
+            print('Fail :(')
+            return []
 
         my_graphQL.client.close()
 
-        return [SlotSet("demo",None)]
+        return [SlotSet("demo",None),SlotSet("tag",None),SlotSet("search_mode",None)]
 
 
 class ActionClearSpace(Action):
@@ -465,7 +440,7 @@ class ActionSwitchMode(Action):
         except Exception as e:
             dispatcher.utter_message(text="I'm sorry, something went wrong. {}".format(e))
             print(e)
-            return []
+            return [SlotSet("mode",None),SlotSet("switch_action",None)]
 
         response = my_graphQL.switch_mode(tracker.get_slot('mode'),tracker.get_slot('switch_action'))
         print("Switch mode action in process...")
@@ -508,7 +483,7 @@ class ActionOpenEnvironment(Action):
         except Exception as e:
             dispatcher.utter_message(text="I'm sorry, something went wrong. {}".format(e))
             print(e)
-            return []
+            return [SlotSet("work_environment",None)]
 
         environment = tracker.get_slot('work_environment')
 
@@ -570,7 +545,7 @@ class ActionHelp(Action):
 
         return []
 
-class ActionResetSlot(Action):
+class ActionResetSlotOpenDemo(Action):
     """A class used to reset slots"""
 
     def name(self):
@@ -579,7 +554,7 @@ class ActionResetSlot(Action):
         Returns:
         Text:The name of the action"""
 
-        return "action_reset_slot"
+        return "action_reset_slot_open"
 
     def run(self, dispatcher, tracker, domain):
         """Function that resets slots.
@@ -593,6 +568,30 @@ class ActionResetSlot(Action):
         List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]"""
 
         return [SlotSet("demo", None), SlotSet("demo_name",None)]
+
+class ActionResetSlotSearch(Action):
+    """A class used to reset slots"""
+
+    def name(self):
+        """Function that returns the name of the action
+
+        Returns:
+        Text:The name of the action"""
+
+        return "action_reset_slot_search"
+
+    def run(self, dispatcher, tracker, domain):
+        """Function that resets slots.
+
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
+
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]"""
+
+        return [SlotSet("demo",None),SlotSet("tag",None),SlotSet("search_mode",None)]
 
 class ActionOpenBrowsers(Action):
     """A class used to open browsers"""
