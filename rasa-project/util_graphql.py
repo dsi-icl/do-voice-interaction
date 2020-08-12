@@ -164,9 +164,6 @@ class GraphQL:
 
         return result['mode']!=None
 
-
-
-
     def choose_mode(self,mode):
         "Function thar permits to choose a mode between section and cluster or to switch the mode"
 
@@ -211,7 +208,6 @@ class GraphQL:
             result = {'success':False,'message':str(exc)}
             result.update(ast.literal_eval(str(exc)))
         finally:
-            print(result)
             return result
 
     def get_current_mode(self):
@@ -263,6 +259,30 @@ class GraphQL:
             result = {"success":True}
             result.update(self.client.execute(mutation))
         except Exception as exc:
+            result = {'success':False,'message':str(exc)}
+            result.update(ast.literal_eval(str(exc)))
+        finally:
+            return result
+
+    def action_list_demos(self,bot_last_messagae):
+        "Function that displays the list of demos"
+
+        try:
+            result= {'success':True}
+            if self.environment_is_opened():
+                list_demos = GraphQL.get_projects()
+                if list_demos == None:
+                    result.update({'message':'There are no demos available in the current environment {}'.format(self.get_current_environment())})
+                elif len(list_demos)>10:
+                    if bot_last_messagae == "The list is pretty long ({} demos). Do you still want me to read it out ?".format(len(list_demos)):
+                        result.update({'message':'Here are the available demos : '+', '.join(list_demos.values())})
+                    else:
+                        result.update({'message':"The list is pretty long ({} demos). Do you still want me to read it out ?".format(len(list_demos))})
+                else:
+                    result.update({'message':'Here are the available demos : '+', '.join(list_demos.values())})
+            else:
+                result.update({'message':"No environment is open so I can't load the list of demos. You can choose an environment between : "+" ,".join(self.get_available_environments())})
+        except Exception as e:
             result = {'success':False,'message':str(exc)}
             result.update(ast.literal_eval(str(exc)))
         finally:
@@ -575,8 +595,59 @@ class GraphQL:
         "Function that executes refresh action"
         return self.action_controller('refresh','OVE_APP_HTML','There is no html controller for this project')
 
+    @staticmethod
+    def demo_contains_tag(tag, available_demos):
+        """Function that indicates if one of the demo contains a tag and returns all demos containing the tag
+
+        Parameters:
+        tag (String): The tag
+        available_demos (List[String]): The list of available demos in the current environments
+
+        Returns:
+        [Boolean, List[String]]: The booleand and the list of found demos"""
+
+        tag_found = False
+        list_chosen_demos = []
+        for demo_name in available_demos:
+            if tag in demo_name.lower():
+                list_chosen_demos.append(demo_name)
+                if not tag_found:
+                    tag_found = True
+
+    @staticmethod
+    @lru_cache(maxsize=None)
+    def get_tags():
+        "Function that returns all the tags"
+
+        sample_transport=RequestsHTTPTransport(
+            #url='http://192.168.0.35:4000/graphql',
+            #url='http://10.0.2.15:4000/graphql',
+            url='http://129.31.142.150:4000/graphql',
+            verify=False,
+            retries=3,
+        )
+
+        client = Client(
+            transport=sample_transport,
+            fetch_schema_from_transport=True,
+        )
+
+        query = gql('''
+            query getTags {
+                current{
+                   tags
+                }
+            }
+        '''
+        )
+
+        result = client.execute(query)
+        if result['current'] == None:
+            return None
+        else:
+            return result['current']['tags']
 
 
 if __name__ == '__main__':
     my_graphQL = GraphQL()
-    print(my_graphQL.clear_screen())
+    print(my_graphQL.get_tags())
