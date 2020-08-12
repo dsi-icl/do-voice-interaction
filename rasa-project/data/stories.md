@@ -36,7 +36,7 @@
   - slot{"demo": null,"demo_name": null}
 * deny
   - utter_affirm
-  - action_reset_slot
+  - action_reset_slot_open
   - slot{"demo": null,"demo_name": null}
 
 ## open fail and restart
@@ -62,28 +62,21 @@
 ## search
 * search
  - action_search
- - slot{"demo": null}
+ - slot{"demo": null,"tag":null,"search_mode":null}
 
-## search and demo not found, new try
+## search and problem, new try
  * search
   - action_search
-  - slot{"demo": null}
  * affirm
-  - utter_ask_new_search
+  - action_search
 
 ## search and give up
  * search
   - action_search
-  - slot{"demo": null}
  * deny
   - utter_affirm
-
-## search and issue to load available demos, new_try
- * search
-  - action_search
-  - slot{"demo": null}
- * new_try
-  - action_search
+  - action_reset_slot_search
+  - slot{"demo": null,"tag":null,"search_mode":null}
 
 ## shutdown confirm
 * shutdown

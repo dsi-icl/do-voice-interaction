@@ -27,6 +27,7 @@ entities:
   - work_environment
   - switch_action
   - tag
+  - search_mode
 
 slots:
   demo:
@@ -59,6 +60,13 @@ slots:
     type: unfeaturized
   switch_action:
     type: unfeaturized
+  search_mode:
+    type: categorical
+    values:
+    - tag
+    - key word
+    - tags
+    - key words
 
 actions:
   - action_open
@@ -71,7 +79,8 @@ actions:
   - action_switch_modes
   - action_open_environment
   - action_help
-  - action_reset_slot
+  - action_reset_slot_open
+  - action_reset_slot_search
   - action_open_browsers
   - action_close_browsers
   - action_refresh_browsers
@@ -92,8 +101,6 @@ responses:
   - text: "Do you really want to shutdown the GDO ?"
   utter_confirm_turn_on_gdo:
   - text: "Do you really want to turn on the Global Data Observatory ?"
-  utter_ask_new_search:
-  - text: "Fine, please repeat your request with the new tag"
 
 
 
