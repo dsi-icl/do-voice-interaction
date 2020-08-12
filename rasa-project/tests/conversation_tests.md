@@ -74,14 +74,14 @@
   - action_open
 * deny: no thank you
   - utter_affirm
-  - action_reset_slot
+  - action_reset_slot_open
 
 ## open fail 2
 * open: [bitcoin](demo)
   - action_open
 * deny: no that's OK
   - utter_affirm
-  - action_reset_slot
+  - action_reset_slot_open
 
 ## open fail and restart 1
 * open: Start [amr](demo)
@@ -90,26 +90,21 @@
   - action_open
 
 ## search 1
-* search: Show me something on [mars](demo)
+* search: Show me something on [mars](tag)
   - action_search
 
 ## search 2
-* search: Can you show me something on [twitter](demo)
+* search: Can you show me something on [twitter](tag)
   - action_search
 * affirm: yes please
-  - utter_ask_new_search
+  - action_search
 
 ## search 3
 * search: Search something on [bitcoin](demo)
   - action_search
 * deny: no
   - utter_affirm
-
-## search 3
-* search: Search something on sun
-  - action_search
-* new_try: yes restart
-  - action_search
+  - action_reset_slot_search
 
 ## shutdown confirm 1
 * shutdown: please, could you shutdown the screens ?
@@ -138,7 +133,7 @@
 ## shutdown confirm and fail, restart
 * shutdown: Shut down the screens please
   - utter_confirm_shutdown
-* affirm: Yes I'm sure
+* affirm: Yes I confirm
   - action_shutdown
 * affirm: yes
   - action_shutdown
@@ -156,7 +151,7 @@
 - action_control
 
 ## control stop
-* control: [Stop](control_command) the music
+* control: [Stop](control_command) the [music](tag)
 - action_control
 
 ## control play
@@ -211,11 +206,11 @@
   - action_switch_modes
 
 # switch modes 2
-* switch_modes: I'd like to change the mode
+* switch_modes: I'd like to [change]{"entity":"switch_action","value":"switch"} the mode
   - action_switch_modes
 
 # switch modes 2
-* switch_modes: Please could you switch [cluster](mode) to [section](mode) ?
+* switch_modes: Please could you [switch](switch_action) [cluster](mode) to [section](mode) ?
   - action_switch_modes
 
 # open environment 1
@@ -289,3 +284,15 @@
 # list of available demos 2
 * list_available_demos: Give me all available demos
   - action_list_demos
+
+# list of available demos try again
+* list_available_demos: Show me all the projects please
+  - action_list_demos
+* affirm: yes
+  - action_list_demos
+
+# list of available demos and cancel
+* list_available_demos: Give me all demos
+  - action_list_demos
+* deny: No
+  - utter_affirm

@@ -12,12 +12,11 @@ class GraphQL:
     def __init__(self):
 
         sample_transport=RequestsHTTPTransport(
-            #url='http://192.168.0.35:4000/graphql',
-            #url='http://10.0.2.15:4000/graphql',
             url='http://129.31.142.150:4000/graphql',
             verify=False,
             retries=3,
         )
+
         self.client = Client(
             transport=sample_transport,
             fetch_schema_from_transport=True,
@@ -35,12 +34,11 @@ class GraphQL:
             }
         '''
         )
-
         params = {
             "id":name_environment
         }
-
         result = self.client.execute(mutation, variable_values=params)
+
         return result
 
     def open_environment_action(self,environment_slot):
@@ -74,13 +72,12 @@ class GraphQL:
             login(username:$username,password:$password)
             }
         ''')
-
         params = {
             "username": username,
             "password": password
         }
-
         result = self.client.execute(mutation, variable_values=params)
+
         return result
 
     def environment_is_opened(self):
@@ -94,9 +91,7 @@ class GraphQL:
             }
         '''
         )
-
         result = self.client.execute(query)
-
         return result["current"]!=None
 
 
@@ -108,7 +103,6 @@ class GraphQL:
                 logout
             }
         ''')
-
         result = self.client.execute(mutation)
         return result['logout']
 
@@ -159,7 +153,6 @@ class GraphQL:
                 }
             }
         ''')
-
         result = self.client.execute(query)
 
         return result['mode']!=None
@@ -175,12 +168,11 @@ class GraphQL:
             }
         '''
         )
-
         params = {
             "id":mode
         }
-
         result = self.client.execute(mutation, variable_values=params)
+
         return result
 
     def switch_mode(self,mode_slot,switch_action_slot):
@@ -220,7 +212,6 @@ class GraphQL:
                 }
             }
         ''')
-
         result = self.client.execute(query)
 
         if result["mode"] == None:
@@ -239,7 +230,6 @@ class GraphQL:
             }
         '''
         )
-
         result = self.client.execute(query)
 
         if result["current"]==None:
@@ -294,18 +284,14 @@ class GraphQL:
         "Function that returns a map with all available projects (id->name) and None if no environment is selected"
 
         sample_transport=RequestsHTTPTransport(
-            #url='http://192.168.0.35:4000/graphql',
-            #url='http://10.0.2.15:4000/graphql',
             url='http://129.31.142.150:4000/graphql',
             verify=False,
             retries=3,
         )
-
         client = Client(
             transport=sample_transport,
             fetch_schema_from_transport=True,
         )
-
         query = gql('''
             query current {
                 current{
@@ -316,17 +302,13 @@ class GraphQL:
             }
         '''
         )
-
         result = client.execute(query)
-
         if result['current'] == None:
             return None
-
         map_projects = {}
 
         for project in result["current"]["projects"]:
             map_projects[project['id']] = project['name'].lower()
-
         client.close()
 
         return map_projects
@@ -376,7 +358,6 @@ class GraphQL:
             }
         '''
         )
-
         result = self.client.execute(query)
         list_environments = []
         for environment in result['environments']:
@@ -446,11 +427,9 @@ class GraphQL:
             }
         '''
         )
-
         params = {
             "id":id
         }
-
         result = self.client.execute(query,variable_values=params)
 
         return result["current"]["project"]["videoController"]
@@ -469,11 +448,9 @@ class GraphQL:
             }
         '''
         )
-
         params = {
             "id":id
         }
-
         result = self.client.execute(query,variable_values=params)
 
         return result["current"]["project"]["htmlController"]
@@ -596,23 +573,25 @@ class GraphQL:
         return self.action_controller('refresh','OVE_APP_HTML','There is no html controller for this project')
 
     @staticmethod
-    def demo_contains_tag(tag, available_demos):
-        """Function that indicates if one of the demo contains a tag and returns all demos containing the tag
+    def demo_contains_word(word, available_demos):
+        """Function that indicates if one of the demo contains a word and returns all demos containing the tag
 
         Parameters:
-        tag (String): The tag
+        word (String): The word
         available_demos (List[String]): The list of available demos in the current environments
 
         Returns:
-        [Boolean, List[String]]: The booleand and the list of found demos"""
+        [Boolean, List[String]]: The boolean and the list of found demos"""
 
-        tag_found = False
+        word_found = False
         list_chosen_demos = []
         for demo_name in available_demos:
-            if tag in demo_name.lower():
+            if word in demo_name.lower():
                 list_chosen_demos.append(demo_name)
-                if not tag_found:
-                    tag_found = True
+                if not word_found:
+                    word_found = True
+
+        return word_found,list_chosen_demos
 
     @staticmethod
     @lru_cache(maxsize=None)
@@ -620,18 +599,14 @@ class GraphQL:
         "Function that returns all the tags"
 
         sample_transport=RequestsHTTPTransport(
-            #url='http://192.168.0.35:4000/graphql',
-            #url='http://10.0.2.15:4000/graphql',
             url='http://129.31.142.150:4000/graphql',
             verify=False,
             retries=3,
         )
-
         client = Client(
             transport=sample_transport,
             fetch_schema_from_transport=True,
         )
-
         query = gql('''
             query getTags {
                 current{
@@ -640,14 +615,95 @@ class GraphQL:
             }
         '''
         )
-
         result = client.execute(query)
+
         if result['current'] == None:
             return None
         else:
             return result['current']['tags']
 
+    def search_demo_by_tag(self,tag):
+        "Function that returns demos names corresponding to a tag"
+
+        query = gql('''
+            query searchProjects($tag:String) {
+                current{
+                   projects(tag:$tag){name}
+                }
+            }
+        '''
+        )
+        params = {
+            "tag":tag
+        }
+        result = self.client.execute(query,variable_values=params)
+
+        if result['current']==None:
+            return None
+        elif len(result['current']['projects']) > 0:
+            list_names = []
+            for name in result['current']['projects']:
+                list_names.append(name['name'])
+            return list_names
+        else:
+            return []
+
+    def search_demo_by_word(self,name):
+        "Function that filters projects by key word"
+        available_demos = GraphQL.get_projects()
+        if available_demos!=None and len(available_demos)>0:
+            result_search = GraphQL.demo_contains_word(name.lower(),available_demos.values())
+            if result_search[0]:
+                return result_search[1]
+
+        return []
+
+    def search_process_tag(self,tag):
+        "Function that is used in search action process to search by key tag"
+
+        search_result = self.search_demo_by_tag(tag)
+        if search_result == None:
+            result = {'success':False,'message':"I can't access to any demo"}
+        elif len(search_result) == 0:
+            result = {'message':"I'm sorry, there is no demo on this topic"}
+        elif len(search_result) > 10:
+            result = {'message':'The list of demos is too long to read out. Would you like to refine it by other tags?'}
+        else:
+            result = {'message':'Here are the results for {}'.format(tag)+' : '+', '.join(search_result)}
+        return result
+
+    def search_prosess_name(self,name):
+        "Function that is used in search action process to search by key word"
+        search_result = self.search_demo_by_word(name)
+        if len(search_result) == 0:
+            result = {'message':"I'm sorry, there is no demo on this topic"}
+        elif len(search_result) > 10:
+            result = {'message':'The list of demos is too long to read out. Would you like to refine it by other names?'}
+        else:
+            result = {'message':'Here are the results for {}'.format(name)+' : '+', '.join(search_result)}
+        return result
+
+    def search_action(self,name,tag,search_mode):
+        "Funtion that executes search action"
+        try:
+            result = {'success':True,'message':'Do you want to search by tag or by key word ? Please choose one of the both options'}
+            if not self.environment_is_opened():
+                result.update({'success':False,'message':"I can't access to any demo if no environment is open. Please, open one of these environments before : "+" ,".join(self.get_available_environments())})
+            elif 'tag' in search_mode and tag == None:
+                result.update({'message':'Fine, please say ''search'' or ''look for'' and your tag. If you already did and got no answer for that request that means that no demo contains this tag'})
+            elif tag != None:
+                result.update(self.search_process_tag(tag))
+            elif 'key word' in search_mode and name == None:
+                result.update({'message':"Fine, please say ''search'' or ''look for'' and your key word. If you already did and got no answer for that request that means that no demo contains this key word"})
+            elif name != None:
+                result.update(self.search_prosess_name(name))
+        except Exception as e:
+            result = {'success':False,'message':str(exc)}
+            result.update(ast.literal_eval(str(exc)))
+        finally:
+            return result
+
 
 if __name__ == '__main__':
     my_graphQL = GraphQL()
-    print(my_graphQL.get_tags())
+    print(my_graphQL.search_demo_by_name("AI"))
