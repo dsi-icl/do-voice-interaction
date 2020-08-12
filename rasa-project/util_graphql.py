@@ -32,8 +32,7 @@ class GraphQL:
                     id
                 }
             }
-        '''
-        )
+        ''')
         params = {
             "id":name_environment
         }
@@ -316,36 +315,50 @@ class GraphQL:
     def load_project(self,name_project):
         "Function that loads a project, and returns a string to indicate, if the project has been correctly launched"
 
-        if not self.environment_is_opened():
-            return "NO ENVIRONMENT IS OPENED"
-
-        if not self.mode_is_selected():
-            return "NO MODE IS SELECTED"
-
-        map_projects = GraphQL.get_projects()
-
-        if not name_project in map_projects.values():
-            return "NO PROJECT WITH THIS NAME"
-
-
         mutation = gql('''
             mutation loadProject($projectID: String!) {
                 loadProject(projectID:$projectID){
                     id
                 }
             }
-        ''')
+        '''
+        )
 
+        map_projects = GraphQL.get_projects()
         for id, name in map_projects.items():
             if name == name_project:
                 id_project = id
-
         params = {
             "projectID":id_project
         }
 
         self.client.execute(mutation,variable_values=params)
-        return "OK"
+
+
+    def launch_project(self,name_project):
+        try:
+            result = {'success':True}
+            if not self.environment_is_opened():
+                result.update({'success':False,'message':'No environment is open'})
+            elif name_project == None:
+                result.update({'message':'There is no such demo available. Would you like to hear the list ?','list':True})
+            else:
+                map_projects = GraphQL.get_projects()
+                if name_project in map_projects.values():
+                    self.load_project(name_project)
+                    result.update({'message':'{} is open'.format(name_project),'project':None,'list':False})
+                else:
+                    similar_project = GraphQL.find_string_in_other_string(name_project,list(map_projects.values()))
+                    if similar_project != None:
+                        result.update({'message':"I've found this demo : {}. Do you want me to open it ?".format(similar_project),'project':similar_project,'list':False})
+                    else:
+                        result.update({'success':False,'message':'There is no such demo available. Would you like to hear the list ?'})
+        except Exception as exc:
+            result = {'success':False,'message':str(exc)}
+            result.update(ast.literal_eval(str(exc)))
+        finally:
+            return result
+
 
     def get_available_environments(self):
         "Function that returns all available environments"
@@ -586,7 +599,7 @@ class GraphQL:
         word_found = False
         list_chosen_demos = []
         for demo_name in available_demos:
-            if word in demo_name.lower():
+            if word.lower() in demo_name.lower():
                 list_chosen_demos.append(demo_name)
                 if not word_found:
                     word_found = True
@@ -690,11 +703,11 @@ class GraphQL:
             if not self.environment_is_opened():
                 result.update({'success':False,'message':"I can't access to any demo if no environment is open. Please, open one of these environments before : "+" ,".join(self.get_available_environments())})
             elif 'tag' in search_mode and tag == None:
-                result.update({'message':'Fine, please say ''search'' or ''look for'' and your tag. If you already did and got no answer for that request that means that no demo contains this tag'})
+                result.update({'message':'Fine, please say "search" or "look for" and your tag. If you already did and got no answer for that request that means that no demo contains this tag'})
             elif tag != None:
                 result.update(self.search_process_tag(tag))
             elif 'key word' in search_mode and name == None:
-                result.update({'message':"Fine, please say ''search'' or ''look for'' and your key word. If you already did and got no answer for that request that means that no demo contains this key word"})
+                result.update({'message':'Fine, please say "search" or "look for" and your key word. If you already did and got no answer for that request that means that no demo contains this key word'})
             elif name != None:
                 result.update(self.search_prosess_name(name))
         except Exception as e:
@@ -706,4 +719,4 @@ class GraphQL:
 
 if __name__ == '__main__':
     my_graphQL = GraphQL()
-    print(my_graphQL.search_demo_by_name("AI"))
+    print(my_graphQL.launch_project('cyber data spark'))

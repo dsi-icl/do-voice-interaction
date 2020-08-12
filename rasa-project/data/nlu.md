@@ -104,6 +104,7 @@
 - launch [london cycling map](demo)
 - open [cycling map](demo)
 - Start [anotherthest](demo)
+- I'd like to start [airesearch](demo)
 - Could you activate the [test](demo) ?
 - Open [DataSparks 2020 Project Luna](demo)
 - I'd like to launch the [datest](demo)
@@ -137,11 +138,17 @@
 - Look for [imagetiles](tag)
 - Look for [healthcare](tag)
 - Look for [ai](tag)
+- Show me something on [london](demo)
+- Search [bitcoin](demo)
 - Show me something on [network](tag)
 - Can you show me something on [the data science institute](tag)
 - Search [business](tag)
 - search demo
 - I'd like to search something on [cryptocurrency](tag)
+- I would like to search by [tags](search_mode)
+- Make a search by [key words](search_mode)
+- Search by [tag](search_mode)
+- Look for by [key word](search_mode)
 
 ## intent:shutdown
 - Shut down screens
@@ -169,6 +176,11 @@
 - Clear the screens
 - clean the space
 - clear space
+- Close current project
+- Could you close the loaded demo
+- Close demo
+- I'd like to close the project
+- Close project
 - I'd like to clean the space
 - Could you clear the space
 - full black
@@ -189,6 +201,8 @@
 - I'd like to [refresh](control_command) the screen
 - [Play loop](control_command) the video
 - Can you [play loop](control_command) the audio
+- [Reset](control_command) the video
+- Could you [reset](control_command) the video
 
 ## intent:switch_modes
 - I'd like to switch the mode

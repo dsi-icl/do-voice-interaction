@@ -38,51 +38,31 @@ class ActionOpen(Action):
         Returns:
         List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]"""
 
-        my_graphQL = GraphQL()
 
-        #demo_name is a slot used to store the demo name suggested by the bot according to the user request.
-        #If it's not empty the it means that the user accepted to open the suggested demo
-        if tracker.get_slot("demo_name") != None:
-            response = my_graphQL.load_project(tracker.get_slot("demo_name"))
-            #We store the demo name to be open
-            demo = tracker.get_slot("demo_name")
-        #The demo slot is an entity and a text slot. Each day, demo values will be updated in the nlu.md file executing the utils file.
-        #If the slot is empty it means that user request doesn't contain any available project name.
-        elif tracker.get_slot("demo")==None:
-            dispatcher.utter_message(text="There is no such demo available. Would you like to hear the list ?")
+        try:
+            my_graphQL = GraphQL()
+        except Exception as e:
+            dispatcher.utter_message(text="I'm sorry, something went wrong. {}".format(e))
+            print(e)
+            return [SlotSet('demo',None),SlotSet('read_list',False),SlotSet('restart',False)]
+
+        response = my_graphQL.launch_project(tracker.get_slot('demo'))
+        print('Trying to launch a project')
+        if response['success']:
+            dispatcher.utter_message(text=response['message'])
+            print('Success :)')
             my_graphQL.client.close()
-            return [SlotSet("demo",None),SlotSet("demo_name",None)]
-        else:
-            response = my_graphQL.load_project(tracker.get_slot("demo"))
-            #We store the demo name to be open
-            demo = tracker.get_slot("demo")
-
-        if response=="NO ENVIRONMENT IS OPENED":
-            list_environments = my_graphQL.get_available_environments()
-            dispatcher.utter_message("Please, choose an environment before. Here are the available environments : "+", ".join(list_environments))
-            dispatcher.utter_message("You'll might have to choose a mode before launching {}".format(tracker.get_slot("demo")))
-
-        elif response=="NO MODE IS SELECTED":
-            dispatcher.utter_message(text="Please, select a mode between cluster and section")
-
-        elif response=="NO PROJECT WITH THIS NAME":
-            available_demos = GraphQL.get_projects()
-            name = GraphQL.find_string_in_other_string(demo,list(available_demos.values()))
-            #If a demo contains this name it will be suggested
-            if name != None:
-                dispatcher.utter_message(text="I've found this demo : "+str(name)+". If you want me to open it, please say open?")
-                my_graphQL.client.close()
-                return [SlotSet("demo",None), SlotSet("demo_name",name)]
+            if not response['list']:
+                return [SlotSet('demo',response['project']),SlotSet('read_list',False),SlotSet('restart',False)]
             else:
-                dispatcher.utter_message(text="There is no such demo available. Would you like to hear the list ?")
-
-        elif response=="OK":
-            dispatcher.utter_message(text="Opening demo...")
+                return [SlotSet('read_list',True),SlotSet('restart',False)]
+        else:
+            dispatcher.utter_message(text="I'm sorry, something went wrong. {}".format(response['message']))
+            dispatcher.utter_message(text="Should I try again ?")
+            print(response['message'])
             my_graphQL.client.close()
-            return [SlotSet("demo",None),SlotSet("demo_name",None),SlotSet("current_demo",demo)]
+            return [SlotSet('read_list',False),SlotSet('restart',True)]
 
-        my_graphQL.client.close()
-        return [SlotSet("demo",None),SlotSet("demo_name",None)]
 
 class ActionListDemos(Action):
     """A class used to list available demos"""
@@ -128,6 +108,8 @@ class ActionListDemos(Action):
             dispatcher.utter_message(text="Something went wrong. {}".format(response['message']))
             dispatcher.utter_message(text="Should I try again ?")
             print(response['message'])
+
+        my_graphQL.client.close()
         return []
 
 
@@ -306,7 +288,7 @@ class ActionControl(Action):
             response = my_graphQL.refresh()
             self.process_response(dispatcher,"I refreshed the page","I didn't refresh the page. Try again please",response)
 
-
+        my_graphQL.client.close()
         return [SlotSet("control_command",None)]
 
 class ActionSearch(Action):
@@ -567,7 +549,7 @@ class ActionResetSlotOpenDemo(Action):
         Returns:
         List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]"""
 
-        return [SlotSet("demo", None), SlotSet("demo_name",None)]
+        return [SlotSet("demo", None),SlotSet("read_list",False),SlotSet('restart',False)]
 
 class ActionResetSlotSearch(Action):
     """A class used to reset slots"""

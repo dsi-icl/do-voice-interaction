@@ -21,39 +21,57 @@
 ## open success
 * open
   - action_open
-  - slot{"demo": null,"demo_name": null}
+  - slot{"demo": null,"read_list":false,"restart":false}
 
 ## open fail and list
 * open
   - action_open
-  - slot{"demo": null,"demo_name": null}
+  - slot{"read_list": true,"restart":false}
 * affirm
+  - action_reset_slot_open
+  - slot{"demo": null,"read_list":false,"restart":false}
   - action_list_demos
 
-## open fail
+## open fail and not list
 * open
   - action_open
-  - slot{"demo": null,"demo_name": null}
+  - slot{"read_list": true,"restart":false}
 * deny
   - utter_affirm
   - action_reset_slot_open
-  - slot{"demo": null,"demo_name": null}
+  - slot{"demo": null,"read_list":false,"restart":false}
 
 ## open fail and restart
 * open
   - action_open
-  -  slot{"demo": null,"demo_name": null}
-* new_try
+  - slot{"read_list":false,"restart":true}
+* affirm
   - action_open
-  -  slot{"demo": null,"demo_name": null}
+
+## open fail and not restart
+* open
+  - action_open
+  - slot{"read_list":false,"restart":true}
+* deny
+  - utter_affirm
+  - action_reset_slot_open
+  - slot{"demo": null,"read_list":false,"restart":false}
 
 ## open and find demo similar
 * open
   - action_open
-  - slot{"demo": null}
+  - slot{"read_list":false,"restart":false}
 * open
   - action_open
-  - slot{"demo": null,"demo_name": null}
+  - slot{"demo": null,"read_list":false,"restart":false}
+
+## open and find demo similar but cancel or cancel restart
+* open
+  - action_open
+* deny
+  - utter_affirm
+  - action_reset_slot_open
+  - slot{"demo": null,"read_list":false}
 
 ## out_of_scope
 * out_of_scope

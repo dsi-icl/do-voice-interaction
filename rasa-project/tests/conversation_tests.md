@@ -44,10 +44,12 @@
 ## open success 1
 * open: Please, launch the [airesearch](demo).
   - action_open
+  - slot{"demo": null,"read_list":false,"restart":false}
 
 ## open success 2
 * open: Activate the [defra](demo) !
   - action_open
+  - slot{"demo": null,"read_list":false,"restart":false}
 
 ## out_of_scope 1
 * out_of_scope: give the name of the French President ?
@@ -60,34 +62,36 @@
 ## open fail and list 1
 * open: I would like to start [Mars selfies](demo)
   - action_open
+  - slot{"read_list":true,"restart":false}
 * affirm: Yes that sounds good
+  - action_reset_slot_open
+  - slot{"demo": null,"read_list":false,"restart":false}
   - action_list_demos
 
-## open fail and list 2
+## open fail and restart
 * open: open [london cycling map](demo)
   - action_open
+  - slot{"read_list":false,"restart":true}
 * affirm: perfect sounds good
-  - action_list_demos
+  - action_open
 
 ## open fail 1
 * open: activate montblanc
   - action_open
+  - slot{"read_list":true,"restart":false}
 * deny: no thank you
   - utter_affirm
   - action_reset_slot_open
+  - slot{"demo": null,"read_list":false,"restart":false}
 
 ## open fail 2
 * open: [bitcoin](demo)
   - action_open
+  - slot{"read_list":false,"restart":true}
 * deny: no that's OK
   - utter_affirm
   - action_reset_slot_open
-
-## open fail and restart 1
-* open: Start [amr](demo)
-  - action_open
-* new_try: Yes, restart
-  - action_open
+  - slot{"demo": null,"read_list":false,"restart":false}
 
 ## search 1
 * search: Show me something on [mars](tag)
@@ -151,7 +155,7 @@
 - action_control
 
 ## control stop
-* control: [Stop](control_command) the [music](tag)
+* control: [Stop](control_command) the music
 - action_control
 
 ## control play

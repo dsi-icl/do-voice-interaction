@@ -39,6 +39,7 @@ slots:
     values:
     - refresh
     - stop
+    - reset
     - play
     - mute
     - pause
@@ -54,10 +55,6 @@ slots:
     - students
     - production
     - development
-  demo_name:
-    type: unfeaturized
-  current_demo:
-    type: unfeaturized
   switch_action:
     type: unfeaturized
   search_mode:
@@ -67,6 +64,10 @@ slots:
     - key word
     - tags
     - key words
+  read_list:
+    type: bool
+  restart:
+    type: bool
 
 actions:
   - action_open
