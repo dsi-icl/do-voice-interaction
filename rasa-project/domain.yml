@@ -26,9 +26,12 @@ entities:
   - mode
   - work_environment
   - switch_action
+  - tag
 
 slots:
   demo:
+    type: text
+  tag:
     type: text
   control_command:
     type: categorical
