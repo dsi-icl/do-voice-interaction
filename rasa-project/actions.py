@@ -112,24 +112,22 @@ class ActionListDemos(Action):
             my_graphQL = GraphQL()
         except Exception as e:
             dispatcher.utter_message(text="I'm sorry, something went wrong. {}".format(e))
+            print(e)
             return []
 
-        response = None
+        robot_last_message = ""
+        if len(tracker.events) >= 3:
+            robot_last_message = tracker.events[-3].get('text')
 
-        if my_graphQL.environment_is_opened():
-            response = GraphQL.get_projects()
-
-        #No environment is opened we can't display the demo list
-        if response == None :
-            list_environments = my_graphQL.get_available_environments()
-            dispatcher.utter_message("I'm sorry, something went wrong. It seems that no environment is opened. Please choose an environment before. Here are all available environments : "+" ,".join(list_environments))
-        elif len(response.values()) == 0:
-            dispatcher.utter_message(text="There are no available demo.")
-        else :
-            dispatcher.utter_message("Here is the list of available demos : "+", ".join(response.values()))
-
-        my_graphQL.client.close()
-
+        print("Trying to get available demos...")
+        response = my_graphQL.action_list_demos(robot_last_message)
+        if response['success']:
+            dispatcher.utter_message(text=response['message'])
+            print("Success :)")
+        else:
+            dispatcher.utter_message(text="Something went wrong. {}".format(response['message']))
+            dispatcher.utter_message(text="Should I try again ?")
+            print(response['message'])
         return []
 
 
@@ -161,6 +159,7 @@ class ActionShutDown(Action):
             my_graphQL = GraphQL()
         except Exception as e:
             dispatcher.utter_message(text="I'm sorry, something went wrong. {}".format(e))
+            print(e)
             return []
 
         response = my_graphQL.turn_off_gdo()
@@ -207,6 +206,7 @@ class ActionTurnOnGDO(Action):
             my_graphQL = GraphQL()
         except Exception as e:
             dispatcher.utter_message(text="I'm sorry, something went wrong. {}".format(e))
+            print(e)
             return []
 
         response = my_graphQL.turn_on_gdo()
@@ -269,6 +269,7 @@ class ActionControl(Action):
             my_graphQL = GraphQL()
         except Exception as e:
             dispatcher.utter_message(text="I'm sorry, something went wrong. {}".format(e))
+            print(e)
             return []
 
         control = tracker.get_slot("control_command")
@@ -359,6 +360,7 @@ class ActionSearch(Action):
             my_graphQL = GraphQL()
         except Exception as e:
             dispatcher.utter_message(text="I'm sorry, something went wrong. {}".format(e))
+            print(e)
             return []
 
         available_demos = None
@@ -417,6 +419,7 @@ class ActionClearSpace(Action):
             my_graphQL = GraphQL()
         except Exception as e:
             dispatcher.utter_message(text="I'm sorry, something went wrong. {}".format(e))
+            print(e)
             return []
 
         response = my_graphQL.clear_screen()
@@ -461,6 +464,7 @@ class ActionSwitchMode(Action):
             my_graphQL = GraphQL()
         except Exception as e:
             dispatcher.utter_message(text="I'm sorry, something went wrong. {}".format(e))
+            print(e)
             return []
 
         response = my_graphQL.switch_mode(tracker.get_slot('mode'),tracker.get_slot('switch_action'))
@@ -503,6 +507,7 @@ class ActionOpenEnvironment(Action):
             my_graphQL = GraphQL()
         except Exception as e:
             dispatcher.utter_message(text="I'm sorry, something went wrong. {}".format(e))
+            print(e)
             return []
 
         environment = tracker.get_slot('work_environment')
@@ -614,6 +619,7 @@ class ActionOpenBrowsers(Action):
         try:
             my_graphQL = GraphQL()
         except Exception as e:
+            print(e)
             dispatcher.utter_message(text="I'm sorry, something went wrong. {}".format(e))
             return []
 
@@ -658,6 +664,7 @@ class ActionCloseBrowsers(Action):
             my_graphQL = GraphQL()
         except Exception as e:
             dispatcher.utter_message(text="I'm sorry, something went wrong. {}".format(e))
+            print(e)
             return []
 
         response = my_graphQL.close_browsers();
@@ -701,6 +708,7 @@ class ActionRefreshBrowsers(Action):
             my_graphQL = GraphQL()
         except Exception as e:
             dispatcher.utter_message(text="I'm sorry, something went wrong. {}".format(e))
+            print(e)
             return []
 
         response = my_graphQL.refresh_browsers();
@@ -738,7 +746,7 @@ class ActionRepeat(Action):
 
         Returns:
         List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]"""
-
+        print('Trying to repeat')
         if len(tracker.events) >= 3:
                 dispatcher.utter_message(tracker.events[-3].get('text'))
 
