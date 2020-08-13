@@ -237,3 +237,11 @@
   - action_list_demos
 * deny
   - utter_affirm
+
+# set reminder
+* ask_remind_end_of_meeting
+  - action_set_reminder
+
+# reminder
+* EXTERNAL_reminder
+  - action_react_to_reminder
