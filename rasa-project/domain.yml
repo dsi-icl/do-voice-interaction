@@ -8,7 +8,6 @@ intents:
   - out_of_scope
   - search
   - shutdown
-  - new_try
   - control
   - clear_space
   - switch_modes
@@ -19,6 +18,8 @@ intents:
   - refresh_browsers
   - ask_repeat
   - list_available_demos
+  - ask_remind_end_of_meeting
+  - EXTERNAL_reminder
 
 entities:
   - demo
@@ -86,6 +87,8 @@ actions:
   - action_close_browsers
   - action_refresh_browsers
   - action_repeat
+  - action_set_reminder
+  - action_react_to_reminder
 
 responses:
   utter_greet:
