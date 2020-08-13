@@ -19,7 +19,7 @@
     "express": "4.17.1",
     "http-errors": "1.8.0",
     "jsdoc-route-plugin": "0.1.0",
-    "lodash": "4.17.19",
+    "lodash": "4.17.20",
     "morgan": "1.10.0",
     "sox": "0.1.0",
     "uuid": "8.3.0",
