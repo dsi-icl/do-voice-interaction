@@ -9,10 +9,20 @@ from typing import Any, Text, Dict, List
 
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
-from rasa_sdk.events import SlotSet
+from rasa_sdk.events import SlotSet, ReminderScheduled
+import datetime
+from datetime import timedelta
 
 from functools import lru_cache
-from util_graphql import GraphQL
+from utilities.utils_graphql import GraphQL
+from utilities.utils_actions import *
+
+try:
+    print('Connection to graphql')
+    my_graphQL = GraphQL('./utilities/config.ini')
+except Exception as e:
+    dispatcher.utter_message(text="I'm sorry, something went wrong. {}".format(e))
+    print(e)
 
 class ActionOpen(Action):
     """A class used to open demos"""
@@ -39,19 +49,12 @@ class ActionOpen(Action):
         List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]"""
 
 
-        try:
-            my_graphQL = GraphQL()
-        except Exception as e:
-            dispatcher.utter_message(text="I'm sorry, something went wrong. {}".format(e))
-            print(e)
-            return [SlotSet('demo',None),SlotSet('read_list',False),SlotSet('restart',False)]
+        response = action_launch_project(my_graphQL,tracker.get_slot('demo'))
 
-        response = my_graphQL.launch_project(tracker.get_slot('demo'))
         print('Trying to launch a project')
         if response['success']:
             dispatcher.utter_message(text=response['message'])
             print('Success :)')
-            my_graphQL.client.close()
             if not response['list']:
                 return [SlotSet('demo',response['project']),SlotSet('read_list',False),SlotSet('restart',False)]
             else:
@@ -60,7 +63,6 @@ class ActionOpen(Action):
             dispatcher.utter_message(text="I'm sorry, something went wrong. {}".format(response['message']))
             dispatcher.utter_message(text="Should I try again ?")
             print(response['message'])
-            my_graphQL.client.close()
             return [SlotSet('read_list',False),SlotSet('restart',True)]
 
 
@@ -88,19 +90,13 @@ class ActionListDemos(Action):
         Returns:
         List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]"""
 
-        try:
-            my_graphQL = GraphQL()
-        except Exception as e:
-            dispatcher.utter_message(text="I'm sorry, something went wrong. {}".format(e))
-            print(e)
-            return []
 
         robot_last_message = ""
         if len(tracker.events) >= 3:
             robot_last_message = tracker.events[-3].get('text')
 
         print("Trying to get available demos...")
-        response = my_graphQL.action_list_demos(robot_last_message)
+        response = action_list_demos(my_graphQL,robot_last_message)
         if response['success']:
             dispatcher.utter_message(text=response['message'])
             print("Success :)")
@@ -109,7 +105,6 @@ class ActionListDemos(Action):
             dispatcher.utter_message(text="Should I try again ?")
             print(response['message'])
 
-        my_graphQL.client.close()
         return []
 
 
@@ -137,14 +132,7 @@ class ActionShutDown(Action):
         Returns:
         List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]"""
 
-        try:
-            my_graphQL = GraphQL()
-        except Exception as e:
-            dispatcher.utter_message(text="I'm sorry, something went wrong. {}".format(e))
-            print(e)
-            return []
-
-        response = my_graphQL.turn_off_gdo()
+        response = action_turn_off_gdo(my_graphQL)
 
         print("Trying to shutdown the GDO...")
         if response['success'] and response['executePowerAction']=="off":
@@ -158,7 +146,7 @@ class ActionShutDown(Action):
             dispatcher.utter_message(text="Something went wrong. Do you want me to try again ?")
             print("Fail :(")
 
-        my_graphQL.client.close()
+        return []
 
 class ActionTurnOnGDO(Action):
     """A class used to turn on the GDO"""
@@ -184,17 +172,9 @@ class ActionTurnOnGDO(Action):
         Returns:
         List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]"""
 
-        try:
-            my_graphQL = GraphQL()
-        except Exception as e:
-            dispatcher.utter_message(text="I'm sorry, something went wrong. {}".format(e))
-            print(e)
-            return []
-
-        response = my_graphQL.turn_on_gdo()
+        response = action_turn_on_gdo(my_graphQL)
 
         print("Trying to turn on the GDO...")
-        print(response)
         if response['success'] and response['executePowerAction']=="on":
             dispatcher.utter_message(text="The Global Data Observatory is on")
             print("The GDO is on :)")
@@ -205,8 +185,6 @@ class ActionTurnOnGDO(Action):
         else:
             dispatcher.utter_message(text="Something went wrong. Do you want me to try again ?")
             print("Fail :(")
-
-        my_graphQL.client.close()
 
         return []
 
@@ -247,13 +225,6 @@ class ActionControl(Action):
         Returns:
         List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]"""
 
-        try:
-            my_graphQL = GraphQL()
-        except Exception as e:
-            dispatcher.utter_message(text="I'm sorry, something went wrong. {}".format(e))
-            print(e)
-            return []
-
         control = tracker.get_slot("control_command")
 
         #If the control command is not recognized, we inform the user
@@ -265,30 +236,29 @@ class ActionControl(Action):
 
         if control=="play":
             print("Trying to play the video/audio...")
-            response = my_graphQL.play()
+            response = action_play(my_graphQL)
             self.process_response(dispatcher,"I'm playing the video","I didn't start playing the video. Try again please",response)
         elif control=="pause":
             print("Trying to pause the video/audio...")
-            response = my_graphQL.pause()
+            response = action_pause(my_graphQL)
             self.process_response(dispatcher,"I paused the video","I didn't pause the video. Try again please",response)
         elif control=="stop":
             print("Trying to stop the video/audio...")
-            response = my_graphQL.stop()
+            response = action_stop(my_graphQL)
             self.process_response(dispatcher,"I stopped the video","I didn't stop the video. Try again please",response)
         elif control=="reset":
             print("Trying to reset the video/audio...")
-            response = my_graphQL.reset()
+            response = action_reset(my_graphQL)
             self.process_response(dispatcher,"I reset the video","I didn't reset the video. Try again please",response)
         elif control=="play loop":
             print("Trying to play loop the video/audio...")
-            response = my_graphQL.play_loop()
+            response = action_play_loop(my_graphQL)
             self.process_response(dispatcher,"I played loop the video","I didn't play loop the video. Try again please",response)
         elif control=="refresh":
             print("Trying to refresh the webpage...")
-            response = my_graphQL.refresh()
+            response = action_refresh(my_graphQL)
             self.process_response(dispatcher,"I refreshed the page","I didn't refresh the page. Try again please",response)
 
-        my_graphQL.client.close()
         return [SlotSet("control_command",None)]
 
 class ActionSearch(Action):
@@ -315,14 +285,6 @@ class ActionSearch(Action):
         Returns:
         List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]"""
 
-        try:
-            my_graphQL = GraphQL()
-        except Exception as e:
-            dispatcher.utter_message(text="I'm sorry, something went wrong. {}".format(e))
-            print(e)
-            return [SlotSet("demo",None),SlotSet("tag",None),SlotSet("search_mode",None)]
-
-
         tag = tracker.get_slot("tag")
         key_word = tracker.get_slot("demo")
         search_mode = tracker.get_slot("search_mode")
@@ -331,7 +293,7 @@ class ActionSearch(Action):
             search_mode = ""
 
 
-        result = my_graphQL.search_action(key_word,tag,search_mode)
+        result = action_search(my_graphQL,key_word,tag,search_mode)
         print("Trying to execute search action...")
 
         if result['success']:
@@ -342,8 +304,6 @@ class ActionSearch(Action):
             dispatcher.utter_message(text="Do you want me to try again ?")
             print('Fail :(')
             return []
-
-        my_graphQL.client.close()
 
         return [SlotSet("demo",None),SlotSet("tag",None),SlotSet("search_mode",None)]
 
@@ -372,24 +332,15 @@ class ActionClearSpace(Action):
         Returns:
         List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]"""
 
-        try:
-            my_graphQL = GraphQL()
-        except Exception as e:
-            dispatcher.utter_message(text="I'm sorry, something went wrong. {}".format(e))
-            print(e)
-            return []
-
-        response = my_graphQL.clear_screen()
+        response = action_clear_space(my_graphQL)
 
         print("Trying to clear the space...")
         if response['success']:
-            dispatcher.utter_message("The space is cleaned")
+            dispatcher.utter_message("The space is clear")
             print("Clear space done ;)")
         else:
             dispatcher.utter_message(text="I'm sorry, something went wrong. I can't clear the screens. {}".format(response['message']))
             print(response['message'])
-
-        my_graphQL.client.close()
 
         return []
 
@@ -417,14 +368,7 @@ class ActionSwitchMode(Action):
         Returns:
         List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]"""
 
-        try:
-            my_graphQL = GraphQL()
-        except Exception as e:
-            dispatcher.utter_message(text="I'm sorry, something went wrong. {}".format(e))
-            print(e)
-            return [SlotSet("mode",None),SlotSet("switch_action",None)]
-
-        response = my_graphQL.switch_mode(tracker.get_slot('mode'),tracker.get_slot('switch_action'))
+        response = action_switch_mode(my_graphQL,tracker.get_slot('mode'),tracker.get_slot('switch_action'))
         print("Switch mode action in process...")
         if response['success']:
             dispatcher.utter_message(text=response['message'])
@@ -433,7 +377,6 @@ class ActionSwitchMode(Action):
             dispatcher.utter_message(text="I'm sorry, I can't do that. {}".format(response['message']))
             print("Fail :(")
 
-        my_graphQL.client.close()
         return [SlotSet("mode",None),SlotSet("switch_action",None)]
 
 class ActionOpenEnvironment(Action):
@@ -460,16 +403,9 @@ class ActionOpenEnvironment(Action):
         Returns:
         List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]"""
 
-        try:
-            my_graphQL = GraphQL()
-        except Exception as e:
-            dispatcher.utter_message(text="I'm sorry, something went wrong. {}".format(e))
-            print(e)
-            return [SlotSet("work_environment",None)]
-
         environment = tracker.get_slot('work_environment')
 
-        response = my_graphQL.open_environment_action(environment)
+        response = action_open_environment(my_graphQL,environment)
         print("Open environment action in process...")
         if response['success']:
             dispatcher.utter_message(text=response['message'])
@@ -478,7 +414,6 @@ class ActionOpenEnvironment(Action):
             dispatcher.utter_message(text="I'm sorry, something went wrong. {}".format(response['message']))
             print(reponse['message'])
 
-        my_graphQL.client.close()
         return [SlotSet("work_environment",None)]
 
 class ActionHelp(Action):
@@ -494,7 +429,7 @@ class ActionHelp(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        """Function that manages the robot's behavior to give help information.
+        """Function that manages the robot's behaviour to give help information.
 
         Parameters:
         dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
@@ -506,6 +441,7 @@ class ActionHelp(Action):
 
         dispatcher.utter_message(text="I can execute the following commands :")
         dispatcher.utter_message(text="Open demo")
+        dispatcher.utter_message(text="Close demo")
         dispatcher.utter_message(text="Show me something on tag")
         dispatcher.utter_message(text="Launch demo")
         dispatcher.utter_message(text="Activate demo")
@@ -516,8 +452,7 @@ class ActionHelp(Action):
         dispatcher.utter_message(text="Play video")
         dispatcher.utter_message(text="Start animation")
         dispatcher.utter_message(text="Stop animation")
-        dispatcher.utter_message(text="Quit video/audio")
-        dispatcher.utter_message(text="Mute video/audio")
+        dispatcher.utter_message(text="Play loop video/audio")
         dispatcher.utter_message(text="Full black screens")
         dispatcher.utter_message(text="Open environment")
         dispatcher.utter_message(text="Switch mode")
@@ -597,14 +532,8 @@ class ActionOpenBrowsers(Action):
         Returns:
         List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]"""
 
-        try:
-            my_graphQL = GraphQL()
-        except Exception as e:
-            print(e)
-            dispatcher.utter_message(text="I'm sorry, something went wrong. {}".format(e))
-            return []
+        response = action_browsers(my_graphQL,"open")
 
-        response = my_graphQL.open_browsers();
         print("Trying to open browsers...")
         if response['success'] and response["executeHwAction"]=="done":
             dispatcher.utter_message(text="The browsers are open")
@@ -616,7 +545,6 @@ class ActionOpenBrowsers(Action):
             dispatcher.utter_message(text="I'm sorry, something went wrong. {}".format(response['message']))
             print(response['message'])
 
-        my_graphQL.client.close()
         return []
 
 class ActionCloseBrowsers(Action):
@@ -641,14 +569,8 @@ class ActionCloseBrowsers(Action):
         Returns:
         List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]"""
 
-        try:
-            my_graphQL = GraphQL()
-        except Exception as e:
-            dispatcher.utter_message(text="I'm sorry, something went wrong. {}".format(e))
-            print(e)
-            return []
+        response = action_browsers(my_graphQL,"kill")
 
-        response = my_graphQL.close_browsers();
         print("Trying to close browsers...")
         if response['success'] and response["executeHwAction"]=="done":
             dispatcher.utter_message(text="The browsers are close")
@@ -660,7 +582,6 @@ class ActionCloseBrowsers(Action):
             dispatcher.utter_message(text="I'm sorry, something went wrong. {}".format(response['message']))
             print(response['message'])
 
-        my_graphQL.client.close()
         return []
 
 class ActionRefreshBrowsers(Action):
@@ -685,14 +606,8 @@ class ActionRefreshBrowsers(Action):
         Returns:
         List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]"""
 
-        try:
-            my_graphQL = GraphQL()
-        except Exception as e:
-            dispatcher.utter_message(text="I'm sorry, something went wrong. {}".format(e))
-            print(e)
-            return []
+        response = action_browsers(my_graphQL,"refresh")
 
-        response = my_graphQL.refresh_browsers();
         print("Trying to refresh browsers...")
         if response['success'] and response["executeHwAction"]=="done":
             dispatcher.utter_message(text="The browsers are reset")
@@ -704,7 +619,6 @@ class ActionRefreshBrowsers(Action):
             dispatcher.utter_message(text="I'm sorry, something went wrong. {}".format(response['message']))
             print(response['message'])
 
-        my_graphQL.client.close()
         return []
 
 class ActionRepeat(Action):
@@ -730,5 +644,48 @@ class ActionRepeat(Action):
         print('Trying to repeat')
         if len(tracker.events) >= 3:
                 dispatcher.utter_message(tracker.events[-3].get('text'))
+
+        return []
+
+class ActionSetReminder(Action):
+    """Schedules a reminder, supplied with the last message's entities."""
+
+    def name(self) -> Text:
+        return "action_set_reminder"
+
+    async def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    ) -> List[Dict[Text, Any]]:
+
+        dispatcher.utter_message("I will remind you in 10 seconds.")
+
+        date = datetime.datetime.now() + datetime.timedelta(seconds=10)
+        entities = tracker.latest_message.get("entities")
+
+        reminder = ReminderScheduled(
+            "EXTERNAL_reminder",
+            trigger_date_time=date,
+            entities=entities,
+            name="my_reminder",
+            kill_on_user_message=False,
+        )
+
+class ActionReactToReminder(Action):
+    """Reminds the user to finish presentation."""
+
+    def name(self) -> Text:
+        return "action_react_to_reminder"
+
+    async def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    ) -> List[Dict[Text, Any]]:
+
+        dispatcher.utter_message("The meeting is finished !")
 
         return []
