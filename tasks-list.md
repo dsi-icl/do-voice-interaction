@@ -39,3 +39,13 @@
 - [x] Implement the echo service with Client-Server architecture using Socket
 - [x] tts, stt, voice-assistant services implemented
 
+# Week of August 3rd to August 8th
+- [x] Clean up the gdo_voicebot
+- [x] Correct different things in gdo_voicebot
+- [x] Start to improve rasa service
+
+# Week of August 10th to August 14th
+- [x] Build dockers for voice-assistant
+- [x] Improve rasa service
+- [x] Clean up rasa service
+- [ ] Correct and clean up voice assistant
