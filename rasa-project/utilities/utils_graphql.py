@@ -198,7 +198,7 @@ class GraphQL:
         "Function that returns a map with all available projects (id->name) and None if no environment is selected"
 
         sample_transport=RequestsHTTPTransport(
-            url='http://129.31.142.150:4000/graphql',
+            url=self.config['GRAPHQL']['Url'],
             verify=False,
             retries=3,
         )
@@ -382,7 +382,7 @@ class GraphQL:
         "Function that returns all the tags"
 
         sample_transport=RequestsHTTPTransport(
-            url='http://129.31.142.150:4000/graphql',
+            url=self.config['GRAPHQL']['Url'],
             verify=False,
             retries=3,
         )
