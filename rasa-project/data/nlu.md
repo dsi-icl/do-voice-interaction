@@ -157,6 +157,8 @@
 - I'd like to shutdown the Screens
 - Screens shutdown
 - Shut down GDO
+- Turn off the GDO
+- Can you turn off the screens
 - Could you shutdown the global data observatory
 
 ## intent:turn_on_gdo
@@ -164,13 +166,10 @@
 - Could you turn on the screens
 - I'd like to turn on the Global Data Observatory
 - Start the gdo
+- Can you turn on the gdo
 - Turn on the screens
+- I'd like to start the Global Data Observatory
 - I would like to turn on the screens
-
-## intent:new_try
-- restart
-- I'd like to restart
-- Could you restart ?
 
 ## intent:clear_space
 - Clear the screens
@@ -264,3 +263,10 @@
 - Available demos
 - What's the list of available environments
 - Available projects
+
+## intent:ask_remind_end_of_meeting
+- remind me when my meeting ends
+- Could you remind me when my meeting ends
+- remind me to sop my meeting
+- remind me when the presentation should end
+- I have to finish my presentation
