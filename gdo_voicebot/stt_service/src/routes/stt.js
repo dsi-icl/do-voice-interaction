@@ -1,7 +1,7 @@
 /**
  * @file Manages some deepspeech utilities functions
  * @author Aurélie Beaugeard
-*/
+ */
 
 /**
  * @import { isEmpty } from "./routes/index.js"
@@ -20,9 +20,7 @@ const DeepSpeech = require('deepspeech')
  * @see {@link https://deepspeech.readthedocs.io/en/v0.7.4/NodeJS-API.html|DeepSpeech}
  */
 function speechToText (audioBuffer, model) {
-  const result = model.stt(audioBuffer)
-
-  return result
+  return model.stt(audioBuffer)
 }
 
 /**
@@ -54,7 +52,11 @@ export function loadDeepSpeechModel () {
 export function executeSpeechToTextRequest (req, res, model) {
   // If we receive an empty buffer or an undefined object we send back an error to the voice assistant service.
   if (isEmpty(req.body)) {
-    res.status(400).json({ status: 'fail', message: 'The request body contains nothing' })
+    res.status(400).json({
+      status: 'fail',
+      service: 'Speech To Text service',
+      message: 'The request body contains nothing'
+    })
   } else {
     const buffer = Buffer.from(req.body, 'base64')
     const textMessage = speechToText(buffer, model)
@@ -66,7 +68,7 @@ export function executeSpeechToTextRequest (req, res, model) {
       res.status(400).json({ status: 'fail', service: 'Speech To Text service', message: 'No transcription for this' })
     } else {
       // Everything is fine, we send back the textMessage
-      res.status(200).json({ status: 'ok', text: textMessage })
+      res.status(200).json({ status: 'ok', service: 'Speech To Text service', text: textMessage })
     }
   }
 }

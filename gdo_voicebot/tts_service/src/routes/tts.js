@@ -9,6 +9,7 @@ const Gtts = require('gtts')
 export function textToSpeech (req, res) {
   try {
     const gtts = new Gtts(req.query.text, req.query.lang)
+    console.log("gtts", gtts)
     gtts.stream().pipe(res)
   } catch (err) {
     res.status(400).json({ status: 'fail', service: 'Text To Speech  service', message: err.toString() })

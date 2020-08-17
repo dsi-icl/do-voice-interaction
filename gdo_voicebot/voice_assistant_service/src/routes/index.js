@@ -33,6 +33,14 @@ export async function getData (requestUrl, robotAnswer) {
     const status = await response.status
     if (status === 200) {
       const audioBuffer = await response.arrayBuffer()
+      console.log("audio buffer", audioBuffer)
+      const fs = require('fs');
+
+      //test, this fails to produce a valid wav file
+      let buf = Buffer.from(audioBuffer, 'base64')
+
+      fs.writeFileSync('./audio.base64.wav', buf);
+
       return { success: true, data: Buffer.from(audioBuffer, 'base64') }
     } else if (status === 400) {
       return { success: false, ...(await response.json()) }

@@ -10,13 +10,13 @@ export function setupSocket(backendUrl, dispatch) {
 
     window.socket.on("connect", () => console.log("Socket connected ..."));
     window.socket.on("response", (data) => {
-        console.log("received", data)
+        console.log("received", data);
 
         dispatch(addResponse({
             ...data,
             id: data.id || uuidv4(),
             date: data.date || new Date(),
-            audio: data.audio ? data.audio.data.toString('base64'): null
+            audio: data.audio.data ? data.audio.data.toString("base64"): null
         }));
     });
     window.socket.on("disconnect", () => console.log("Socket disconnected ..."));

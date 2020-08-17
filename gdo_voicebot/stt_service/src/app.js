@@ -1,7 +1,7 @@
 /**
  * @file Manages routing for the Speech-To-Text service
  * @author Aurélie Beaugeard
-*/
+ */
 
 import express from 'express'
 import cors from 'cors'
@@ -12,7 +12,7 @@ import fs from 'fs'
  * @import { loadDeepSpeechModel, executeSpeechToTextRequest } from "./routes/stt.js"
  * @see {@link ./routes/stt.js|stt.js}
  */
-import { loadDeepSpeechModel, executeSpeechToTextRequest } from './routes/stt.js'
+import { executeSpeechToTextRequest, loadDeepSpeechModel } from './routes/stt.js'
 
 /**
  * @import { sampleData } from "./routes/index.js"
@@ -21,7 +21,7 @@ import { loadDeepSpeechModel, executeSpeechToTextRequest } from './routes/stt.js
 import { sampleData } from './routes/index.js'
 
 if (!fs.existsSync('./config/config.json')) {
-  console.error("Could not find the configuration file: './config/config.json'")
+  console.error('Could not find the configuration file: \'./config/config.json\'')
   process.exit(1)
 }
 
@@ -30,11 +30,13 @@ global.config = JSON.parse(fs.readFileSync('./config/config.json').toString())
 const app = express()
 
 // Generate the deepspeech model and if it fails, returns the error to the server console
+let model
 try {
-  var model = loadDeepSpeechModel()
+  model = loadDeepSpeechModel()
 } catch (error) {
-  console.log('Error during deepspeech model construction')
-  console.log(error)
+  console.error('Error during deepspeech model construction')
+  console.error(error)
+  process.exit(2)
 }
 
 app.use(cors())

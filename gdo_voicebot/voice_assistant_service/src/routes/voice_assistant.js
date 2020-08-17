@@ -14,12 +14,15 @@ export async function successProcess (client, sttResponse, request) {
   console.log('Speech to text transcription : SUCCESS\n')
 
   const botResult = await postData(global.config.services.doControlService, '{"message":"' + sttResponse.text + '"}', 'Data Observatory Control Service')
-  const botResponseText = prepareBotTextAnswer(botResult)
-  const botResponseVoice = prepareBotVoiceAnswer(botResult)
+
+  console.log('bot result', botResult)
+
+  const botResponseText = mergeText(botResult, " ")
+  const botResponseVoice = mergeText(botResult, ", ")
 
   // We send the text message to the tts service to get back the voice answer.
   const voiceAnswer = await getData(global.config.services.ttsService, botResponseVoice)
-  console.log('Voice answer data : ',voiceAnswer.data)
+  console.log('Voice answer (success) : ', voiceAnswer)
 
   if (voiceAnswer.success) {
     // The user receives a transcript of her or his voice message for verification.
@@ -49,6 +52,8 @@ export async function successProcess (client, sttResponse, request) {
 export async function errorProcess (client, errorResponse, sttResponseText, request) {
   // We geerate an error voice message
   const voiceAnswer = await getData(global.config.services.ttsService, 'I encountered an error. Please consult technical support or try the request again')
+
+  console.log("Voice answer (fail)", voiceAnswer)
 
   // We send the json content response to the client, to give a description to the user in an alert box
   // The voice alert is sent to the client to be played
@@ -98,27 +103,15 @@ export async function processTextCommand (client, request) {
 }
 
 /**
- * Function used to shape the bot text answer sent to the tts service. All has to be in one line to get an entire voice response from gtts
- * @param {JSON} botResult The json response from the chatbot
- * @returns {String} The bot text answer sent to the tts service
+ * Function used to merge a text answer
+ * @param {JSON} result The json response
+ * @param {String} separator the separator to use
+ * @returns {String} The text answer
  */
-function prepareBotVoiceAnswer (botResult) {
-  let result = ''
-  botResult.forEach(element => {
-    result += element.text + ', '
-  })
-  return result
-}
-
-/**
- * Function used to shape the bot text answer displayed on the UI
- * @param {JSON} botResult The json response from the chatbot
- * @returns {String} The bot text answer
- */
-function prepareBotTextAnswer (botResult) {
-  let result = ''
-  botResult.forEach(element => {
-    result += element.text + ' '
-  })
-  return result
+function mergeText (result, separator) {
+  if (Array.isArray(result)) {
+    return result.map(e => e.text).join(separator)
+  } else {
+    return result.hasOwnProperty('text') ? result.text : ''
+  }
 }

@@ -20,7 +20,7 @@ export function sampleData (req, res) {
  * @returns {Boolean} The boolean value
  */
 export function isEmpty (obj) {
-  for (var key in obj) {
+  for (let key in obj) {
     if (Object.prototype.hasOwnProperty.call(obj, key)) { return false }
   }
   return true
