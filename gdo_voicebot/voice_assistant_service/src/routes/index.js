@@ -32,7 +32,8 @@ export async function getData (requestUrl, robotAnswer) {
 
     const status = await response.status
     if (status === 200) {
-      return { success: true, data: new Buffer(response.arrayBuffer()).toString('base64') }
+      const audioBuffer = await response.arrayBuffer()
+      return { success: true, data: Buffer.from(audioBuffer, 'base64') }
     } else if (status === 400) {
       return { success: false, ...(await response.json()) }
     } else {
@@ -54,7 +55,7 @@ export async function getData (requestUrl, robotAnswer) {
  * @see {@link https://deepspeech.readthedocs.io/en/v0.7.4/NodeJS-API.html|DeepSpeech}
  */
 export async function postData (url, data, serviceName) {
-  //todo; refactor this to be same as getData
+  // todo; refactor this to be same as getData
   try {
     const response = await fetch(url, {
       method: 'post',

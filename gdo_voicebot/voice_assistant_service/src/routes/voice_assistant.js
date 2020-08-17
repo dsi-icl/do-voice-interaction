@@ -19,6 +19,7 @@ export async function successProcess (client, sttResponse, request) {
 
   // We send the text message to the tts service to get back the voice answer.
   const voiceAnswer = await getData(global.config.services.ttsService, botResponseVoice)
+  console.log('Voice answer data : ',voiceAnswer.data)
 
   if (voiceAnswer.success) {
     // The user receives a transcript of her or his voice message for verification.
@@ -89,9 +90,9 @@ export async function processAudioCommand (client, request) {
 }
 
 export async function processTextCommand (client, request) {
-  //todo; implement this similar to audio data
+  // todo; implement this similar to audio data
 
-  const commandData = request.command
+  // const commandData = request.command
 
   return errorProcess(client, { status: 'fail', service: 'voice assistant', text: 'Not yet implemented' }, '', request)
 }
@@ -105,6 +106,19 @@ function prepareBotVoiceAnswer (botResult) {
   let result = ''
   botResult.forEach(element => {
     result += element.text + ', '
+  })
+  return result
+}
+
+/**
+ * Function used to shape the bot text answer displayed on the UI
+ * @param {JSON} botResult The json response from the chatbot
+ * @returns {String} The bot text answer
+ */
+function prepareBotTextAnswer (botResult) {
+  let result = ''
+  botResult.forEach(element => {
+    result += element.text + ' '
   })
   return result
 }

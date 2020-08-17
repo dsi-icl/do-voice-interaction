@@ -17,11 +17,11 @@ export const media = createSlice({
                 id: action.payload.id,
                 date: action.payload.date,
                 command: action.payload.command,
-                response: action.payload.command,
+                response: action.payload.response,
                 error: action.payload.error
             }];
-            state.audio = action.payload.audio ? action.payload.audio.data : null;
-
+            state.audio = action.payload.audio ? action.payload.audio : null;
+            console.log('Response',state.audio)
             if (!state.audio) {
                 state.status = PlayerStatus.IDLE;
             }
