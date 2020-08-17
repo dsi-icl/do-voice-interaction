@@ -17,8 +17,13 @@ export async function successProcess (client, sttResponse, request) {
 
   console.log('bot result', botResult)
 
-  const botResponseText = mergeText(botResult, " ")
-  const botResponseVoice = mergeText(botResult, ", ")
+  let botResponseText = botResult.data
+  let botResponseVoice = botResult.data
+
+  if (botResult.success) {
+    botResponseText = mergeText(botResult.data, ' ')
+    botResponseVoice = mergeText(botResult.data, ', ')
+  }
 
   // We send the text message to the tts service to get back the voice answer.
   const voiceAnswer = await getData(global.config.services.ttsService, botResponseVoice)
@@ -39,7 +44,7 @@ export async function successProcess (client, sttResponse, request) {
     })
   } else {
     // If Gtts raised an error, we send it to the client
-    await errorProcess(client, voiceAnswer, sttResponse.text, request)
+    await errorProcess(client, voiceAnswer, sttResponse.data, request)
   }
 }
 
@@ -50,10 +55,10 @@ export async function successProcess (client, sttResponse, request) {
  * @param {String} sttResponseText The text received from the Speech To Text service
  */
 export async function errorProcess (client, errorResponse, sttResponseText, request) {
-  // We geerate an error voice message
+  // We generate an error voice message
   const voiceAnswer = await getData(global.config.services.ttsService, 'I encountered an error. Please consult technical support or try the request again')
 
-  console.log("Voice answer (fail)", voiceAnswer)
+  console.log('Voice answer (fail)', voiceAnswer)
 
   // We send the json content response to the client, to give a description to the user in an alert box
   // The voice alert is sent to the client to be played
@@ -66,40 +71,39 @@ export async function errorProcess (client, errorResponse, sttResponseText, requ
     },
     error: errorResponse.text
   })
-  // Console error messages
-  console.log('Status :', errorResponse.status)
-  console.log('Concerned service : ', errorResponse.service)
-  console.log('Error message :', errorResponse.text + '\n')
 }
 
 export async function processAudioCommand (client, request) {
-  // We get the audio blob and send it to the stt service
-  const audioData = request.audio.data.split(',').pop()
-
-  /* you can also validate:
-   - request.audio.type -> should be "audio/wav"
-   - request.audio.sampleRate
-   - request.audio.bufferSize -> not sure if it's useful
-  */
-  const sttResponse = await postData(global.config.services.sttService, audioData, 'Speech To Text Service')
-
-  console.log('sttresponse', sttResponse)
-
-  // If an error was encountered during the request or the string response is empty we inform the user through the event problem with the socket.
-  // Else we can send the text transcript to the the text to speech service and sending the audiobuffer received to the client.
-  if (sttResponse.status === 'ok') {
-    await successProcess(client, sttResponse, request)
+  if (request.audio.type !== 'audio/wav' || request.audio.sampleRate !== 16000) {
+    const error = { status: 'fail', service: 'Voice-assistant service', text: 'The record format is wrong' }
+    await errorProcess(client, error, '', request)
   } else {
-    await errorProcess(client, sttResponse, '', request)
+    // We get the audio blob and send it to the stt service
+    const audioData = request.audio.data.split(',').pop()
+
+    const sttResponse = await postData(global.config.services.sttService, audioData, 'Speech To Text Service')
+
+    console.log('sttresponse', sttResponse)
+
+    // If an error was encountered during the request or the string response is empty we inform the user through the event problem with the socket.
+    // Else we can send the text transcript to the the text to speech service and sending the audiobuffer received to the client.
+    if (sttResponse.success) {
+      await successProcess(client, sttResponse.data, request)
+    } else {
+      await errorProcess(client, sttResponse.data, '', request)
+    }
   }
 }
 
 export async function processTextCommand (client, request) {
-  // todo; implement this similar to audio data
+  const commandData = { data: request.command }
 
-  // const commandData = request.command
-
-  return errorProcess(client, { status: 'fail', service: 'voice assistant', text: 'Not yet implemented' }, '', request)
+  if (commandData.data === '') {
+    const error = { status: 'fail', service: 'Voice-assistant service', text: 'Nothing has been written' }
+    await errorProcess(client, error, '', request)
+  } else {
+    await successProcess(client, commandData, request)
+  }
 }
 
 /**
@@ -112,6 +116,6 @@ function mergeText (result, separator) {
   if (Array.isArray(result)) {
     return result.map(e => e.text).join(separator)
   } else {
-    return result.hasOwnProperty('text') ? result.text : ''
+    return Object.property.hasOwnProperty.call(result, 'text') ? result.text : ''
   }
 }

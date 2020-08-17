@@ -31,19 +31,17 @@ export async function getData (requestUrl, robotAnswer) {
     const response = await fetch(mergeUrlParams(requestUrl, { text: robotAnswer, lang: 'en' }))
 
     const status = await response.status
-    if (status === 200) {
+    if (status >= 200 && status <= 299) {
       const audioBuffer = await response.arrayBuffer()
-      console.log("audio buffer", audioBuffer)
-      const fs = require('fs');
+      console.log('audio buffer', audioBuffer)
+      const fs = require('fs')
 
-      //test, this fails to produce a valid wav file
-      let buf = Buffer.from(audioBuffer, 'base64')
+      // test, this fails to produce a valid wav file
+      const buf = Buffer.from(audioBuffer, 'base64')
 
-      fs.writeFileSync('./audio.base64.wav', buf);
+      fs.writeFileSync('./audio.base64.wav', buf)
 
       return { success: true, data: Buffer.from(audioBuffer, 'base64') }
-    } else if (status === 400) {
-      return { success: false, ...(await response.json()) }
     } else {
       return { success: false, ...(await response.json()) }
     }
@@ -71,12 +69,16 @@ export async function postData (url, data, serviceName) {
       headers: { 'Content-type': 'text/plain' },
       body: data
     })
-    return await response.json()
-  } catch (error) {
-    return {
-      status: 'fail',
-      service: serviceName,
-      text: `I encountered this error '${error.message}' in the '${serviceName}'`
+
+    const status = await response.status
+    const responseData = await response.json()
+
+    if (status >= 200 && status <= 299) {
+      return { success: true, data: responseData }
+    } else {
+      return { success: false, data: responseData }
     }
+  } catch (exc) {
+    return { success: false, data: exc.message }
   }
 }
