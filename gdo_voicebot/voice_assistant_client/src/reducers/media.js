@@ -21,7 +21,6 @@ export const media = createSlice({
                 error: action.payload.error
             }];
             state.audio = action.payload.audio ? action.payload.audio : null;
-            console.log('Response',state.audio)
             if (!state.audio) {
                 state.status = PlayerStatus.IDLE;
             }
