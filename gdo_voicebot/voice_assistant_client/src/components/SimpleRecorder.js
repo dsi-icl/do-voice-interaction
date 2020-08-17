@@ -60,7 +60,7 @@ class SimpleRecorder extends React.Component {
                             type: this.state.recorder.getBlob().type || "audio/wav",
                             sampleRate: this.state.recorder.sampleRate,
                             bufferSize: this.state.recorder.bufferSize,
-                            data: audioDataURL
+                            data: audioDataURL.split(",").pop()
                         }
                     }));
                 });

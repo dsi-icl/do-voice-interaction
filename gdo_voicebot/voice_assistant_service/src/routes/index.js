@@ -33,14 +33,6 @@ export async function getData (requestUrl, robotAnswer) {
     const status = await response.status
     if (status >= 200 && status <= 299) {
       const audioBuffer = await response.arrayBuffer()
-      console.log('audio buffer', audioBuffer)
-      const fs = require('fs')
-
-      // test, this fails to produce a valid wav file
-      const buf = Buffer.from(audioBuffer, 'base64')
-
-      fs.writeFileSync('./audio.base64.wav', buf)
-
       return { success: true, data: Buffer.from(audioBuffer, 'base64') }
     } else {
       return { success: false, ...(await response.json()) }
@@ -61,7 +53,6 @@ export async function getData (requestUrl, robotAnswer) {
  * @see {@link https://deepspeech.readthedocs.io/en/v0.7.4/NodeJS-API.html|DeepSpeech}
  */
 export async function postData (url, data, serviceName) {
-  // todo; refactor this to be same as getData
   try {
     const response = await fetch(url, {
       method: 'post',

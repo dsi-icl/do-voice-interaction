@@ -78,10 +78,7 @@ export async function processAudioCommand (client, request) {
     const error = { status: 'fail', service: 'Voice-assistant service', text: 'The record format is wrong' }
     await errorProcess(client, error, '', request)
   } else {
-    // We get the audio blob and send it to the stt service
-    const audioData = request.audio.data.split(',').pop()
-
-    const sttResponse = await postData(global.config.services.sttService, audioData, 'Speech To Text Service')
+    const sttResponse = await postData(global.config.services.sttService, request.audio.data, 'Speech To Text Service')
 
     console.log('sttresponse', sttResponse)
 

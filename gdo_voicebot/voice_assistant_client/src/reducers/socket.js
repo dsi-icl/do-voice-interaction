@@ -16,7 +16,8 @@ export function setupSocket(backendUrl, dispatch) {
             ...data,
             id: data.id || uuidv4(),
             date: data.date || new Date(),
-            audio: data.audio.data ? data.audio.data.toString("base64"): null
+            //todo; move this beauty into the tts service
+            audio: data.audio.data ? Buffer.from(data.audio.data, "base64").toString("base64"): null
         }));
     });
     window.socket.on("disconnect", () => console.log("Socket disconnected ..."));

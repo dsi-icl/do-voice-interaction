@@ -27,7 +27,12 @@ const TextBox = () => {
     }, [setMessage, dispatch]);
 
     return <Input type="text" placeholder="command" fluid action value={message} onChange={handleChange}>
-        <input/>
+        <input onKeyUp={event => {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                handleSubmit();
+            }
+        }}/>
         <Button icon onClick={handleSubmit}><Icon name="chat"/></Button>
     </Input>;
 };
