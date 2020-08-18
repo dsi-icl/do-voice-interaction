@@ -26,3 +26,15 @@ services:
       - "2000:2000"
     volumes:
       - "./voice_assistant_service/config/config.docker.json:/app/config/config.json:ro"
+
+  do-voice-dialog-manager-service:
+    image: rasa/rasa:1.10.9-full
+    ports:
+      - "5005:5005"
+    volumes:
+      - ./dialog_manager_service/:/app
+    command:
+      - run
+    app:
+      image: rasa_actions:latest
+      expose: 5055
