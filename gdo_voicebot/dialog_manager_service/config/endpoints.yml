@@ -12,6 +12,9 @@
 
 action_endpoint:
  url: "http://localhost:5055/webhook"
+ #url: "http://129.31.142.150:5055/webhook"
+ #Docker version
+ #url: "http://action-server:5055/webhook"
 
 # Tracker store which is used to store the conversations.
 # By default the conversations are stored in memory.
