@@ -14,10 +14,8 @@ class GraphQL:
 
     def __init__(self,path):
 
-        # self.config = configparser.ConfigParser()
-        # self.config.read(path)
         self.config = parse_config(path)
-        print(self.config['url'])
+
         sample_transport=RequestsHTTPTransport(
             url=self.config['url'],
             verify=False,
