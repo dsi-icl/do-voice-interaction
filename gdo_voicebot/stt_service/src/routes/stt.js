@@ -65,7 +65,7 @@ export function executeSpeechToTextRequest (req, res, model) {
 
     // If deepspeech transcription is empty we send back an error to the voice assistant service.
     if (textMessage.length === 0) {
-      res.status(400).json({ status: 'fail', service: 'Speech To Text service', message: 'No transcription for this' })
+      res.status(400).json({ status: 'fail', service: 'Speech To Text service', text: 'No transcription for this' })
     } else {
       // Everything is fine, we send back the textMessage
       res.status(200).json({ status: 'ok', service: 'Speech To Text service', text: textMessage })

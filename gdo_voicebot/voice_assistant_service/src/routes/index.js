@@ -70,6 +70,6 @@ export async function postData (url, data, serviceName) {
       return { success: false, data: responseData }
     }
   } catch (exc) {
-    return { success: false, data: exc.message }
+    return { success: false, data: {text: exc.message} }
   }
 }

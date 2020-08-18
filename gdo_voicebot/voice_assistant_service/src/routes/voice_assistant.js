@@ -17,35 +17,36 @@ export async function successProcess (client, sttResponse, request) {
 
   console.log('bot result', botResult)
 
-  let botResponseText = botResult.data
-  let botResponseVoice = botResult.data
-
   if (botResult.success) {
-    botResponseText = mergeText(botResult.data, ' ')
-    botResponseVoice = mergeText(botResult.data, ', ')
-  }
+    const botResponseText = mergeText(botResult.data, '\n')
+    const botResponseVoice = mergeText(botResult.data, ', ')
 
-  // We send the text message to the tts service to get back the voice answer.
-  const voiceAnswer = await getData(global.config.services.ttsService, botResponseVoice)
-  console.log('Voice answer (success) : ', voiceAnswer)
+    // We send the text message to the tts service to get back the voice answer.
+    const voiceAnswer = await getData(global.config.services.ttsService, botResponseVoice)
+    console.log('Voice answer (success) : ', voiceAnswer)
 
-  if (voiceAnswer.success) {
-    // The user receives a transcript of her or his voice message for verification.
-    // The text version of the bot answer is also sent and displayed on the user interface
-    // Voice answer sent to the client through the socket
-    client.emit('response', {
-      id: request.id,
-      date: request.date,
-      command: sttResponse.text,
-      response: botResponseText,
-      audio: {
-        data: voiceAnswer.data
-      }
-    })
+    if (voiceAnswer.success) {
+      // The user receives a transcript of her or his voice message for verification.
+      // The text version of the bot answer is also sent and displayed on the user interface
+      // Voice answer sent to the client through the socket
+      client.emit('response', {
+        id: request.id,
+        date: request.date,
+        command: sttResponse.text,
+        response: botResponseText,
+        audio: {
+          data: voiceAnswer.data
+        }
+      })
+    } else {
+      // If Gtts raised an error, we send it to the client
+      await errorProcess(client, voiceAnswer, sttResponse.text, request)
+    }
   } else {
-    // If Gtts raised an error, we send it to the client
-    await errorProcess(client, voiceAnswer, sttResponse.data, request)
+    await errorProcess(client, botResult.data, sttResponse.text, request)
   }
+
+
 }
 
 /**
@@ -93,7 +94,7 @@ export async function processAudioCommand (client, request) {
 }
 
 export async function processTextCommand (client, request) {
-  const commandData = { data: request.command }
+  const commandData = { text: request.command }
 
   if (commandData.data === '') {
     const error = { status: 'fail', service: 'Voice-assistant service', text: 'Nothing has been written' }
