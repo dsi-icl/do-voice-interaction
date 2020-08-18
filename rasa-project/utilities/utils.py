@@ -1,55 +1,4 @@
-from .utils_graphql import GraphQL
-
-def search_demo_by_tag(graphql,tag):
-    "Function that returns demos names corresponding to a tag"
-
-    result = graphql.search_by_tag(tag)
-
-    if result['current']==None:
-        return None
-    elif len(result['current']['projects']) > 0:
-        list_names = []
-        for name in result['current']['projects']:
-            list_names.append(name['name'])
-        return list_names
-    else:
-        return []
-
-def search_demo_by_word(graphql,name):
-    "Function that filters projects by key word"
-    available_demos = GraphQL.get_projects()
-    if available_demos!=None and len(available_demos)>0:
-        result_search = demo_contains_word(name.lower(),available_demos.values())
-        if result_search[0]:
-            return result_search[1]
-
-    return []
-
-def search_process_tag(graphql,tag):
-    "Function that is used in search action process to search by key tag"
-
-    search_result = search_demo_by_tag(graphql,tag)
-    if search_result == None:
-        result = {'success':False,'message':"I can't access to any demo"}
-    elif len(search_result) == 0:
-        result = {'message':"I'm sorry, there is no demo on this topic"}
-    elif len(search_result) > 10:
-        result = {'message':'The list of demos is too long to read out. Would you like to refine it by other tags?'}
-    else:
-        result = {'message':'Here are the results for {}'.format(tag)+' : '+', '.join(search_result)}
-    return result
-
-def search_prosess_name(graphql,name):
-    "Function that is used in search action process to search by key word"
-
-    search_result = search_demo_by_word(graphql,name)
-    if len(search_result) == 0:
-        result = {'message':"I'm sorry, there is no demo on this topic"}
-    elif len(search_result) > 10:
-        result = {'message':'The list of demos is too long to read out. Would you like to refine it by other names?'}
-    else:
-        result = {'message':'Here are the results for {}'.format(name)+' : '+', '.join(search_result)}
-    return result
+import yaml
 
 def demo_contains_word(word, available_demos):
     """Function that indicates if one of the demo contains a word and returns all demos containing the tag
@@ -87,7 +36,7 @@ def find_string_in_other_string(input_name,available_demos):
         ind = 0
 
         while demo_found and ind<len(words):
-            demo_found = words[ind] in demo_name
+            demo_found = words[ind].lower() in demo_name.lower()
             ind += 1
 
         if demo_found:
@@ -100,3 +49,76 @@ def find_string_in_other_string(input_name,available_demos):
         return name
 
     return None
+
+def prepare_lines(lines,intent_up,intent_down,demos,command,slot):
+    "Function that prepare the new lines to add in the nlu file"
+
+    #indexes where we will have to add the new known entities
+    indexes = []
+    #boolean to know if we are in the right intent
+    in_right_intent = False
+
+    for ind,line in enumerate(lines):
+        #if there is an empty line we automatically store the index of this one without carrying out a test, in order to be able to add our demos.
+        if in_right_intent and line=="\n":
+            indexes.append(ind)
+        elif in_right_intent:
+            for item in demos:
+                if item in line:
+                    #if the demo is already known by the file it means that there is no need to add it, so we remove it from our list.
+                    demos.remove(item)
+                else:
+                    indexes.append(ind)
+        #we check this condition to detect the passage into the intended intent
+        if intent_up in line and not in_right_intent:
+            in_right_intent = True
+        #if we detect the name of the next intent then we are out of the open intent and we stop the loop
+        if intent_down in line:
+            break
+
+    #we insert our new demos in new lines with stored indices
+    for i,item in enumerate(demos):
+        lines.insert(indexes[i],command+'['+item.lower()+']'+'('+slot+')'+'\n')
+
+    return lines
+
+def write_entities(config_path,entity_name):
+    "Function that updates and writesdemo oor tag entities in nlu file"
+    try:
+        file = None
+        #we retrieve the list of available demos
+        my_graphQL = GraphQL(config_path)
+
+        #we open the nlu.md file in read mode to retrieve all the lines of the file
+        file = open("./data/nlu.md","r")
+        lines = file.readlines()
+
+        if entity_name=='demo':
+            available_demos = list(GraphQL.get_projects(my_graphQL.config['url']).values())
+            lines = prepare_lines(lines,'intent:open','intent:out_of_scope',available_demos,'- Open ',entity_name)
+        else:
+            tags = GraphQL.get_tags(my_graphQL.config['url'])
+            lines = prepare_lines(lines,'intent:search','intent:shutdown',tags,'- Look for ',entity_name)
+
+
+        #we now open the file in write mode
+        file = open("./data/nlu.md","w")
+        #we update the file with the new lines
+        file.writelines(lines)
+        file.close()
+
+    except Exception as e:
+        print("Exception : ",str(e))
+        if file!=None and not file.closed():
+            file.close()
+
+def parse_config(config_path):
+    "Function tha parses yml config file"
+    with open(config_path,'r') as file:
+        config = yaml.load(file, Loader=yaml.FullLoader)
+        graphql_config = config['graphql']
+        config = {}
+        for element in graphql_config:
+            for key in element.keys():
+                config[key]=element[key]
+        return config

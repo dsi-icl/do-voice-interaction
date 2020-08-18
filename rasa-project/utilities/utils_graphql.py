@@ -1,6 +1,7 @@
 from gql import gql, Client
 from gql.transport.requests import RequestsHTTPTransport
 from functools import lru_cache
+from .utils import parse_config
 import ast
 import operator
 import configparser
@@ -11,13 +12,14 @@ class GraphQL:
     """Class managing all methods related to the GDO Controller with this characteristic :
     - its client"""
 
-    def __init__(self,url):
+    def __init__(self,path):
 
-        self.config = configparser.ConfigParser()
-        self.config.read(url)
-
+        # self.config = configparser.ConfigParser()
+        # self.config.read(path)
+        self.config = parse_config(path)
+        print(self.config['url'])
         sample_transport=RequestsHTTPTransport(
-            url=self.config['GRAPHQL']['Url'],
+            url=self.config['url'],
             verify=False,
             retries=3,
         )
@@ -194,11 +196,11 @@ class GraphQL:
 
     @staticmethod
     @lru_cache(maxsize=None)
-    def get_projects():
+    def get_projects(url):
         "Function that returns a map with all available projects (id->name) and None if no environment is selected"
 
         sample_transport=RequestsHTTPTransport(
-            url=self.config['GRAPHQL']['Url'],
+            url=url,
             verify=False,
             retries=3,
         )
@@ -222,7 +224,7 @@ class GraphQL:
         map_projects = {}
 
         for project in result["current"]["projects"]:
-            map_projects[project['id']] = project['name'].lower()
+            map_projects[project['id']] = project['name']
         client.close()
 
         return map_projects
@@ -239,9 +241,10 @@ class GraphQL:
         '''
         )
 
-        map_projects = GraphQL.get_projects()
+        map_projects = GraphQL.get_projects(self.config['url'])
+        id_project = ''
         for id, name in map_projects.items():
-            if name == name_project:
+            if name.lower() == name_project.lower():
                 id_project = id
         params = {
             "projectID":id_project
@@ -378,11 +381,11 @@ class GraphQL:
 
     @staticmethod
     @lru_cache(maxsize=None)
-    def get_tags():
+    def get_tags(url):
         "Function that returns all the tags"
 
         sample_transport=RequestsHTTPTransport(
-            url=self.config['GRAPHQL']['Url'],
+            url=url,
             verify=False,
             retries=3,
         )
@@ -426,7 +429,7 @@ class GraphQL:
         "Function that zoom-in and zoom-out according to a delta level"
 
         mutation = gql('''
-            mutation executeAppAction($action: String!, param: String = null, $app: String!) {
+            mutation executeAppAction($action: String!, $param: String = "", $app: String!) {
                     executeAppAction(action:$action,param:$param,app:$app)
             }
         '''
@@ -438,20 +441,24 @@ class GraphQL:
         }
 
         result = self.client.execute(mutation,variable_values=params)
+
         return result['executeAppAction']
 
     def zoom_maps(self,delta_level):
         "Function to zoom-in or zoom-out maps"
-        self.maps_images_control("zoom",delta_level,"OVE_APP_MAPS")
+        return self.maps_images_control("zoom",delta_level,"OVE_APP_MAPS")
 
     def zoom_images(self,delta_level):
         "Function to zoom-in or zoom-out images"
-        self.maps_images_control("zoom",delta_level,"OVE_APP_IMAGES")
+        return self.maps_images_control("zoom",delta_level,"OVE_APP_IMAGES")
 
     def move_maps(self,orientation):
         "Function to move in maps"
-        self.maps_images_control("move",orientation,"OVE_APP_MAPS")
+        return self.maps_images_control("move",orientation,"OVE_APP_MAPS")
 
     def move_images(self,orientation):
         "Function to move in maps"
-        self.maps_images_control("move",orientation,"OVE_APP_IMAGES")
+        return self.maps_images_control("move",orientation,"OVE_APP_IMAGES")
+
+if __name__ == '__main__':
+    my_graphQL = GraphQL('../config/config.yml')

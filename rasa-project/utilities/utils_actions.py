@@ -1,5 +1,6 @@
 from .utils_graphql import GraphQL
-from .utils import *
+from .actions_tools import *
+from .utils import demo_contains_word, find_string_in_other_string
 import ast
 
 def action_open_environment(graphql,environment_slot):
@@ -56,7 +57,7 @@ def action_list_demos(graphql,bot_last_messagae):
     try:
         result= {'success':True}
         if graphql.environment_is_open():
-            list_demos = GraphQL.get_projects()
+            list_demos = GraphQL.get_projects(graphql.config['url'])
             if list_demos == None:
                 result.update({'message':'There are no demos available in the current environment {}'.format(graphql.get_current_environment())})
             elif len(list_demos)>10:
@@ -68,7 +69,7 @@ def action_list_demos(graphql,bot_last_messagae):
                 result.update({'message':'Here are the available demos : '+', '.join(list_demos.values())})
         else:
             result.update({'message':"No environment is open so I can't load the list of demos. You can choose an environment between : "+" ,".join(graphql.get_available_environments())})
-    except Exception as e:
+    except Exception as exc:
         result = {'success':False,'message':str(exc)}
         result.update(ast.literal_eval(str(exc)))
     finally:
@@ -83,7 +84,7 @@ def action_launch_project(graphql,name_project):
         elif name_project == None:
             result.update({'message':'There is no such demo available. Would you like to hear the list ?','list':True})
         else:
-            map_projects = GraphQL.get_projects()
+            map_projects = GraphQL.get_projects(graphql.config['url'])
             if name_project in map_projects.values():
                 graphql.load_project(name_project)
                 result.update({'message':'{} is open'.format(name_project),'project':None,'list':False})
@@ -170,8 +171,8 @@ def action_search(graphql,name,tag,search_mode):
         elif 'key word' in search_mode and name == None:
             result.update({'message':'Fine, please say "search" or "look for" and your key word. If you already did and got no answer for that request that means that no demo contains this key word'})
         elif name != None:
-            result.update(search_prosess_name(graphql,name))
-    except Exception as e:
+            result.update(search_process_name(graphql,name))
+    except Exception as exc:
         result = {'success':False,'message':str(exc)}
         result.update(ast.literal_eval(str(exc)))
     finally:
@@ -204,6 +205,38 @@ def action_turn_on_gdo(graphql):
     try:
         result = {"success":True}
         result.update(graphql.turn_on_gdo())
+    except Exception as exc:
+        result = {'success':False,'message':str(exc)}
+        result.update(ast.literal_eval(str(exc)))
+    finally:
+        return result
+
+def action_zoom(graphql,zoom_action_slot,zoom_level_slot=None):
+    "Function that executes zoom-in or zoom_out actions"
+    try:
+        result = {'success':True}
+        zoom = 'Nothing has been done yet'
+        if not graphql.environment_is_open():
+            result.update({'success':False})
+            zoom = 'No environment is open. Please, open one of these environments before : '+' ,'.join(graphql.get_available_environments())
+        elif graphql.get_current_project() == None:
+            result.update({'success':False})
+            zoom = 'No project is open'
+        elif zoom_action_slot == None:
+            zoom = 'Do you want to zoom in or zoom out ?'
+        elif zoom_action_slot == 'in' and zoom_level_slot == None:
+            zoom = graphql.zoom_images(graphql.config['zoomin'][1]['medium'])
+        elif zoom_action_slot == 'in' and zoom_level_slot == 'small':
+            zoom = graphql.zoom_images(graphql.config['zoomin'][0]['little'])
+        elif zoom_action_slot == 'in' and zoom_level_slot == 'big':
+            zoom = graphql.zoom_images(graphql.config['zoomin'][2]['big'])
+        elif zoom_action_slot == 'out' and zoom_level_slot == None:
+            zoom = graphql.zoom_images(graphql.config['zoomout'][1]['medium'])
+        elif zoom_action_slot == 'out' and zoom_level_slot == 'small':
+            zoom = graphql.zoom_images(graphql.config['zoomout'][0]['little'])
+        elif zoom_action_slot == 'out' and zoom_level_slot == 'big':
+            zoom = graphql.zoom_images(graphql.config['zoomout'][2]['big'])
+        result.update({'message':zoom})
     except Exception as exc:
         result = {'success':False,'message':str(exc)}
         result.update(ast.literal_eval(str(exc)))
