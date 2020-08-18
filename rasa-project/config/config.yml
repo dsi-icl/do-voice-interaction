@@ -24,3 +24,20 @@ policies:
     max_history: 5
     epochs: 100
   - name: MappingPolicy
+
+# Configuration for Graphql
+graphql:
+  - url: http://129.31.142.150:4000/graphql
+  - move:
+      - left: "-5000,0"
+      - right: "5000,0"
+      - up: "0,-5000"
+      - down: "0,5000"
+  - zoomin:
+      - little: "3.0"
+      - medium: "6.0"
+      - big: "8.0"
+  - zoomout:
+      - little: "-3.0"
+      - medium: "-6.0"
+      - big: "-8.0"
