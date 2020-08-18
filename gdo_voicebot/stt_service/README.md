@@ -2,7 +2,7 @@
 
 ## Description
 
-This service will take care of receiving the voice message and transcribing it using the  mozilla's [DeepSpeech](https://github.com/mozilla/STT) model. To learn more about DeepSpeech, you can acess to the documentation [here](https://mozilla-voice-stt.readthedocs.io/en/latest/index.html). In the [stt.js](https://github.com/dsi-icl/do-voice-interaction/blob/master/gdo_voicebot/stt_service/src/routes/stt.js) file you'll find how the audioBuffer received is processed.
+This service will take care of receiving the voice message and transcribing it using the [Mozilla's DeepSpeech](https://github.com/mozilla/STT) model. To learn more about DeepSpeech, you can acess to the documentation [here](https://mozilla-voice-stt.readthedocs.io/en/latest/index.html). In the [stt.js](https://github.com/dsi-icl/do-voice-interaction/blob/master/gdo_voicebot/stt_service/src/routes/stt.js) file you'll find how the audioBuffer received is processed.
 
 ## How to install it
 
