@@ -238,10 +238,36 @@
 * deny
   - utter_affirm
 
-# set reminder
+# zoom
+* zoom
+  - action_zoom
+  - slot{"zoom_action":null,"zoom_big_level":null,"zoom_small_level":null}
+
+# zoom and try again
+* zoom
+  - action_zoom
+* affirm
+  - action_zoom
+
+# zoom and cancel
+* zoom
+  - action_zoom
+* deny
+  - utter_affirm
+  - action_reset_slot_zoom
+  - slot{"zoom_action":null,"zoom_big_level":null,"zoom_small_level":null}
+
+# zoom and ask action type
+* zoom
+  - action_zoom
+  - slot{"zoom_action":null}
+* zoom
+  - action_zoom
+
+<!-- # set reminder
 * ask_remind_end_of_meeting
   - action_set_reminder
 
 # reminder
 * EXTERNAL_reminder
-  - action_react_to_reminder
+  - action_react_to_reminder -->
