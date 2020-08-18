@@ -1,7 +1,0 @@
-rasa
-requests
-requests-cache
-graphql-core
-gql
-unittest
-pyyaml
