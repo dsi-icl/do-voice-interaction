@@ -1,7 +1,8 @@
 import time
 import unittest
 import sys
-from ..utils import *
+sys.path.append("../..")
+from utilities.utils import *
 
 class TestUtils(unittest.TestCase):
 
