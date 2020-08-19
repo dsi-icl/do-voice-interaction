@@ -6,7 +6,7 @@ This service turns a text message into a voice mssage using [gtts](https://www.n
 
 ## How to install it
 
-`npm install` to install all dependecies.
+`npm install` to install all dependencies.
 
 ## How to build it
 
