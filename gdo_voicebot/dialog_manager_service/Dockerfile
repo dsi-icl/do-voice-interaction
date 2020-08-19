@@ -19,10 +19,13 @@ COPY ./actions /app/actions
 # Copy utilities folder to working directory
 COPY ./utilities /app/utilities
 
+# Copy configuration
+COPY ./config/config.docker.yml /app/config/config.yml
+
 # Copy module file
 COPY __init__.py ./
 
 # By best practices, don't run the code with root user
 USER 1001
 
-CMD ["run","actions","--actions","actions"]
+CMD ["start", "--actions", "actions.actions"]

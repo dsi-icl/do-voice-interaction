@@ -1,8 +1,5 @@
-rasa
 requests
 requests-cache
-graphql-core
+graphql-core==2.3.2
 gql
-unittest
-pyyaml
-pdoc3
+pyaml
