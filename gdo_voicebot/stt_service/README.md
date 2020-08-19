@@ -6,7 +6,7 @@ This service will take care of receiving the voice message and transcribing it u
 
 ## How to install it
 
-`npm install` to install all dependecies.
+`npm install` to install all dependencies.
 
 If you don't want to use docker, please make sure, that you installed deepspeech models by executing the following command `./download_models.sh`
 
