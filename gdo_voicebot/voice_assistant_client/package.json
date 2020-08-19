@@ -12,6 +12,7 @@
     "react": "16.13.1",
     "react-audio-player": "0.13.0",
     "react-dom": "16.13.1",
+    "react-html-parser": "^2.0.2",
     "react-loader-spinner": "3.1.14",
     "react-redux": "7.2.1",
     "react-scripts": "3.4.1",

@@ -4,7 +4,10 @@ import PropTypes from "prop-types";
 import {Feed, Icon} from "semantic-ui-react";
 import {useSelector} from "react-redux";
 
+import ReactHtmlParser from "react-html-parser";
+
 import {selectResponses} from "../reducers/media";
+import {replaceHtmlElements} from "../util";
 
 import "./CommandFeed.css";
 
@@ -21,9 +24,9 @@ const FeedItem = ({date, command, response, error}) => <Feed.Event>
     </Feed.Label>
     <Feed.Content>
         <Feed.Date className="feed-text">{date}</Feed.Date>
-        <Feed.Summary className="feed-text">You: {command}</Feed.Summary>
-        {response && <Feed.Extra text className="feed-text">Assistant: {response}</Feed.Extra>}
-        {error && <Feed.Extra text className="feed-text-error">Error: {error}</Feed.Extra>}
+        <Feed.Summary className="feed-text">You: {ReactHtmlParser(replaceHtmlElements(command))}</Feed.Summary>
+        {response && <Feed.Extra text className="feed-text">Assistant: {ReactHtmlParser(replaceHtmlElements(response))}</Feed.Extra>}
+        {error && <Feed.Extra text className="feed-text-error">Error: {ReactHtmlParser(replaceHtmlElements(error))}</Feed.Extra>}
     </Feed.Content>
 </Feed.Event>;
 

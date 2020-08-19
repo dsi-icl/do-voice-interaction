@@ -39,3 +39,7 @@ export function setupAudioRecorder() {
 export function setupHark() {
     return setupStream().then(stream => hark(stream, {play: false}));
 }
+
+export function replaceHtmlElements(text) {
+    return text.replace(/\n/gi, "<br />");
+}
