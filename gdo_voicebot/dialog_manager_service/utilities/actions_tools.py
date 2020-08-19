@@ -1,5 +1,5 @@
-from .utils_graphql import GraphQL
-from .utils import demo_contains_word, find_string_in_other_string
+from utilities.utils_graphql import GraphQL
+from utilities.utils import demo_contains_word, find_string_in_other_string
 
 def search_demo_by_tag(graphql,tag):
     "Function that returns demos names corresponding to a tag"

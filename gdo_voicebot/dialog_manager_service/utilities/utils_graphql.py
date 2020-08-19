@@ -1,7 +1,7 @@
 from gql import gql, Client
 from gql.transport.requests import RequestsHTTPTransport
 from functools import lru_cache
-from .utils import parse_config
+from utilities.utils import parse_config
 import ast
 import operator
 import configparser

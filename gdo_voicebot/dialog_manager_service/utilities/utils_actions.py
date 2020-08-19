@@ -1,6 +1,6 @@
-from .utils_graphql import GraphQL
-from .actions_tools import *
-from .utils import demo_contains_word, find_string_in_other_string
+from utilities.utils_graphql import GraphQL
+from utilities.actions_tools import *
+from utilities.utils import demo_contains_word, find_string_in_other_string
 import ast
 
 def action_open_environment(graphql,environment_slot):

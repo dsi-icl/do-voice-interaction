@@ -64,7 +64,7 @@ def prepare_lines(lines,intent_up,intent_down,demos,command,slot):
             indexes.append(ind)
         elif in_right_intent:
             for item in demos:
-                if item in line:
+                if item.lower() in line:
                     #if the demo is already known by the file it means that there is no need to add it, so we remove it from our list.
                     demos.remove(item)
                 else:
@@ -81,36 +81,6 @@ def prepare_lines(lines,intent_up,intent_down,demos,command,slot):
         lines.insert(indexes[i],command+'['+item.lower()+']'+'('+slot+')'+'\n')
 
     return lines
-
-def write_entities(config_path,entity_name):
-    "Function that updates and writesdemo oor tag entities in nlu file"
-    try:
-        file = None
-        #we retrieve the list of available demos
-        my_graphQL = GraphQL(config_path)
-
-        #we open the nlu.md file in read mode to retrieve all the lines of the file
-        file = open("./data/nlu.md","r")
-        lines = file.readlines()
-
-        if entity_name=='demo':
-            available_demos = list(GraphQL.get_projects(my_graphQL.config['url']).values())
-            lines = prepare_lines(lines,'intent:open','intent:out_of_scope',available_demos,'- Open ',entity_name)
-        else:
-            tags = GraphQL.get_tags(my_graphQL.config['url'])
-            lines = prepare_lines(lines,'intent:search','intent:shutdown',tags,'- Look for ',entity_name)
-
-
-        #we now open the file in write mode
-        file = open("./data/nlu.md","w")
-        #we update the file with the new lines
-        file.writelines(lines)
-        file.close()
-
-    except Exception as e:
-        print("Exception : ",str(e))
-        if file!=None and not file.closed():
-            file.close()
 
 def parse_config(config_path):
     "Function tha parses yml config file"
