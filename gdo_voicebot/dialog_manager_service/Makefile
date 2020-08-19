@@ -1,6 +1,7 @@
 docker rasa:
 	docker pull rasa/rasa
-
+	docker pull rasa/rasa-sdk
+	
 build:
 	docker build . -t rasa_actions
 
