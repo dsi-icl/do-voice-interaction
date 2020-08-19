@@ -24,3 +24,5 @@ COPY __init__.py ./
 
 # By best practices, don't run the code with root user
 USER 1001
+
+CMD ["run","actions","--actions","actions"]

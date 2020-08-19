@@ -29,12 +29,21 @@ services:
 
   do-voice-dialog-manager-service:
     image: rasa/rasa:1.10.9-full
+    container_name: do-voice-dialog-manager-service
     ports:
       - "5005:5005"
     volumes:
-      - ./dialog_manager_service/:/app
+      - ./dialog_manager_service/models:/app/models:ro
+      - ./dialog_manager_service/config/credentials.docker.yml:/app/config/credentials.yml:ro
+      - ./dialog_manager_service/config/endpoints.docker.yml:/app/config/endpoints.yml:ro
     command:
-      - run
-    app:
-      image: rasa_actions:latest
-      expose: 5055
+      - run -m /app/models --endpoints /app/config/endpoints.yml --credentials /app/config/credentials.yml
+
+  do-voice-dialog-manager-actions-service:
+    image: dsi-icl/do-voice-dialog-manager-actions-service:latest
+    containes_name: do-voice-dialog-manager-actions-service
+    build: dialog_manager_service/
+    ports:
+      - "5055:5055"
+    volumes:
+      - "./voice_assistant_service/config/config.docker.yml:/app/config/config.yml:ro"
