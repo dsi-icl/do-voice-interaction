@@ -144,7 +144,7 @@ responses:
   utter_greet:
   - text: "Welcome to the Data Observatory. I am your voice assistant. Can I help you ?"
   utter_goodbye:
-  - text: "The Data Observatory thanks you for your presentation. I hope to see you soon :)"
+  - text: "The Data Observatory thanks you for your presentation. I hope to see you soon"
   utter_affirm:
   - text: "Fine"
   - text: "No worries"
