@@ -67,4 +67,4 @@ If you want to use [docker-compose](https://github.com/dsi-icl/do-voice-interact
 
 In the [docs](https://github.com/dsi-icl/do-voice-interaction/tree/master/gdo_voicebot/dialog_manager_service/docs) folder, ou'll find python documentation about the Dialog manager service.
 
-To generate your own documentation, please use `pdoc --html -o docs/ <file_1.py> <file_2.py>` replacing `<file_n.py>`by the files containing documentation. If you want to use python scripts already implemented and to modify or update them just with nes documentation, do `pdoc --html --force -o docs/ actions/actions.py utilities/utils_graphql.py utilities/utils_actions.py utilities/actions_tools.py`.
+To generate your own documentation, please use `pdoc --html -o docs/ <file_1.py> <file_2.py>` replacing `<file_n.py>`by the files containing documentation. If you want to use python scripts already implemented and to modify or update them just with nes documentation, do `pdoc --html --force -o docs/ actions/actions.py utilities/utils_graphql.py utilities/utils_actions.py utilities/actions_tools.py utilities/utils.py`.
