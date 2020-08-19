@@ -1,0 +1,1715 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.8.4" />
+<title>utils_graphql API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js" integrity="sha256-eOgo0OtLL4cdq7RdwRUiGKLX9XsIJ7nGhWEKbohmVAQ=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>utils_graphql</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">from gql import gql, Client
+from gql.transport.requests import RequestsHTTPTransport
+from functools import lru_cache
+from utilities.utils import parse_config
+import ast
+import operator
+import configparser
+import os
+
+class GraphQL:
+
+    &#34;&#34;&#34;Class managing all methods related to the GDO Controller with this characteristic :
+    - its client&#34;&#34;&#34;
+
+    def __init__(self,path):
+
+        self.config = parse_config(path)
+
+        sample_transport=RequestsHTTPTransport(
+            url=self.config[&#39;url&#39;],
+            verify=False,
+            retries=3,
+        )
+
+        self.client = Client(
+            transport=sample_transport,
+            fetch_schema_from_transport=True,
+        )
+
+
+    def open_environment(self,name_environment):
+        &#34;Function that opens the chosen environment&#34;
+
+        mutation = gql(&#39;&#39;&#39;
+            mutation changeEnvironment($id : String!) {
+                changeEnvironment(id:$id){
+                    id
+                }
+            }
+        &#39;&#39;&#39;)
+        params = {
+            &#34;id&#34;:name_environment
+        }
+        result = self.client.execute(mutation, variable_values=params)
+
+        return result
+
+    def login(self,username,password):
+        &#34;Function to log in to the GDO launcher&#34;
+
+        mutation = gql(&#39;&#39;&#39;
+            mutation login($username: String!, $password: String!) {
+            login(username:$username,password:$password)
+            }
+        &#39;&#39;&#39;)
+        params = {
+            &#34;username&#34;: username,
+            &#34;password&#34;: password
+        }
+        result = self.client.execute(mutation, variable_values=params)
+
+        return result
+
+    def environment_is_open(self):
+        &#34;Function to check if an environment is opened&#34;
+
+        query = gql(&#39;&#39;&#39;
+            query current {
+                current{
+                    id
+                }
+            }
+        &#39;&#39;&#39;
+        )
+        result = self.client.execute(query)
+        return result[&#34;current&#34;]!=None
+
+
+    def logout(self):
+        &#34;Function to log out&#34;
+
+        mutation = gql(&#39;&#39;&#39;
+            mutation logout {
+                logout
+            }
+        &#39;&#39;&#39;)
+        result = self.client.execute(mutation)
+        return result[&#39;logout&#39;]
+
+
+    def turn_on_gdo(self):
+        &#34;Function that truns on the GDO&#34;
+
+        mutation = gql(&#39;&#39;&#39;
+            mutation executePowerAction {
+                executePowerAction(action:&#34;on&#34;)
+            }
+        &#39;&#39;&#39;
+        )
+
+        return self.client.execute(mutation)
+
+    def turn_off_gdo(self):
+        &#34;Function that turns off the GDO&#34;
+
+        mutation = gql(&#39;&#39;&#39;
+            mutation executePowerAction {
+                executePowerAction(action:&#34;off&#34;)
+            }
+        &#39;&#39;&#39;
+        )
+
+        return self.client.execute(mutation)
+
+
+    def mode_is_selected(self):
+        &#34;Function that indicates if a mode is selected&#34;
+
+        query = gql(&#39;&#39;&#39;
+            query mode {
+                mode{
+                    id
+                }
+            }
+        &#39;&#39;&#39;)
+        result = self.client.execute(query)
+
+        return result[&#39;mode&#39;]!=None
+
+    def choose_mode(self,mode):
+        &#34;Function thar permits to choose a mode between section and cluster or to switch the mode&#34;
+
+        mutation = gql(&#39;&#39;&#39;
+            mutation changeMode($id : String!) {
+                changeMode(id:$id){
+                    id
+                }
+            }
+        &#39;&#39;&#39;
+        )
+        params = {
+            &#34;id&#34;:mode
+        }
+        result = self.client.execute(mutation, variable_values=params)
+
+        return result
+
+    def get_current_mode(self):
+        &#34;Function that returns the name of the current mode&#34;
+
+        query = gql(&#39;&#39;&#39;
+            query mode {
+                mode{
+                    id
+                }
+            }
+        &#39;&#39;&#39;)
+        result = self.client.execute(query)
+
+        if result[&#34;mode&#34;] == None:
+            return None
+
+        return result[&#34;mode&#34;][&#34;id&#34;]
+
+    def get_current_environment(self):
+        &#34;Function that returns the name of the current environment&#34;
+
+        query = gql(&#39;&#39;&#39;
+            query current {
+                current{
+                    id
+                }
+            }
+        &#39;&#39;&#39;
+        )
+        result = self.client.execute(query)
+
+        if result[&#34;current&#34;]==None:
+            return None
+
+        return result[&#34;current&#34;][&#34;id&#34;]
+
+    def clear_screen(self):
+        &#34;Function that clears the screen and returns a boolean which indicates if it has been done or not&#34;
+
+        mutation = gql(&#39;&#39;&#39;
+            mutation cleanSpace {
+              cleanSpace
+            }
+        &#39;&#39;&#39;)
+
+        return self.client.execute(mutation)
+
+
+    @staticmethod
+    @lru_cache(maxsize=None)
+    def get_projects(url):
+        &#34;Function that returns a map with all available projects (id-&gt;name) and None if no environment is selected&#34;
+
+        sample_transport=RequestsHTTPTransport(
+            url=url,
+            verify=False,
+            retries=3,
+        )
+        client = Client(
+            transport=sample_transport,
+            fetch_schema_from_transport=True,
+        )
+        query = gql(&#39;&#39;&#39;
+            query current {
+                current{
+                    projects{
+                        id,name
+                    }
+                }
+            }
+        &#39;&#39;&#39;
+        )
+        result = client.execute(query)
+        if result[&#39;current&#39;] == None:
+            return None
+        map_projects = {}
+
+        for project in result[&#34;current&#34;][&#34;projects&#34;]:
+            map_projects[project[&#39;id&#39;]] = project[&#39;name&#39;]
+        client.close()
+
+        return map_projects
+
+    def load_project(self,name_project):
+        &#34;Function that loads a project&#34;
+
+        mutation = gql(&#39;&#39;&#39;
+            mutation loadProject($projectID: String!) {
+                loadProject(projectID:$projectID){
+                    id
+                }
+            }
+        &#39;&#39;&#39;
+        )
+
+        map_projects = GraphQL.get_projects(self.config[&#39;url&#39;])
+        id_project = &#39;&#39;
+        for id, name in map_projects.items():
+            if name.lower() == name_project.lower():
+                id_project = id
+        params = {
+            &#34;projectID&#34;:id_project
+        }
+
+        self.client.execute(mutation,variable_values=params)
+
+
+    def get_available_environments(self):
+        &#34;Function that returns all available environments&#34;
+
+        query = gql(&#39;&#39;&#39;
+            query environments {
+                environments{
+                    id
+                }
+            }
+        &#39;&#39;&#39;
+        )
+        result = self.client.execute(query)
+        list_environments = []
+        for environment in result[&#39;environments&#39;]:
+            list_environments.append(environment[&#39;id&#39;])
+
+        return list_environments
+
+
+    def get_current_am_User(self):
+        &#34;Function that gives the id of the username amUser&#34;
+
+        query = gql(&#39;&#39;&#39;
+            query environments {
+                environments{
+                    amUser
+                }
+            }
+        &#39;&#39;&#39;
+        )
+
+        result = self.client.execute(query)
+
+        return result[&#34;environments&#34;][0][&#34;amUser&#34;]
+
+
+    def project_has_video_controller(self,id):
+        &#34;Function that checks if a project has a video or not&#34;
+
+        query = gql(&#39;&#39;&#39;
+            query has_video_controller($id:String!) {
+                current {
+                    project(id:$id){
+                        videoController
+                    }
+                }
+            }
+        &#39;&#39;&#39;
+        )
+        params = {
+            &#34;id&#34;:id
+        }
+        result = self.client.execute(query,variable_values=params)
+
+        return result[&#34;current&#34;][&#34;project&#34;][&#34;videoController&#34;]
+
+
+    def project_has_html_controller(self,id):
+        &#34;Function that checks if a project has a html page or not&#34;
+
+        query = gql(&#39;&#39;&#39;
+            query has_html_controller($id:String!) {
+                current {
+                    project(id:$id){
+                        htmlController
+                    }
+                }
+            }
+        &#39;&#39;&#39;
+        )
+        params = {
+            &#34;id&#34;:id
+        }
+        result = self.client.execute(query,variable_values=params)
+
+        return result[&#34;current&#34;][&#34;project&#34;][&#34;htmlController&#34;]
+
+    def browser_actions(self,id):
+        &#34;Function that executes action on browsers&#34;
+        mutation = gql(&#39;&#39;&#39;
+            mutation executeHwAction($action:String!) {
+                executeHwAction(action:$action)
+            }
+        &#39;&#39;&#39;
+        )
+
+        params = {
+            &#34;action&#34;:id
+        }
+
+        return self.client.execute(mutation,variable_values=params)
+
+    def get_current_project(self):
+        &#34;Function that returns the current project&#34;
+
+        query = gql(&#39;&#39;&#39;
+            query getProject {
+                current{
+                    currentProject{id}
+                }
+            }
+        &#39;&#39;&#39;
+        )
+
+        result = self.client.execute(query)
+        if result[&#34;current&#34;][&#34;currentProject&#34;]==None:
+            return None
+        else:
+            return result[&#34;current&#34;][&#34;currentProject&#34;][&#34;id&#34;]
+
+    def controller_actions(self,id_action,id_app):
+        &#34;Function that executes controller actions&#34;
+
+        query = gql(&#39;&#39;&#39;
+            mutation executeAppAction($action:String!,$app:String!) {
+                executeAppAction(action:$action,app:$app)
+            }
+        &#39;&#39;&#39;
+        )
+        params={
+            &#34;action&#34;:id_action,
+            &#34;app&#34;:id_app
+        }
+
+        return self.client.execute(query,variable_values=params)
+
+    @staticmethod
+    @lru_cache(maxsize=None)
+    def get_tags(url):
+        &#34;Function that returns all the tags&#34;
+
+        sample_transport=RequestsHTTPTransport(
+            url=url,
+            verify=False,
+            retries=3,
+        )
+        client = Client(
+            transport=sample_transport,
+            fetch_schema_from_transport=True,
+        )
+        query = gql(&#39;&#39;&#39;
+            query getTags {
+                current{
+                   tags
+                }
+            }
+        &#39;&#39;&#39;
+        )
+        result = client.execute(query)
+
+        if result[&#39;current&#39;] == None:
+            return None
+        else:
+            return result[&#39;current&#39;][&#39;tags&#39;]
+
+    def search_by_tag(self,tag):
+        &#34;Function that returns demos names corresponding to a tag&#34;
+
+        query = gql(&#39;&#39;&#39;
+            query searchProjects($tag:String) {
+                current{
+                   projects(tag:$tag){name}
+                }
+            }
+        &#39;&#39;&#39;
+        )
+        params = {
+            &#34;tag&#34;:tag
+        }
+
+        return self.client.execute(query,variable_values=params)
+
+    def maps_images_control(self,action, param, app):
+        &#34;Function that zoom-in and zoom-out according to a delta level&#34;
+
+        mutation = gql(&#39;&#39;&#39;
+            mutation executeAppAction($action: String!, $param: String = &#34;&#34;, $app: String!) {
+                    executeAppAction(action:$action,param:$param,app:$app)
+            }
+        &#39;&#39;&#39;
+        )
+        params = {
+            &#34;action&#34;:action,
+            &#34;param&#34;:param,
+            &#34;app&#34;:app
+        }
+
+        result = self.client.execute(mutation,variable_values=params)
+
+        return result[&#39;executeAppAction&#39;]
+
+    def zoom_maps(self,delta_level):
+        &#34;Function to zoom-in or zoom-out maps&#34;
+        return self.maps_images_control(&#34;zoom&#34;,delta_level,&#34;OVE_APP_MAPS&#34;)
+
+    def zoom_images(self,delta_level):
+        &#34;Function to zoom-in or zoom-out images&#34;
+        return self.maps_images_control(&#34;zoom&#34;,delta_level,&#34;OVE_APP_IMAGES&#34;)
+
+    def move_maps(self,orientation):
+        &#34;Function to move in maps&#34;
+        return self.maps_images_control(&#34;move&#34;,orientation,&#34;OVE_APP_MAPS&#34;)
+
+    def move_images(self,orientation):
+        &#34;Function to move in maps&#34;
+        return self.maps_images_control(&#34;move&#34;,orientation,&#34;OVE_APP_IMAGES&#34;)
+
+if __name__ == &#39;__main__&#39;:
+    my_graphQL = GraphQL(&#39;../config/config.yml&#39;)</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="utils_graphql.GraphQL"><code class="flex name class">
+<span>class <span class="ident">GraphQL</span></span>
+<span>(</span><span>path)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Class managing all methods related to the GDO Controller with this characteristic :
+- its client</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class GraphQL:
+
+    &#34;&#34;&#34;Class managing all methods related to the GDO Controller with this characteristic :
+    - its client&#34;&#34;&#34;
+
+    def __init__(self,path):
+
+        self.config = parse_config(path)
+
+        sample_transport=RequestsHTTPTransport(
+            url=self.config[&#39;url&#39;],
+            verify=False,
+            retries=3,
+        )
+
+        self.client = Client(
+            transport=sample_transport,
+            fetch_schema_from_transport=True,
+        )
+
+
+    def open_environment(self,name_environment):
+        &#34;Function that opens the chosen environment&#34;
+
+        mutation = gql(&#39;&#39;&#39;
+            mutation changeEnvironment($id : String!) {
+                changeEnvironment(id:$id){
+                    id
+                }
+            }
+        &#39;&#39;&#39;)
+        params = {
+            &#34;id&#34;:name_environment
+        }
+        result = self.client.execute(mutation, variable_values=params)
+
+        return result
+
+    def login(self,username,password):
+        &#34;Function to log in to the GDO launcher&#34;
+
+        mutation = gql(&#39;&#39;&#39;
+            mutation login($username: String!, $password: String!) {
+            login(username:$username,password:$password)
+            }
+        &#39;&#39;&#39;)
+        params = {
+            &#34;username&#34;: username,
+            &#34;password&#34;: password
+        }
+        result = self.client.execute(mutation, variable_values=params)
+
+        return result
+
+    def environment_is_open(self):
+        &#34;Function to check if an environment is opened&#34;
+
+        query = gql(&#39;&#39;&#39;
+            query current {
+                current{
+                    id
+                }
+            }
+        &#39;&#39;&#39;
+        )
+        result = self.client.execute(query)
+        return result[&#34;current&#34;]!=None
+
+
+    def logout(self):
+        &#34;Function to log out&#34;
+
+        mutation = gql(&#39;&#39;&#39;
+            mutation logout {
+                logout
+            }
+        &#39;&#39;&#39;)
+        result = self.client.execute(mutation)
+        return result[&#39;logout&#39;]
+
+
+    def turn_on_gdo(self):
+        &#34;Function that truns on the GDO&#34;
+
+        mutation = gql(&#39;&#39;&#39;
+            mutation executePowerAction {
+                executePowerAction(action:&#34;on&#34;)
+            }
+        &#39;&#39;&#39;
+        )
+
+        return self.client.execute(mutation)
+
+    def turn_off_gdo(self):
+        &#34;Function that turns off the GDO&#34;
+
+        mutation = gql(&#39;&#39;&#39;
+            mutation executePowerAction {
+                executePowerAction(action:&#34;off&#34;)
+            }
+        &#39;&#39;&#39;
+        )
+
+        return self.client.execute(mutation)
+
+
+    def mode_is_selected(self):
+        &#34;Function that indicates if a mode is selected&#34;
+
+        query = gql(&#39;&#39;&#39;
+            query mode {
+                mode{
+                    id
+                }
+            }
+        &#39;&#39;&#39;)
+        result = self.client.execute(query)
+
+        return result[&#39;mode&#39;]!=None
+
+    def choose_mode(self,mode):
+        &#34;Function thar permits to choose a mode between section and cluster or to switch the mode&#34;
+
+        mutation = gql(&#39;&#39;&#39;
+            mutation changeMode($id : String!) {
+                changeMode(id:$id){
+                    id
+                }
+            }
+        &#39;&#39;&#39;
+        )
+        params = {
+            &#34;id&#34;:mode
+        }
+        result = self.client.execute(mutation, variable_values=params)
+
+        return result
+
+    def get_current_mode(self):
+        &#34;Function that returns the name of the current mode&#34;
+
+        query = gql(&#39;&#39;&#39;
+            query mode {
+                mode{
+                    id
+                }
+            }
+        &#39;&#39;&#39;)
+        result = self.client.execute(query)
+
+        if result[&#34;mode&#34;] == None:
+            return None
+
+        return result[&#34;mode&#34;][&#34;id&#34;]
+
+    def get_current_environment(self):
+        &#34;Function that returns the name of the current environment&#34;
+
+        query = gql(&#39;&#39;&#39;
+            query current {
+                current{
+                    id
+                }
+            }
+        &#39;&#39;&#39;
+        )
+        result = self.client.execute(query)
+
+        if result[&#34;current&#34;]==None:
+            return None
+
+        return result[&#34;current&#34;][&#34;id&#34;]
+
+    def clear_screen(self):
+        &#34;Function that clears the screen and returns a boolean which indicates if it has been done or not&#34;
+
+        mutation = gql(&#39;&#39;&#39;
+            mutation cleanSpace {
+              cleanSpace
+            }
+        &#39;&#39;&#39;)
+
+        return self.client.execute(mutation)
+
+
+    @staticmethod
+    @lru_cache(maxsize=None)
+    def get_projects(url):
+        &#34;Function that returns a map with all available projects (id-&gt;name) and None if no environment is selected&#34;
+
+        sample_transport=RequestsHTTPTransport(
+            url=url,
+            verify=False,
+            retries=3,
+        )
+        client = Client(
+            transport=sample_transport,
+            fetch_schema_from_transport=True,
+        )
+        query = gql(&#39;&#39;&#39;
+            query current {
+                current{
+                    projects{
+                        id,name
+                    }
+                }
+            }
+        &#39;&#39;&#39;
+        )
+        result = client.execute(query)
+        if result[&#39;current&#39;] == None:
+            return None
+        map_projects = {}
+
+        for project in result[&#34;current&#34;][&#34;projects&#34;]:
+            map_projects[project[&#39;id&#39;]] = project[&#39;name&#39;]
+        client.close()
+
+        return map_projects
+
+    def load_project(self,name_project):
+        &#34;Function that loads a project&#34;
+
+        mutation = gql(&#39;&#39;&#39;
+            mutation loadProject($projectID: String!) {
+                loadProject(projectID:$projectID){
+                    id
+                }
+            }
+        &#39;&#39;&#39;
+        )
+
+        map_projects = GraphQL.get_projects(self.config[&#39;url&#39;])
+        id_project = &#39;&#39;
+        for id, name in map_projects.items():
+            if name.lower() == name_project.lower():
+                id_project = id
+        params = {
+            &#34;projectID&#34;:id_project
+        }
+
+        self.client.execute(mutation,variable_values=params)
+
+
+    def get_available_environments(self):
+        &#34;Function that returns all available environments&#34;
+
+        query = gql(&#39;&#39;&#39;
+            query environments {
+                environments{
+                    id
+                }
+            }
+        &#39;&#39;&#39;
+        )
+        result = self.client.execute(query)
+        list_environments = []
+        for environment in result[&#39;environments&#39;]:
+            list_environments.append(environment[&#39;id&#39;])
+
+        return list_environments
+
+
+    def get_current_am_User(self):
+        &#34;Function that gives the id of the username amUser&#34;
+
+        query = gql(&#39;&#39;&#39;
+            query environments {
+                environments{
+                    amUser
+                }
+            }
+        &#39;&#39;&#39;
+        )
+
+        result = self.client.execute(query)
+
+        return result[&#34;environments&#34;][0][&#34;amUser&#34;]
+
+
+    def project_has_video_controller(self,id):
+        &#34;Function that checks if a project has a video or not&#34;
+
+        query = gql(&#39;&#39;&#39;
+            query has_video_controller($id:String!) {
+                current {
+                    project(id:$id){
+                        videoController
+                    }
+                }
+            }
+        &#39;&#39;&#39;
+        )
+        params = {
+            &#34;id&#34;:id
+        }
+        result = self.client.execute(query,variable_values=params)
+
+        return result[&#34;current&#34;][&#34;project&#34;][&#34;videoController&#34;]
+
+
+    def project_has_html_controller(self,id):
+        &#34;Function that checks if a project has a html page or not&#34;
+
+        query = gql(&#39;&#39;&#39;
+            query has_html_controller($id:String!) {
+                current {
+                    project(id:$id){
+                        htmlController
+                    }
+                }
+            }
+        &#39;&#39;&#39;
+        )
+        params = {
+            &#34;id&#34;:id
+        }
+        result = self.client.execute(query,variable_values=params)
+
+        return result[&#34;current&#34;][&#34;project&#34;][&#34;htmlController&#34;]
+
+    def browser_actions(self,id):
+        &#34;Function that executes action on browsers&#34;
+        mutation = gql(&#39;&#39;&#39;
+            mutation executeHwAction($action:String!) {
+                executeHwAction(action:$action)
+            }
+        &#39;&#39;&#39;
+        )
+
+        params = {
+            &#34;action&#34;:id
+        }
+
+        return self.client.execute(mutation,variable_values=params)
+
+    def get_current_project(self):
+        &#34;Function that returns the current project&#34;
+
+        query = gql(&#39;&#39;&#39;
+            query getProject {
+                current{
+                    currentProject{id}
+                }
+            }
+        &#39;&#39;&#39;
+        )
+
+        result = self.client.execute(query)
+        if result[&#34;current&#34;][&#34;currentProject&#34;]==None:
+            return None
+        else:
+            return result[&#34;current&#34;][&#34;currentProject&#34;][&#34;id&#34;]
+
+    def controller_actions(self,id_action,id_app):
+        &#34;Function that executes controller actions&#34;
+
+        query = gql(&#39;&#39;&#39;
+            mutation executeAppAction($action:String!,$app:String!) {
+                executeAppAction(action:$action,app:$app)
+            }
+        &#39;&#39;&#39;
+        )
+        params={
+            &#34;action&#34;:id_action,
+            &#34;app&#34;:id_app
+        }
+
+        return self.client.execute(query,variable_values=params)
+
+    @staticmethod
+    @lru_cache(maxsize=None)
+    def get_tags(url):
+        &#34;Function that returns all the tags&#34;
+
+        sample_transport=RequestsHTTPTransport(
+            url=url,
+            verify=False,
+            retries=3,
+        )
+        client = Client(
+            transport=sample_transport,
+            fetch_schema_from_transport=True,
+        )
+        query = gql(&#39;&#39;&#39;
+            query getTags {
+                current{
+                   tags
+                }
+            }
+        &#39;&#39;&#39;
+        )
+        result = client.execute(query)
+
+        if result[&#39;current&#39;] == None:
+            return None
+        else:
+            return result[&#39;current&#39;][&#39;tags&#39;]
+
+    def search_by_tag(self,tag):
+        &#34;Function that returns demos names corresponding to a tag&#34;
+
+        query = gql(&#39;&#39;&#39;
+            query searchProjects($tag:String) {
+                current{
+                   projects(tag:$tag){name}
+                }
+            }
+        &#39;&#39;&#39;
+        )
+        params = {
+            &#34;tag&#34;:tag
+        }
+
+        return self.client.execute(query,variable_values=params)
+
+    def maps_images_control(self,action, param, app):
+        &#34;Function that zoom-in and zoom-out according to a delta level&#34;
+
+        mutation = gql(&#39;&#39;&#39;
+            mutation executeAppAction($action: String!, $param: String = &#34;&#34;, $app: String!) {
+                    executeAppAction(action:$action,param:$param,app:$app)
+            }
+        &#39;&#39;&#39;
+        )
+        params = {
+            &#34;action&#34;:action,
+            &#34;param&#34;:param,
+            &#34;app&#34;:app
+        }
+
+        result = self.client.execute(mutation,variable_values=params)
+
+        return result[&#39;executeAppAction&#39;]
+
+    def zoom_maps(self,delta_level):
+        &#34;Function to zoom-in or zoom-out maps&#34;
+        return self.maps_images_control(&#34;zoom&#34;,delta_level,&#34;OVE_APP_MAPS&#34;)
+
+    def zoom_images(self,delta_level):
+        &#34;Function to zoom-in or zoom-out images&#34;
+        return self.maps_images_control(&#34;zoom&#34;,delta_level,&#34;OVE_APP_IMAGES&#34;)
+
+    def move_maps(self,orientation):
+        &#34;Function to move in maps&#34;
+        return self.maps_images_control(&#34;move&#34;,orientation,&#34;OVE_APP_MAPS&#34;)
+
+    def move_images(self,orientation):
+        &#34;Function to move in maps&#34;
+        return self.maps_images_control(&#34;move&#34;,orientation,&#34;OVE_APP_IMAGES&#34;)</code></pre>
+</details>
+<h3>Static methods</h3>
+<dl>
+<dt id="utils_graphql.GraphQL.get_projects"><code class="name flex">
+<span>def <span class="ident">get_projects</span></span>(<span>url)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that returns a map with all available projects (id-&gt;name) and None if no environment is selected</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod
+@lru_cache(maxsize=None)
+def get_projects(url):
+    &#34;Function that returns a map with all available projects (id-&gt;name) and None if no environment is selected&#34;
+
+    sample_transport=RequestsHTTPTransport(
+        url=url,
+        verify=False,
+        retries=3,
+    )
+    client = Client(
+        transport=sample_transport,
+        fetch_schema_from_transport=True,
+    )
+    query = gql(&#39;&#39;&#39;
+        query current {
+            current{
+                projects{
+                    id,name
+                }
+            }
+        }
+    &#39;&#39;&#39;
+    )
+    result = client.execute(query)
+    if result[&#39;current&#39;] == None:
+        return None
+    map_projects = {}
+
+    for project in result[&#34;current&#34;][&#34;projects&#34;]:
+        map_projects[project[&#39;id&#39;]] = project[&#39;name&#39;]
+    client.close()
+
+    return map_projects</code></pre>
+</details>
+</dd>
+<dt id="utils_graphql.GraphQL.get_tags"><code class="name flex">
+<span>def <span class="ident">get_tags</span></span>(<span>url)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that returns all the tags</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@staticmethod
+@lru_cache(maxsize=None)
+def get_tags(url):
+    &#34;Function that returns all the tags&#34;
+
+    sample_transport=RequestsHTTPTransport(
+        url=url,
+        verify=False,
+        retries=3,
+    )
+    client = Client(
+        transport=sample_transport,
+        fetch_schema_from_transport=True,
+    )
+    query = gql(&#39;&#39;&#39;
+        query getTags {
+            current{
+               tags
+            }
+        }
+    &#39;&#39;&#39;
+    )
+    result = client.execute(query)
+
+    if result[&#39;current&#39;] == None:
+        return None
+    else:
+        return result[&#39;current&#39;][&#39;tags&#39;]</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="utils_graphql.GraphQL.browser_actions"><code class="name flex">
+<span>def <span class="ident">browser_actions</span></span>(<span>self, id)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that executes action on browsers</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def browser_actions(self,id):
+    &#34;Function that executes action on browsers&#34;
+    mutation = gql(&#39;&#39;&#39;
+        mutation executeHwAction($action:String!) {
+            executeHwAction(action:$action)
+        }
+    &#39;&#39;&#39;
+    )
+
+    params = {
+        &#34;action&#34;:id
+    }
+
+    return self.client.execute(mutation,variable_values=params)</code></pre>
+</details>
+</dd>
+<dt id="utils_graphql.GraphQL.choose_mode"><code class="name flex">
+<span>def <span class="ident">choose_mode</span></span>(<span>self, mode)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function thar permits to choose a mode between section and cluster or to switch the mode</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def choose_mode(self,mode):
+    &#34;Function thar permits to choose a mode between section and cluster or to switch the mode&#34;
+
+    mutation = gql(&#39;&#39;&#39;
+        mutation changeMode($id : String!) {
+            changeMode(id:$id){
+                id
+            }
+        }
+    &#39;&#39;&#39;
+    )
+    params = {
+        &#34;id&#34;:mode
+    }
+    result = self.client.execute(mutation, variable_values=params)
+
+    return result</code></pre>
+</details>
+</dd>
+<dt id="utils_graphql.GraphQL.clear_screen"><code class="name flex">
+<span>def <span class="ident">clear_screen</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that clears the screen and returns a boolean which indicates if it has been done or not</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def clear_screen(self):
+    &#34;Function that clears the screen and returns a boolean which indicates if it has been done or not&#34;
+
+    mutation = gql(&#39;&#39;&#39;
+        mutation cleanSpace {
+          cleanSpace
+        }
+    &#39;&#39;&#39;)
+
+    return self.client.execute(mutation)</code></pre>
+</details>
+</dd>
+<dt id="utils_graphql.GraphQL.controller_actions"><code class="name flex">
+<span>def <span class="ident">controller_actions</span></span>(<span>self, id_action, id_app)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that executes controller actions</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def controller_actions(self,id_action,id_app):
+    &#34;Function that executes controller actions&#34;
+
+    query = gql(&#39;&#39;&#39;
+        mutation executeAppAction($action:String!,$app:String!) {
+            executeAppAction(action:$action,app:$app)
+        }
+    &#39;&#39;&#39;
+    )
+    params={
+        &#34;action&#34;:id_action,
+        &#34;app&#34;:id_app
+    }
+
+    return self.client.execute(query,variable_values=params)</code></pre>
+</details>
+</dd>
+<dt id="utils_graphql.GraphQL.environment_is_open"><code class="name flex">
+<span>def <span class="ident">environment_is_open</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function to check if an environment is opened</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def environment_is_open(self):
+    &#34;Function to check if an environment is opened&#34;
+
+    query = gql(&#39;&#39;&#39;
+        query current {
+            current{
+                id
+            }
+        }
+    &#39;&#39;&#39;
+    )
+    result = self.client.execute(query)
+    return result[&#34;current&#34;]!=None</code></pre>
+</details>
+</dd>
+<dt id="utils_graphql.GraphQL.get_available_environments"><code class="name flex">
+<span>def <span class="ident">get_available_environments</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that returns all available environments</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_available_environments(self):
+    &#34;Function that returns all available environments&#34;
+
+    query = gql(&#39;&#39;&#39;
+        query environments {
+            environments{
+                id
+            }
+        }
+    &#39;&#39;&#39;
+    )
+    result = self.client.execute(query)
+    list_environments = []
+    for environment in result[&#39;environments&#39;]:
+        list_environments.append(environment[&#39;id&#39;])
+
+    return list_environments</code></pre>
+</details>
+</dd>
+<dt id="utils_graphql.GraphQL.get_current_am_User"><code class="name flex">
+<span>def <span class="ident">get_current_am_User</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that gives the id of the username amUser</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_current_am_User(self):
+    &#34;Function that gives the id of the username amUser&#34;
+
+    query = gql(&#39;&#39;&#39;
+        query environments {
+            environments{
+                amUser
+            }
+        }
+    &#39;&#39;&#39;
+    )
+
+    result = self.client.execute(query)
+
+    return result[&#34;environments&#34;][0][&#34;amUser&#34;]</code></pre>
+</details>
+</dd>
+<dt id="utils_graphql.GraphQL.get_current_environment"><code class="name flex">
+<span>def <span class="ident">get_current_environment</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that returns the name of the current environment</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_current_environment(self):
+    &#34;Function that returns the name of the current environment&#34;
+
+    query = gql(&#39;&#39;&#39;
+        query current {
+            current{
+                id
+            }
+        }
+    &#39;&#39;&#39;
+    )
+    result = self.client.execute(query)
+
+    if result[&#34;current&#34;]==None:
+        return None
+
+    return result[&#34;current&#34;][&#34;id&#34;]</code></pre>
+</details>
+</dd>
+<dt id="utils_graphql.GraphQL.get_current_mode"><code class="name flex">
+<span>def <span class="ident">get_current_mode</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that returns the name of the current mode</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_current_mode(self):
+    &#34;Function that returns the name of the current mode&#34;
+
+    query = gql(&#39;&#39;&#39;
+        query mode {
+            mode{
+                id
+            }
+        }
+    &#39;&#39;&#39;)
+    result = self.client.execute(query)
+
+    if result[&#34;mode&#34;] == None:
+        return None
+
+    return result[&#34;mode&#34;][&#34;id&#34;]</code></pre>
+</details>
+</dd>
+<dt id="utils_graphql.GraphQL.get_current_project"><code class="name flex">
+<span>def <span class="ident">get_current_project</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that returns the current project</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_current_project(self):
+    &#34;Function that returns the current project&#34;
+
+    query = gql(&#39;&#39;&#39;
+        query getProject {
+            current{
+                currentProject{id}
+            }
+        }
+    &#39;&#39;&#39;
+    )
+
+    result = self.client.execute(query)
+    if result[&#34;current&#34;][&#34;currentProject&#34;]==None:
+        return None
+    else:
+        return result[&#34;current&#34;][&#34;currentProject&#34;][&#34;id&#34;]</code></pre>
+</details>
+</dd>
+<dt id="utils_graphql.GraphQL.load_project"><code class="name flex">
+<span>def <span class="ident">load_project</span></span>(<span>self, name_project)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that loads a project</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def load_project(self,name_project):
+    &#34;Function that loads a project&#34;
+
+    mutation = gql(&#39;&#39;&#39;
+        mutation loadProject($projectID: String!) {
+            loadProject(projectID:$projectID){
+                id
+            }
+        }
+    &#39;&#39;&#39;
+    )
+
+    map_projects = GraphQL.get_projects(self.config[&#39;url&#39;])
+    id_project = &#39;&#39;
+    for id, name in map_projects.items():
+        if name.lower() == name_project.lower():
+            id_project = id
+    params = {
+        &#34;projectID&#34;:id_project
+    }
+
+    self.client.execute(mutation,variable_values=params)</code></pre>
+</details>
+</dd>
+<dt id="utils_graphql.GraphQL.login"><code class="name flex">
+<span>def <span class="ident">login</span></span>(<span>self, username, password)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function to log in to the GDO launcher</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def login(self,username,password):
+    &#34;Function to log in to the GDO launcher&#34;
+
+    mutation = gql(&#39;&#39;&#39;
+        mutation login($username: String!, $password: String!) {
+        login(username:$username,password:$password)
+        }
+    &#39;&#39;&#39;)
+    params = {
+        &#34;username&#34;: username,
+        &#34;password&#34;: password
+    }
+    result = self.client.execute(mutation, variable_values=params)
+
+    return result</code></pre>
+</details>
+</dd>
+<dt id="utils_graphql.GraphQL.logout"><code class="name flex">
+<span>def <span class="ident">logout</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function to log out</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def logout(self):
+    &#34;Function to log out&#34;
+
+    mutation = gql(&#39;&#39;&#39;
+        mutation logout {
+            logout
+        }
+    &#39;&#39;&#39;)
+    result = self.client.execute(mutation)
+    return result[&#39;logout&#39;]</code></pre>
+</details>
+</dd>
+<dt id="utils_graphql.GraphQL.maps_images_control"><code class="name flex">
+<span>def <span class="ident">maps_images_control</span></span>(<span>self, action, param, app)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that zoom-in and zoom-out according to a delta level</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def maps_images_control(self,action, param, app):
+    &#34;Function that zoom-in and zoom-out according to a delta level&#34;
+
+    mutation = gql(&#39;&#39;&#39;
+        mutation executeAppAction($action: String!, $param: String = &#34;&#34;, $app: String!) {
+                executeAppAction(action:$action,param:$param,app:$app)
+        }
+    &#39;&#39;&#39;
+    )
+    params = {
+        &#34;action&#34;:action,
+        &#34;param&#34;:param,
+        &#34;app&#34;:app
+    }
+
+    result = self.client.execute(mutation,variable_values=params)
+
+    return result[&#39;executeAppAction&#39;]</code></pre>
+</details>
+</dd>
+<dt id="utils_graphql.GraphQL.mode_is_selected"><code class="name flex">
+<span>def <span class="ident">mode_is_selected</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that indicates if a mode is selected</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def mode_is_selected(self):
+    &#34;Function that indicates if a mode is selected&#34;
+
+    query = gql(&#39;&#39;&#39;
+        query mode {
+            mode{
+                id
+            }
+        }
+    &#39;&#39;&#39;)
+    result = self.client.execute(query)
+
+    return result[&#39;mode&#39;]!=None</code></pre>
+</details>
+</dd>
+<dt id="utils_graphql.GraphQL.move_images"><code class="name flex">
+<span>def <span class="ident">move_images</span></span>(<span>self, orientation)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function to move in maps</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def move_images(self,orientation):
+    &#34;Function to move in maps&#34;
+    return self.maps_images_control(&#34;move&#34;,orientation,&#34;OVE_APP_IMAGES&#34;)</code></pre>
+</details>
+</dd>
+<dt id="utils_graphql.GraphQL.move_maps"><code class="name flex">
+<span>def <span class="ident">move_maps</span></span>(<span>self, orientation)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function to move in maps</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def move_maps(self,orientation):
+    &#34;Function to move in maps&#34;
+    return self.maps_images_control(&#34;move&#34;,orientation,&#34;OVE_APP_MAPS&#34;)</code></pre>
+</details>
+</dd>
+<dt id="utils_graphql.GraphQL.open_environment"><code class="name flex">
+<span>def <span class="ident">open_environment</span></span>(<span>self, name_environment)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that opens the chosen environment</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def open_environment(self,name_environment):
+    &#34;Function that opens the chosen environment&#34;
+
+    mutation = gql(&#39;&#39;&#39;
+        mutation changeEnvironment($id : String!) {
+            changeEnvironment(id:$id){
+                id
+            }
+        }
+    &#39;&#39;&#39;)
+    params = {
+        &#34;id&#34;:name_environment
+    }
+    result = self.client.execute(mutation, variable_values=params)
+
+    return result</code></pre>
+</details>
+</dd>
+<dt id="utils_graphql.GraphQL.project_has_html_controller"><code class="name flex">
+<span>def <span class="ident">project_has_html_controller</span></span>(<span>self, id)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that checks if a project has a html page or not</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def project_has_html_controller(self,id):
+    &#34;Function that checks if a project has a html page or not&#34;
+
+    query = gql(&#39;&#39;&#39;
+        query has_html_controller($id:String!) {
+            current {
+                project(id:$id){
+                    htmlController
+                }
+            }
+        }
+    &#39;&#39;&#39;
+    )
+    params = {
+        &#34;id&#34;:id
+    }
+    result = self.client.execute(query,variable_values=params)
+
+    return result[&#34;current&#34;][&#34;project&#34;][&#34;htmlController&#34;]</code></pre>
+</details>
+</dd>
+<dt id="utils_graphql.GraphQL.project_has_video_controller"><code class="name flex">
+<span>def <span class="ident">project_has_video_controller</span></span>(<span>self, id)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that checks if a project has a video or not</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def project_has_video_controller(self,id):
+    &#34;Function that checks if a project has a video or not&#34;
+
+    query = gql(&#39;&#39;&#39;
+        query has_video_controller($id:String!) {
+            current {
+                project(id:$id){
+                    videoController
+                }
+            }
+        }
+    &#39;&#39;&#39;
+    )
+    params = {
+        &#34;id&#34;:id
+    }
+    result = self.client.execute(query,variable_values=params)
+
+    return result[&#34;current&#34;][&#34;project&#34;][&#34;videoController&#34;]</code></pre>
+</details>
+</dd>
+<dt id="utils_graphql.GraphQL.search_by_tag"><code class="name flex">
+<span>def <span class="ident">search_by_tag</span></span>(<span>self, tag)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that returns demos names corresponding to a tag</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def search_by_tag(self,tag):
+    &#34;Function that returns demos names corresponding to a tag&#34;
+
+    query = gql(&#39;&#39;&#39;
+        query searchProjects($tag:String) {
+            current{
+               projects(tag:$tag){name}
+            }
+        }
+    &#39;&#39;&#39;
+    )
+    params = {
+        &#34;tag&#34;:tag
+    }
+
+    return self.client.execute(query,variable_values=params)</code></pre>
+</details>
+</dd>
+<dt id="utils_graphql.GraphQL.turn_off_gdo"><code class="name flex">
+<span>def <span class="ident">turn_off_gdo</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that turns off the GDO</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def turn_off_gdo(self):
+    &#34;Function that turns off the GDO&#34;
+
+    mutation = gql(&#39;&#39;&#39;
+        mutation executePowerAction {
+            executePowerAction(action:&#34;off&#34;)
+        }
+    &#39;&#39;&#39;
+    )
+
+    return self.client.execute(mutation)</code></pre>
+</details>
+</dd>
+<dt id="utils_graphql.GraphQL.turn_on_gdo"><code class="name flex">
+<span>def <span class="ident">turn_on_gdo</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that truns on the GDO</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def turn_on_gdo(self):
+    &#34;Function that truns on the GDO&#34;
+
+    mutation = gql(&#39;&#39;&#39;
+        mutation executePowerAction {
+            executePowerAction(action:&#34;on&#34;)
+        }
+    &#39;&#39;&#39;
+    )
+
+    return self.client.execute(mutation)</code></pre>
+</details>
+</dd>
+<dt id="utils_graphql.GraphQL.zoom_images"><code class="name flex">
+<span>def <span class="ident">zoom_images</span></span>(<span>self, delta_level)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function to zoom-in or zoom-out images</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def zoom_images(self,delta_level):
+    &#34;Function to zoom-in or zoom-out images&#34;
+    return self.maps_images_control(&#34;zoom&#34;,delta_level,&#34;OVE_APP_IMAGES&#34;)</code></pre>
+</details>
+</dd>
+<dt id="utils_graphql.GraphQL.zoom_maps"><code class="name flex">
+<span>def <span class="ident">zoom_maps</span></span>(<span>self, delta_level)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function to zoom-in or zoom-out maps</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def zoom_maps(self,delta_level):
+    &#34;Function to zoom-in or zoom-out maps&#34;
+    return self.maps_images_control(&#34;zoom&#34;,delta_level,&#34;OVE_APP_MAPS&#34;)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="utils_graphql.GraphQL" href="#utils_graphql.GraphQL">GraphQL</a></code></h4>
+<ul class="">
+<li><code><a title="utils_graphql.GraphQL.browser_actions" href="#utils_graphql.GraphQL.browser_actions">browser_actions</a></code></li>
+<li><code><a title="utils_graphql.GraphQL.choose_mode" href="#utils_graphql.GraphQL.choose_mode">choose_mode</a></code></li>
+<li><code><a title="utils_graphql.GraphQL.clear_screen" href="#utils_graphql.GraphQL.clear_screen">clear_screen</a></code></li>
+<li><code><a title="utils_graphql.GraphQL.controller_actions" href="#utils_graphql.GraphQL.controller_actions">controller_actions</a></code></li>
+<li><code><a title="utils_graphql.GraphQL.environment_is_open" href="#utils_graphql.GraphQL.environment_is_open">environment_is_open</a></code></li>
+<li><code><a title="utils_graphql.GraphQL.get_available_environments" href="#utils_graphql.GraphQL.get_available_environments">get_available_environments</a></code></li>
+<li><code><a title="utils_graphql.GraphQL.get_current_am_User" href="#utils_graphql.GraphQL.get_current_am_User">get_current_am_User</a></code></li>
+<li><code><a title="utils_graphql.GraphQL.get_current_environment" href="#utils_graphql.GraphQL.get_current_environment">get_current_environment</a></code></li>
+<li><code><a title="utils_graphql.GraphQL.get_current_mode" href="#utils_graphql.GraphQL.get_current_mode">get_current_mode</a></code></li>
+<li><code><a title="utils_graphql.GraphQL.get_current_project" href="#utils_graphql.GraphQL.get_current_project">get_current_project</a></code></li>
+<li><code><a title="utils_graphql.GraphQL.get_projects" href="#utils_graphql.GraphQL.get_projects">get_projects</a></code></li>
+<li><code><a title="utils_graphql.GraphQL.get_tags" href="#utils_graphql.GraphQL.get_tags">get_tags</a></code></li>
+<li><code><a title="utils_graphql.GraphQL.load_project" href="#utils_graphql.GraphQL.load_project">load_project</a></code></li>
+<li><code><a title="utils_graphql.GraphQL.login" href="#utils_graphql.GraphQL.login">login</a></code></li>
+<li><code><a title="utils_graphql.GraphQL.logout" href="#utils_graphql.GraphQL.logout">logout</a></code></li>
+<li><code><a title="utils_graphql.GraphQL.maps_images_control" href="#utils_graphql.GraphQL.maps_images_control">maps_images_control</a></code></li>
+<li><code><a title="utils_graphql.GraphQL.mode_is_selected" href="#utils_graphql.GraphQL.mode_is_selected">mode_is_selected</a></code></li>
+<li><code><a title="utils_graphql.GraphQL.move_images" href="#utils_graphql.GraphQL.move_images">move_images</a></code></li>
+<li><code><a title="utils_graphql.GraphQL.move_maps" href="#utils_graphql.GraphQL.move_maps">move_maps</a></code></li>
+<li><code><a title="utils_graphql.GraphQL.open_environment" href="#utils_graphql.GraphQL.open_environment">open_environment</a></code></li>
+<li><code><a title="utils_graphql.GraphQL.project_has_html_controller" href="#utils_graphql.GraphQL.project_has_html_controller">project_has_html_controller</a></code></li>
+<li><code><a title="utils_graphql.GraphQL.project_has_video_controller" href="#utils_graphql.GraphQL.project_has_video_controller">project_has_video_controller</a></code></li>
+<li><code><a title="utils_graphql.GraphQL.search_by_tag" href="#utils_graphql.GraphQL.search_by_tag">search_by_tag</a></code></li>
+<li><code><a title="utils_graphql.GraphQL.turn_off_gdo" href="#utils_graphql.GraphQL.turn_off_gdo">turn_off_gdo</a></code></li>
+<li><code><a title="utils_graphql.GraphQL.turn_on_gdo" href="#utils_graphql.GraphQL.turn_on_gdo">turn_on_gdo</a></code></li>
+<li><code><a title="utils_graphql.GraphQL.zoom_images" href="#utils_graphql.GraphQL.zoom_images">zoom_images</a></code></li>
+<li><code><a title="utils_graphql.GraphQL.zoom_maps" href="#utils_graphql.GraphQL.zoom_maps">zoom_maps</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.8.4</a>.</p>
+</footer>
+</body>
+</html>

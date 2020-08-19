@@ -1,0 +1,3091 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.8.4" />
+<title>actions API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js" integrity="sha256-eOgo0OtLL4cdq7RdwRUiGKLX9XsIJ7nGhWEKbohmVAQ=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>actions</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python"># This files contains your custom actions which can be used to run
+# custom Python code.
+#
+# See this guide on how to implement these action:
+# https://rasa.com/docs/rasa/core/actions/#custom-actions/
+
+
+from typing import Any, Text, Dict, List
+
+from rasa_sdk import Action, Tracker
+from rasa_sdk.executor import CollectingDispatcher
+from rasa_sdk.events import SlotSet, ReminderScheduled
+# import datetime
+# from datetime import timedelta
+from functools import lru_cache
+from utilities.utils_graphql import GraphQL
+from utilities.utils_actions import *
+
+try:
+    print(&#39;Connection to graphql&#39;)
+    my_graphQL = GraphQL(&#39;./config/config.yml&#39;)
+except Exception as e:
+    raise e
+    print(e)
+
+class ActionOpen(Action):
+    &#34;&#34;&#34;A class used to open demos&#34;&#34;&#34;
+
+    def name(self) -&gt; Text:
+        &#34;&#34;&#34;Function that returns the name of the action
+
+        Returns:
+        Text:The name of the action&#34;&#34;&#34;
+
+        return &#34;action_open&#34;
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -&gt; List[Dict[Text, Any]]:
+        &#34;&#34;&#34;Function that manages the robot&#39;s behavior for the &#39;&#39;open&#39;&#39;action.
+
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
+
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+
+        response = action_launch_project(my_graphQL,tracker.get_slot(&#39;demo&#39;))
+
+        print(&#39;Trying to launch a project&#39;)
+        if response[&#39;success&#39;]:
+            dispatcher.utter_message(text=response[&#39;message&#39;])
+            print(&#39;Success :)&#39;)
+            if not response[&#39;list&#39;]:
+                return [SlotSet(&#39;demo&#39;,response[&#39;project&#39;]),SlotSet(&#39;read_list&#39;,False),SlotSet(&#39;restart&#39;,False)]
+            else:
+                return [SlotSet(&#39;read_list&#39;,True),SlotSet(&#39;restart&#39;,False)]
+        else:
+            dispatcher.utter_message(text=&#34;I&#39;m sorry, something went wrong. {}&#34;.format(response[&#39;message&#39;]))
+            dispatcher.utter_message(text=&#34;Should I try again ?&#34;)
+            print(response[&#39;message&#39;])
+            return [SlotSet(&#39;read_list&#39;,False),SlotSet(&#39;restart&#39;,True)]
+
+
+class ActionListDemos(Action):
+    &#34;&#34;&#34;A class used to list available demos&#34;&#34;&#34;
+
+    def name(self) -&gt; Text:
+        &#34;&#34;&#34;Function that returns the name of the action
+
+        Returns:
+        Text:The name of the action&#34;&#34;&#34;
+
+        return &#34;action_list_demos&#34;
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -&gt; List[Dict[Text, Any]]:
+        &#34;&#34;&#34;Function that manages the robot&#39;s behavior to display available demos.
+
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
+
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+
+        robot_last_message = &#34;&#34;
+        if len(tracker.events) &gt;= 3:
+            robot_last_message = tracker.events[-3].get(&#39;text&#39;)
+
+        print(&#34;Trying to get available demos...&#34;)
+        response = action_list_demos(my_graphQL,robot_last_message)
+        if response[&#39;success&#39;]:
+            dispatcher.utter_message(text=response[&#39;message&#39;])
+            print(&#34;Success :)&#34;)
+        else:
+            dispatcher.utter_message(text=&#34;Something went wrong. {}&#34;.format(response[&#39;message&#39;]))
+            dispatcher.utter_message(text=&#34;Should I try again ?&#34;)
+            print(response[&#39;message&#39;])
+
+        return []
+
+
+class ActionShutDown(Action):
+    &#34;&#34;&#34;A class used to shutdown the GDO&#34;&#34;&#34;
+
+    def name(self) -&gt; Text:
+        &#34;&#34;&#34;Function that returns the name of the action
+
+        Returns:
+        Text:The name of the action&#34;&#34;&#34;
+
+        return &#34;action_shutdown&#34;
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -&gt; List[Dict[Text, Any]]:
+        &#34;&#34;&#34;Function that manages the robot&#39;s behavior to shutdown the GDO
+
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
+
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+        response = action_turn_off_gdo(my_graphQL)
+
+        print(&#34;Trying to shutdown the GDO...&#34;)
+        if response[&#39;success&#39;] and response[&#39;executePowerAction&#39;]==&#34;off&#34;:
+            dispatcher.utter_message(text=&#34;The Global Data Observatory is off&#34;)
+            print(&#34;The GDO is off :)&#34;)
+        elif not response[&#39;success&#39;]:
+            dispatcher.utter_message(text=&#34;Something went wrong. {}&#34;.format(response[&#39;message&#39;]))
+            dispatcher.utter_message(text=&#34;Do you want me to try again ?&#34;)
+            print(response[&#34;message&#34;])
+        else:
+            dispatcher.utter_message(text=&#34;Something went wrong. Do you want me to try again ?&#34;)
+            print(&#34;Fail :(&#34;)
+
+        return []
+
+class ActionTurnOnGDO(Action):
+    &#34;&#34;&#34;A class used to turn on the GDO&#34;&#34;&#34;
+
+    def name(self) -&gt; Text:
+        &#34;&#34;&#34;Function that returns the name of the action
+
+        Returns:
+        Text:The name of the action&#34;&#34;&#34;
+
+        return &#34;action_turn_on_gdo&#34;
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -&gt; List[Dict[Text, Any]]:
+        &#34;&#34;&#34;Function that manages the robot&#39;s behavior to turn on the GDO.
+
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
+
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+        response = action_turn_on_gdo(my_graphQL)
+
+        print(&#34;Trying to turn on the GDO...&#34;)
+        if response[&#39;success&#39;] and response[&#39;executePowerAction&#39;]==&#34;on&#34;:
+            dispatcher.utter_message(text=&#34;The Global Data Observatory is on&#34;)
+            print(&#34;The GDO is on :)&#34;)
+        elif not response[&#39;success&#39;]:
+            dispatcher.utter_message(text=&#34;Something went wrong. {}&#34;.format(response[&#39;message&#39;]))
+            dispatcher.utter_message(text=&#34;Do you want me to try again ?&#34;)
+            print(response[&#34;message&#34;])
+        else:
+            dispatcher.utter_message(text=&#34;Something went wrong. Do you want me to try again ?&#34;)
+            print(&#34;Fail :(&#34;)
+
+        return []
+
+class ActionControl(Action):
+    &#34;&#34;&#34;A class used to execute a controller action&#34;&#34;&#34;
+
+    def name(self) -&gt; Text:
+        &#34;&#34;&#34;Function that returns the name of the action
+
+        Returns:
+        Text:The name of the action&#34;&#34;&#34;
+
+        return &#34;action_control&#34;
+
+    def process_response(self, dispatcher: CollectingDispatcher, message_success: str, message_fail: str, response):
+        if response[&#39;success&#39;] == True and response[&#39;executeAppAction&#39;]==&#39;done&#39;:
+            dispatcher.utter_message(message_success)
+            print(&#34;Done ! :)&#34;)
+        elif response[&#39;success&#39;] == True:
+            dispatcher.utter_message(message_fail)
+            print(&#34;The action has not been executed :(&#34;)
+        else:
+            dispatcher.utter_message(&#34;I&#39;m sorry. Something went wrong.&#34;)
+            dispatcher.utter_message(response[&#39;message&#39;])
+            print(response[&#39;message&#39;])
+
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -&gt; List[Dict[Text, Any]]:
+        &#34;&#34;&#34;Function that manages the robot&#39;s behavior to execute a control command.
+
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
+
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+        control = tracker.get_slot(&#34;control_command&#34;)
+
+        #If the control command is not recognized, we inform the user
+        if control == None:
+            dispatcher.utter_message(&#34;Sorry I didn&#39;t get the command&#34;)
+            return [SlotSet(&#34;control_command&#34;,None)]
+        else:
+            control = control.lower()
+
+        if control==&#34;play&#34;:
+            print(&#34;Trying to play the video/audio...&#34;)
+            response = action_play(my_graphQL)
+            self.process_response(dispatcher,&#34;I&#39;m playing the video&#34;,&#34;I didn&#39;t start playing the video. Try again please&#34;,response)
+        elif control==&#34;pause&#34;:
+            print(&#34;Trying to pause the video/audio...&#34;)
+            response = action_pause(my_graphQL)
+            self.process_response(dispatcher,&#34;I paused the video&#34;,&#34;I didn&#39;t pause the video. Try again please&#34;,response)
+        elif control==&#34;stop&#34;:
+            print(&#34;Trying to stop the video/audio...&#34;)
+            response = action_stop(my_graphQL)
+            self.process_response(dispatcher,&#34;I stopped the video&#34;,&#34;I didn&#39;t stop the video. Try again please&#34;,response)
+        elif control==&#34;reset&#34;:
+            print(&#34;Trying to reset the video/audio...&#34;)
+            response = action_reset(my_graphQL)
+            self.process_response(dispatcher,&#34;I reset the video&#34;,&#34;I didn&#39;t reset the video. Try again please&#34;,response)
+        elif control==&#34;play loop&#34;:
+            print(&#34;Trying to play loop the video/audio...&#34;)
+            response = action_play_loop(my_graphQL)
+            self.process_response(dispatcher,&#34;I played loop the video&#34;,&#34;I didn&#39;t play loop the video. Try again please&#34;,response)
+        elif control==&#34;refresh&#34;:
+            print(&#34;Trying to refresh the webpage...&#34;)
+            response = action_refresh(my_graphQL)
+            self.process_response(dispatcher,&#34;I refreshed the page&#34;,&#34;I didn&#39;t refresh the page. Try again please&#34;,response)
+
+        return [SlotSet(&#34;control_command&#34;,None)]
+
+class ActionSearch(Action):
+    &#34;&#34;&#34;A class used to search a demo&#34;&#34;&#34;
+
+    def name(self) -&gt; Text:
+        &#34;&#34;&#34;Function that returns the name of the action
+
+        Returns:
+        Text:The name of the action&#34;&#34;&#34;
+
+        return &#34;action_search&#34;
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -&gt; List[Dict[Text, Any]]:
+        &#34;&#34;&#34;Function that manages the robot&#39;s behavior to search a demo.
+
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
+
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+        tag = tracker.get_slot(&#34;tag&#34;)
+        key_word = tracker.get_slot(&#34;demo&#34;)
+        search_mode = tracker.get_slot(&#34;search_mode&#34;)
+
+        if search_mode == None:
+            search_mode = &#34;&#34;
+
+
+        result = action_search(my_graphQL,key_word,tag,search_mode)
+        print(&#34;Trying to execute search action...&#34;)
+
+        if result[&#39;success&#39;]:
+            dispatcher.utter_message(text=result[&#39;message&#39;])
+            print(&#34;Success :)&#34;)
+        else:
+            dispatcher.utter_message(text=&#34;I&#39;m sorry, something went wrong. {}&#34;.format(result[&#39;message&#39;]))
+            dispatcher.utter_message(text=&#34;Do you want me to try again ?&#34;)
+            print(&#39;Fail :(&#39;)
+            return []
+
+        return [SlotSet(&#34;demo&#34;,None),SlotSet(&#34;tag&#34;,None),SlotSet(&#34;search_mode&#34;,None)]
+
+
+class ActionClearSpace(Action):
+    &#34;&#34;&#34;A class used to clear the space&#34;&#34;&#34;
+
+    def name(self) -&gt; Text:
+        &#34;&#34;&#34;Function that returns the name of the action
+
+        Returns:
+        Text:The name of the action&#34;&#34;&#34;
+
+        return &#34;action_clear_space&#34;
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -&gt; List[Dict[Text, Any]]:
+        &#34;&#34;&#34;Function that manages the robot&#39;s behavior to clear the space.
+
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
+
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+        response = action_clear_space(my_graphQL)
+
+        print(&#34;Trying to clear the space...&#34;)
+        if response[&#39;success&#39;]:
+            dispatcher.utter_message(&#34;The space is clear&#34;)
+            print(&#34;Clear space done ;)&#34;)
+        else:
+            dispatcher.utter_message(text=&#34;I&#39;m sorry, something went wrong. I can&#39;t clear the screens. {}&#34;.format(response[&#39;message&#39;]))
+            print(response[&#39;message&#39;])
+
+        return []
+
+class ActionSwitchMode(Action):
+    &#34;&#34;&#34;A class used to switch the mode&#34;&#34;&#34;
+
+    def name(self) -&gt; Text:
+        &#34;&#34;&#34;Function that returns the name of the action
+
+        Returns:
+        Text:The name of the action&#34;&#34;&#34;
+
+        return &#34;action_switch_modes&#34;
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -&gt; List[Dict[Text, Any]]:
+        &#34;&#34;&#34;Function that manages the robot&#39;s behavior to switch the mode.
+
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
+
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+        response = action_switch_mode(my_graphQL,tracker.get_slot(&#39;mode&#39;),tracker.get_slot(&#39;switch_action&#39;))
+        print(&#34;Switch mode action in process...&#34;)
+        if response[&#39;success&#39;]:
+            dispatcher.utter_message(text=response[&#39;message&#39;])
+            print(response[&#39;message&#39;])
+        else:
+            dispatcher.utter_message(text=&#34;I&#39;m sorry, I can&#39;t do that. {}&#34;.format(response[&#39;message&#39;]))
+            print(&#34;Fail :(&#34;)
+
+        return [SlotSet(&#34;mode&#34;,None),SlotSet(&#34;switch_action&#34;,None)]
+
+class ActionOpenEnvironment(Action):
+    &#34;&#34;&#34;A class used to open an environment&#34;&#34;&#34;
+
+    def name(self) -&gt; Text:
+        &#34;&#34;&#34;Function that returns the name of the action
+
+        Returns:
+        Text:The name of the action&#34;&#34;&#34;
+
+        return &#34;action_open_environment&#34;
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -&gt; List[Dict[Text, Any]]:
+        &#34;&#34;&#34;Function that manages the robot&#39;s behavior to open an environment.
+
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
+
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+        environment = tracker.get_slot(&#39;work_environment&#39;)
+
+        response = action_open_environment(my_graphQL,environment)
+        print(&#34;Open environment action in process...&#34;)
+        if response[&#39;success&#39;]:
+            dispatcher.utter_message(text=response[&#39;message&#39;])
+            print(&#34;Successfully accomplished :)&#34;)
+        else:
+            dispatcher.utter_message(text=&#34;I&#39;m sorry, something went wrong. {}&#34;.format(response[&#39;message&#39;]))
+            print(reponse[&#39;message&#39;])
+
+        return [SlotSet(&#34;work_environment&#34;,None)]
+
+class ActionHelp(Action):
+    &#34;&#34;&#34;A class used to give information&#34;&#34;&#34;
+
+    def name(self) -&gt; Text:
+        &#34;&#34;&#34;Function that returns the name of the action
+
+        Returns:
+        Text:The name of the action&#34;&#34;&#34;
+        return &#34;action_help&#34;
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -&gt; List[Dict[Text, Any]]:
+        &#34;&#34;&#34;Function that manages the robot&#39;s behaviour to give help information.
+
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
+
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+        dispatcher.utter_message(text=&#34;I can execute the following commands :&#34;)
+        dispatcher.utter_message(text=&#34;Open demo&#34;)
+        dispatcher.utter_message(text=&#34;Close demo&#34;)
+        dispatcher.utter_message(text=&#34;Show me something on tag&#34;)
+        dispatcher.utter_message(text=&#34;Launch demo&#34;)
+        dispatcher.utter_message(text=&#34;Activate demo&#34;)
+        dispatcher.utter_message(text=&#34;Shutdown screens&#34;)
+        dispatcher.utter_message(text=&#34;Do a clearspace&#34;)
+        dispatcher.utter_message(text=&#34;Refresh the screens&#34;)
+        dispatcher.utter_message(text=&#34;Pause the video/the audio&#34;)
+        dispatcher.utter_message(text=&#34;Play video&#34;)
+        dispatcher.utter_message(text=&#34;Start animation&#34;)
+        dispatcher.utter_message(text=&#34;Stop animation&#34;)
+        dispatcher.utter_message(text=&#34;Play loop video/audio&#34;)
+        dispatcher.utter_message(text=&#34;Full black screens&#34;)
+        dispatcher.utter_message(text=&#34;Open environment&#34;)
+        dispatcher.utter_message(text=&#34;Switch mode&#34;)
+        dispatcher.utter_message(text=&#34;Turn on the Global Data Observatory&#34;)
+        dispatcher.utter_message(text=&#34;Shutdown the Global Data Observatory&#34;)
+        dispatcher.utter_message(text=&#34;Open/Close/Reset browsers&#34;)
+
+        return []
+
+class ActionResetSlotOpenDemo(Action):
+    &#34;&#34;&#34;A class used to reset slots&#34;&#34;&#34;
+
+    def name(self):
+        &#34;&#34;&#34;Function that returns the name of the action
+
+        Returns:
+        Text:The name of the action&#34;&#34;&#34;
+
+        return &#34;action_reset_slot_open&#34;
+
+    def run(self, dispatcher, tracker, domain):
+        &#34;&#34;&#34;Function that resets slots.
+
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
+
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+        return [SlotSet(&#34;demo&#34;, None),SlotSet(&#34;read_list&#34;,False),SlotSet(&#39;restart&#39;,False)]
+
+class ActionResetSlotSearch(Action):
+    &#34;&#34;&#34;A class used to reset slots&#34;&#34;&#34;
+
+    def name(self):
+        &#34;&#34;&#34;Function that returns the name of the action
+
+        Returns:
+        Text:The name of the action&#34;&#34;&#34;
+
+        return &#34;action_reset_slot_search&#34;
+
+    def run(self, dispatcher, tracker, domain):
+        &#34;&#34;&#34;Function that resets slots.
+
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
+
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+        return [SlotSet(&#34;demo&#34;,None),SlotSet(&#34;tag&#34;,None),SlotSet(&#34;search_mode&#34;,None)]
+
+class ActionResetSlotZoom(Action):
+    &#34;&#34;&#34;A class used to reset slots&#34;&#34;&#34;
+
+    def name(self):
+        &#34;&#34;&#34;Function that returns the name of the action
+
+        Returns:
+        Text:The name of the action&#34;&#34;&#34;
+
+        return &#34;action_reset_slot_zoom&#34;
+
+    def run(self, dispatcher, tracker, domain):
+        &#34;&#34;&#34;Function that resets slots.
+
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
+
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+        return [SlotSet(&#39;zoom_action&#39;,None),SlotSet(&#39;zoom_big_level&#39;,None),SlotSet(&#39;zoom_small_level&#39;,None)]
+
+class ActionOpenBrowsers(Action):
+    &#34;&#34;&#34;A class used to open browsers&#34;&#34;&#34;
+
+    def name(self):
+        &#34;&#34;&#34;Function that returns the name of the action
+
+        Returns:
+        Text:The name of the action&#34;&#34;&#34;
+
+        return &#34;action_open_browsers&#34;
+
+    def run(self, dispatcher, tracker, domain):
+        &#34;&#34;&#34;Function that manages the robot&#39;s behavior to open browsers.
+
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
+
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+        response = action_browsers(my_graphQL,&#34;open&#34;)
+
+        print(&#34;Trying to open browsers...&#34;)
+        if response[&#39;success&#39;] and response[&#34;executeHwAction&#34;]==&#34;done&#34;:
+            dispatcher.utter_message(text=&#34;The browsers are open&#34;)
+            print(&#34;Browsers are open ;)&#34;)
+        elif response[&#39;success&#39;]:
+            dispatcher.utter_message(text=&#34;Something went wrong. Do you want me to try again ?&#34;)
+            print(&#34;Fail :(&#34;)
+        else:
+            dispatcher.utter_message(text=&#34;I&#39;m sorry, something went wrong. {}&#34;.format(response[&#39;message&#39;]))
+            print(response[&#39;message&#39;])
+
+        return []
+
+class ActionCloseBrowsers(Action):
+    &#34;&#34;&#34;A class used to close browsers&#34;&#34;&#34;
+
+    def name(self):
+        &#34;&#34;&#34;Function that returns the name of the action
+
+        Returns:
+        Text:The name of the action&#34;&#34;&#34;
+
+        return &#34;action_close_browsers&#34;
+
+    def run(self, dispatcher, tracker, domain):
+        &#34;&#34;&#34;Function that manages the robot&#39;s behavior to close browsers.
+
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
+
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+        response = action_browsers(my_graphQL,&#34;kill&#34;)
+
+        print(&#34;Trying to close browsers...&#34;)
+        if response[&#39;success&#39;] and response[&#34;executeHwAction&#34;]==&#34;done&#34;:
+            dispatcher.utter_message(text=&#34;The browsers are close&#34;)
+            print(&#34;Browsers are close ;)&#34;)
+        elif response[&#39;success&#39;]:
+            dispatcher.utter_message(text=&#34;Something went wrong. Do you want me to try again ?&#34;)
+            print(&#34;Fail :(&#34;)
+        else:
+            dispatcher.utter_message(text=&#34;I&#39;m sorry, something went wrong. {}&#34;.format(response[&#39;message&#39;]))
+            print(response[&#39;message&#39;])
+
+        return []
+
+class ActionRefreshBrowsers(Action):
+    &#34;&#34;&#34;A class used to refresh browsers&#34;&#34;&#34;
+
+    def name(self):
+        &#34;&#34;&#34;Function that returns the name of the action
+
+        Returns:
+        Text:The name of the action&#34;&#34;&#34;
+
+        return &#34;action_refresh_browsers&#34;
+
+    def run(self, dispatcher, tracker, domain):
+        &#34;&#34;&#34;Function that manages the robot&#39;s behavior to refresh browsers.
+
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
+
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+        response = action_browsers(my_graphQL,&#34;refresh&#34;)
+
+        print(&#34;Trying to refresh browsers...&#34;)
+        if response[&#39;success&#39;] and response[&#34;executeHwAction&#34;]==&#34;done&#34;:
+            dispatcher.utter_message(text=&#34;The browsers are reset&#34;)
+            print(&#34;Browsers are reset ;)&#34;)
+        elif response[&#39;success&#39;]:
+            dispatcher.utter_message(text=&#34;Something went wrong. Do you want me to try again ?&#34;)
+            print(&#34;Fail :(&#34;)
+        else:
+            dispatcher.utter_message(text=&#34;I&#39;m sorry, something went wrong. {}&#34;.format(response[&#39;message&#39;]))
+            print(response[&#39;message&#39;])
+
+        return []
+
+class ActionRepeat(Action):
+    &#34;&#34;&#34;A class used to repeat the last bot answer&#34;&#34;&#34;
+
+    def name(self):
+        &#34;&#34;&#34;Function that returns the name of the action
+
+        Returns:
+        Text:The name of the action&#34;&#34;&#34;
+        return &#34;action_repeat&#34;
+
+    def run(self, dispatcher, tracker, domain):
+        &#34;&#34;&#34;Function that repeats the last utter_message.
+
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
+
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+        print(&#39;Trying to repeat&#39;)
+        if len(tracker.events) &gt;= 3:
+                dispatcher.utter_message(tracker.events[-3].get(&#39;text&#39;))
+
+        return []
+
+class ActionZoom(Action):
+    &#34;&#34;&#34;A class used to zoom in or zoom out&#34;&#34;&#34;
+
+    def name(self):
+        &#34;&#34;&#34;Function that returns the name of the action
+
+        Returns:
+        Text:The name of the action&#34;&#34;&#34;
+        return &#34;action_zoom&#34;
+
+    def run(self, dispatcher, tracker, domain):
+        &#34;&#34;&#34;Function that runs zoom-in or zoom-out commands
+
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
+
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+        zoom_action = tracker.get_slot(&#39;zoom_action&#39;)
+        zoom_small_level = tracker.get_slot(&#39;zoom_small_level&#39;)
+        zoom_big_level = tracker.get_slot(&#39;zoom_big_level&#39;)
+
+        print(&#39;Trying to execute zoom action&#39;)
+        if zoom_small_level == None and zoom_big_level == None:
+            response = action_zoom(my_graphQL,zoom_action)
+        elif zoom_small_level == None:
+            response = action_zoom(my_graphQL,zoom_action,&#39;big&#39;)
+        else:
+            response = action_zoom(my_graphQL,zoom_action,&#39;small&#39;)
+
+        if response[&#39;success&#39;] and response[&#39;message&#39;] ==&#39;done&#39;:
+            dispatcher.utter_message(text=&#34;It&#39;s done !&#34;)
+            print(&#39;Zoom action successfully done :)&#39;)
+            return [SlotSet(&#39;zoom_action&#39;,None),SlotSet(&#39;zoom_big_level&#39;,None),SlotSet(&#39;zoom_small_level&#39;,None)]
+        elif response[&#39;success&#39;]:
+            dispatcher.utter_message(text=response[&#39;message&#39;])
+            return [SlotSet(&#39;zoom_action&#39;,None)]
+        else :
+            dispatcher.utter_message(text=&#34;I&#39;m sorry. I didn&#39;t manage to do it. {}. Should I try again ?&#34;.format(response[&#39;message&#39;]))
+            print(&#39;Did not manage to do it :(&#39;)
+            return []
+
+
+# TODO : Reminder
+# class ActionSetReminder(Action):
+#     &#34;&#34;&#34;Schedules a reminder, supplied with the last message&#39;s entities.&#34;&#34;&#34;
+#
+#     def name(self) -&gt; Text:
+#         return &#34;action_set_reminder&#34;
+#
+#     async def run(
+#         self,
+#         dispatcher: CollectingDispatcher,
+#         tracker: Tracker,
+#         domain: Dict[Text, Any],
+#     ) -&gt; List[Dict[Text, Any]]:
+#
+#         dispatcher.utter_message(&#34;I will remind you in 10 seconds.&#34;)
+#
+#         date = datetime.datetime.now() + datetime.timedelta(seconds=10)
+#         entities = tracker.latest_message.get(&#34;entities&#34;)
+#
+#         reminder = ReminderScheduled(
+#             &#34;EXTERNAL_reminder&#34;,
+#             trigger_date_time=date,
+#             entities=entities,
+#             name=&#34;my_reminder&#34;,
+#             kill_on_user_message=False,
+#         )
+#
+# class ActionReactToReminder(Action):
+#     &#34;&#34;&#34;Reminds the user to finish presentation.&#34;&#34;&#34;
+#
+#     def name(self) -&gt; Text:
+#         return &#34;action_react_to_reminder&#34;
+#
+#     async def run(
+#         self,
+#         dispatcher: CollectingDispatcher,
+#         tracker: Tracker,
+#         domain: Dict[Text, Any],
+#     ) -&gt; List[Dict[Text, Any]]:
+#
+#         dispatcher.utter_message(&#34;The meeting is finished !&#34;)
+#
+#         return []</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="actions.ActionClearSpace"><code class="flex name class">
+<span>class <span class="ident">ActionClearSpace</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>A class used to clear the space</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class ActionClearSpace(Action):
+    &#34;&#34;&#34;A class used to clear the space&#34;&#34;&#34;
+
+    def name(self) -&gt; Text:
+        &#34;&#34;&#34;Function that returns the name of the action
+
+        Returns:
+        Text:The name of the action&#34;&#34;&#34;
+
+        return &#34;action_clear_space&#34;
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -&gt; List[Dict[Text, Any]]:
+        &#34;&#34;&#34;Function that manages the robot&#39;s behavior to clear the space.
+
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
+
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+        response = action_clear_space(my_graphQL)
+
+        print(&#34;Trying to clear the space...&#34;)
+        if response[&#39;success&#39;]:
+            dispatcher.utter_message(&#34;The space is clear&#34;)
+            print(&#34;Clear space done ;)&#34;)
+        else:
+            dispatcher.utter_message(text=&#34;I&#39;m sorry, something went wrong. I can&#39;t clear the screens. {}&#34;.format(response[&#39;message&#39;]))
+            print(response[&#39;message&#39;])
+
+        return []</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>rasa_sdk.interfaces.Action</li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="actions.ActionClearSpace.name"><code class="name flex">
+<span>def <span class="ident">name</span></span>(<span>self) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that returns the name of the action</p>
+<p>Returns:
+Text:The name of the action</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def name(self) -&gt; Text:
+    &#34;&#34;&#34;Function that returns the name of the action
+
+    Returns:
+    Text:The name of the action&#34;&#34;&#34;
+
+    return &#34;action_clear_space&#34;</code></pre>
+</details>
+</dd>
+<dt id="actions.ActionClearSpace.run"><code class="name flex">
+<span>def <span class="ident">run</span></span>(<span>self, dispatcher: rasa_sdk.executor.CollectingDispatcher, tracker: rasa_sdk.interfaces.Tracker, domain: Dict[str, Any]) ‑> List[Dict[str, Any]]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that manages the robot's behavior to clear the space.</p>
+<p>Parameters:
+dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+domain (Dict[Text, Any]): The bot’s domain</p>
+<p>Returns:
+List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def run(self, dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any]) -&gt; List[Dict[Text, Any]]:
+    &#34;&#34;&#34;Function that manages the robot&#39;s behavior to clear the space.
+
+    Parameters:
+    dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+    tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+    domain (Dict[Text, Any]): The bot’s domain
+
+    Returns:
+    List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+    response = action_clear_space(my_graphQL)
+
+    print(&#34;Trying to clear the space...&#34;)
+    if response[&#39;success&#39;]:
+        dispatcher.utter_message(&#34;The space is clear&#34;)
+        print(&#34;Clear space done ;)&#34;)
+    else:
+        dispatcher.utter_message(text=&#34;I&#39;m sorry, something went wrong. I can&#39;t clear the screens. {}&#34;.format(response[&#39;message&#39;]))
+        print(response[&#39;message&#39;])
+
+    return []</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="actions.ActionCloseBrowsers"><code class="flex name class">
+<span>class <span class="ident">ActionCloseBrowsers</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>A class used to close browsers</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class ActionCloseBrowsers(Action):
+    &#34;&#34;&#34;A class used to close browsers&#34;&#34;&#34;
+
+    def name(self):
+        &#34;&#34;&#34;Function that returns the name of the action
+
+        Returns:
+        Text:The name of the action&#34;&#34;&#34;
+
+        return &#34;action_close_browsers&#34;
+
+    def run(self, dispatcher, tracker, domain):
+        &#34;&#34;&#34;Function that manages the robot&#39;s behavior to close browsers.
+
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
+
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+        response = action_browsers(my_graphQL,&#34;kill&#34;)
+
+        print(&#34;Trying to close browsers...&#34;)
+        if response[&#39;success&#39;] and response[&#34;executeHwAction&#34;]==&#34;done&#34;:
+            dispatcher.utter_message(text=&#34;The browsers are close&#34;)
+            print(&#34;Browsers are close ;)&#34;)
+        elif response[&#39;success&#39;]:
+            dispatcher.utter_message(text=&#34;Something went wrong. Do you want me to try again ?&#34;)
+            print(&#34;Fail :(&#34;)
+        else:
+            dispatcher.utter_message(text=&#34;I&#39;m sorry, something went wrong. {}&#34;.format(response[&#39;message&#39;]))
+            print(response[&#39;message&#39;])
+
+        return []</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>rasa_sdk.interfaces.Action</li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="actions.ActionCloseBrowsers.name"><code class="name flex">
+<span>def <span class="ident">name</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that returns the name of the action</p>
+<p>Returns:
+Text:The name of the action</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def name(self):
+    &#34;&#34;&#34;Function that returns the name of the action
+
+    Returns:
+    Text:The name of the action&#34;&#34;&#34;
+
+    return &#34;action_close_browsers&#34;</code></pre>
+</details>
+</dd>
+<dt id="actions.ActionCloseBrowsers.run"><code class="name flex">
+<span>def <span class="ident">run</span></span>(<span>self, dispatcher, tracker, domain)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that manages the robot's behavior to close browsers.</p>
+<p>Parameters:
+dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+domain (Dict[Text, Any]): The bot’s domain</p>
+<p>Returns:
+List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def run(self, dispatcher, tracker, domain):
+    &#34;&#34;&#34;Function that manages the robot&#39;s behavior to close browsers.
+
+    Parameters:
+    dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+    tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+    domain (Dict[Text, Any]): The bot’s domain
+
+    Returns:
+    List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+    response = action_browsers(my_graphQL,&#34;kill&#34;)
+
+    print(&#34;Trying to close browsers...&#34;)
+    if response[&#39;success&#39;] and response[&#34;executeHwAction&#34;]==&#34;done&#34;:
+        dispatcher.utter_message(text=&#34;The browsers are close&#34;)
+        print(&#34;Browsers are close ;)&#34;)
+    elif response[&#39;success&#39;]:
+        dispatcher.utter_message(text=&#34;Something went wrong. Do you want me to try again ?&#34;)
+        print(&#34;Fail :(&#34;)
+    else:
+        dispatcher.utter_message(text=&#34;I&#39;m sorry, something went wrong. {}&#34;.format(response[&#39;message&#39;]))
+        print(response[&#39;message&#39;])
+
+    return []</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="actions.ActionControl"><code class="flex name class">
+<span>class <span class="ident">ActionControl</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>A class used to execute a controller action</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class ActionControl(Action):
+    &#34;&#34;&#34;A class used to execute a controller action&#34;&#34;&#34;
+
+    def name(self) -&gt; Text:
+        &#34;&#34;&#34;Function that returns the name of the action
+
+        Returns:
+        Text:The name of the action&#34;&#34;&#34;
+
+        return &#34;action_control&#34;
+
+    def process_response(self, dispatcher: CollectingDispatcher, message_success: str, message_fail: str, response):
+        if response[&#39;success&#39;] == True and response[&#39;executeAppAction&#39;]==&#39;done&#39;:
+            dispatcher.utter_message(message_success)
+            print(&#34;Done ! :)&#34;)
+        elif response[&#39;success&#39;] == True:
+            dispatcher.utter_message(message_fail)
+            print(&#34;The action has not been executed :(&#34;)
+        else:
+            dispatcher.utter_message(&#34;I&#39;m sorry. Something went wrong.&#34;)
+            dispatcher.utter_message(response[&#39;message&#39;])
+            print(response[&#39;message&#39;])
+
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -&gt; List[Dict[Text, Any]]:
+        &#34;&#34;&#34;Function that manages the robot&#39;s behavior to execute a control command.
+
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
+
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+        control = tracker.get_slot(&#34;control_command&#34;)
+
+        #If the control command is not recognized, we inform the user
+        if control == None:
+            dispatcher.utter_message(&#34;Sorry I didn&#39;t get the command&#34;)
+            return [SlotSet(&#34;control_command&#34;,None)]
+        else:
+            control = control.lower()
+
+        if control==&#34;play&#34;:
+            print(&#34;Trying to play the video/audio...&#34;)
+            response = action_play(my_graphQL)
+            self.process_response(dispatcher,&#34;I&#39;m playing the video&#34;,&#34;I didn&#39;t start playing the video. Try again please&#34;,response)
+        elif control==&#34;pause&#34;:
+            print(&#34;Trying to pause the video/audio...&#34;)
+            response = action_pause(my_graphQL)
+            self.process_response(dispatcher,&#34;I paused the video&#34;,&#34;I didn&#39;t pause the video. Try again please&#34;,response)
+        elif control==&#34;stop&#34;:
+            print(&#34;Trying to stop the video/audio...&#34;)
+            response = action_stop(my_graphQL)
+            self.process_response(dispatcher,&#34;I stopped the video&#34;,&#34;I didn&#39;t stop the video. Try again please&#34;,response)
+        elif control==&#34;reset&#34;:
+            print(&#34;Trying to reset the video/audio...&#34;)
+            response = action_reset(my_graphQL)
+            self.process_response(dispatcher,&#34;I reset the video&#34;,&#34;I didn&#39;t reset the video. Try again please&#34;,response)
+        elif control==&#34;play loop&#34;:
+            print(&#34;Trying to play loop the video/audio...&#34;)
+            response = action_play_loop(my_graphQL)
+            self.process_response(dispatcher,&#34;I played loop the video&#34;,&#34;I didn&#39;t play loop the video. Try again please&#34;,response)
+        elif control==&#34;refresh&#34;:
+            print(&#34;Trying to refresh the webpage...&#34;)
+            response = action_refresh(my_graphQL)
+            self.process_response(dispatcher,&#34;I refreshed the page&#34;,&#34;I didn&#39;t refresh the page. Try again please&#34;,response)
+
+        return [SlotSet(&#34;control_command&#34;,None)]</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>rasa_sdk.interfaces.Action</li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="actions.ActionControl.name"><code class="name flex">
+<span>def <span class="ident">name</span></span>(<span>self) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that returns the name of the action</p>
+<p>Returns:
+Text:The name of the action</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def name(self) -&gt; Text:
+    &#34;&#34;&#34;Function that returns the name of the action
+
+    Returns:
+    Text:The name of the action&#34;&#34;&#34;
+
+    return &#34;action_control&#34;</code></pre>
+</details>
+</dd>
+<dt id="actions.ActionControl.process_response"><code class="name flex">
+<span>def <span class="ident">process_response</span></span>(<span>self, dispatcher: rasa_sdk.executor.CollectingDispatcher, message_success: str, message_fail: str, response)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def process_response(self, dispatcher: CollectingDispatcher, message_success: str, message_fail: str, response):
+    if response[&#39;success&#39;] == True and response[&#39;executeAppAction&#39;]==&#39;done&#39;:
+        dispatcher.utter_message(message_success)
+        print(&#34;Done ! :)&#34;)
+    elif response[&#39;success&#39;] == True:
+        dispatcher.utter_message(message_fail)
+        print(&#34;The action has not been executed :(&#34;)
+    else:
+        dispatcher.utter_message(&#34;I&#39;m sorry. Something went wrong.&#34;)
+        dispatcher.utter_message(response[&#39;message&#39;])
+        print(response[&#39;message&#39;])</code></pre>
+</details>
+</dd>
+<dt id="actions.ActionControl.run"><code class="name flex">
+<span>def <span class="ident">run</span></span>(<span>self, dispatcher: rasa_sdk.executor.CollectingDispatcher, tracker: rasa_sdk.interfaces.Tracker, domain: Dict[str, Any]) ‑> List[Dict[str, Any]]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that manages the robot's behavior to execute a control command.</p>
+<p>Parameters:
+dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+domain (Dict[Text, Any]): The bot’s domain</p>
+<p>Returns:
+List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def run(self, dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any]) -&gt; List[Dict[Text, Any]]:
+    &#34;&#34;&#34;Function that manages the robot&#39;s behavior to execute a control command.
+
+    Parameters:
+    dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+    tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+    domain (Dict[Text, Any]): The bot’s domain
+
+    Returns:
+    List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+    control = tracker.get_slot(&#34;control_command&#34;)
+
+    #If the control command is not recognized, we inform the user
+    if control == None:
+        dispatcher.utter_message(&#34;Sorry I didn&#39;t get the command&#34;)
+        return [SlotSet(&#34;control_command&#34;,None)]
+    else:
+        control = control.lower()
+
+    if control==&#34;play&#34;:
+        print(&#34;Trying to play the video/audio...&#34;)
+        response = action_play(my_graphQL)
+        self.process_response(dispatcher,&#34;I&#39;m playing the video&#34;,&#34;I didn&#39;t start playing the video. Try again please&#34;,response)
+    elif control==&#34;pause&#34;:
+        print(&#34;Trying to pause the video/audio...&#34;)
+        response = action_pause(my_graphQL)
+        self.process_response(dispatcher,&#34;I paused the video&#34;,&#34;I didn&#39;t pause the video. Try again please&#34;,response)
+    elif control==&#34;stop&#34;:
+        print(&#34;Trying to stop the video/audio...&#34;)
+        response = action_stop(my_graphQL)
+        self.process_response(dispatcher,&#34;I stopped the video&#34;,&#34;I didn&#39;t stop the video. Try again please&#34;,response)
+    elif control==&#34;reset&#34;:
+        print(&#34;Trying to reset the video/audio...&#34;)
+        response = action_reset(my_graphQL)
+        self.process_response(dispatcher,&#34;I reset the video&#34;,&#34;I didn&#39;t reset the video. Try again please&#34;,response)
+    elif control==&#34;play loop&#34;:
+        print(&#34;Trying to play loop the video/audio...&#34;)
+        response = action_play_loop(my_graphQL)
+        self.process_response(dispatcher,&#34;I played loop the video&#34;,&#34;I didn&#39;t play loop the video. Try again please&#34;,response)
+    elif control==&#34;refresh&#34;:
+        print(&#34;Trying to refresh the webpage...&#34;)
+        response = action_refresh(my_graphQL)
+        self.process_response(dispatcher,&#34;I refreshed the page&#34;,&#34;I didn&#39;t refresh the page. Try again please&#34;,response)
+
+    return [SlotSet(&#34;control_command&#34;,None)]</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="actions.ActionHelp"><code class="flex name class">
+<span>class <span class="ident">ActionHelp</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>A class used to give information</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class ActionHelp(Action):
+    &#34;&#34;&#34;A class used to give information&#34;&#34;&#34;
+
+    def name(self) -&gt; Text:
+        &#34;&#34;&#34;Function that returns the name of the action
+
+        Returns:
+        Text:The name of the action&#34;&#34;&#34;
+        return &#34;action_help&#34;
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -&gt; List[Dict[Text, Any]]:
+        &#34;&#34;&#34;Function that manages the robot&#39;s behaviour to give help information.
+
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
+
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+        dispatcher.utter_message(text=&#34;I can execute the following commands :&#34;)
+        dispatcher.utter_message(text=&#34;Open demo&#34;)
+        dispatcher.utter_message(text=&#34;Close demo&#34;)
+        dispatcher.utter_message(text=&#34;Show me something on tag&#34;)
+        dispatcher.utter_message(text=&#34;Launch demo&#34;)
+        dispatcher.utter_message(text=&#34;Activate demo&#34;)
+        dispatcher.utter_message(text=&#34;Shutdown screens&#34;)
+        dispatcher.utter_message(text=&#34;Do a clearspace&#34;)
+        dispatcher.utter_message(text=&#34;Refresh the screens&#34;)
+        dispatcher.utter_message(text=&#34;Pause the video/the audio&#34;)
+        dispatcher.utter_message(text=&#34;Play video&#34;)
+        dispatcher.utter_message(text=&#34;Start animation&#34;)
+        dispatcher.utter_message(text=&#34;Stop animation&#34;)
+        dispatcher.utter_message(text=&#34;Play loop video/audio&#34;)
+        dispatcher.utter_message(text=&#34;Full black screens&#34;)
+        dispatcher.utter_message(text=&#34;Open environment&#34;)
+        dispatcher.utter_message(text=&#34;Switch mode&#34;)
+        dispatcher.utter_message(text=&#34;Turn on the Global Data Observatory&#34;)
+        dispatcher.utter_message(text=&#34;Shutdown the Global Data Observatory&#34;)
+        dispatcher.utter_message(text=&#34;Open/Close/Reset browsers&#34;)
+
+        return []</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>rasa_sdk.interfaces.Action</li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="actions.ActionHelp.name"><code class="name flex">
+<span>def <span class="ident">name</span></span>(<span>self) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that returns the name of the action</p>
+<p>Returns:
+Text:The name of the action</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def name(self) -&gt; Text:
+    &#34;&#34;&#34;Function that returns the name of the action
+
+    Returns:
+    Text:The name of the action&#34;&#34;&#34;
+    return &#34;action_help&#34;</code></pre>
+</details>
+</dd>
+<dt id="actions.ActionHelp.run"><code class="name flex">
+<span>def <span class="ident">run</span></span>(<span>self, dispatcher: rasa_sdk.executor.CollectingDispatcher, tracker: rasa_sdk.interfaces.Tracker, domain: Dict[str, Any]) ‑> List[Dict[str, Any]]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that manages the robot's behaviour to give help information.</p>
+<p>Parameters:
+dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+domain (Dict[Text, Any]): The bot’s domain</p>
+<p>Returns:
+List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def run(self, dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any]) -&gt; List[Dict[Text, Any]]:
+    &#34;&#34;&#34;Function that manages the robot&#39;s behaviour to give help information.
+
+    Parameters:
+    dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+    tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+    domain (Dict[Text, Any]): The bot’s domain
+
+    Returns:
+    List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+    dispatcher.utter_message(text=&#34;I can execute the following commands :&#34;)
+    dispatcher.utter_message(text=&#34;Open demo&#34;)
+    dispatcher.utter_message(text=&#34;Close demo&#34;)
+    dispatcher.utter_message(text=&#34;Show me something on tag&#34;)
+    dispatcher.utter_message(text=&#34;Launch demo&#34;)
+    dispatcher.utter_message(text=&#34;Activate demo&#34;)
+    dispatcher.utter_message(text=&#34;Shutdown screens&#34;)
+    dispatcher.utter_message(text=&#34;Do a clearspace&#34;)
+    dispatcher.utter_message(text=&#34;Refresh the screens&#34;)
+    dispatcher.utter_message(text=&#34;Pause the video/the audio&#34;)
+    dispatcher.utter_message(text=&#34;Play video&#34;)
+    dispatcher.utter_message(text=&#34;Start animation&#34;)
+    dispatcher.utter_message(text=&#34;Stop animation&#34;)
+    dispatcher.utter_message(text=&#34;Play loop video/audio&#34;)
+    dispatcher.utter_message(text=&#34;Full black screens&#34;)
+    dispatcher.utter_message(text=&#34;Open environment&#34;)
+    dispatcher.utter_message(text=&#34;Switch mode&#34;)
+    dispatcher.utter_message(text=&#34;Turn on the Global Data Observatory&#34;)
+    dispatcher.utter_message(text=&#34;Shutdown the Global Data Observatory&#34;)
+    dispatcher.utter_message(text=&#34;Open/Close/Reset browsers&#34;)
+
+    return []</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="actions.ActionListDemos"><code class="flex name class">
+<span>class <span class="ident">ActionListDemos</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>A class used to list available demos</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class ActionListDemos(Action):
+    &#34;&#34;&#34;A class used to list available demos&#34;&#34;&#34;
+
+    def name(self) -&gt; Text:
+        &#34;&#34;&#34;Function that returns the name of the action
+
+        Returns:
+        Text:The name of the action&#34;&#34;&#34;
+
+        return &#34;action_list_demos&#34;
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -&gt; List[Dict[Text, Any]]:
+        &#34;&#34;&#34;Function that manages the robot&#39;s behavior to display available demos.
+
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
+
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+
+        robot_last_message = &#34;&#34;
+        if len(tracker.events) &gt;= 3:
+            robot_last_message = tracker.events[-3].get(&#39;text&#39;)
+
+        print(&#34;Trying to get available demos...&#34;)
+        response = action_list_demos(my_graphQL,robot_last_message)
+        if response[&#39;success&#39;]:
+            dispatcher.utter_message(text=response[&#39;message&#39;])
+            print(&#34;Success :)&#34;)
+        else:
+            dispatcher.utter_message(text=&#34;Something went wrong. {}&#34;.format(response[&#39;message&#39;]))
+            dispatcher.utter_message(text=&#34;Should I try again ?&#34;)
+            print(response[&#39;message&#39;])
+
+        return []</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>rasa_sdk.interfaces.Action</li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="actions.ActionListDemos.name"><code class="name flex">
+<span>def <span class="ident">name</span></span>(<span>self) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that returns the name of the action</p>
+<p>Returns:
+Text:The name of the action</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def name(self) -&gt; Text:
+    &#34;&#34;&#34;Function that returns the name of the action
+
+    Returns:
+    Text:The name of the action&#34;&#34;&#34;
+
+    return &#34;action_list_demos&#34;</code></pre>
+</details>
+</dd>
+<dt id="actions.ActionListDemos.run"><code class="name flex">
+<span>def <span class="ident">run</span></span>(<span>self, dispatcher: rasa_sdk.executor.CollectingDispatcher, tracker: rasa_sdk.interfaces.Tracker, domain: Dict[str, Any]) ‑> List[Dict[str, Any]]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that manages the robot's behavior to display available demos.</p>
+<p>Parameters:
+dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+domain (Dict[Text, Any]): The bot’s domain</p>
+<p>Returns:
+List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def run(self, dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any]) -&gt; List[Dict[Text, Any]]:
+    &#34;&#34;&#34;Function that manages the robot&#39;s behavior to display available demos.
+
+    Parameters:
+    dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+    tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+    domain (Dict[Text, Any]): The bot’s domain
+
+    Returns:
+    List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+
+    robot_last_message = &#34;&#34;
+    if len(tracker.events) &gt;= 3:
+        robot_last_message = tracker.events[-3].get(&#39;text&#39;)
+
+    print(&#34;Trying to get available demos...&#34;)
+    response = action_list_demos(my_graphQL,robot_last_message)
+    if response[&#39;success&#39;]:
+        dispatcher.utter_message(text=response[&#39;message&#39;])
+        print(&#34;Success :)&#34;)
+    else:
+        dispatcher.utter_message(text=&#34;Something went wrong. {}&#34;.format(response[&#39;message&#39;]))
+        dispatcher.utter_message(text=&#34;Should I try again ?&#34;)
+        print(response[&#39;message&#39;])
+
+    return []</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="actions.ActionOpen"><code class="flex name class">
+<span>class <span class="ident">ActionOpen</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>A class used to open demos</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class ActionOpen(Action):
+    &#34;&#34;&#34;A class used to open demos&#34;&#34;&#34;
+
+    def name(self) -&gt; Text:
+        &#34;&#34;&#34;Function that returns the name of the action
+
+        Returns:
+        Text:The name of the action&#34;&#34;&#34;
+
+        return &#34;action_open&#34;
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -&gt; List[Dict[Text, Any]]:
+        &#34;&#34;&#34;Function that manages the robot&#39;s behavior for the &#39;&#39;open&#39;&#39;action.
+
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
+
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+
+        response = action_launch_project(my_graphQL,tracker.get_slot(&#39;demo&#39;))
+
+        print(&#39;Trying to launch a project&#39;)
+        if response[&#39;success&#39;]:
+            dispatcher.utter_message(text=response[&#39;message&#39;])
+            print(&#39;Success :)&#39;)
+            if not response[&#39;list&#39;]:
+                return [SlotSet(&#39;demo&#39;,response[&#39;project&#39;]),SlotSet(&#39;read_list&#39;,False),SlotSet(&#39;restart&#39;,False)]
+            else:
+                return [SlotSet(&#39;read_list&#39;,True),SlotSet(&#39;restart&#39;,False)]
+        else:
+            dispatcher.utter_message(text=&#34;I&#39;m sorry, something went wrong. {}&#34;.format(response[&#39;message&#39;]))
+            dispatcher.utter_message(text=&#34;Should I try again ?&#34;)
+            print(response[&#39;message&#39;])
+            return [SlotSet(&#39;read_list&#39;,False),SlotSet(&#39;restart&#39;,True)]</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>rasa_sdk.interfaces.Action</li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="actions.ActionOpen.name"><code class="name flex">
+<span>def <span class="ident">name</span></span>(<span>self) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that returns the name of the action</p>
+<p>Returns:
+Text:The name of the action</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def name(self) -&gt; Text:
+    &#34;&#34;&#34;Function that returns the name of the action
+
+    Returns:
+    Text:The name of the action&#34;&#34;&#34;
+
+    return &#34;action_open&#34;</code></pre>
+</details>
+</dd>
+<dt id="actions.ActionOpen.run"><code class="name flex">
+<span>def <span class="ident">run</span></span>(<span>self, dispatcher: rasa_sdk.executor.CollectingDispatcher, tracker: rasa_sdk.interfaces.Tracker, domain: Dict[str, Any]) ‑> List[Dict[str, Any]]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that manages the robot's behavior for the ''open''action.</p>
+<p>Parameters:
+dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+domain (Dict[Text, Any]): The bot’s domain</p>
+<p>Returns:
+List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def run(self, dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any]) -&gt; List[Dict[Text, Any]]:
+    &#34;&#34;&#34;Function that manages the robot&#39;s behavior for the &#39;&#39;open&#39;&#39;action.
+
+    Parameters:
+    dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+    tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+    domain (Dict[Text, Any]): The bot’s domain
+
+    Returns:
+    List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+
+    response = action_launch_project(my_graphQL,tracker.get_slot(&#39;demo&#39;))
+
+    print(&#39;Trying to launch a project&#39;)
+    if response[&#39;success&#39;]:
+        dispatcher.utter_message(text=response[&#39;message&#39;])
+        print(&#39;Success :)&#39;)
+        if not response[&#39;list&#39;]:
+            return [SlotSet(&#39;demo&#39;,response[&#39;project&#39;]),SlotSet(&#39;read_list&#39;,False),SlotSet(&#39;restart&#39;,False)]
+        else:
+            return [SlotSet(&#39;read_list&#39;,True),SlotSet(&#39;restart&#39;,False)]
+    else:
+        dispatcher.utter_message(text=&#34;I&#39;m sorry, something went wrong. {}&#34;.format(response[&#39;message&#39;]))
+        dispatcher.utter_message(text=&#34;Should I try again ?&#34;)
+        print(response[&#39;message&#39;])
+        return [SlotSet(&#39;read_list&#39;,False),SlotSet(&#39;restart&#39;,True)]</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="actions.ActionOpenBrowsers"><code class="flex name class">
+<span>class <span class="ident">ActionOpenBrowsers</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>A class used to open browsers</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class ActionOpenBrowsers(Action):
+    &#34;&#34;&#34;A class used to open browsers&#34;&#34;&#34;
+
+    def name(self):
+        &#34;&#34;&#34;Function that returns the name of the action
+
+        Returns:
+        Text:The name of the action&#34;&#34;&#34;
+
+        return &#34;action_open_browsers&#34;
+
+    def run(self, dispatcher, tracker, domain):
+        &#34;&#34;&#34;Function that manages the robot&#39;s behavior to open browsers.
+
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
+
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+        response = action_browsers(my_graphQL,&#34;open&#34;)
+
+        print(&#34;Trying to open browsers...&#34;)
+        if response[&#39;success&#39;] and response[&#34;executeHwAction&#34;]==&#34;done&#34;:
+            dispatcher.utter_message(text=&#34;The browsers are open&#34;)
+            print(&#34;Browsers are open ;)&#34;)
+        elif response[&#39;success&#39;]:
+            dispatcher.utter_message(text=&#34;Something went wrong. Do you want me to try again ?&#34;)
+            print(&#34;Fail :(&#34;)
+        else:
+            dispatcher.utter_message(text=&#34;I&#39;m sorry, something went wrong. {}&#34;.format(response[&#39;message&#39;]))
+            print(response[&#39;message&#39;])
+
+        return []</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>rasa_sdk.interfaces.Action</li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="actions.ActionOpenBrowsers.name"><code class="name flex">
+<span>def <span class="ident">name</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that returns the name of the action</p>
+<p>Returns:
+Text:The name of the action</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def name(self):
+    &#34;&#34;&#34;Function that returns the name of the action
+
+    Returns:
+    Text:The name of the action&#34;&#34;&#34;
+
+    return &#34;action_open_browsers&#34;</code></pre>
+</details>
+</dd>
+<dt id="actions.ActionOpenBrowsers.run"><code class="name flex">
+<span>def <span class="ident">run</span></span>(<span>self, dispatcher, tracker, domain)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that manages the robot's behavior to open browsers.</p>
+<p>Parameters:
+dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+domain (Dict[Text, Any]): The bot’s domain</p>
+<p>Returns:
+List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def run(self, dispatcher, tracker, domain):
+    &#34;&#34;&#34;Function that manages the robot&#39;s behavior to open browsers.
+
+    Parameters:
+    dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+    tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+    domain (Dict[Text, Any]): The bot’s domain
+
+    Returns:
+    List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+    response = action_browsers(my_graphQL,&#34;open&#34;)
+
+    print(&#34;Trying to open browsers...&#34;)
+    if response[&#39;success&#39;] and response[&#34;executeHwAction&#34;]==&#34;done&#34;:
+        dispatcher.utter_message(text=&#34;The browsers are open&#34;)
+        print(&#34;Browsers are open ;)&#34;)
+    elif response[&#39;success&#39;]:
+        dispatcher.utter_message(text=&#34;Something went wrong. Do you want me to try again ?&#34;)
+        print(&#34;Fail :(&#34;)
+    else:
+        dispatcher.utter_message(text=&#34;I&#39;m sorry, something went wrong. {}&#34;.format(response[&#39;message&#39;]))
+        print(response[&#39;message&#39;])
+
+    return []</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="actions.ActionOpenEnvironment"><code class="flex name class">
+<span>class <span class="ident">ActionOpenEnvironment</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>A class used to open an environment</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class ActionOpenEnvironment(Action):
+    &#34;&#34;&#34;A class used to open an environment&#34;&#34;&#34;
+
+    def name(self) -&gt; Text:
+        &#34;&#34;&#34;Function that returns the name of the action
+
+        Returns:
+        Text:The name of the action&#34;&#34;&#34;
+
+        return &#34;action_open_environment&#34;
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -&gt; List[Dict[Text, Any]]:
+        &#34;&#34;&#34;Function that manages the robot&#39;s behavior to open an environment.
+
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
+
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+        environment = tracker.get_slot(&#39;work_environment&#39;)
+
+        response = action_open_environment(my_graphQL,environment)
+        print(&#34;Open environment action in process...&#34;)
+        if response[&#39;success&#39;]:
+            dispatcher.utter_message(text=response[&#39;message&#39;])
+            print(&#34;Successfully accomplished :)&#34;)
+        else:
+            dispatcher.utter_message(text=&#34;I&#39;m sorry, something went wrong. {}&#34;.format(response[&#39;message&#39;]))
+            print(reponse[&#39;message&#39;])
+
+        return [SlotSet(&#34;work_environment&#34;,None)]</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>rasa_sdk.interfaces.Action</li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="actions.ActionOpenEnvironment.name"><code class="name flex">
+<span>def <span class="ident">name</span></span>(<span>self) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that returns the name of the action</p>
+<p>Returns:
+Text:The name of the action</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def name(self) -&gt; Text:
+    &#34;&#34;&#34;Function that returns the name of the action
+
+    Returns:
+    Text:The name of the action&#34;&#34;&#34;
+
+    return &#34;action_open_environment&#34;</code></pre>
+</details>
+</dd>
+<dt id="actions.ActionOpenEnvironment.run"><code class="name flex">
+<span>def <span class="ident">run</span></span>(<span>self, dispatcher: rasa_sdk.executor.CollectingDispatcher, tracker: rasa_sdk.interfaces.Tracker, domain: Dict[str, Any]) ‑> List[Dict[str, Any]]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that manages the robot's behavior to open an environment.</p>
+<p>Parameters:
+dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+domain (Dict[Text, Any]): The bot’s domain</p>
+<p>Returns:
+List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def run(self, dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any]) -&gt; List[Dict[Text, Any]]:
+    &#34;&#34;&#34;Function that manages the robot&#39;s behavior to open an environment.
+
+    Parameters:
+    dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+    tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+    domain (Dict[Text, Any]): The bot’s domain
+
+    Returns:
+    List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+    environment = tracker.get_slot(&#39;work_environment&#39;)
+
+    response = action_open_environment(my_graphQL,environment)
+    print(&#34;Open environment action in process...&#34;)
+    if response[&#39;success&#39;]:
+        dispatcher.utter_message(text=response[&#39;message&#39;])
+        print(&#34;Successfully accomplished :)&#34;)
+    else:
+        dispatcher.utter_message(text=&#34;I&#39;m sorry, something went wrong. {}&#34;.format(response[&#39;message&#39;]))
+        print(reponse[&#39;message&#39;])
+
+    return [SlotSet(&#34;work_environment&#34;,None)]</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="actions.ActionRefreshBrowsers"><code class="flex name class">
+<span>class <span class="ident">ActionRefreshBrowsers</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>A class used to refresh browsers</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class ActionRefreshBrowsers(Action):
+    &#34;&#34;&#34;A class used to refresh browsers&#34;&#34;&#34;
+
+    def name(self):
+        &#34;&#34;&#34;Function that returns the name of the action
+
+        Returns:
+        Text:The name of the action&#34;&#34;&#34;
+
+        return &#34;action_refresh_browsers&#34;
+
+    def run(self, dispatcher, tracker, domain):
+        &#34;&#34;&#34;Function that manages the robot&#39;s behavior to refresh browsers.
+
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
+
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+        response = action_browsers(my_graphQL,&#34;refresh&#34;)
+
+        print(&#34;Trying to refresh browsers...&#34;)
+        if response[&#39;success&#39;] and response[&#34;executeHwAction&#34;]==&#34;done&#34;:
+            dispatcher.utter_message(text=&#34;The browsers are reset&#34;)
+            print(&#34;Browsers are reset ;)&#34;)
+        elif response[&#39;success&#39;]:
+            dispatcher.utter_message(text=&#34;Something went wrong. Do you want me to try again ?&#34;)
+            print(&#34;Fail :(&#34;)
+        else:
+            dispatcher.utter_message(text=&#34;I&#39;m sorry, something went wrong. {}&#34;.format(response[&#39;message&#39;]))
+            print(response[&#39;message&#39;])
+
+        return []</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>rasa_sdk.interfaces.Action</li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="actions.ActionRefreshBrowsers.name"><code class="name flex">
+<span>def <span class="ident">name</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that returns the name of the action</p>
+<p>Returns:
+Text:The name of the action</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def name(self):
+    &#34;&#34;&#34;Function that returns the name of the action
+
+    Returns:
+    Text:The name of the action&#34;&#34;&#34;
+
+    return &#34;action_refresh_browsers&#34;</code></pre>
+</details>
+</dd>
+<dt id="actions.ActionRefreshBrowsers.run"><code class="name flex">
+<span>def <span class="ident">run</span></span>(<span>self, dispatcher, tracker, domain)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that manages the robot's behavior to refresh browsers.</p>
+<p>Parameters:
+dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+domain (Dict[Text, Any]): The bot’s domain</p>
+<p>Returns:
+List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def run(self, dispatcher, tracker, domain):
+    &#34;&#34;&#34;Function that manages the robot&#39;s behavior to refresh browsers.
+
+    Parameters:
+    dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+    tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+    domain (Dict[Text, Any]): The bot’s domain
+
+    Returns:
+    List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+    response = action_browsers(my_graphQL,&#34;refresh&#34;)
+
+    print(&#34;Trying to refresh browsers...&#34;)
+    if response[&#39;success&#39;] and response[&#34;executeHwAction&#34;]==&#34;done&#34;:
+        dispatcher.utter_message(text=&#34;The browsers are reset&#34;)
+        print(&#34;Browsers are reset ;)&#34;)
+    elif response[&#39;success&#39;]:
+        dispatcher.utter_message(text=&#34;Something went wrong. Do you want me to try again ?&#34;)
+        print(&#34;Fail :(&#34;)
+    else:
+        dispatcher.utter_message(text=&#34;I&#39;m sorry, something went wrong. {}&#34;.format(response[&#39;message&#39;]))
+        print(response[&#39;message&#39;])
+
+    return []</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="actions.ActionRepeat"><code class="flex name class">
+<span>class <span class="ident">ActionRepeat</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>A class used to repeat the last bot answer</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class ActionRepeat(Action):
+    &#34;&#34;&#34;A class used to repeat the last bot answer&#34;&#34;&#34;
+
+    def name(self):
+        &#34;&#34;&#34;Function that returns the name of the action
+
+        Returns:
+        Text:The name of the action&#34;&#34;&#34;
+        return &#34;action_repeat&#34;
+
+    def run(self, dispatcher, tracker, domain):
+        &#34;&#34;&#34;Function that repeats the last utter_message.
+
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
+
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+        print(&#39;Trying to repeat&#39;)
+        if len(tracker.events) &gt;= 3:
+                dispatcher.utter_message(tracker.events[-3].get(&#39;text&#39;))
+
+        return []</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>rasa_sdk.interfaces.Action</li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="actions.ActionRepeat.name"><code class="name flex">
+<span>def <span class="ident">name</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that returns the name of the action</p>
+<p>Returns:
+Text:The name of the action</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def name(self):
+    &#34;&#34;&#34;Function that returns the name of the action
+
+    Returns:
+    Text:The name of the action&#34;&#34;&#34;
+    return &#34;action_repeat&#34;</code></pre>
+</details>
+</dd>
+<dt id="actions.ActionRepeat.run"><code class="name flex">
+<span>def <span class="ident">run</span></span>(<span>self, dispatcher, tracker, domain)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that repeats the last utter_message.</p>
+<p>Parameters:
+dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+domain (Dict[Text, Any]): The bot’s domain</p>
+<p>Returns:
+List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def run(self, dispatcher, tracker, domain):
+    &#34;&#34;&#34;Function that repeats the last utter_message.
+
+    Parameters:
+    dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+    tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+    domain (Dict[Text, Any]): The bot’s domain
+
+    Returns:
+    List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+    print(&#39;Trying to repeat&#39;)
+    if len(tracker.events) &gt;= 3:
+            dispatcher.utter_message(tracker.events[-3].get(&#39;text&#39;))
+
+    return []</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="actions.ActionResetSlotOpenDemo"><code class="flex name class">
+<span>class <span class="ident">ActionResetSlotOpenDemo</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>A class used to reset slots</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class ActionResetSlotOpenDemo(Action):
+    &#34;&#34;&#34;A class used to reset slots&#34;&#34;&#34;
+
+    def name(self):
+        &#34;&#34;&#34;Function that returns the name of the action
+
+        Returns:
+        Text:The name of the action&#34;&#34;&#34;
+
+        return &#34;action_reset_slot_open&#34;
+
+    def run(self, dispatcher, tracker, domain):
+        &#34;&#34;&#34;Function that resets slots.
+
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
+
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+        return [SlotSet(&#34;demo&#34;, None),SlotSet(&#34;read_list&#34;,False),SlotSet(&#39;restart&#39;,False)]</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>rasa_sdk.interfaces.Action</li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="actions.ActionResetSlotOpenDemo.name"><code class="name flex">
+<span>def <span class="ident">name</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that returns the name of the action</p>
+<p>Returns:
+Text:The name of the action</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def name(self):
+    &#34;&#34;&#34;Function that returns the name of the action
+
+    Returns:
+    Text:The name of the action&#34;&#34;&#34;
+
+    return &#34;action_reset_slot_open&#34;</code></pre>
+</details>
+</dd>
+<dt id="actions.ActionResetSlotOpenDemo.run"><code class="name flex">
+<span>def <span class="ident">run</span></span>(<span>self, dispatcher, tracker, domain)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that resets slots.</p>
+<p>Parameters:
+dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+domain (Dict[Text, Any]): The bot’s domain</p>
+<p>Returns:
+List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def run(self, dispatcher, tracker, domain):
+    &#34;&#34;&#34;Function that resets slots.
+
+    Parameters:
+    dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+    tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+    domain (Dict[Text, Any]): The bot’s domain
+
+    Returns:
+    List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+    return [SlotSet(&#34;demo&#34;, None),SlotSet(&#34;read_list&#34;,False),SlotSet(&#39;restart&#39;,False)]</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="actions.ActionResetSlotSearch"><code class="flex name class">
+<span>class <span class="ident">ActionResetSlotSearch</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>A class used to reset slots</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class ActionResetSlotSearch(Action):
+    &#34;&#34;&#34;A class used to reset slots&#34;&#34;&#34;
+
+    def name(self):
+        &#34;&#34;&#34;Function that returns the name of the action
+
+        Returns:
+        Text:The name of the action&#34;&#34;&#34;
+
+        return &#34;action_reset_slot_search&#34;
+
+    def run(self, dispatcher, tracker, domain):
+        &#34;&#34;&#34;Function that resets slots.
+
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
+
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+        return [SlotSet(&#34;demo&#34;,None),SlotSet(&#34;tag&#34;,None),SlotSet(&#34;search_mode&#34;,None)]</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>rasa_sdk.interfaces.Action</li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="actions.ActionResetSlotSearch.name"><code class="name flex">
+<span>def <span class="ident">name</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that returns the name of the action</p>
+<p>Returns:
+Text:The name of the action</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def name(self):
+    &#34;&#34;&#34;Function that returns the name of the action
+
+    Returns:
+    Text:The name of the action&#34;&#34;&#34;
+
+    return &#34;action_reset_slot_search&#34;</code></pre>
+</details>
+</dd>
+<dt id="actions.ActionResetSlotSearch.run"><code class="name flex">
+<span>def <span class="ident">run</span></span>(<span>self, dispatcher, tracker, domain)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that resets slots.</p>
+<p>Parameters:
+dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+domain (Dict[Text, Any]): The bot’s domain</p>
+<p>Returns:
+List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def run(self, dispatcher, tracker, domain):
+    &#34;&#34;&#34;Function that resets slots.
+
+    Parameters:
+    dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+    tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+    domain (Dict[Text, Any]): The bot’s domain
+
+    Returns:
+    List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+    return [SlotSet(&#34;demo&#34;,None),SlotSet(&#34;tag&#34;,None),SlotSet(&#34;search_mode&#34;,None)]</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="actions.ActionResetSlotZoom"><code class="flex name class">
+<span>class <span class="ident">ActionResetSlotZoom</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>A class used to reset slots</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class ActionResetSlotZoom(Action):
+    &#34;&#34;&#34;A class used to reset slots&#34;&#34;&#34;
+
+    def name(self):
+        &#34;&#34;&#34;Function that returns the name of the action
+
+        Returns:
+        Text:The name of the action&#34;&#34;&#34;
+
+        return &#34;action_reset_slot_zoom&#34;
+
+    def run(self, dispatcher, tracker, domain):
+        &#34;&#34;&#34;Function that resets slots.
+
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
+
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+        return [SlotSet(&#39;zoom_action&#39;,None),SlotSet(&#39;zoom_big_level&#39;,None),SlotSet(&#39;zoom_small_level&#39;,None)]</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>rasa_sdk.interfaces.Action</li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="actions.ActionResetSlotZoom.name"><code class="name flex">
+<span>def <span class="ident">name</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that returns the name of the action</p>
+<p>Returns:
+Text:The name of the action</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def name(self):
+    &#34;&#34;&#34;Function that returns the name of the action
+
+    Returns:
+    Text:The name of the action&#34;&#34;&#34;
+
+    return &#34;action_reset_slot_zoom&#34;</code></pre>
+</details>
+</dd>
+<dt id="actions.ActionResetSlotZoom.run"><code class="name flex">
+<span>def <span class="ident">run</span></span>(<span>self, dispatcher, tracker, domain)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that resets slots.</p>
+<p>Parameters:
+dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+domain (Dict[Text, Any]): The bot’s domain</p>
+<p>Returns:
+List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def run(self, dispatcher, tracker, domain):
+    &#34;&#34;&#34;Function that resets slots.
+
+    Parameters:
+    dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+    tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+    domain (Dict[Text, Any]): The bot’s domain
+
+    Returns:
+    List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+    return [SlotSet(&#39;zoom_action&#39;,None),SlotSet(&#39;zoom_big_level&#39;,None),SlotSet(&#39;zoom_small_level&#39;,None)]</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="actions.ActionSearch"><code class="flex name class">
+<span>class <span class="ident">ActionSearch</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>A class used to search a demo</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class ActionSearch(Action):
+    &#34;&#34;&#34;A class used to search a demo&#34;&#34;&#34;
+
+    def name(self) -&gt; Text:
+        &#34;&#34;&#34;Function that returns the name of the action
+
+        Returns:
+        Text:The name of the action&#34;&#34;&#34;
+
+        return &#34;action_search&#34;
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -&gt; List[Dict[Text, Any]]:
+        &#34;&#34;&#34;Function that manages the robot&#39;s behavior to search a demo.
+
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
+
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+        tag = tracker.get_slot(&#34;tag&#34;)
+        key_word = tracker.get_slot(&#34;demo&#34;)
+        search_mode = tracker.get_slot(&#34;search_mode&#34;)
+
+        if search_mode == None:
+            search_mode = &#34;&#34;
+
+
+        result = action_search(my_graphQL,key_word,tag,search_mode)
+        print(&#34;Trying to execute search action...&#34;)
+
+        if result[&#39;success&#39;]:
+            dispatcher.utter_message(text=result[&#39;message&#39;])
+            print(&#34;Success :)&#34;)
+        else:
+            dispatcher.utter_message(text=&#34;I&#39;m sorry, something went wrong. {}&#34;.format(result[&#39;message&#39;]))
+            dispatcher.utter_message(text=&#34;Do you want me to try again ?&#34;)
+            print(&#39;Fail :(&#39;)
+            return []
+
+        return [SlotSet(&#34;demo&#34;,None),SlotSet(&#34;tag&#34;,None),SlotSet(&#34;search_mode&#34;,None)]</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>rasa_sdk.interfaces.Action</li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="actions.ActionSearch.name"><code class="name flex">
+<span>def <span class="ident">name</span></span>(<span>self) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that returns the name of the action</p>
+<p>Returns:
+Text:The name of the action</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def name(self) -&gt; Text:
+    &#34;&#34;&#34;Function that returns the name of the action
+
+    Returns:
+    Text:The name of the action&#34;&#34;&#34;
+
+    return &#34;action_search&#34;</code></pre>
+</details>
+</dd>
+<dt id="actions.ActionSearch.run"><code class="name flex">
+<span>def <span class="ident">run</span></span>(<span>self, dispatcher: rasa_sdk.executor.CollectingDispatcher, tracker: rasa_sdk.interfaces.Tracker, domain: Dict[str, Any]) ‑> List[Dict[str, Any]]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that manages the robot's behavior to search a demo.</p>
+<p>Parameters:
+dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+domain (Dict[Text, Any]): The bot’s domain</p>
+<p>Returns:
+List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def run(self, dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any]) -&gt; List[Dict[Text, Any]]:
+    &#34;&#34;&#34;Function that manages the robot&#39;s behavior to search a demo.
+
+    Parameters:
+    dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+    tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+    domain (Dict[Text, Any]): The bot’s domain
+
+    Returns:
+    List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+    tag = tracker.get_slot(&#34;tag&#34;)
+    key_word = tracker.get_slot(&#34;demo&#34;)
+    search_mode = tracker.get_slot(&#34;search_mode&#34;)
+
+    if search_mode == None:
+        search_mode = &#34;&#34;
+
+
+    result = action_search(my_graphQL,key_word,tag,search_mode)
+    print(&#34;Trying to execute search action...&#34;)
+
+    if result[&#39;success&#39;]:
+        dispatcher.utter_message(text=result[&#39;message&#39;])
+        print(&#34;Success :)&#34;)
+    else:
+        dispatcher.utter_message(text=&#34;I&#39;m sorry, something went wrong. {}&#34;.format(result[&#39;message&#39;]))
+        dispatcher.utter_message(text=&#34;Do you want me to try again ?&#34;)
+        print(&#39;Fail :(&#39;)
+        return []
+
+    return [SlotSet(&#34;demo&#34;,None),SlotSet(&#34;tag&#34;,None),SlotSet(&#34;search_mode&#34;,None)]</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="actions.ActionShutDown"><code class="flex name class">
+<span>class <span class="ident">ActionShutDown</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>A class used to shutdown the GDO</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class ActionShutDown(Action):
+    &#34;&#34;&#34;A class used to shutdown the GDO&#34;&#34;&#34;
+
+    def name(self) -&gt; Text:
+        &#34;&#34;&#34;Function that returns the name of the action
+
+        Returns:
+        Text:The name of the action&#34;&#34;&#34;
+
+        return &#34;action_shutdown&#34;
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -&gt; List[Dict[Text, Any]]:
+        &#34;&#34;&#34;Function that manages the robot&#39;s behavior to shutdown the GDO
+
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
+
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+        response = action_turn_off_gdo(my_graphQL)
+
+        print(&#34;Trying to shutdown the GDO...&#34;)
+        if response[&#39;success&#39;] and response[&#39;executePowerAction&#39;]==&#34;off&#34;:
+            dispatcher.utter_message(text=&#34;The Global Data Observatory is off&#34;)
+            print(&#34;The GDO is off :)&#34;)
+        elif not response[&#39;success&#39;]:
+            dispatcher.utter_message(text=&#34;Something went wrong. {}&#34;.format(response[&#39;message&#39;]))
+            dispatcher.utter_message(text=&#34;Do you want me to try again ?&#34;)
+            print(response[&#34;message&#34;])
+        else:
+            dispatcher.utter_message(text=&#34;Something went wrong. Do you want me to try again ?&#34;)
+            print(&#34;Fail :(&#34;)
+
+        return []</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>rasa_sdk.interfaces.Action</li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="actions.ActionShutDown.name"><code class="name flex">
+<span>def <span class="ident">name</span></span>(<span>self) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that returns the name of the action</p>
+<p>Returns:
+Text:The name of the action</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def name(self) -&gt; Text:
+    &#34;&#34;&#34;Function that returns the name of the action
+
+    Returns:
+    Text:The name of the action&#34;&#34;&#34;
+
+    return &#34;action_shutdown&#34;</code></pre>
+</details>
+</dd>
+<dt id="actions.ActionShutDown.run"><code class="name flex">
+<span>def <span class="ident">run</span></span>(<span>self, dispatcher: rasa_sdk.executor.CollectingDispatcher, tracker: rasa_sdk.interfaces.Tracker, domain: Dict[str, Any]) ‑> List[Dict[str, Any]]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that manages the robot's behavior to shutdown the GDO</p>
+<p>Parameters:
+dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+domain (Dict[Text, Any]): The bot’s domain</p>
+<p>Returns:
+List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def run(self, dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any]) -&gt; List[Dict[Text, Any]]:
+    &#34;&#34;&#34;Function that manages the robot&#39;s behavior to shutdown the GDO
+
+    Parameters:
+    dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+    tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+    domain (Dict[Text, Any]): The bot’s domain
+
+    Returns:
+    List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+    response = action_turn_off_gdo(my_graphQL)
+
+    print(&#34;Trying to shutdown the GDO...&#34;)
+    if response[&#39;success&#39;] and response[&#39;executePowerAction&#39;]==&#34;off&#34;:
+        dispatcher.utter_message(text=&#34;The Global Data Observatory is off&#34;)
+        print(&#34;The GDO is off :)&#34;)
+    elif not response[&#39;success&#39;]:
+        dispatcher.utter_message(text=&#34;Something went wrong. {}&#34;.format(response[&#39;message&#39;]))
+        dispatcher.utter_message(text=&#34;Do you want me to try again ?&#34;)
+        print(response[&#34;message&#34;])
+    else:
+        dispatcher.utter_message(text=&#34;Something went wrong. Do you want me to try again ?&#34;)
+        print(&#34;Fail :(&#34;)
+
+    return []</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="actions.ActionSwitchMode"><code class="flex name class">
+<span>class <span class="ident">ActionSwitchMode</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>A class used to switch the mode</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class ActionSwitchMode(Action):
+    &#34;&#34;&#34;A class used to switch the mode&#34;&#34;&#34;
+
+    def name(self) -&gt; Text:
+        &#34;&#34;&#34;Function that returns the name of the action
+
+        Returns:
+        Text:The name of the action&#34;&#34;&#34;
+
+        return &#34;action_switch_modes&#34;
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -&gt; List[Dict[Text, Any]]:
+        &#34;&#34;&#34;Function that manages the robot&#39;s behavior to switch the mode.
+
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
+
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+        response = action_switch_mode(my_graphQL,tracker.get_slot(&#39;mode&#39;),tracker.get_slot(&#39;switch_action&#39;))
+        print(&#34;Switch mode action in process...&#34;)
+        if response[&#39;success&#39;]:
+            dispatcher.utter_message(text=response[&#39;message&#39;])
+            print(response[&#39;message&#39;])
+        else:
+            dispatcher.utter_message(text=&#34;I&#39;m sorry, I can&#39;t do that. {}&#34;.format(response[&#39;message&#39;]))
+            print(&#34;Fail :(&#34;)
+
+        return [SlotSet(&#34;mode&#34;,None),SlotSet(&#34;switch_action&#34;,None)]</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>rasa_sdk.interfaces.Action</li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="actions.ActionSwitchMode.name"><code class="name flex">
+<span>def <span class="ident">name</span></span>(<span>self) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that returns the name of the action</p>
+<p>Returns:
+Text:The name of the action</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def name(self) -&gt; Text:
+    &#34;&#34;&#34;Function that returns the name of the action
+
+    Returns:
+    Text:The name of the action&#34;&#34;&#34;
+
+    return &#34;action_switch_modes&#34;</code></pre>
+</details>
+</dd>
+<dt id="actions.ActionSwitchMode.run"><code class="name flex">
+<span>def <span class="ident">run</span></span>(<span>self, dispatcher: rasa_sdk.executor.CollectingDispatcher, tracker: rasa_sdk.interfaces.Tracker, domain: Dict[str, Any]) ‑> List[Dict[str, Any]]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that manages the robot's behavior to switch the mode.</p>
+<p>Parameters:
+dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+domain (Dict[Text, Any]): The bot’s domain</p>
+<p>Returns:
+List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def run(self, dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any]) -&gt; List[Dict[Text, Any]]:
+    &#34;&#34;&#34;Function that manages the robot&#39;s behavior to switch the mode.
+
+    Parameters:
+    dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+    tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+    domain (Dict[Text, Any]): The bot’s domain
+
+    Returns:
+    List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+    response = action_switch_mode(my_graphQL,tracker.get_slot(&#39;mode&#39;),tracker.get_slot(&#39;switch_action&#39;))
+    print(&#34;Switch mode action in process...&#34;)
+    if response[&#39;success&#39;]:
+        dispatcher.utter_message(text=response[&#39;message&#39;])
+        print(response[&#39;message&#39;])
+    else:
+        dispatcher.utter_message(text=&#34;I&#39;m sorry, I can&#39;t do that. {}&#34;.format(response[&#39;message&#39;]))
+        print(&#34;Fail :(&#34;)
+
+    return [SlotSet(&#34;mode&#34;,None),SlotSet(&#34;switch_action&#34;,None)]</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="actions.ActionTurnOnGDO"><code class="flex name class">
+<span>class <span class="ident">ActionTurnOnGDO</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>A class used to turn on the GDO</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class ActionTurnOnGDO(Action):
+    &#34;&#34;&#34;A class used to turn on the GDO&#34;&#34;&#34;
+
+    def name(self) -&gt; Text:
+        &#34;&#34;&#34;Function that returns the name of the action
+
+        Returns:
+        Text:The name of the action&#34;&#34;&#34;
+
+        return &#34;action_turn_on_gdo&#34;
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -&gt; List[Dict[Text, Any]]:
+        &#34;&#34;&#34;Function that manages the robot&#39;s behavior to turn on the GDO.
+
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
+
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+        response = action_turn_on_gdo(my_graphQL)
+
+        print(&#34;Trying to turn on the GDO...&#34;)
+        if response[&#39;success&#39;] and response[&#39;executePowerAction&#39;]==&#34;on&#34;:
+            dispatcher.utter_message(text=&#34;The Global Data Observatory is on&#34;)
+            print(&#34;The GDO is on :)&#34;)
+        elif not response[&#39;success&#39;]:
+            dispatcher.utter_message(text=&#34;Something went wrong. {}&#34;.format(response[&#39;message&#39;]))
+            dispatcher.utter_message(text=&#34;Do you want me to try again ?&#34;)
+            print(response[&#34;message&#34;])
+        else:
+            dispatcher.utter_message(text=&#34;Something went wrong. Do you want me to try again ?&#34;)
+            print(&#34;Fail :(&#34;)
+
+        return []</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>rasa_sdk.interfaces.Action</li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="actions.ActionTurnOnGDO.name"><code class="name flex">
+<span>def <span class="ident">name</span></span>(<span>self) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that returns the name of the action</p>
+<p>Returns:
+Text:The name of the action</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def name(self) -&gt; Text:
+    &#34;&#34;&#34;Function that returns the name of the action
+
+    Returns:
+    Text:The name of the action&#34;&#34;&#34;
+
+    return &#34;action_turn_on_gdo&#34;</code></pre>
+</details>
+</dd>
+<dt id="actions.ActionTurnOnGDO.run"><code class="name flex">
+<span>def <span class="ident">run</span></span>(<span>self, dispatcher: rasa_sdk.executor.CollectingDispatcher, tracker: rasa_sdk.interfaces.Tracker, domain: Dict[str, Any]) ‑> List[Dict[str, Any]]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that manages the robot's behavior to turn on the GDO.</p>
+<p>Parameters:
+dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+domain (Dict[Text, Any]): The bot’s domain</p>
+<p>Returns:
+List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def run(self, dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any]) -&gt; List[Dict[Text, Any]]:
+    &#34;&#34;&#34;Function that manages the robot&#39;s behavior to turn on the GDO.
+
+    Parameters:
+    dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+    tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+    domain (Dict[Text, Any]): The bot’s domain
+
+    Returns:
+    List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+    response = action_turn_on_gdo(my_graphQL)
+
+    print(&#34;Trying to turn on the GDO...&#34;)
+    if response[&#39;success&#39;] and response[&#39;executePowerAction&#39;]==&#34;on&#34;:
+        dispatcher.utter_message(text=&#34;The Global Data Observatory is on&#34;)
+        print(&#34;The GDO is on :)&#34;)
+    elif not response[&#39;success&#39;]:
+        dispatcher.utter_message(text=&#34;Something went wrong. {}&#34;.format(response[&#39;message&#39;]))
+        dispatcher.utter_message(text=&#34;Do you want me to try again ?&#34;)
+        print(response[&#34;message&#34;])
+    else:
+        dispatcher.utter_message(text=&#34;Something went wrong. Do you want me to try again ?&#34;)
+        print(&#34;Fail :(&#34;)
+
+    return []</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="actions.ActionZoom"><code class="flex name class">
+<span>class <span class="ident">ActionZoom</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>A class used to zoom in or zoom out</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class ActionZoom(Action):
+    &#34;&#34;&#34;A class used to zoom in or zoom out&#34;&#34;&#34;
+
+    def name(self):
+        &#34;&#34;&#34;Function that returns the name of the action
+
+        Returns:
+        Text:The name of the action&#34;&#34;&#34;
+        return &#34;action_zoom&#34;
+
+    def run(self, dispatcher, tracker, domain):
+        &#34;&#34;&#34;Function that runs zoom-in or zoom-out commands
+
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
+
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+        zoom_action = tracker.get_slot(&#39;zoom_action&#39;)
+        zoom_small_level = tracker.get_slot(&#39;zoom_small_level&#39;)
+        zoom_big_level = tracker.get_slot(&#39;zoom_big_level&#39;)
+
+        print(&#39;Trying to execute zoom action&#39;)
+        if zoom_small_level == None and zoom_big_level == None:
+            response = action_zoom(my_graphQL,zoom_action)
+        elif zoom_small_level == None:
+            response = action_zoom(my_graphQL,zoom_action,&#39;big&#39;)
+        else:
+            response = action_zoom(my_graphQL,zoom_action,&#39;small&#39;)
+
+        if response[&#39;success&#39;] and response[&#39;message&#39;] ==&#39;done&#39;:
+            dispatcher.utter_message(text=&#34;It&#39;s done !&#34;)
+            print(&#39;Zoom action successfully done :)&#39;)
+            return [SlotSet(&#39;zoom_action&#39;,None),SlotSet(&#39;zoom_big_level&#39;,None),SlotSet(&#39;zoom_small_level&#39;,None)]
+        elif response[&#39;success&#39;]:
+            dispatcher.utter_message(text=response[&#39;message&#39;])
+            return [SlotSet(&#39;zoom_action&#39;,None)]
+        else :
+            dispatcher.utter_message(text=&#34;I&#39;m sorry. I didn&#39;t manage to do it. {}. Should I try again ?&#34;.format(response[&#39;message&#39;]))
+            print(&#39;Did not manage to do it :(&#39;)
+            return []</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>rasa_sdk.interfaces.Action</li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="actions.ActionZoom.name"><code class="name flex">
+<span>def <span class="ident">name</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that returns the name of the action</p>
+<p>Returns:
+Text:The name of the action</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def name(self):
+    &#34;&#34;&#34;Function that returns the name of the action
+
+    Returns:
+    Text:The name of the action&#34;&#34;&#34;
+    return &#34;action_zoom&#34;</code></pre>
+</details>
+</dd>
+<dt id="actions.ActionZoom.run"><code class="name flex">
+<span>def <span class="ident">run</span></span>(<span>self, dispatcher, tracker, domain)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that runs zoom-in or zoom-out commands</p>
+<p>Parameters:
+dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+domain (Dict[Text, Any]): The bot’s domain</p>
+<p>Returns:
+List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def run(self, dispatcher, tracker, domain):
+    &#34;&#34;&#34;Function that runs zoom-in or zoom-out commands
+
+    Parameters:
+    dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+    tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+    domain (Dict[Text, Any]): The bot’s domain
+
+    Returns:
+    List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+    zoom_action = tracker.get_slot(&#39;zoom_action&#39;)
+    zoom_small_level = tracker.get_slot(&#39;zoom_small_level&#39;)
+    zoom_big_level = tracker.get_slot(&#39;zoom_big_level&#39;)
+
+    print(&#39;Trying to execute zoom action&#39;)
+    if zoom_small_level == None and zoom_big_level == None:
+        response = action_zoom(my_graphQL,zoom_action)
+    elif zoom_small_level == None:
+        response = action_zoom(my_graphQL,zoom_action,&#39;big&#39;)
+    else:
+        response = action_zoom(my_graphQL,zoom_action,&#39;small&#39;)
+
+    if response[&#39;success&#39;] and response[&#39;message&#39;] ==&#39;done&#39;:
+        dispatcher.utter_message(text=&#34;It&#39;s done !&#34;)
+        print(&#39;Zoom action successfully done :)&#39;)
+        return [SlotSet(&#39;zoom_action&#39;,None),SlotSet(&#39;zoom_big_level&#39;,None),SlotSet(&#39;zoom_small_level&#39;,None)]
+    elif response[&#39;success&#39;]:
+        dispatcher.utter_message(text=response[&#39;message&#39;])
+        return [SlotSet(&#39;zoom_action&#39;,None)]
+    else :
+        dispatcher.utter_message(text=&#34;I&#39;m sorry. I didn&#39;t manage to do it. {}. Should I try again ?&#34;.format(response[&#39;message&#39;]))
+        print(&#39;Did not manage to do it :(&#39;)
+        return []</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="actions.ActionClearSpace" href="#actions.ActionClearSpace">ActionClearSpace</a></code></h4>
+<ul class="">
+<li><code><a title="actions.ActionClearSpace.name" href="#actions.ActionClearSpace.name">name</a></code></li>
+<li><code><a title="actions.ActionClearSpace.run" href="#actions.ActionClearSpace.run">run</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="actions.ActionCloseBrowsers" href="#actions.ActionCloseBrowsers">ActionCloseBrowsers</a></code></h4>
+<ul class="">
+<li><code><a title="actions.ActionCloseBrowsers.name" href="#actions.ActionCloseBrowsers.name">name</a></code></li>
+<li><code><a title="actions.ActionCloseBrowsers.run" href="#actions.ActionCloseBrowsers.run">run</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="actions.ActionControl" href="#actions.ActionControl">ActionControl</a></code></h4>
+<ul class="">
+<li><code><a title="actions.ActionControl.name" href="#actions.ActionControl.name">name</a></code></li>
+<li><code><a title="actions.ActionControl.process_response" href="#actions.ActionControl.process_response">process_response</a></code></li>
+<li><code><a title="actions.ActionControl.run" href="#actions.ActionControl.run">run</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="actions.ActionHelp" href="#actions.ActionHelp">ActionHelp</a></code></h4>
+<ul class="">
+<li><code><a title="actions.ActionHelp.name" href="#actions.ActionHelp.name">name</a></code></li>
+<li><code><a title="actions.ActionHelp.run" href="#actions.ActionHelp.run">run</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="actions.ActionListDemos" href="#actions.ActionListDemos">ActionListDemos</a></code></h4>
+<ul class="">
+<li><code><a title="actions.ActionListDemos.name" href="#actions.ActionListDemos.name">name</a></code></li>
+<li><code><a title="actions.ActionListDemos.run" href="#actions.ActionListDemos.run">run</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="actions.ActionOpen" href="#actions.ActionOpen">ActionOpen</a></code></h4>
+<ul class="">
+<li><code><a title="actions.ActionOpen.name" href="#actions.ActionOpen.name">name</a></code></li>
+<li><code><a title="actions.ActionOpen.run" href="#actions.ActionOpen.run">run</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="actions.ActionOpenBrowsers" href="#actions.ActionOpenBrowsers">ActionOpenBrowsers</a></code></h4>
+<ul class="">
+<li><code><a title="actions.ActionOpenBrowsers.name" href="#actions.ActionOpenBrowsers.name">name</a></code></li>
+<li><code><a title="actions.ActionOpenBrowsers.run" href="#actions.ActionOpenBrowsers.run">run</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="actions.ActionOpenEnvironment" href="#actions.ActionOpenEnvironment">ActionOpenEnvironment</a></code></h4>
+<ul class="">
+<li><code><a title="actions.ActionOpenEnvironment.name" href="#actions.ActionOpenEnvironment.name">name</a></code></li>
+<li><code><a title="actions.ActionOpenEnvironment.run" href="#actions.ActionOpenEnvironment.run">run</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="actions.ActionRefreshBrowsers" href="#actions.ActionRefreshBrowsers">ActionRefreshBrowsers</a></code></h4>
+<ul class="">
+<li><code><a title="actions.ActionRefreshBrowsers.name" href="#actions.ActionRefreshBrowsers.name">name</a></code></li>
+<li><code><a title="actions.ActionRefreshBrowsers.run" href="#actions.ActionRefreshBrowsers.run">run</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="actions.ActionRepeat" href="#actions.ActionRepeat">ActionRepeat</a></code></h4>
+<ul class="">
+<li><code><a title="actions.ActionRepeat.name" href="#actions.ActionRepeat.name">name</a></code></li>
+<li><code><a title="actions.ActionRepeat.run" href="#actions.ActionRepeat.run">run</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="actions.ActionResetSlotOpenDemo" href="#actions.ActionResetSlotOpenDemo">ActionResetSlotOpenDemo</a></code></h4>
+<ul class="">
+<li><code><a title="actions.ActionResetSlotOpenDemo.name" href="#actions.ActionResetSlotOpenDemo.name">name</a></code></li>
+<li><code><a title="actions.ActionResetSlotOpenDemo.run" href="#actions.ActionResetSlotOpenDemo.run">run</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="actions.ActionResetSlotSearch" href="#actions.ActionResetSlotSearch">ActionResetSlotSearch</a></code></h4>
+<ul class="">
+<li><code><a title="actions.ActionResetSlotSearch.name" href="#actions.ActionResetSlotSearch.name">name</a></code></li>
+<li><code><a title="actions.ActionResetSlotSearch.run" href="#actions.ActionResetSlotSearch.run">run</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="actions.ActionResetSlotZoom" href="#actions.ActionResetSlotZoom">ActionResetSlotZoom</a></code></h4>
+<ul class="">
+<li><code><a title="actions.ActionResetSlotZoom.name" href="#actions.ActionResetSlotZoom.name">name</a></code></li>
+<li><code><a title="actions.ActionResetSlotZoom.run" href="#actions.ActionResetSlotZoom.run">run</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="actions.ActionSearch" href="#actions.ActionSearch">ActionSearch</a></code></h4>
+<ul class="">
+<li><code><a title="actions.ActionSearch.name" href="#actions.ActionSearch.name">name</a></code></li>
+<li><code><a title="actions.ActionSearch.run" href="#actions.ActionSearch.run">run</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="actions.ActionShutDown" href="#actions.ActionShutDown">ActionShutDown</a></code></h4>
+<ul class="">
+<li><code><a title="actions.ActionShutDown.name" href="#actions.ActionShutDown.name">name</a></code></li>
+<li><code><a title="actions.ActionShutDown.run" href="#actions.ActionShutDown.run">run</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="actions.ActionSwitchMode" href="#actions.ActionSwitchMode">ActionSwitchMode</a></code></h4>
+<ul class="">
+<li><code><a title="actions.ActionSwitchMode.name" href="#actions.ActionSwitchMode.name">name</a></code></li>
+<li><code><a title="actions.ActionSwitchMode.run" href="#actions.ActionSwitchMode.run">run</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="actions.ActionTurnOnGDO" href="#actions.ActionTurnOnGDO">ActionTurnOnGDO</a></code></h4>
+<ul class="">
+<li><code><a title="actions.ActionTurnOnGDO.name" href="#actions.ActionTurnOnGDO.name">name</a></code></li>
+<li><code><a title="actions.ActionTurnOnGDO.run" href="#actions.ActionTurnOnGDO.run">run</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="actions.ActionZoom" href="#actions.ActionZoom">ActionZoom</a></code></h4>
+<ul class="">
+<li><code><a title="actions.ActionZoom.name" href="#actions.ActionZoom.name">name</a></code></li>
+<li><code><a title="actions.ActionZoom.run" href="#actions.ActionZoom.run">run</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.8.4</a>.</p>
+</footer>
+</body>
+</html>
