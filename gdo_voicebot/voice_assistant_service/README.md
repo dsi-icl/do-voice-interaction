@@ -15,7 +15,7 @@ You can see in details how it's done in the [voice_assistant.js](https://github.
 
 ## How to install it
 
-`npm install` to install all dependecies.
+`npm install` to install all dependencies.
 
 ## How to build it
 
