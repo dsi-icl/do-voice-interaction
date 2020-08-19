@@ -27,6 +27,10 @@ Execute `rasa shell` if you don't use any custom actions and `rasa shell --endpo
 
 Execute `rasa run actions --actions actions` in your virtual environment. 
 
+## Run tests
+
+In the [tests](https://github.com/dsi-icl/do-voice-interaction/tree/master/gdo_voicebot/dialog_manager_service/utilities/tests) folder, execute `python -m unittest test_utils_graphql.py` and `python -m unittest test_utils.py` in your virtual environment.
+
 ## How to use it with docker 
 
 In [dialog_manager_service](https://github.com/dsi-icl/do-voice-interaction/tree/master/gdo_voicebot/dialog_manager_service), there's a [Makefile](https://github.com/dsi-icl/do-voice-interaction/blob/master/gdo_voicebot/dialog_manager_service/Makefile) which wille help you to execute the different rasa commands on docker. Plese, see, the [Rasa documentation on Docker](https://rasa.com/docs/rasa/user-guide/docker/building-in-docker/) to have more information about how the different commands work. 
