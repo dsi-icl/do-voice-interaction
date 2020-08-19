@@ -3,7 +3,7 @@
 
 This service implements a [rasa assistant](https://rasa.com/docs/) to manage the dialog between the user and the voicebot. Our assistant uses [custom actions](https://rasa.com/docs/rasa/core/actions/#id2) which require connection to the [GDO GraphQL](https://github.com/dsi-icl/gdo-project-launcher). So, please, if you'd like to use it, make sure that [ove server](https://github.com/dsi-icl/gdo-project-launcher/tree/master/server) is launched by entering `npm start` in your console in the [proper directory](https://github.com/dsi-icl/gdo-project-launcher/tree/master/server). Else, you won't be able to use custom actions.
 
-Moreover, you'll have also to refresh demo and tag entities each day, before training your model. Do `python update_demos_tags.py` with over server running.
+Moreover, you'll also have to update demo and tag entities each day, before training your model. Do `python update_demos_tags.py` with over server running.
 
 ## Virtual environment
 
@@ -59,5 +59,6 @@ Once you have finished, you can `make stop actions` to stop actions server runni
 
 Do `make server` to simply run rasa server. Please if you use custom actions for the first time, please follow the 2nd and 3rd steps of [Shell](#shell). 
 
+### Use docker-compose
 
-
+If you want to use [docker-compose](https://github.com/dsi-icl/do-voice-interaction/blob/master/gdo_voicebot/docker-compose.yml), `make build` to build the rasa_actions docker image for the first time. Then you can execute `docker-compose up` in the [gdo_voicebot](https://github.com/dsi-icl/do-voice-interaction/tree/master/gdo_voicebot) folder
