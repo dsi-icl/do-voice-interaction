@@ -5,3 +5,4 @@ graphql-core
 gql
 unittest
 pyyaml
+pdoc3
