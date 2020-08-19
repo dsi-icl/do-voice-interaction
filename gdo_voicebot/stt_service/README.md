@@ -22,10 +22,10 @@ Locally you can execute `npm run lint`or`npm run lint:fix`.
 
 ## How to use it with docker
 
-In the [gdo_voicebot](https://github.com/dsi-icl/do-voice-interaction/tree/master/gdo_voicebot), you'll find a [docker-compose](https://github.com/dsi-icl/do-voice-interaction/blob/master/gdo_voicebot/docker-compose.yml) file. Here you can run `docker-compose up` and that's it.
+In the [gdo_voicebot](https://github.com/dsi-icl/do-voice-interaction/tree/master/gdo_voicebot), you'll find a [docker-compose](https://github.com/dsi-icl/do-voice-interaction/blob/master/gdo_voicebot/docker-compose.yml) file. Here you can run `docker-compose up do-voice-stt-service` and that's it.
 
 ## Where to find the documentation
 
-In the [docs](https://github.com/dsi-icl/do-voice-interaction/tree/master/gdo_voicebot/stt_service/docs) folder, you'll find javascript documentation about the Sppech-to-Text service. 
+In the [docs](https://github.com/dsi-icl/do-voice-interaction/tree/master/gdo_voicebot/stt_service/docs) folder, you'll find javascript documentation about the Speech-to-Text service. 
 
 To generate your own [documentation](https://jsdoc.app/), please use `jsdoc <file_1.js> <file_2.js>` indicating all documented javascripts files.
