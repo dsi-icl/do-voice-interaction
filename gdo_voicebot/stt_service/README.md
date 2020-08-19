@@ -26,4 +26,4 @@ In the [gdo_voicebot](https://github.com/dsi-icl/do-voice-interaction/tree/maste
 
 In the [docs](https://github.com/dsi-icl/do-voice-interaction/tree/master/gdo_voicebot/stt_service/docs) folder, you'll find javascript documentation about the Sppech-to-Text service. 
 
-To generate your own [documentation](https://jsdoc.app/), please use `jsdoc <file_1.js> <file_2.js>` indicating all documented javascripts flles.
+To generate your own [documentation](https://jsdoc.app/), please use `jsdoc <file_1.js> <file_2.js>` indicating all documented javascripts files.
