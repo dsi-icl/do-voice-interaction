@@ -8,6 +8,8 @@ This service will take care of receiving the voice message and transcribing it u
 
 `npm install` to install all dependecies.
 
+If you don't want to use docker, please make sure, that you installed deepspeech models by executing the following command `./download_models.sh`
+
 ## How to check and correct the syntax
 
 In the [gdo_voicebot](https://github.com/dsi-icl/do-voice-interaction/tree/master/gdo_voicebot) you'll find a [lint bash](https://github.com/dsi-icl/do-voice-interaction/blob/master/gdo_voicebot/lint.sh) that will check the integrality of the syntax in each microservice. Execute `./lint.sh` to symply check the syntax and `./lint.sh --fix` to correct syntax errors automaticaly.
