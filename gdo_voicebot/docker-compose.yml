@@ -29,7 +29,6 @@ services:
 
   do-voice-dialog-manager-service:
     image: rasa/rasa:1.10.9-full
-    container_name: do-voice-dialog-manager-service
     ports:
       - "5005:5005"
     volumes:
@@ -41,7 +40,7 @@ services:
 
   do-voice-dialog-manager-actions-service:
     image: dsi-icl/do-voice-dialog-manager-actions-service:latest
-    containes_name: do-voice-dialog-manager-actions-service
+    containes_name: do-voice-dialog-manager-service
     build: dialog_manager_service/
     ports:
       - "5055:5055"
