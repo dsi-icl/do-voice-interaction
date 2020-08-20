@@ -1,9 +1,6 @@
 docker rasa:
 	docker pull rasa/rasa
 	docker pull rasa/rasa-sdk
-	
-build:
-	docker build . -t rasa_actions
 
 train:
 	docker run -v $(shell pwd):/app rasa/rasa:1.10.9-full train -d config/domain.yml -c config/config.yml
