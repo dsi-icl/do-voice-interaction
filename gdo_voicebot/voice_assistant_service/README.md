@@ -3,7 +3,7 @@
 
 ## Description
 
-This service is the heart of our architecture since it will allow communication between the different departments and the client. Here's how he does it :
+This service is the heart of our architecture since it will allow communication between the different microservices and the client. Here's how he does it :
 
 1. It receives the user's voice message from the [client](https://github.com/dsi-icl/do-voice-interaction/tree/master/gdo_voicebot/voice_assistant_client) via a socket.
 2. It posts it to the stt service and gets the text message.
