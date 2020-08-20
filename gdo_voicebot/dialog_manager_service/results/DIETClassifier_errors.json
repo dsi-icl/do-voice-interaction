@@ -6,15 +6,75 @@
         "start": 29,
         "end": 55,
         "value": "the data science institute",
-        "entity": "demo"
+        "entity": "tag"
       }
     ],
     "predicted_entities": [
       {
-        "entity": "demo",
+        "entity": "close_browsers",
+        "start": 29,
+        "end": 32,
+        "value": "the",
+        "extractor": "DIETClassifier"
+      },
+      {
+        "entity": "tag",
         "start": 33,
         "end": 55,
         "value": "data science institute",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "Could you close the loaded demo",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "close_browsers",
+        "start": 10,
+        "end": 15,
+        "value": "close",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "Reset the video",
+    "entities": [
+      {
+        "start": 0,
+        "end": 5,
+        "value": "Reset",
+        "entity": "control_command"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "reset_browsers",
+        "start": 0,
+        "end": 5,
+        "value": "Reset",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "Could you reset the video",
+    "entities": [
+      {
+        "start": 10,
+        "end": 15,
+        "value": "reset",
+        "entity": "control_command"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "reset_browsers",
+        "start": 10,
+        "end": 15,
+        "value": "reset",
         "extractor": "DIETClassifier"
       }
     ]
