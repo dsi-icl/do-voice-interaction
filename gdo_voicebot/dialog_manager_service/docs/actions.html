@@ -561,6 +561,30 @@ class ActionResetSlotZoom(Action):
 
         return [SlotSet(&#39;zoom_action&#39;,None),SlotSet(&#39;zoom_big_level&#39;,None),SlotSet(&#39;zoom_small_level&#39;,None)]
 
+class ActionResetSlotDirection(Action):
+    &#34;&#34;&#34;A class used to reset slots&#34;&#34;&#34;
+
+    def name(self):
+        &#34;&#34;&#34;Function that returns the name of the action
+
+        Returns:
+        Text:The name of the action&#34;&#34;&#34;
+
+        return &#34;action_reset_slot_direction&#34;
+
+    def run(self, dispatcher, tracker, domain):
+        &#34;&#34;&#34;Function that resets slots.
+
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
+
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+        return [SlotSet(&#39;direction&#39;,None)]
+
 class ActionOpenBrowsers(Action):
     &#34;&#34;&#34;A class used to open browsers&#34;&#34;&#34;
 
@@ -743,6 +767,40 @@ class ActionZoom(Action):
             print(&#39;Did not manage to do it :(&#39;)
             return []
 
+class ActionMove(Action):
+    &#34;&#34;&#34;A class used to move on maps&#34;&#34;&#34;
+
+    def name(self):
+        &#34;&#34;&#34;Function that returns the name of the action
+
+        Returns:
+        Text:The name of the action&#34;&#34;&#34;
+        return &#34;action_move&#34;
+
+    def run(self, dispatcher, tracker, domain):
+        &#34;&#34;&#34;Function that runs zoom-in or zoom-out commands
+
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
+
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+        direction = tracker.get_slot(&#39;direction&#39;)
+        response = action_move(my_graphQL,direction)
+
+        if response[&#39;success&#39;] and response[&#39;message&#39;] == &#39;done&#39;:
+            dispatcher.utter_message(text=&#34;It&#39;s done !&#34;)
+            print(&#39;Move action successfully done :)&#39;)
+            return [SlotSet(&#39;direction&#39;,None)]
+        elif response[&#39;success&#39;]:
+            dispatcher.utter_message(text=response[&#39;message&#39;])
+        else:
+            dispatcher.utter_message(text=&#34;I&#39;m sorry. I didn&#39;t manage to do it. {}. Should I try again ?&#34;.format(response[&#39;message&#39;]))
+            print(&#39;Did not manage to do it :(&#39;)
+        return []
 
 # TODO : Reminder
 # class ActionSetReminder(Action):
@@ -1483,6 +1541,118 @@ List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is r
 </dd>
 </dl>
 </dd>
+<dt id="actions.ActionMove"><code class="flex name class">
+<span>class <span class="ident">ActionMove</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>A class used to move on maps</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class ActionMove(Action):
+    &#34;&#34;&#34;A class used to move on maps&#34;&#34;&#34;
+
+    def name(self):
+        &#34;&#34;&#34;Function that returns the name of the action
+
+        Returns:
+        Text:The name of the action&#34;&#34;&#34;
+        return &#34;action_move&#34;
+
+    def run(self, dispatcher, tracker, domain):
+        &#34;&#34;&#34;Function that runs zoom-in or zoom-out commands
+
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
+
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+        direction = tracker.get_slot(&#39;direction&#39;)
+        response = action_move(my_graphQL,direction)
+
+        if response[&#39;success&#39;] and response[&#39;message&#39;] == &#39;done&#39;:
+            dispatcher.utter_message(text=&#34;It&#39;s done !&#34;)
+            print(&#39;Move action successfully done :)&#39;)
+            return [SlotSet(&#39;direction&#39;,None)]
+        elif response[&#39;success&#39;]:
+            dispatcher.utter_message(text=response[&#39;message&#39;])
+        else:
+            dispatcher.utter_message(text=&#34;I&#39;m sorry. I didn&#39;t manage to do it. {}. Should I try again ?&#34;.format(response[&#39;message&#39;]))
+            print(&#39;Did not manage to do it :(&#39;)
+        return []</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>rasa_sdk.interfaces.Action</li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="actions.ActionMove.name"><code class="name flex">
+<span>def <span class="ident">name</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that returns the name of the action</p>
+<p>Returns:
+Text:The name of the action</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def name(self):
+    &#34;&#34;&#34;Function that returns the name of the action
+
+    Returns:
+    Text:The name of the action&#34;&#34;&#34;
+    return &#34;action_move&#34;</code></pre>
+</details>
+</dd>
+<dt id="actions.ActionMove.run"><code class="name flex">
+<span>def <span class="ident">run</span></span>(<span>self, dispatcher, tracker, domain)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that runs zoom-in or zoom-out commands</p>
+<p>Parameters:
+dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+domain (Dict[Text, Any]): The bot’s domain</p>
+<p>Returns:
+List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def run(self, dispatcher, tracker, domain):
+    &#34;&#34;&#34;Function that runs zoom-in or zoom-out commands
+
+    Parameters:
+    dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+    tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+    domain (Dict[Text, Any]): The bot’s domain
+
+    Returns:
+    List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+    direction = tracker.get_slot(&#39;direction&#39;)
+    response = action_move(my_graphQL,direction)
+
+    if response[&#39;success&#39;] and response[&#39;message&#39;] == &#39;done&#39;:
+        dispatcher.utter_message(text=&#34;It&#39;s done !&#34;)
+        print(&#39;Move action successfully done :)&#39;)
+        return [SlotSet(&#39;direction&#39;,None)]
+    elif response[&#39;success&#39;]:
+        dispatcher.utter_message(text=response[&#39;message&#39;])
+    else:
+        dispatcher.utter_message(text=&#34;I&#39;m sorry. I didn&#39;t manage to do it. {}. Should I try again ?&#34;.format(response[&#39;message&#39;]))
+        print(&#39;Did not manage to do it :(&#39;)
+    return []</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
 <dt id="actions.ActionOpen"><code class="flex name class">
 <span>class <span class="ident">ActionOpen</span></span>
 </code></dt>
@@ -2045,6 +2215,96 @@ List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is r
             dispatcher.utter_message(tracker.events[-3].get(&#39;text&#39;))
 
     return []</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="actions.ActionResetSlotDirection"><code class="flex name class">
+<span>class <span class="ident">ActionResetSlotDirection</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>A class used to reset slots</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class ActionResetSlotDirection(Action):
+    &#34;&#34;&#34;A class used to reset slots&#34;&#34;&#34;
+
+    def name(self):
+        &#34;&#34;&#34;Function that returns the name of the action
+
+        Returns:
+        Text:The name of the action&#34;&#34;&#34;
+
+        return &#34;action_reset_slot_direction&#34;
+
+    def run(self, dispatcher, tracker, domain):
+        &#34;&#34;&#34;Function that resets slots.
+
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
+
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+        return [SlotSet(&#39;direction&#39;,None)]</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>rasa_sdk.interfaces.Action</li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="actions.ActionResetSlotDirection.name"><code class="name flex">
+<span>def <span class="ident">name</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that returns the name of the action</p>
+<p>Returns:
+Text:The name of the action</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def name(self):
+    &#34;&#34;&#34;Function that returns the name of the action
+
+    Returns:
+    Text:The name of the action&#34;&#34;&#34;
+
+    return &#34;action_reset_slot_direction&#34;</code></pre>
+</details>
+</dd>
+<dt id="actions.ActionResetSlotDirection.run"><code class="name flex">
+<span>def <span class="ident">run</span></span>(<span>self, dispatcher, tracker, domain)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that resets slots.</p>
+<p>Parameters:
+dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+domain (Dict[Text, Any]): The bot’s domain</p>
+<p>Returns:
+List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def run(self, dispatcher, tracker, domain):
+    &#34;&#34;&#34;Function that resets slots.
+
+    Parameters:
+    dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+    tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+    domain (Dict[Text, Any]): The bot’s domain
+
+    Returns:
+    List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]&#34;&#34;&#34;
+
+    return [SlotSet(&#39;direction&#39;,None)]</code></pre>
 </details>
 </dd>
 </dl>
@@ -2989,6 +3249,13 @@ List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is r
 </ul>
 </li>
 <li>
+<h4><code><a title="actions.ActionMove" href="#actions.ActionMove">ActionMove</a></code></h4>
+<ul class="">
+<li><code><a title="actions.ActionMove.name" href="#actions.ActionMove.name">name</a></code></li>
+<li><code><a title="actions.ActionMove.run" href="#actions.ActionMove.run">run</a></code></li>
+</ul>
+</li>
+<li>
 <h4><code><a title="actions.ActionOpen" href="#actions.ActionOpen">ActionOpen</a></code></h4>
 <ul class="">
 <li><code><a title="actions.ActionOpen.name" href="#actions.ActionOpen.name">name</a></code></li>
@@ -3021,6 +3288,13 @@ List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is r
 <ul class="">
 <li><code><a title="actions.ActionRepeat.name" href="#actions.ActionRepeat.name">name</a></code></li>
 <li><code><a title="actions.ActionRepeat.run" href="#actions.ActionRepeat.run">run</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="actions.ActionResetSlotDirection" href="#actions.ActionResetSlotDirection">ActionResetSlotDirection</a></code></h4>
+<ul class="">
+<li><code><a title="actions.ActionResetSlotDirection.name" href="#actions.ActionResetSlotDirection.name">name</a></code></li>
+<li><code><a title="actions.ActionResetSlotDirection.run" href="#actions.ActionResetSlotDirection.run">run</a></code></li>
 </ul>
 </li>
 <li>
