@@ -1,4 +1,4 @@
 # This file contains the different endpoints your bot can use.
 
 action_endpoint:
- url: "http://do-voice-dialogue-manager-service:5055/webhook"
+ url: "http://do-voice-dialog-manager-service:5055/webhook"

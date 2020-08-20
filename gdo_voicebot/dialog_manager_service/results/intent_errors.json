@@ -1,10 +1,74 @@
 [
   {
+    "text": "Could you open the browsers please",
+    "intent": "open_browsers",
+    "intent_prediction": {
+      "name": "out_of_scope",
+      "confidence": 0.27997732162475586
+    }
+  },
+  {
+    "text": "I want to open the browsers",
+    "intent": "open_browsers",
+    "intent_prediction": {
+      "name": "out_of_scope",
+      "confidence": 0.3196272552013397
+    }
+  },
+  {
+    "text": "I'd like to open the browsers",
+    "intent": "open_browsers",
+    "intent_prediction": {
+      "name": "out_of_scope",
+      "confidence": 0.3447205722332001
+    }
+  },
+  {
+    "text": "I would like to open browsers please",
+    "intent": "open_browsers",
+    "intent_prediction": {
+      "name": "out_of_scope",
+      "confidence": 0.27824920415878296
+    }
+  },
+  {
+    "text": "Reset browsers",
+    "intent": "refresh_browsers",
+    "intent_prediction": {
+      "name": "clear_space",
+      "confidence": 0.4205099046230316
+    }
+  },
+  {
+    "text": "Could you reset the browsers",
+    "intent": "refresh_browsers",
+    "intent_prediction": {
+      "name": "zoom",
+      "confidence": 0.2890331447124481
+    }
+  },
+  {
+    "text": "I want to reset the browsers please",
+    "intent": "refresh_browsers",
+    "intent_prediction": {
+      "name": "zoom",
+      "confidence": 0.4041612446308136
+    }
+  },
+  {
+    "text": "I would like to reset browsers please",
+    "intent": "refresh_browsers",
+    "intent_prediction": {
+      "name": "zoom",
+      "confidence": 0.43204158544540405
+    }
+  },
+  {
     "text": "What's the list of available environments",
     "intent": "list_available_demos",
     "intent_prediction": {
       "name": "open_environment",
-      "confidence": 0.35867369174957275
+      "confidence": 0.9603561162948608
     }
   }
 ]

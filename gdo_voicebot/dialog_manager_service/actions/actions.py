@@ -439,25 +439,23 @@ class ActionHelp(Action):
         List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]"""
 
         dispatcher.utter_message(text="I can execute the following commands :")
-        dispatcher.utter_message(text="Open demo")
+        dispatcher.utter_message(text="Open/Launch/Start demo")
         dispatcher.utter_message(text="Close demo")
-        dispatcher.utter_message(text="Show me something on tag")
+        dispatcher.utter_message(text="Show me something on tag/key word")
         dispatcher.utter_message(text="Launch demo")
         dispatcher.utter_message(text="Activate demo")
         dispatcher.utter_message(text="Shutdown screens")
         dispatcher.utter_message(text="Do a clearspace")
         dispatcher.utter_message(text="Refresh the screens")
-        dispatcher.utter_message(text="Pause the video/the audio")
-        dispatcher.utter_message(text="Play video")
-        dispatcher.utter_message(text="Start animation")
-        dispatcher.utter_message(text="Stop animation")
-        dispatcher.utter_message(text="Play loop video/audio")
+        dispatcher.utter_message(text="Play/Pause/Stop/Reset/Play loop videos")
         dispatcher.utter_message(text="Full black screens")
         dispatcher.utter_message(text="Open environment")
         dispatcher.utter_message(text="Switch mode")
         dispatcher.utter_message(text="Turn on the Global Data Observatory")
         dispatcher.utter_message(text="Shutdown the Global Data Observatory")
         dispatcher.utter_message(text="Open/Close/Reset browsers")
+        dispatcher.utter_message(text="Zoom in or zoom out a bit, a lot, moderately")
+        dispatcher.utter_message(text="Move up/down/right/left on a map")
 
         return []
 

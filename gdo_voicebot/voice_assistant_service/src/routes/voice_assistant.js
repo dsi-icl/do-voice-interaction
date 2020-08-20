@@ -13,7 +13,7 @@ import { getData, postData } from './index.js'
 export async function successProcess (client, sttResponse, request) {
   console.log('Speech to text transcription : SUCCESS\n')
 
-  const botResult = await postData(global.config.services.doControlService, '{"message":"' + sttResponse.text + '"}', 'Data Observatory Control Service')
+  const botResult = await postData(global.config.services.dialogManagerService, '{"message":"' + sttResponse.text + '"}', 'Data Observatory Control Service')
 
   console.log('bot result', botResult)
 
@@ -45,8 +45,6 @@ export async function successProcess (client, sttResponse, request) {
   } else {
     await errorProcess(client, botResult.data, sttResponse.text, request)
   }
-
-
 }
 
 /**

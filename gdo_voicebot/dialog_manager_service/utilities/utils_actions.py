@@ -161,15 +161,15 @@ def action_refresh(graphql):
 def action_search(graphql,name,tag,search_mode):
     "Funtion that executes search action"
     try:
-        result = {'success':True,'message':'Do you want to search by tag or by key word ? Please choose one of the both options'}
+        result = {'success':True,'message':'Do you want to search by tag or by keyword ? Please choose one of the both options'}
         if not graphql.environment_is_open():
             result.update({'success':False,'message':"I can't access to any demo if no environment is open. Please, open one of these environments before : "+" ,".join(graphql.get_available_environments())})
         elif 'tag' in search_mode and tag == None:
             result.update({'message':'Fine, please say "search" or "look for" and your tag. If you already did and got no answer for that request that means that no demo contains this tag'})
         elif tag != None:
             result.update(search_process_tag(graphql,tag))
-        elif 'key word' in search_mode and name == None:
-            result.update({'message':'Fine, please say "search" or "look for" and your key word. If you already did and got no answer for that request that means that no demo contains this key word'})
+        elif 'key' in search_mode and name == None:
+            result.update({'message':'Fine, please say "search" or "look for" and your keyword. If you already did and got no answer for that request that means that no demo contains this keyword'})
         elif name != None:
             result.update(search_process_name(graphql,name))
     except Exception as exc:

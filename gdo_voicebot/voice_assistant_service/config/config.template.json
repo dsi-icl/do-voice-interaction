@@ -2,6 +2,6 @@
     "services":{
         "sttService":"http://localhost:3000/api/stt",
         "ttsService":"http://localhost:5000/api/tts",
-        "doControlService":"http://localhost:5002/webhooks/rest/webhook"
+        "dialogManagerService":"http://localhost:5005/webhooks/rest/webhook"
     }
 }
