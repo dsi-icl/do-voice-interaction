@@ -65,7 +65,7 @@ Do `make server` to simply run rasa server. Please if you use custom actions for
 
 ### Use docker-compose
 
-If you want to use [docker-compose](https://github.com/dsi-icl/do-voice-interaction/blob/master/gdo_voicebot/docker-compose.yml), `make build` to build the rasa_actions docker image for the first time. Then you can execute `docker-compose up` in the [gdo_voicebot](https://github.com/dsi-icl/do-voice-interaction/tree/master/gdo_voicebot) folder
+If you want to use [docker-compose](https://github.com/dsi-icl/do-voice-interaction/blob/master/gdo_voicebot/docker-compose.yml), execute `docker-compose up` in the [gdo_voicebot](https://github.com/dsi-icl/do-voice-interaction/blob/master/gdo_voicebot/README.md) folder.
 
 ## Where to find the documentation
 
