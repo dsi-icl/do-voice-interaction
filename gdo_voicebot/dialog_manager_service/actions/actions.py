@@ -533,6 +533,30 @@ class ActionResetSlotZoom(Action):
 
         return [SlotSet('zoom_action',None),SlotSet('zoom_big_level',None),SlotSet('zoom_small_level',None)]
 
+class ActionResetSlotDirection(Action):
+    """A class used to reset slots"""
+
+    def name(self):
+        """Function that returns the name of the action
+
+        Returns:
+        Text:The name of the action"""
+
+        return "action_reset_slot_direction"
+
+    def run(self, dispatcher, tracker, domain):
+        """Function that resets slots.
+
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
+
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]"""
+
+        return [SlotSet('direction',None)]
+
 class ActionOpenBrowsers(Action):
     """A class used to open browsers"""
 
@@ -715,6 +739,40 @@ class ActionZoom(Action):
             print('Did not manage to do it :(')
             return []
 
+class ActionMove(Action):
+    """A class used to move on maps"""
+
+    def name(self):
+        """Function that returns the name of the action
+
+        Returns:
+        Text:The name of the action"""
+        return "action_move"
+
+    def run(self, dispatcher, tracker, domain):
+        """Function that runs zoom-in or zoom-out commands
+
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
+
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]"""
+
+        direction = tracker.get_slot('direction')
+        response = action_move(my_graphQL,direction)
+
+        if response['success'] and response['message'] == 'done':
+            dispatcher.utter_message(text="It's done !")
+            print('Move action successfully done :)')
+            return [SlotSet('direction',None)]
+        elif response['success']:
+            dispatcher.utter_message(text=response['message'])
+        else:
+            dispatcher.utter_message(text="I'm sorry. I didn't manage to do it. {}. Should I try again ?".format(response['message']))
+            print('Did not manage to do it :(')
+        return []
 
 # TODO : Reminder
 # class ActionSetReminder(Action):

@@ -230,49 +230,49 @@
   - action_open_environment
 
 # open browsers 1
-* open_browsers: Open browsers please
+* open_browsers: [Open browsers](open_browsers)
   - action_open_browsers
 
 # open browsers 2
-* open_browsers: Could you open the browsers
+* open_browsers: Could you [open the browsers](open_browsers)
   - action_open_browsers
 * affirm: Yes
   - action_open_browsers
 
 # open browsers 3
-* open_browsers: I'd like to open the browsers
+* open_browsers: I'd like to [open the browsers](open_browsers)
   - action_open_browsers
 * deny: No
   - utter_affirm
 
 # close browsers 1
-* close_browsers: Close browsers please
+* close_browsers: [Close browsers](close_browsers) please
   - action_close_browsers
 
 # close browsers 2
-* close_browsers: Could you close the browsers
+* close_browsers: Could you [close the browsers](close_browsers)
   - action_close_browsers
 * affirm: Yes
   - action_close_browsers
 
 # close browsers 3
-* close_browsers: I'd like to close the browsers
+* close_browsers: I'd like to [close the browsers](close_browsers)
   - action_close_browsers
 * deny: No
   - utter_affirm
 
 # refresh browsers 1
-* refresh_browsers: Reset browsers please
+* refresh_browsers: [Reset browsers](reset_browsers) please
   - action_refresh_browsers
 
 # refresh browsers 2
-* refresh_browsers: Could you reset the browsers
+* refresh_browsers: Could you [reset the browsers](reset_browsers)
   - action_refresh_browsers
 * affirm: Yes
   - action_refresh_browsers
 
 # refresh browsers 3
-* refresh_browsers: I'd like to reset the browsers
+* refresh_browsers: I'd like to [reset the browsers](reset_browsers)
   - action_refresh_browsers
 * deny: No
   - utter_affirm
@@ -300,3 +300,49 @@
   - action_list_demos
 * deny: No
   - utter_affirm
+
+# zoom 1
+* zoom: Could you zoom [in](zoom_action) please
+  - action_zoom
+
+# zoom and try again
+* zoom: Zoom [out](zoom_action) [a lot](zoom_big_level)
+  - action_zoom
+* affirm: Yes
+  - action_zoom
+
+# zoom and cancel
+* zoom: Can you zoom [in](zoom_action) [a bit](zoom_small_level)
+  - action_zoom
+* deny: No
+  - utter_affirm
+  - action_reset_slot_zoom
+
+# zoom and ask action type
+* zoom: Make a zoom
+  - action_zoom
+* zoom: Zoom [in](zoom_action)
+  - action_zoom
+
+# move
+* move: Move [left](direction) please
+  - action_move
+
+# move and indicat direction
+* move: Could you move into the map
+  - action_move
+* move: Go [up](direction)
+  - action_move
+
+# move and try again
+* move: Show me what's on the [left](direction)
+  - action_move
+* affirm: Yes
+  - action_move
+
+# move and cancel
+* move: I want you to go [down](direction)
+  - action_move
+* deny: No
+  - utter_affirm
+  - action_reset_slot_direction

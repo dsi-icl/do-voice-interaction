@@ -19,6 +19,7 @@ intents:
   - ask_repeat
   - list_available_demos
   - zoom
+  - move
   # - ask_remind_end_of_meeting
   # - EXTERNAL_reminder
 
@@ -36,6 +37,7 @@ entities:
   - open_browsers
   - close_browsers
   - reset_browsers
+  - direction
 
 slots:
   demo:
@@ -117,6 +119,15 @@ slots:
     - reset the browsers
     - Reset the browsers
     - Reset browsers
+  direction:
+    type: categorical
+    values:
+    - up
+    - top
+    - down
+    - bottom
+    - right
+    - left
 
 actions:
   - action_open
@@ -137,6 +148,8 @@ actions:
   - action_repeat
   - action_zoom
   - action_reset_slot_zoom
+  - action_move
+  - action_reset_slot_direction
   # - action_set_reminder
   # - action_react_to_reminder
 

@@ -84,9 +84,7 @@
 - Open [cardiac ai](demo)
 - Open [bitcoin economy](demo)
 - Open [bitcoin blockchain history](demo)
-- Open [bitcoin](demo)
 - Open [behaviour analytics lab](demo)
-- Open [amr](demo)
 - Open [ai workforce](demo)
 - Open [ai research](demo)
 - Open [ai network](demo)
@@ -277,6 +275,15 @@
 - Do a [small](zoom_small_level)
 - make a [large](zoom_small_level)
 
+## intent:move
+- Move [up](direction)
+- Can you go [down](direction)
+- Could you move to the [left](direction)
+- Go [up](direction)
+- I want you to move to your [right](direction)
+- Move
+- I'd like to see the [top](direction) of the map
+- Show me the [bottom](direction) of the image
 
 <!-- #toDo : Reminder action -->
 <!-- ## intent:ask_remind_end_of_meeting

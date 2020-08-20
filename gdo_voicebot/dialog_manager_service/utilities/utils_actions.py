@@ -225,18 +225,43 @@ def action_zoom(graphql,zoom_action_slot,zoom_level_slot=None):
         elif zoom_action_slot == None:
             zoom = 'Do you want to zoom in or zoom out ?'
         elif zoom_action_slot == 'in' and zoom_level_slot == None:
-            zoom = graphql.zoom_images(graphql.config['zoomin'][1]['medium'])
+            zoom = graphql.zoom_maps(graphql.config['zoomin'][1]['medium'])
         elif zoom_action_slot == 'in' and zoom_level_slot == 'small':
-            zoom = graphql.zoom_images(graphql.config['zoomin'][0]['little'])
+            zoom = graphql.zoom_maps(graphql.config['zoomin'][0]['little'])
         elif zoom_action_slot == 'in' and zoom_level_slot == 'big':
-            zoom = graphql.zoom_images(graphql.config['zoomin'][2]['big'])
+            zoom = graphql.zoom_maps(graphql.config['zoomin'][2]['big'])
         elif zoom_action_slot == 'out' and zoom_level_slot == None:
-            zoom = graphql.zoom_images(graphql.config['zoomout'][1]['medium'])
+            zoom = graphql.zoom_mpas(graphql.config['zoomout'][1]['medium'])
         elif zoom_action_slot == 'out' and zoom_level_slot == 'small':
-            zoom = graphql.zoom_images(graphql.config['zoomout'][0]['little'])
+            zoom = graphql.zoom_maps(graphql.config['zoomout'][0]['little'])
         elif zoom_action_slot == 'out' and zoom_level_slot == 'big':
-            zoom = graphql.zoom_images(graphql.config['zoomout'][2]['big'])
+            zoom = graphql.zoom_maps(graphql.config['zoomout'][2]['big'])
         result.update({'message':zoom})
+    except Exception as exc:
+        result = {'success':False,'message':str(exc)}
+        result.update(ast.literal_eval(str(exc)))
+    finally:
+        return result
+
+def action_move(graphql,direction_slot):
+    "Function that executez move actions"
+
+    try:
+        result = {'success':True}
+        if not graphql.environment_is_open():
+            result.update({'success':False, 'message':'No environment is open. Please, open one of these environments before : '+' ,'.join(graphql.get_available_environments())})
+        elif graphql.get_current_project() == None:
+            result.update({'success':False, 'message':'No project is open'})
+        elif direction_slot in ['top','up']:
+            result.update({'message':graphql.move_maps(graphql.config['move'][2]['up'])})
+        elif direction_slot in ['bottom','down']:
+            result.update({'message':graphql.move_maps(graphql.config['move'][3]['down'])})
+        elif direction_slot == 'left':
+            result.update({'message':graphql.move_maps(graphql.config['move'][0]['left'])})
+        elif direction_slot == 'right':
+            result.update({'message':graphql.move_maps(graphql.config['move'][1]['right'])})
+        else:
+            result.update({'message':'Do you want to go down, up, left or right ?'})
     except Exception as exc:
         result = {'success':False,'message':str(exc)}
         result.update(ast.literal_eval(str(exc)))

@@ -264,6 +264,31 @@
 * zoom
   - action_zoom
 
+# move
+* move
+  - action_move
+  - slot{"direction":null}
+
+# move and ask direction
+* move
+  - action_move
+* move
+  - action_move
+
+# move and try again
+* move
+  - action_move
+* affirm
+  - action_move
+
+# move and cancel
+* move
+  - action_move
+* deny
+  - utter_affirm
+  - action_reset_slot_direction
+  - slot{"direction":null}
+
 <!-- # set reminder
 * ask_remind_end_of_meeting
   - action_set_reminder
