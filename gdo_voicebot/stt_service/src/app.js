@@ -14,12 +14,6 @@ import fs from 'fs'
  */
 import { executeSpeechToTextRequest, loadDeepSpeechModel } from './routes/stt.js'
 
-/**
- * @import { sampleData } from "./routes/index.js"
- * @see {@link "./routes/index.js"|index.js}
- */
-import { sampleData } from './routes/index.js'
-
 if (!fs.existsSync('./config/config.json')) {
   console.error('Could not find the configuration file: \'./config/config.json\'')
   process.exit(1)
@@ -51,15 +45,7 @@ app.use(express.urlencoded({ extended: false }))
  * @name Getting service status
  * @route {GET} /api/status
  */
-app.get('/api/status', (req, res) => res.send('Service is running'))
-
-/**
- * Test service with simple json response
- *
- * @name Getting the test result
- * @route {GET} /api/json
- */
-app.get('/api/json', sampleData)
+app.get('/api/status', (req, res) => res.status(200).send('Service is running'))
 
 /**
  * Get the speech to text transcription using the received audio blob

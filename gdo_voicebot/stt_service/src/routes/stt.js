@@ -61,8 +61,6 @@ export function executeSpeechToTextRequest (req, res, model) {
     const buffer = Buffer.from(req.body, 'base64')
     const textMessage = speechToText(buffer, model)
 
-    console.log('Text message :', textMessage)
-
     // If deepspeech transcription is empty we send back an error to the voice assistant service.
     if (textMessage.length === 0) {
       res.status(400).json({ status: 'fail', service: 'Speech To Text service', text: 'No transcription for this' })

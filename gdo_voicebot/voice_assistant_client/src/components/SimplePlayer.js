@@ -11,8 +11,7 @@ const SimpleRecorder = () => {
     const audio = useSelector(selectAudio);
     const dispatch = useDispatch();
 
-    //hack to wrap the into something playable
-    return <ReactAudioPlayer src={audio ? "data:audio/wav;base64," + audio : null}
+    return <ReactAudioPlayer src={audio}
                              autoPlay onEnded={() => dispatch(clearAudio())}
                              onPlay={() => dispatch(changeStatus({status: PlayerStatus.RESPONDING}))}/>;
 };

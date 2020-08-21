@@ -20,7 +20,7 @@ export const media = createSlice({
                 response: action.payload.response,
                 error: action.payload.error
             }];
-            state.audio = action.payload.audio ? action.payload.audio : null;
+            state.audio = createDataUrl(action.payload.audio);
             if (!state.audio) {
                 state.status = PlayerStatus.IDLE;
             }
@@ -39,3 +39,8 @@ export const selectResponses = state => state.media.responseList;
 export const selectAudio = state => state.media.audio;
 
 export default media.reducer;
+
+// utilities
+function createDataUrl(audio) {
+    return (audio && audio.data) ? `data:${audio.contentType};base64,${audio.data}` : null;
+}

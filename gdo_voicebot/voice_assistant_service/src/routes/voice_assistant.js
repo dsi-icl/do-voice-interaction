@@ -23,7 +23,6 @@ export async function successProcess (client, sttResponse, request) {
 
     // We send the text message to the tts service to get back the voice answer.
     const voiceAnswer = await getData(global.config.services.ttsService, botResponseVoice)
-    console.log('Voice answer (success) : ', voiceAnswer)
 
     if (voiceAnswer.success) {
       // The user receives a transcript of her or his voice message for verification.
@@ -35,7 +34,8 @@ export async function successProcess (client, sttResponse, request) {
         command: sttResponse.text,
         response: botResponseText,
         audio: {
-          data: voiceAnswer.data
+          data: voiceAnswer.data,
+          contentType: voiceAnswer.contentType
         }
       })
     } else {
@@ -57,8 +57,6 @@ export async function errorProcess (client, errorResponse, sttResponseText, requ
   // We generate an error voice message
   const voiceAnswer = await getData(global.config.services.ttsService, 'I encountered an error. Please consult technical support or try the request again')
 
-  console.log('Voice answer (fail)', voiceAnswer)
-
   // We send the json content response to the client, to give a description to the user in an alert box
   // The voice alert is sent to the client to be played
   client.emit('response', {
@@ -66,7 +64,8 @@ export async function errorProcess (client, errorResponse, sttResponseText, requ
     date: request.date,
     command: sttResponseText !== '' ? sttResponseText : '...',
     audio: {
-      data: voiceAnswer.success ? voiceAnswer.data : null
+      data: voiceAnswer.data,
+      contentType: voiceAnswer.contentType
     },
     error: errorResponse.text
   })

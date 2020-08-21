@@ -28,14 +28,14 @@ export function sampleData (req, res) {
 export async function getData (requestUrl, robotAnswer) {
 // We make the get request with the correct url (.../api/tts) and with the chosen parameters
   try {
-    const response = await fetch(mergeUrlParams(requestUrl, { text: robotAnswer, lang: 'en' }))
+    const response = await fetch(mergeUrlParams(requestUrl, { text: robotAnswer, lang: 'en-uk' }))
 
     const status = await response.status
+    const data = await response.json()
     if (status >= 200 && status <= 299) {
-      const audioBuffer = await response.arrayBuffer()
-      return { success: true, data: Buffer.from(audioBuffer, 'base64') }
+      return { success: true, data: data.data, contentType: data.contentType }
     } else {
-      return { success: false, ...(await response.json()) }
+      return { success: false, text: data.error }
     }
   } catch (exc) {
     return { success: false, text: exc.message }
