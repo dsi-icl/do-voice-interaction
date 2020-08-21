@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "axios": "0.20.0",
-    "base64-stream": "^1.0.0",
+    "base64-stream": "1.0.0",
     "cookie-parser": "1.4.5",
     "cors": "2.8.5",
     "debug": "4.1.1",
@@ -22,7 +22,7 @@
     "jsdoc-route-plugin": "0.1.0",
     "lodash": "4.17.20",
     "morgan": "1.10.0",
-    "stream-to-promise": "^3.0.0",
+    "stream-to-promise": "3.0.0",
     "uuid": "8.3.0",
     "yargs-parser": "19.0.1"
   },
