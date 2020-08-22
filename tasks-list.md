@@ -3,7 +3,7 @@
 - [x] See the ove documentation and understand the concepts
 - [x] VPN Set up 
 - [x] Setting survey questions  
----Added tasks---  
+---------------------------------
 - [x] Familiarization with OVE Application Launcher
 - [x] Try some API requests with Swagger UI
 - [x] Install Rasa and follow the tutorial
@@ -49,3 +49,10 @@
 - [x] Improve rasa service
 - [x] Clean up rasa service
 - [ ] Correct and clean up voice assistant
+
+# Week of August 17th to August 21st
+- [x] Zoom and Move Map actions
+- [x] Correct and clean up voice assistant
+- [x] Clean up and move dialog manager service in gdo_voicebot
+- [x] Add docker for dialog manager service 
+- [x] Make README.md files 
