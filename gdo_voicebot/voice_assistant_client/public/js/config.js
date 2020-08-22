@@ -1,1 +1,6 @@
-window.BACKEND_URL = "http://localhost:2000";
+let port = window.location.port;
+if (port === "6060") {
+    port = 2000;
+}
+
+window.BACKEND_URL = `${window.location.protocol}//${window.location.hostname}:${port}`;

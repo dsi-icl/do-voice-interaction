@@ -8,8 +8,8 @@ import cors from 'cors'
 import logger from 'morgan'
 import fs from 'fs'
 import path from 'path'
+import favicon from 'serve-favicon'
 
-import { sampleData } from './routes'
 import { processAudioCommand, processTextCommand } from './routes/voice_assistant.js'
 
 if (!fs.existsSync('./config/config.json')) {
@@ -24,7 +24,7 @@ const __dirname = path.resolve()
 
 app.use(cors())
 app.use(logger('dev'))
-app.use(express.json())
+app.use(express.json({ limit: '50mb' }))
 app.use(express.urlencoded({ extended: false }))
 
 /**
@@ -34,27 +34,13 @@ app.use(express.urlencoded({ extended: false }))
  * @route {GET} /api/status
  */
 app.get('/api/status', (req, res) => res.send('Service is running'))
-/**
- * Test service with simple json response
- *
- * @name Getting the test result
- * @route {GET} /api/json
- */
-app.get('/api/json', sampleData)
 
-app.use('/node_modules', express.static(path.join(__dirname, '/node_modules')))
-/**
- * To serve static files such as images, CSS files, and JavaScript files, use the express.static built-in middleware function in Express.
- *
- * @name Serving static files in Express
- * @route {USE} /api/echo
- * @see {@link https://expressjs.com/en/starter/static-files.html|Exprees}
- */
-app.use('/api/echo', express.static('public'))
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
+app.use('/', express.static(path.join(__dirname, 'public')))
 
 /**
  * Function that manage the entire communication process between the server and the client
- * @param {SocketIO.Client} client The client with which the server comunicates
+ * @param {SocketIO.Client} client The client with which the server communicates
  */
 export function setupClient (client) {
   console.log('Client connected\n')

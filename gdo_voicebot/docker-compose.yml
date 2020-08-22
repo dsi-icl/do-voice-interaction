@@ -21,7 +21,9 @@ services:
   do-voice-assistant-service:
     image: dsi-icl/do-voice-assistant-service:latest
     container_name: do-voice-assistant-service
-    build: voice_assistant_service/
+    build:
+      context: .
+      dockerfile: voice_assistant_service/Dockerfile
     ports:
       - "2000:2000"
     volumes:

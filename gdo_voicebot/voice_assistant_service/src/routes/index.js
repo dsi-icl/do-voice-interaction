@@ -7,16 +7,6 @@ import fetch from 'node-fetch'
 import { mergeUrlParams } from '../util'
 
 /**
- * This function returns a json response to be sent at the /api/json route.
- *
- * @param {Request} req The user's request
- * @param {Response} res The service response
- */
-export function sampleData (req, res) {
-  res.json({ data: 'sampleData' })
-}
-
-/**
  * This function returns the voice buffer sent by the Text To speech service thanks to a post request
  *
  * @param {URL} requestUrl The url to make the post request
