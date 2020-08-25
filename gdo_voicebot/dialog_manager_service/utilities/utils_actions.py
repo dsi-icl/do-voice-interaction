@@ -51,7 +51,7 @@ def action_switch_mode(graphql,mode_slot,switch_action_slot):
     finally:
         return result
 
-def action_list_demos(graphql,bot_last_messagae):
+def action_list_demos(graphql,bot_last_message):
     "Function that displays the list of demos"
 
     try:
@@ -61,7 +61,7 @@ def action_list_demos(graphql,bot_last_messagae):
             if list_demos == None:
                 result.update({'message':'There are no demos available in the current environment {}'.format(graphql.get_current_environment())})
             elif len(list_demos)>10:
-                if bot_last_messagae == "The list is pretty long ({} demos). Do you still want me to read it out ?".format(len(list_demos)):
+                if bot_last_message == "The list is pretty long ({} demos). Do you still want me to read it out ?".format(len(list_demos)):
                     result.update({'message':'Here are the available demos : '+', '.join(list_demos.values())})
                 else:
                     result.update({'message':"The list is pretty long ({} demos). Do you still want me to read it out ?".format(len(list_demos))})
