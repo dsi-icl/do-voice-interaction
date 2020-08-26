@@ -173,6 +173,7 @@
 # open browsers success
 * open_browsers
   - action_open_browsers
+  - slot{"open_browsers":null}
 
 # open browsers, fail, try again
 * open_browsers
@@ -185,10 +186,12 @@
   - action_open_browsers
 * deny
   - utter_affirm
+  - action_reset_slot_browsers
 
 # close browsers success
 * close_browsers
   - action_close_browsers
+  - slot{"close_browsers":null}
 
 # close browsers, fail, try again
 * close_browsers
@@ -201,10 +204,12 @@
   - action_close_browsers
 * deny
   - utter_affirm
+  - action_reset_slot_browsers
 
 # refresh browsers success
 * refresh_browsers
   - action_refresh_browsers
+  - slot{"reset_browsers":null}
 
 # refresh browsers, fail, try again
 * refresh_browsers
@@ -217,6 +222,7 @@
   - action_refresh_browsers
 * deny
   - utter_affirm
+  - action_reset_slot_browsers
 
 # ask repeat
 * ask_repeat
