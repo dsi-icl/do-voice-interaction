@@ -1,45 +1,15 @@
 {
-  "zoom_small_level": {
-    "precision": 1.0,
-    "recall": 1.0,
-    "f1-score": 1.0,
-    "support": 6
-  },
-  "zoom_big_level": {
-    "precision": 1.0,
-    "recall": 1.0,
-    "f1-score": 1.0,
-    "support": 4
-  },
-  "open_browsers": {
-    "precision": 1.0,
-    "recall": 1.0,
-    "f1-score": 1.0,
-    "support": 13
-  },
-  "reset_browsers": {
-    "precision": 0.8666666666666667,
-    "recall": 1.0,
-    "f1-score": 0.9285714285714286,
-    "support": 13
-  },
-  "search_mode": {
-    "precision": 1.0,
-    "recall": 1.0,
-    "f1-score": 1.0,
-    "support": 6
-  },
   "control_command": {
     "precision": 1.0,
     "recall": 0.8571428571428571,
     "f1-score": 0.923076923076923,
     "support": 14
   },
-  "close_browsers": {
-    "precision": 0.8666666666666667,
+  "mode": {
+    "precision": 1.0,
     "recall": 1.0,
-    "f1-score": 0.9285714285714286,
-    "support": 13
+    "f1-score": 1.0,
+    "support": 7
   },
   "zoom_action": {
     "precision": 1.0,
@@ -53,23 +23,29 @@
     "f1-score": 1.0,
     "support": 143
   },
-  "work_environment": {
+  "open_browsers": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 13
+  },
+  "zoom_big_level": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 4
+  },
+  "reset_browsers": {
+    "precision": 0.8666666666666667,
+    "recall": 1.0,
+    "f1-score": 0.9285714285714286,
+    "support": 13
+  },
+  "switch_action": {
     "precision": 1.0,
     "recall": 1.0,
     "f1-score": 1.0,
     "support": 5
-  },
-  "direction": {
-    "precision": 1.0,
-    "recall": 1.0,
-    "f1-score": 1.0,
-    "support": 7
-  },
-  "mode": {
-    "precision": 1.0,
-    "recall": 1.0,
-    "f1-score": 1.0,
-    "support": 7
   },
   "tag": {
     "precision": 1.0,
@@ -77,11 +53,35 @@
     "f1-score": 0.9795918367346939,
     "support": 25
   },
-  "switch_action": {
+  "zoom_small_level": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 6
+  },
+  "direction": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 7
+  },
+  "search_mode": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 6
+  },
+  "work_environment": {
     "precision": 1.0,
     "recall": 1.0,
     "f1-score": 1.0,
     "support": 5
+  },
+  "close_browsers": {
+    "precision": 0.8666666666666667,
+    "recall": 1.0,
+    "f1-score": 0.9285714285714286,
+    "support": 13
   },
   "micro avg": {
     "precision": 0.9851301115241635,
@@ -98,7 +98,7 @@
   "weighted avg": {
     "precision": 0.9870646766169153,
     "recall": 0.9888059701492538,
-    "f1-score": 0.9871482462100799,
+    "f1-score": 0.9871482462100797,
     "support": 268
   }
 }

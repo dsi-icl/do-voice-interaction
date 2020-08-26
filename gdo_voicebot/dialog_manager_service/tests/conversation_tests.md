@@ -244,6 +244,7 @@
   - action_open_browsers
 * deny: No
   - utter_affirm
+  - action_reset_slot_browsers
 
 # close browsers 1
 * close_browsers: [Close browsers](close_browsers) please
@@ -260,6 +261,7 @@
   - action_close_browsers
 * deny: No
   - utter_affirm
+  - action_reset_slot_browsers
 
 # refresh browsers 1
 * refresh_browsers: [Reset browsers](reset_browsers) please
@@ -276,6 +278,7 @@
   - action_refresh_browsers
 * deny: No
   - utter_affirm
+  - action_reset_slot_browsers
 
 # ask repeat 1
 * ask_repeat: Could you repeat please
