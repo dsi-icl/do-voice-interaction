@@ -73,9 +73,9 @@ slots:
     type: categorical
     values:
     - tag
-    - key word
+    - keyword
     - tags
-    - key words
+    - keywords
   read_list:
     type: bool
   restart:
@@ -150,6 +150,7 @@ actions:
   - action_reset_slot_zoom
   - action_move
   - action_reset_slot_direction
+  - action_reset_slot_browsers
   # - action_set_reminder
   # - action_react_to_reminder
 
