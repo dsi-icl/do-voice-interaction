@@ -26,7 +26,7 @@ def action_open_environment(graphql,environment_slot):
     finally:
         return result
 
-def action_switch_mode(graphql,mode_slot,switch_action_slot):
+def action_switch_mode(graphql,mode_slot,switch_action_slot=None):
     "Function that manages ActionSwitchMode"
     try:
         result = {'success':True}
