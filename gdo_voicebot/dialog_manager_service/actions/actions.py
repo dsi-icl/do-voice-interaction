@@ -367,7 +367,12 @@ class ActionSwitchMode(Action):
         Returns:
         List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]"""
 
-        response = action_switch_mode(my_graphQL,tracker.get_slot('mode'),tracker.get_slot('switch_action'))
+        mode = my_graphQL,tracker.get_slot('mode')
+        if mode!=None and 'section' in mode:
+            mode = 'section'
+        elif mode!=None and 'cluster' in mode:
+            mode = 'cluster'
+        response = action_switch_mode(my_graphQL,mode,tracker.get_slot('switch_action'))
         print("Switch mode action in process...")
         if response['success']:
             dispatcher.utter_message(text=response['message'])
@@ -403,6 +408,8 @@ class ActionOpenEnvironment(Action):
         List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]"""
 
         environment = tracker.get_slot('work_environment')
+        if environment!=None and 'student' in environment:
+            environment = 'students'
 
         response = action_open_environment(my_graphQL,environment)
         print("Open environment action in process...")
@@ -555,6 +562,30 @@ class ActionResetSlotDirection(Action):
 
         return [SlotSet('direction',None)]
 
+class ActionResetSlotBrowsers(Action):
+    """A class used to reset slots"""
+
+    def name(self):
+        """Function that returns the name of the action
+
+        Returns:
+        Text:The name of the action"""
+
+        return "action_reset_slot_browsers"
+
+    def run(self, dispatcher, tracker, domain):
+        """Function that resets slots.
+
+        Parameters:
+        dispatcher (CollectingDispatcher): The dispatcher which is used to send messages back to the user. Use dispatcher.utter_message() for sending messages.
+        tracker (Tracker): The state tracker for the current user. You can access slot values using tracker.get_slot(slot_name), the most recent user message is tracker.latest_message.text and any other rasa_sdk.Tracker property.
+        domain (Dict[Text, Any]): The bot’s domain
+
+        Returns:
+        List[Dict[Text, Any]]: A dictionary of rasa_sdk.events.Event instances that is returned through the endpoint List[Dict[str, Any]]"""
+
+        return [SlotSet('open_browsers',None),SlotSet('close_browsers',None),SlotSet('reset_browsers',None)]
+
 class ActionOpenBrowsers(Action):
     """A class used to open browsers"""
 
@@ -586,11 +617,13 @@ class ActionOpenBrowsers(Action):
         elif response['success']:
             dispatcher.utter_message(text="Something went wrong. Do you want me to try again ?")
             print("Fail :(")
+            return []
         else:
             dispatcher.utter_message(text="I'm sorry, something went wrong. {}".format(response['message']))
             print(response['message'])
 
-        return []
+        return [SlotSet('open_browsers'),None]
+
 
 class ActionCloseBrowsers(Action):
     """A class used to close browsers"""
@@ -623,11 +656,12 @@ class ActionCloseBrowsers(Action):
         elif response['success']:
             dispatcher.utter_message(text="Something went wrong. Do you want me to try again ?")
             print("Fail :(")
+            return []
         else:
             dispatcher.utter_message(text="I'm sorry, something went wrong. {}".format(response['message']))
             print(response['message'])
 
-        return []
+        return [SlotSet('close_browsers',None)]
 
 class ActionRefreshBrowsers(Action):
     """A class used to refresh browsers"""
@@ -664,7 +698,7 @@ class ActionRefreshBrowsers(Action):
             dispatcher.utter_message(text="I'm sorry, something went wrong. {}".format(response['message']))
             print(response['message'])
 
-        return []
+        return [SlotSet('reset_browsers',None)]
 
 class ActionRepeat(Action):
     """A class used to repeat the last bot answer"""
