@@ -27,7 +27,7 @@
     "yargs-parser": "19.0.1"
   },
   "devDependencies": {
-    "@vercel/ncc": "0.23.0",
+    "@vercel/ncc": "0.24.0",
     "babel-eslint": "10.1.0",
     "eslint": "7.7.0",
     "jsdoc": "3.6.5",
