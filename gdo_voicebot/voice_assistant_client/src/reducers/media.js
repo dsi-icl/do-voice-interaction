@@ -13,13 +13,13 @@ export const media = createSlice({
             state.status = action.payload.status;
         },
         addResponse: (state, action) => {
-            state.responseList = [...state.responseList, {
+            state.responseList = [{
                 id: action.payload.id,
                 date: action.payload.date,
                 command: action.payload.command,
                 response: action.payload.response,
                 error: action.payload.error
-            }];
+            }, ...state.responseList];
             state.audio = createDataUrl(action.payload.audio);
             if (!state.audio) {
                 state.status = PlayerStatus.IDLE;
