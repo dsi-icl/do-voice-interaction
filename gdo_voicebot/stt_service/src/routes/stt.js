@@ -26,11 +26,10 @@ function speechToText (audioBuffer, model) {
 /**
  * Function that returns a pre-constructed DeepSpeech Model object
  *
- * @description DEEPSPEECH VERSION: 0.7.4,
  * @description BEAM_WIDTH: 1024,
  * @description LM_ALPHA: 0.75,
  * @description LM_BETA: 1.85,
- * @see {@link https://deepspeech.readthedocs.io/en/v0.7.4/NodeJS-API.html|DeepSpeech}
+ * @see {@link https://deepspeech.readthedocs.io/en/latest/NodeJS-API.html|DeepSpeech}
  * @returns {DeepSpeech.Model} The model to be used for the transcription
  */
 export function loadDeepSpeechModel () {
@@ -57,16 +56,18 @@ export function executeSpeechToTextRequest (req, res, model) {
       service: 'Speech To Text service',
       message: 'The request body contains nothing'
     })
-  } else {
-    const buffer = Buffer.from(req.body, 'base64')
-    const textMessage = speechToText(buffer, model)
-
-    // If deepspeech transcription is empty we send back an error to the voice assistant service.
-    if (textMessage.length === 0) {
-      res.status(400).json({ status: 'fail', service: 'Speech To Text service', text: 'No transcription for this' })
-    } else {
-      // Everything is fine, we send back the textMessage
-      res.status(200).json({ status: 'ok', service: 'Speech To Text service', text: textMessage })
-    }
+    return
   }
+
+  const buffer = Buffer.from(req.body, 'base64')
+  const textMessage = speechToText(buffer, model)
+
+  // If deepspeech transcription is empty we send back an error to the voice assistant service.
+  if (textMessage.length === 0) {
+    res.status(400).json({ status: 'fail', service: 'Speech To Text service', text: 'No transcription for this' })
+  } else {
+    // Everything is fine, we send back the textMessage
+    res.status(200).json({ status: 'ok', service: 'Speech To Text service', text: textMessage })
+  }
+
 }
