@@ -39,5 +39,9 @@ def write_entities(config_path,entity_name):
         if file!=None and not file.closed():
             file.close()
 
-write_entities('./config/config.yml','demo')
-write_entities('./config/config.yml','tag')
+def main():
+    write_entities('./config/config.yml','demo')
+    write_entities('./config/config.yml','tag')
+
+if __name__ == "__main__":
+    main()
