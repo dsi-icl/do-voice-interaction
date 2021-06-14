@@ -35,5 +35,4 @@ services:
 
   do-voice-dialog-manager-actions-service:
     image: dsi-icl/do-voice-dialog-manager-actions-service:latest
-    container_name: do-voice-dialog-manager-service
     build: dialog_manager_service/
