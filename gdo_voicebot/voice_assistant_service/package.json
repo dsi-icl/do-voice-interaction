@@ -20,7 +20,7 @@
     "hark": "1.2.3",
     "http-errors": "1.8.0",
     "jsdoc-route-plugin": "0.1.0",
-    "lodash": "4.17.20",
+    "lodash": "4.17.21",
     "mediaserver": "0.1.1",
     "memory-stream": "1.0.0",
     "morgan": "1.10.0",
