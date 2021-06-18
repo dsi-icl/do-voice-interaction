@@ -26,7 +26,7 @@ services:
       - "./voice_assistant_service/config/config.docker.json:/app/config/config.json:ro"
 
   do-voice-dialog-manager-service:
-    image: rasa/rasa:1.10.11-full
+    image: rasa/rasa:1.10.26-full
     volumes:
       - ./dialog_manager_service/models:/app/models:ro
       - ./dialog_manager_service/config/credentials.docker.yml:/app/config/credentials.yml:ro
