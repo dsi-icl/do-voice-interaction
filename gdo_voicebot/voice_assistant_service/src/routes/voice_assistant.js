@@ -81,7 +81,7 @@ export async function processAudioCommand (client, request) {
     // Send the original audio and the stt response to the emotion recognition service
     console.log('\nSending the original audio and the stt response to the emotion recognition service')
     const dataForEmotionRecognition = { audio: request.audio.data, transcript: sttResponse.data.text }
-    postData('http://localhost:5000/emotion-recognition', JSON.stringify(dataForEmotionRecognition), 'Emotion Recognition Service')
+    postData('http://localhost:8000/emotion-recognition', JSON.stringify(dataForEmotionRecognition), 'Emotion Recognition Service')
     // console.log(dataForEmotionRecognition)
     console.log('\nSent off data to emotion recognition service')
     console.log('sttresponse', sttResponse)
