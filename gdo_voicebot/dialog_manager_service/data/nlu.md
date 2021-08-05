@@ -243,3 +243,23 @@
 - remind me to sop my meeting
 - remind me when the presentation should end
 - I have to finish my presentation -->
+
+## intent:tell_name
+- i want to tell you my name
+- give name
+- ill give you my name
+- my name is
+- do you want to know my name?
+
+## repeat_name
+- what is my name
+- tell me my name
+- do you know my name
+- repeat my name
+
+## give_name
+- vincent
+- rachael
+- emma
+- justin
+- amy

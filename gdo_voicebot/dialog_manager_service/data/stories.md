@@ -302,3 +302,15 @@
 # reminder
 * EXTERNAL_reminder
   - action_react_to_reminder -->
+
+# name path
+* greet
+  - utter_greet
+* affirm
+  - action_help
+* tell_name
+  - utter_ask_name
+* give_name
+  - action_receive_name
+* repeat_name
+  - action_say_name

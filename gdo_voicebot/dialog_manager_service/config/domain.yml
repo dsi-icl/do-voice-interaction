@@ -40,6 +40,8 @@ entities:
   - direction
 
 slots:
+  name:
+    type: text
   demo:
     type: text
   tag:
@@ -151,6 +153,8 @@ actions:
   - action_move
   - action_reset_slot_direction
   - action_reset_slot_browsers
+  - action_receive_name
+  - action_say_name
   # - action_set_reminder
   # - action_react_to_reminder
 
@@ -169,6 +173,8 @@ responses:
   - text: "Do you really want to shutdown the GDO ?"
   utter_confirm_turn_on_gdo:
   - text: "Do you really want to turn on the Global Data Observatory ?"
+  utter_ask_name:
+  - text: "What is your name?"
 
 
 
