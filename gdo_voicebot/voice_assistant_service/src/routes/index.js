@@ -33,6 +33,35 @@ export async function getData (requestUrl, robotAnswer) {
 }
 
 /**
+ * NEW getData more generic with only one parameter
+ *
+ * @param {URL} requestUrl The url to make the post request
+ * @returns {ArrayBuffer} The voice answer encoded in an array buffer
+ * @see {@link https://www.npmjs.com/package/node-fetch|Fetch}
+ * @see {@link https://www.npmjs.com/package/gtts|Gtts}
+ */
+ export async function getDataRasa (requestUrl) {
+  // We make the get request with the correct url (.../api/tts) and with the chosen parameters
+    try {
+      const response = await fetch(requestUrl, {
+        method: 'get',
+        // The content-type is important to be able to send the audio blob properly
+        headers: { 'Content-type': 'text/plain' },
+      })
+      
+      const status = response.status
+      if (status >= 200 && status <= 299) {
+        const data = await response.json()
+        return { success: true, data: data, contentType: data.contentType }
+      } else {
+        return { success: false, text: data.error }
+      }
+    } catch (exc) {
+      return { success: false, text: exc.message }
+    }
+  }
+
+/**
  * This function is used to post the user's voice encoded in a blob to the speech to text service thanks to fetch.
  *
  * @param {URL} url The url to make the post request (.../api/stt)

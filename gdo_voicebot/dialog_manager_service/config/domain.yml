@@ -20,8 +20,17 @@ intents:
   - list_available_demos
   - zoom
   - move
-  # - ask_remind_end_of_meeting
-  # - EXTERNAL_reminder
+  # conversational
+  - start_small_talk
+  - check_emotion_detection_enabled
+  - want_to_give_name
+  - give_name
+  - repeat_name
+  - tell_about_today
+  - ask_current_emotion
+  - turn_on_emotion_detection
+  - turn_off_emotion_detection
+
 
 entities:
   - demo
@@ -42,6 +51,13 @@ entities:
 slots:
   name:
     type: text
+    initial_value: ""
+  emotion:
+    type: text
+    initial_value: "neutral"
+  emotion_detection_enabled:
+    type: bool
+    initial_value: false
   demo:
     type: text
   tag:
@@ -153,10 +169,14 @@ actions:
   - action_move
   - action_reset_slot_direction
   - action_reset_slot_browsers
-  - action_receive_name
-  - action_say_name
   # - action_set_reminder
   # - action_react_to_reminder
+  # conversational
+  - action_turn_on_emotion_detection
+  - action_turn_off_emotion_detection
+  - action_check_emotion_detection_enabled
+  - action_receive_name
+  - action_say_name
 
 responses:
   utter_greet:
@@ -173,9 +193,17 @@ responses:
   - text: "Do you really want to shutdown the GDO ?"
   utter_confirm_turn_on_gdo:
   - text: "Do you really want to turn on the Global Data Observatory ?"
+  # conversational
+  utter_confirm_start_small_talk:
+  - text: "Sure let's have a chat!"
+  utter_ask_to_turn_on_emotion_detection:
+  - text: "Can I turn on emotion detection so that I can understand you better?"
   utter_ask_name:
-  - text: "What is your name?"
-
+  - text: "So, what is your name?"
+  utter_ask_about_today:
+  - text: "What have you been up to today {name}?"
+  utter_current_emotion:
+  - text: "{emotion}"
 
 
 session_config:

@@ -23,33 +23,76 @@ except Exception as e:
     raise e
     print(e)
 
-class ActionReceiveName(Action):
+class ActionTurnOnEmotionDetection(Action):
+
     def name(self) -> Text:
-        return "action_receive_name"
-    
+        return "action_turn_on_emotion_detection"
+
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        dispatcher.utter_message(text="Emotion detection is on.")
+        return [SlotSet("emotion_detection_enabled", True)]
+
+class ActionTurnOffEmotionDetection(Action):
+
+    def name(self) -> Text:
+        return "action_turn_off_emotion_detection"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        dispatcher.utter_message(text="Emotion detection is off.")
+        # When turning of emotion detection, reset the current emotion to neutral
+        return [SlotSet("emotion_detection_enabled", False), SlotSet("emotion", "neutral")]
+class ActionCheckEmotionDetectionEnabled(Action):
+
+    def name(self) -> Text:
+        return "action_check_emotion_detection_enabled"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        emotion_detection_enabled = tracker.get_slot("emotion_detection_enabled")
+        if emotion_detection_enabled:
+            dispatcher.utter_message(text="Emotion detection is currently enabled")
+        else:
+            dispatcher.utter_message(text="Emotion detection is currently disabled")
         
+        return []
+class ActionReceiveName(Action):
+
+    def name(self) -> Text:
+        return "action_receive_name"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
         text = tracker.latest_message['text']
         dispatcher.utter_message(text=f"I'll remember your name {text}!")
         return [SlotSet("name", text)]
 
+
 class ActionSayName(Action):
+
     def name(self) -> Text:
         return "action_say_name"
-    
+
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        
+
         name = tracker.get_slot("name")
         if not name:
             dispatcher.utter_message(text="I don't know your name.")
         else:
-            dispatcher.utter_message(text=f"Your name is {name}")
+            dispatcher.utter_message(text=f"Your name is {name}!")
         return []
-        
+         
 class ActionOpen(Action):
     """A class used to open demos"""
 

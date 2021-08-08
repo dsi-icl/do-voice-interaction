@@ -14,6 +14,7 @@
 - that sounds good
 - correct
 - confirm
+- sure
 
 ## intent:deny
 - no
@@ -244,22 +245,65 @@
 - remind me when the presentation should end
 - I have to finish my presentation -->
 
-## intent:tell_name
+## intent:start_small_talk
+- I want to talk to you
+- Let's have a chat
+- Let's talk
+- Do you want to have a conversation?
+- I want to have a conversation
+- Can we chat?
+
+## intent:check_emotion_detection_enabled
+- is emotion detection enabled?
+- are you currently detecting emotion?
+- is emotion recognition turned on?
+- are you studying my emotion right now?
+- have you turned off emotion recognition?
+## intent:want_to_give_name
 - i want to tell you my name
-- give name
+- Can you learn my name?
 - ill give you my name
-- my name is
-- do you want to know my name?
+- remember my name
 
-## repeat_name
-- what is my name
-- tell me my name
-- do you know my name
+## intent:repeat_name
+- do you know my name?
 - repeat my name
+- name of the current speaker
+- who is the current speaker
 
-## give_name
-- vincent
-- rachael
-- emma
-- justin
+## intent:give_name
+- ovidiu
+- aurelie
+- mifu
+- samuel
 - amy
+
+## intent:tell_about_today
+- today i've been running errands and being busy
+- today i had a video call with my family
+- today i went to school
+- i've not done much today
+- nothing interesting
+- i went to skate boarding with my friends
+- i've been studying all day
+
+## intent:ask_current_emotion
+- what is my current emotion?
+- can you tell me what my emotion is?
+- what am i feeling?
+- current emotion
+- emotion right now
+
+## intent:turn_on_emotion_detection
+- start emotion detection
+- turn sentiment recognition on
+- turn on emotion detection
+- recognise emotion
+- enable emotion detection
+
+## intent:turn_off_emotion_detection
+- stop emotion detection
+- turn sentiment recognition off
+- turn off emotion detection
+- stop emotion recognition
+- disable emotion detection

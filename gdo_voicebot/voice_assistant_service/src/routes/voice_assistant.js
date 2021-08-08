@@ -3,7 +3,8 @@
  * @author Aurélie Beaugeard
  */
 
-import { getData, postData } from './index.js'
+import { getData, getDataRasa, postData } from './index.js'
+var emotionDetectionEnabled = false
 
 /**
  * Function that manages the actions to do if the deepspeech transcription has been successfully done
@@ -71,26 +72,40 @@ export async function errorProcess (client, errorResponse, sttResponseText, requ
   })
 }
 
+export async function processEmotion (client, speech, transcript) {
+  console.log('\nSending the original audio and the stt response to the emotion recognition service')
+  const dataForEmotionRecognition = { audio: speech, transcript: transcript }
+  const emotionRecognitionResponse = await postData('http://localhost:8000/emotion-recognition', JSON.stringify(dataForEmotionRecognition), 'Emotion Recognition Service')
+  console.log('emotionRecognitionResponse ', emotionRecognitionResponse)
+  const detectedEmotion = emotionRecognitionResponse.data.emotion
+
+  // Set the emotion slot in rasa via http api
+  const newData = '{"event": "slot", "timestamp": null, "name": "emotion", "value": "' + detectedEmotion + '"}'
+  const botResult = await postData('http://localhost:5005/conversations/default/tracker/events', newData, 'Data Observatory Control Service')
+  console.log('set emotion in rasa ', botResult)
+}
+
 export async function processAudioCommand (client, request) {
   if (request.audio.type !== 'audio/wav' || request.audio.sampleRate !== 16000) {
     const error = { status: 'fail', service: 'Voice-assistant service', text: 'The record format is wrong' }
     await errorProcess(client, error, '', request)
   } else {
     const sttResponse = await postData(global.config.services.sttService, request.audio.data, 'Speech To Text Service')
-    // Mifu: dump the audio file somewhere
-    // Send the original audio and the stt response to the emotion recognition service
-    console.log('\nSending the original audio and the stt response to the emotion recognition service')
-    const dataForEmotionRecognition = { audio: request.audio.data, transcript: sttResponse.data.text }
-    postData('http://localhost:8000/emotion-recognition', JSON.stringify(dataForEmotionRecognition), 'Emotion Recognition Service')
-    // console.log(dataForEmotionRecognition)
-    console.log('\nSent off data to emotion recognition service')
     console.log('sttresponse', sttResponse)
 
     // If an error was encountered during the request or the string response is empty we inform the user through the event problem with the socket.
     // Else we can send the text transcript to the the text to speech service and sending the audiobuffer received to the client.
     if (sttResponse.success) {
-      console.log('\nSTT process successful!')
       await successProcess(client, sttResponse.data, request)
+
+      // Get tracker information from rasa
+      const tracker = await getDataRasa('http://localhost:5005/conversations/default/tracker')
+      // Get rasa's slot values
+      const slots = tracker.data.slots
+      // Only carry out emotion recognition if the speaker current has it enabled in the slot
+      if (slots.emotion_detection_enabled == true) {
+        processEmotion (client, request.audio.data, sttResponse.data.text)
+      }
     } else {
       await errorProcess(client, sttResponse.data, '', request)
     }
