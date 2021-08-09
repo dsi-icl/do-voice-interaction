@@ -314,7 +314,7 @@
   - action_turn_on_emotion_detection
   - utter_ask_about_today
 * tell_about_today
-  - utter_affirm
+  - action_respond_about_today
 
 # conversation without emotion detection
 * start_small_talk
@@ -325,7 +325,7 @@
   - action_turn_off_emotion_detection
   - utter_ask_about_today
 * tell_about_today
-  - utter_affirm
+  - action_respond_about_today
 
 # turn on emotion detection
 * turn_on_emotion_detection

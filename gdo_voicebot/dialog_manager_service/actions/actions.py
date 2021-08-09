@@ -23,6 +23,34 @@ except Exception as e:
     raise e
     print(e)
 
+class ActionRespondAboutToday(Action):
+
+    def name(self) -> Text:
+        return "action_respond_about_today"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        emotion = tracker.get_slot("emotion")
+        if emotion == "n/a" or emotion == "neutral":
+            dispatcher.utter_message(text="I see. Well, I'm glad you made it to the Data Observatory.")
+        elif emotion == "excited":
+            dispatcher.utter_message(text="Wow, you have a great energy! I need to keep it up!")
+        elif emotion == "sleepy":
+            dispatcher.utter_message(text="Hmm... You sound a bit tired.")
+        elif emotion == "happy":
+            dispatcher.utter_message(text="I like listening to you. You have a happy presence.")
+        elif emotion == "relaxed":
+            dispatcher.utter_message(text="You seem pretty relaxed.")
+        elif emotion == "frustrated":
+            dispatcher.utter_message(text="I can feel your frustration. What can I do for you?")
+        elif emotion == "sad":
+            dispatcher.utter_message(text="You seem sad... What can I do to cheer you up?")
+        elif emotion == "mixed":
+            dispatcher.utter_message(text="You don't seem very coonovinced.")
+
+        return []
 class ActionTurnOnEmotionDetection(Action):
 
     def name(self) -> Text:
@@ -46,7 +74,7 @@ class ActionTurnOffEmotionDetection(Action):
 
         dispatcher.utter_message(text="Emotion detection is off.")
         # When turning of emotion detection, reset the current emotion to neutral
-        return [SlotSet("emotion_detection_enabled", False), SlotSet("emotion", "neutral")]
+        return [SlotSet("emotion_detection_enabled", False), SlotSet("emotion", "n/a")]
 class ActionCheckEmotionDetectionEnabled(Action):
 
     def name(self) -> Text:

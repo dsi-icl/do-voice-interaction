@@ -54,7 +54,7 @@ slots:
     initial_value: ""
   emotion:
     type: text
-    initial_value: "neutral"
+    initial_value: "n/a"
   emotion_detection_enabled:
     type: bool
     initial_value: false
@@ -177,6 +177,7 @@ actions:
   - action_check_emotion_detection_enabled
   - action_receive_name
   - action_say_name
+  - action_respond_about_today
 
 responses:
   utter_greet:
