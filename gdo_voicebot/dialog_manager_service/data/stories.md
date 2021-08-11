@@ -310,7 +310,6 @@
   - utter_confirm_start_small_talk
   - utter_ask_to_turn_on_emotion_detection
 * affirm
-  - utter_affirm
   - action_turn_on_emotion_detection
   - utter_ask_about_today
 * tell_about_today

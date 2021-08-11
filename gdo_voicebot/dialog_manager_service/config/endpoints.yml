@@ -5,4 +5,6 @@ action_endpoint:
  #url: "http://192.168.1.112.:5055/webhook" # this is my ip without vpn
  #url: "http://action-server:5055/webhook" 
  #url: "http://192.168.1.133.:5055/webhook" # this is what ovidiu said to use # this is my ip with vpn
- url: "http://192.168.1.112:5055/webhook"
+ #url: "http://192.168.1.112:5055/webhook"
+ url: "http://192.168.43.105:5055/webhook"
+ 

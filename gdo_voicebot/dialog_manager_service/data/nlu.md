@@ -246,15 +246,16 @@
 - I have to finish my presentation -->
 
 ## intent:start_small_talk
-- I want to talk to you
-- Let's have a chat
-- Let's talk
-- Do you want to have a conversation?
-- I want to have a conversation
-- Can we chat?
+- i want to talk to you
+- let's have a chat
+- let's talk
+- do you want to have a conversation?
+- i want to have a conversation
+- can we chat?
 
 ## intent:check_emotion_detection_enabled
 - is emotion detection enabled?
+- is emotion detection on?
 - are you currently detecting emotion?
 - is emotion recognition turned on?
 - are you studying my emotion right now?

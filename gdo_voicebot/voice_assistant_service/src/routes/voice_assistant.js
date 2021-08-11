@@ -4,14 +4,14 @@
  */
 
 import { getData, getDataRasa, postData } from './index.js'
-var emotionDetectionEnabled = false
+var currentEmotion = false
 
 /**
  * Function that manages the actions to do if the deepspeech transcription has been successfully done
  * @param {SocketIO.Client} client The client with which the server comunicates
  * @param {JSON} sttResponse The deepspeech json response
  */
-export async function successProcess (client, sttResponse, request) {
+export async function successProcess (client, sttResponse, request, recentEmotion) {
   console.log('Speech to text transcription : SUCCESS\n')
 
   const botResult = await postData(global.config.services.dialogManagerService, '{"message":"' + sttResponse.text + '"}', 'Data Observatory Control Service')
@@ -33,6 +33,7 @@ export async function successProcess (client, sttResponse, request) {
         id: request.id,
         date: request.date,
         command: sttResponse.text,
+        emotion: recentEmotion,
         response: botResponseText,
         audio: {
           data: voiceAnswer.data,
@@ -73,7 +74,6 @@ export async function errorProcess (client, errorResponse, sttResponseText, requ
 }
 
 export async function processEmotion (client, speech, transcript) {
-  console.log('\nSending the original audio and the stt response to the emotion recognition service')
   const dataForEmotionRecognition = { audio: speech, transcript: transcript }
   const emotionRecognitionResponse = await postData('http://localhost:8000/emotion-recognition', JSON.stringify(dataForEmotionRecognition), 'Emotion Recognition Service')
   console.log('emotionRecognitionResponse ', emotionRecognitionResponse)
@@ -83,6 +83,7 @@ export async function processEmotion (client, speech, transcript) {
   const newData = '{"event": "slot", "timestamp": null, "name": "emotion", "value": "' + detectedEmotion + '"}'
   const botResult = await postData('http://localhost:5005/conversations/default/tracker/events', newData, 'Data Observatory Control Service')
   console.log('set emotion in rasa ', botResult)
+  return detectedEmotion
 }
 
 export async function processAudioCommand (client, request) {
@@ -101,12 +102,11 @@ export async function processAudioCommand (client, request) {
       // Get rasa's slot values
       const slots = tracker.data.slots
       // Only carry out emotion recognition if the speaker current has it enabled in the slot
+      var emotion = 'n/a'
       if (slots.emotion_detection_enabled == true) {
-        await processEmotion (client, request.audio.data, sttResponse.data.text)
+        emotion = await processEmotion (client, request.audio.data, sttResponse.data.text)
       }
-
-      await successProcess(client, sttResponse.data, request)
-
+      await successProcess(client, sttResponse.data, request, emotion)
     } else {
       await errorProcess(client, sttResponse.data, '', request)
     }
@@ -120,7 +120,7 @@ export async function processTextCommand (client, request) {
     const error = { status: 'fail', service: 'Voice-assistant service', text: 'Nothing has been written' }
     await errorProcess(client, error, '', request)
   } else {
-    await successProcess(client, commandData, request)
+    await successProcess(client, commandData, request, 'no detection for text-only command.')
   }
 }
 

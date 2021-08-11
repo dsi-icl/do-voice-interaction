@@ -44,11 +44,9 @@ class ActionRespondAboutToday(Action):
         elif emotion == "relaxed":
             dispatcher.utter_message(text="You seem pretty relaxed.")
         elif emotion == "frustrated":
-            dispatcher.utter_message(text="I can feel your frustration. What can I do for you?")
+            dispatcher.utter_message(text="I understand your frustration. What can I do for you?")
         elif emotion == "sad":
             dispatcher.utter_message(text="You seem sad... What can I do to cheer you up?")
-        elif emotion == "mixed":
-            dispatcher.utter_message(text="You don't seem very coonovinced.")
 
         return []
 class ActionTurnOnEmotionDetection(Action):
@@ -60,7 +58,7 @@ class ActionTurnOnEmotionDetection(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        dispatcher.utter_message(text="Emotion detection is on.")
+        dispatcher.utter_message(text="Emotion detection has been turned on.")
         return [SlotSet("emotion_detection_enabled", True)]
 
 class ActionTurnOffEmotionDetection(Action):
@@ -72,8 +70,8 @@ class ActionTurnOffEmotionDetection(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        dispatcher.utter_message(text="Emotion detection is off.")
-        # When turning of emotion detection, reset the current emotion to neutral
+        dispatcher.utter_message(text="Emotion detection has been turned off.")
+        # When turning of emotion detection, reset the current emotion to n/a
         return [SlotSet("emotion_detection_enabled", False), SlotSet("emotion", "n/a")]
 class ActionCheckEmotionDetectionEnabled(Action):
 
