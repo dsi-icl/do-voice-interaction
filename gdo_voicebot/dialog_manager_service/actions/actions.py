@@ -47,6 +47,8 @@ class ActionRespondAboutToday(Action):
             dispatcher.utter_message(text="I understand your frustration. What can I do for you?")
         elif emotion == "sad":
             dispatcher.utter_message(text="You seem sad... What can I do to cheer you up?")
+        elif emotion == "mixed":
+            dispatcher.utter_message(text="Are you alright? You seem a little off...")
 
         return []
 class ActionTurnOnEmotionDetection(Action):
