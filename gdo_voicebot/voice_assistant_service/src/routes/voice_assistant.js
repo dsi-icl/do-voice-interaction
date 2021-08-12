@@ -42,10 +42,10 @@ export async function successProcess (client, sttResponse, request, recentEmotio
       })
     } else {
       // If Gtts raised an error, we send it to the client
-      await errorProcess(client, voiceAnswer, sttResponse.text, request)
+      await errorProcess(client, voiceAnswer, sttResponse.text, request, 'n/a')
     }
   } else {
-    await errorProcess(client, botResult.data, sttResponse.text, request)
+    await errorProcess(client, botResult.data, sttResponse.text, request, 'n/a')
   }
 }
 
@@ -55,7 +55,7 @@ export async function successProcess (client, sttResponse, request, recentEmotio
  * @param {JSON} errorResponse The error json response
  * @param {String} sttResponseText The text received from the Speech To Text service
  */
-export async function errorProcess (client, errorResponse, sttResponseText, request) {
+export async function errorProcess (client, errorResponse, sttResponseText, request, recentEmotion) {
   // We generate an error voice message
   const voiceAnswer = await getData(global.config.services.ttsService, 'I encountered an error. Please consult technical support or try the request again')
 
@@ -65,6 +65,7 @@ export async function errorProcess (client, errorResponse, sttResponseText, requ
     id: request.id,
     date: request.date,
     command: sttResponseText !== '' ? sttResponseText : '...',
+    emotion: recentEmotion,
     audio: {
       data: voiceAnswer.data,
       contentType: voiceAnswer.contentType
@@ -89,7 +90,7 @@ export async function processEmotion (client, speech, transcript) {
 export async function processAudioCommand (client, request) {
   if (request.audio.type !== 'audio/wav' || request.audio.sampleRate !== 16000) {
     const error = { status: 'fail', service: 'Voice-assistant service', text: 'The record format is wrong' }
-    await errorProcess(client, error, '', request)
+    await errorProcess(client, error, '', request, 'n/a')
   } else {
     const sttResponse = await postData(global.config.services.sttService, request.audio.data, 'Speech To Text Service')
     console.log('sttresponse', sttResponse)
@@ -108,7 +109,7 @@ export async function processAudioCommand (client, request) {
       }
       await successProcess(client, sttResponse.data, request, emotion)
     } else {
-      await errorProcess(client, sttResponse.data, '', request)
+      await errorProcess(client, sttResponse.data, '', request, 'n/a')
     }
   }
 }
@@ -118,7 +119,7 @@ export async function processTextCommand (client, request) {
 
   if (commandData.data === '') {
     const error = { status: 'fail', service: 'Voice-assistant service', text: 'Nothing has been written' }
-    await errorProcess(client, error, '', request)
+    await errorProcess(client, error, '', request, 'n/a')
   } else {
     await successProcess(client, commandData, request, 'no detection for text-only command.')
   }
