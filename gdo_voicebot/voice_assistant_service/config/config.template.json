@@ -2,6 +2,9 @@
     "services":{
         "sttService":"http://localhost:3000/api/stt",
         "ttsService":"http://localhost:5000/api/tts",
-        "dialogManagerService":"http://localhost:5005/webhooks/rest/webhook"
+        "dialogManagerService":"http://localhost:5005/webhooks/rest/webhook",
+        "rasaTracker":"http://localhost:5005/conversations/default/tracker",
+        "rasaTrackerEvents":"http://localhost:5005/conversations/default/tracker/events",
+        "emotionRecognitionService":"http://localhost:8000/emotion-recognition"
     }
 }
