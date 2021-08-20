@@ -34,7 +34,7 @@ class ActionRespondAboutToday(Action):
 
         emotion = tracker.get_slot("emotion")
         if emotion == "n/a" or emotion == "neutral":
-            dispatcher.utter_message(text="I see. Well, I'm glad you made it to the Data Observatory.")
+            dispatcher.utter_message(text="I see. Well, I'm glad you came by I was starting to get bored.")
         elif emotion == "excited":
             dispatcher.utter_message(text="Wow, you have a great energy! I need to keep it up!")
         elif emotion == "sleepy":
@@ -72,7 +72,7 @@ class ActionTurnOffEmotionDetection(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        dispatcher.utter_message(text="Emotion detection has been turned off.")
+        dispatcher.utter_message(text="Emotion detection is turned off.")
         # When turning of emotion detection, reset the current emotion to n/a
         return [SlotSet("emotion_detection_enabled", False), SlotSet("emotion", "n/a")]
 class ActionCheckEmotionDetectionEnabled(Action):
