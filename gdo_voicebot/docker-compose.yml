@@ -31,8 +31,15 @@ services:
       - ./dialog_manager_service/models:/app/models:ro
       - ./dialog_manager_service/config/credentials.docker.yml:/app/config/credentials.yml:ro
       - ./dialog_manager_service/config/endpoints.docker.yml:/app/config/endpoints.yml:ro
-    command: ["run","-m","/app/models","--endpoints","/app/config/endpoints.yml","--credentials","/app/config/credentials.yml"]
+    command: ["run","-m","/app/models", "--enable-api", "--endpoints","/app/config/endpoints.yml","--credentials","/app/config/credentials.yml"]
 
   do-voice-dialog-manager-actions-service:
     image: dsi-icl/do-voice-dialog-manager-actions-service:latest
     build: dialog_manager_service/
+
+  do-voice-emotion-recognition-service:
+    image: dsi-icl/do-voice-emotion-recognition-service:latest
+    container_name: do-voice-emotion-recognition-service
+    build: emotion_recognition_service/
+    volumes:
+      - "./emotion_recognition_service:/usr/src/app"
