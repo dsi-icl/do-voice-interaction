@@ -12,15 +12,14 @@ slim = tf.contrib.slim
 
 def recurrent_model(net, emb=None, hidden_units=256, number_of_outputs=2): # net = network outputed by audio_model2(audio_frames)
     development_msg('\n*************** Entering recurrent_model() in model.py ***************')
-    # net_1 = tf.contrib.layers.fully_connected(net, num_outputs=512)
-    # net_2 = tf.contrib.layers.fully_connected(net, num_outputs=512)
-    # net_3 = tf.contrib.layers.fully_connected(net, num_outputs=512)
 
     development_msg('\n*************** Constructing the neural network ***************')
 
     # Fusing strategies of output of CNN model with word embeddings
     development_msg('Defining fusion of paralinguistic and semantic networks')
-    # Attention aprroach  # here, net = audio_model2 = paralinguistic AND emb = tf.cast(word_embeddings, tf.float32) = semantic, projected_units = 256
+    # Attention aprroach  
+    # # here, net = audio_model2 = paralinguistic AND 
+    # emb = tf.cast(word_embeddings, tf.float32) = semantic, projected_units = 256
     fused_features = attention_model(net, emb, projected_units=1024) # fuse paralinguistic and semantic networks - mifu
 
     development_msg('Defining three FC layers to disentangle 3 features')
@@ -58,13 +57,12 @@ def recurrent_model(net, emb=None, hidden_units=256, number_of_outputs=2): # net
                                        cell_clip=100,
                                        state_is_tuple=True)
 
-        # stacked_lstm = tf.contrib.rnn.MultiRNNCell([lstm1, lstm2], state_is_tuple=True)
-
         outputs, states = tf.nn.dynamic_rnn(lstm, net, dtype=tf.float32) # param 1 = LSTM cell, param 2 = input data. 'tf.nn.dynamic_rnn' creates a recurrent neural network specified by RNNCell cell
         net = tf.reshape(outputs, (batch_size * seq_length, hidden_units))
         prediction = tf.nn.tanh(slim.layers.linear(net, number_of_outputs))
         development_msg('\n*************** Returning a successfully created recurrent network **************')
         return tf.reshape(prediction, (batch_size, seq_length, number_of_outputs))
+
 
 # paralinguistic feature extractor - mifu
 def audio_model2(audio_frames=None, conv_filters=40):
@@ -190,6 +188,6 @@ def get_model(name):
         raise ValueError('Requested name [{}] not a valid model'.format(name))
 
     def wrapper(*args, **kwargs):
-        return recurrent_model(model(*args), **kwargs) # the first param (i.e. model) refers to audio_model2 which is the paralinguistic network - mifu
+        return recurrent_model(model(*args), **kwargs) # the first param (i.e. model) refers to audio_model2 which is the paralinguistic network
 
-    return wrapper # returns the recurrent_model - mifu
+    return wrapper # returns the recurrent_model

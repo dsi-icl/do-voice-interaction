@@ -12,15 +12,12 @@ from collections import Counter
 from aeneas.executetask import ExecuteTask
 from aeneas.task import Task
 
-sys.path.append("./speech2vec")
 import models
-from helper import WordVectorHelper
+from helper import WordVectorHelper, TARGET_SAMPLING_RATE, \
+                    CHUNK_SIZE, EMBEDDING_DIMENSION, SEQUENCE_LENGTH, \
+                    WORD2VEC_DIR, W2V_VEC 
 
-TARGET_SAMPLING_RATE = 22050
-MAX_DATA_LENGTH = 50
-AUDIO_DIMENSION = 2205
-EMBEDDING_DIMENSION = 100
-SEQUENCE_LENGTH = 100
+CKPT_PATH = './checkpoint_final/model.ckpt-8188'
 
 app = Flask(__name__)
 slim = tf.contrib.slim
@@ -118,19 +115,7 @@ def process_word_mappings(time, time_mappings):
     for i in range(len(time)):
         if corresponding_word[i] is None:
             corresponding_word[i] = np.zeros((1, EMBEDDING_DIMENSION))
-            '''
-            if i > 0 and corresponding_word_id[i-1] == sid:
-                count = 2 if count == 0 else count + 1
-            else:
-                count = 0
 
-            corresponding_word_id[i] = sid
-            corresponding_sentence_id[i] = sid
-
-            if count == MAX_DATA_LENGTH:
-                sid -= 1
-                count = 0
-            '''
     corresponding_word = np.array(corresponding_word)
     return corresponding_word#, corresponding_sentence_id, corresponding_word_id
 
@@ -138,7 +123,7 @@ def process_word_mappings(time, time_mappings):
 def load_metadata(filename):
     print('\n***************** Enter load_metadata(' + filename + ') *****************')
     audio_signal, sampling_rate = lb.core.load('./' + filename + '.wav', sr=TARGET_SAMPLING_RATE)
-    audio_signal = np.pad(audio_signal, (0, AUDIO_DIMENSION - audio_signal.shape[0] % AUDIO_DIMENSION), 'constant')
+    audio_signal = np.pad(audio_signal, (0, CHUNK_SIZE - audio_signal.shape[0] % CHUNK_SIZE), 'constant')
     time_mappings = np.loadtxt('./' + filename + '.csv', delimiter=',', dtype=str, ndmin=2)
     duration = lb.core.get_duration(audio_signal, sampling_rate)
     development_msg('\naudio duration = ' + str(duration))
@@ -166,9 +151,9 @@ def get_samples(filename):
     return target_interculator_audio, corresponding_word
 
 
-vec_helper = WordVectorHelper('word2vec/vec/100.vec')
+vec_helper = WordVectorHelper(WORD2VEC_DIR+W2V_VEC)
 _, _, _, embed_dict = vec_helper.load_vec()
-syn_dict = vec_helper.check_for_synonym_in_vec()
+
 
 def _get_embedding(word):
     global unk
@@ -182,6 +167,7 @@ def _get_embedding(word):
         print('Word {%s} not in dict, so returning random embedding')
         return np.random.rand(EMBEDDING_DIMENSION)
 
+
 # not used at the moment as stt service does not output these punctuations
 def clean_word(word):
     word = word.lower()
@@ -190,6 +176,7 @@ def clean_word(word):
     word = word.translate(str.maketrans('', '', punctuation))
     
     return word
+
 
 def classifyEmotion(arousal, valence):
     if arousal<=0.5 and arousal>=-0.5 and valence<=0.5 and valence>=-0.5:
@@ -248,6 +235,7 @@ def processPrediction(prediction):
     print('\nFinal single emotion is: ' + str(final_emotion) + '\n')
     return final_emotion
 
+
 @app.route("/emotion-recognition", methods=['POST'])
 def detectEmotion():
 
@@ -285,13 +273,13 @@ def detectEmotion():
     if n_frames % SEQUENCE_LENGTH != 0:
         gap_to_fill = SEQUENCE_LENGTH - (n_frames % SEQUENCE_LENGTH)
         development_msg(gap_to_fill) # 89
-        filler = np.zeros((gap_to_fill, AUDIO_DIMENSION)) # (89, 2205) in this case filler is 89 rows to make a total of 100
+        filler = np.zeros((gap_to_fill, CHUNK_SIZE)) # (89, 2205) in this case filler is 89 rows to make a total of 100
         audio_frames = np.vstack((audio_frames, filler))
         development_msg(audio_frames.shape) # (100, 2205)
         new_n_frames = len(audio_frames) # 100
         n_batches = int(new_n_frames / SEQUENCE_LENGTH) # this is relevant if there are more than 100 frames
         development_msg(n_batches) # 1
-        audio_frames = audio_frames.reshape(n_batches, SEQUENCE_LENGTH, AUDIO_DIMENSION) # (1, 100, 2205)
+        audio_frames = audio_frames.reshape(n_batches, SEQUENCE_LENGTH, CHUNK_SIZE) # (1, 100, 2205)
     
     audio_frames = tf.convert_to_tensor(audio_frames, dtype=np.float32)
     development_msg('\naudio_frames (tensor) = ' + str(audio_frames))
@@ -320,7 +308,7 @@ def detectEmotion():
                                                        hidden_units=256) # get_model() returns the function recurrent_model(net, emb=None, hidden_units=256, number_of_outputs=3)
     saver = tf.train.Saver(slim.get_variables_to_restore()) # this saver allows to get variables such as weights, biases, gradients etc from a given model path        
     with tf.Session() as sess:
-        saver.restore(sess, './model/best/model.ckpt-8188')
+        saver.restore(sess, CKPT_PATH)
         sess.run(predictions) # this ouputs the predictions for fillers too (if n_frames were less than 100, then we put in a filler)
         predictions = predictions.eval() # convert tensor to numpy array (1, 100, 2) n_batches, n_frames, n_outputs
     predictions = predictions[0, :(n_frames-gap_to_fill)] # discard irrelevant predictions
@@ -341,6 +329,7 @@ def detectEmotion():
         mimetype='application/json'
     )
     return response
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8000, debug=False) # set debug=False for production
