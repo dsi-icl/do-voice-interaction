@@ -73,9 +73,9 @@ def train():
             exit(-1)
             
         # Evaluate one batch
-        count = 0
+        #count = 0
         for i, name in enumerate(['arousal', 'valence']):
-            count += 1
+            #count += 1
 
             '''
             'prediction' has a shape of (batch_size, seq_length, number_of_outputs)

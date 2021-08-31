@@ -1,8 +1,6 @@
 FROM python:3.7-slim
 LABEL maintainer="ms1518@imperial.ac.uk"
 
-#RUN apt-get -y update
-#RUN apt-get install -y ffmpeg espeak
 ENV PYTHONIOENCODING=UTF-8
 
 RUN apt-get update && apt-get install -y \

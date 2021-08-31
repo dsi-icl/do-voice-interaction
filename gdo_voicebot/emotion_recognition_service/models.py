@@ -15,33 +15,19 @@ def recurrent_model(net, emb=None, hidden_units=256, number_of_outputs=2): # net
 
     development_msg('\n*************** Constructing the neural network ***************')
 
-    # Fusing strategies of output of CNN model with word embeddings
     development_msg('Defining fusion of paralinguistic and semantic networks')
-    # Attention aprroach  
-    # # here, net = audio_model2 = paralinguistic AND 
-    # emb = tf.cast(word_embeddings, tf.float32) = semantic, projected_units = 256
-    fused_features = attention_model(net, emb, projected_units=1024) # fuse paralinguistic and semantic networks - mifu
+    
+    fused_features = attention_model(net, emb, projected_units=1024) # fuse paralinguistic and semantic networks
 
-    development_msg('Defining three FC layers to disentangle 3 features')
-    # "We chose to use three FC layers such that the information 
-    # flow per emotional dimension in the network is disentagled.
-    # The intuition here is that by adding three additional dense layers, 
-    # we hope that each of these projections could learn features that
-    # suit best for a dimension in our emotion space." - paper
-    # setting up three nets to disentangle the information - mifu
-    net_1 = tf.contrib.layers.fully_connected(fused_features, num_outputs=512) # arousal - mifu
-    net_2 = tf.contrib.layers.fully_connected(fused_features, num_outputs=512) # valence - mifu
+    development_msg('Defining three FC layers to disentangle 2 features')
+    net_1 = tf.contrib.layers.fully_connected(fused_features, num_outputs=512) # arousal
+    net_2 = tf.contrib.layers.fully_connected(fused_features, num_outputs=512) # valence
 
-    # Concat output
-    # net = tf.concat([net_1, net_2, net_3], axis=2)
-    development_msg('Defining the fusing of the three FC layers')
+    development_msg('Defining the fusing of the 2 FC layers')
     # Self-attention
-    # fuse the three layers to prep for LSTM - mifu
+    # fuse the three layers to prep for LSTM
     net = attention_model(net_1, net_2, scope='_self12')
 
-    #-----------------------------------------#
-    # Fully connected layer approach
-    # net = fully_connected_model(net, emb)
     development_msg(net)
 
     with tf.variable_scope('recurrent'): # 'tf.variable_scope' is a context manager for defining ops that create layers
@@ -57,14 +43,14 @@ def recurrent_model(net, emb=None, hidden_units=256, number_of_outputs=2): # net
                                        cell_clip=100,
                                        state_is_tuple=True)
 
-        outputs, states = tf.nn.dynamic_rnn(lstm, net, dtype=tf.float32) # param 1 = LSTM cell, param 2 = input data. 'tf.nn.dynamic_rnn' creates a recurrent neural network specified by RNNCell cell
+        outputs, states = tf.nn.dynamic_rnn(lstm, net, dtype=tf.float32)
         net = tf.reshape(outputs, (batch_size * seq_length, hidden_units))
         prediction = tf.nn.tanh(slim.layers.linear(net, number_of_outputs))
         development_msg('\n*************** Returning a successfully created recurrent network **************')
         return tf.reshape(prediction, (batch_size, seq_length, number_of_outputs))
 
 
-# paralinguistic feature extractor - mifu
+# paralinguistic feature extractor
 def audio_model2(audio_frames=None, conv_filters=40):
     with tf.variable_scope('audio_model'):
         development_msg('\n*************** Entering audio_model2 in model.py **************')
@@ -106,20 +92,18 @@ def fully_connected_model(audio_frames, text_frames):
         return net
 
 
-def attention_model(audio_frames, text_frames, projected_units=2048, scope=''): # audio_frames and text_frames should be renamed to net_1 and net_2? - mifu
+def attention_model(audio_frames, text_frames, projected_units=2048, scope=''):
     with tf.variable_scope('attn_model' + scope):
         batch_size, seq_length, num_features = audio_frames.get_shape().as_list()
 
         # Attention
         audio_features = tf.reshape(audio_frames, [-1, audio_frames.get_shape()[-1]])
 
-        # NEW - check if embedding present (in evaluation sometimes there is no embedding)
+        # Check if embedding present in case embedding=None used in recurrent_model()
         if text_frames != None:
-            text_features = tf.reshape(text_frames, [-1, text_frames.get_shape()[-1]]) # Previously only this existed with no checks to wether embedding was None or not. This was giving an error when trying to run an inference without embedding
+            text_features = tf.reshape(text_frames, [-1, text_frames.get_shape()[-1]])
         else:
-            text_features = tf.zeros((500, 100)) # NEW
-
-        # development_msg(audio_features.get_shape().as_list(), text_features.get_shape().as_list())
+            text_features = tf.zeros((500, 100))
 
         if audio_features.get_shape().as_list()[1] != text_features.get_shape().as_list()[1]:
             projected_audio = tf.contrib.layers.fully_connected(audio_features, num_outputs=projected_units)
@@ -143,20 +127,14 @@ def stack_attention_producer(frame1, frame2, batch_size, scope=None):
         frames = tf.concat([frame1, frame2], axis=1)
         tmp_frames = tf.expand_dims(frames, 3)
 
-        # development_msg(frames, tmp_frames)
-
         conv = tf.squeeze(conv2d(tmp_frames, 1, 1, frames.get_shape()[-1], name=scope + '_selector'), [2, 3])
-        # development_msg(conv)
 
         conv = tf.multiply(conv, 1. / tf.sqrt(tf.cast(frames.get_shape()[-1], tf.float32)))
-        # development_msg(conv)
 
         attention = tf.nn.softmax(conv, name=scope + '_softmax')
         attention = tf.expand_dims(attention, axis=2)
-        # development_msg(attention)
 
         out = tf.reduce_sum(tf.multiply(frames, attention), 1, keep_dims=True)
-        # development_msg(out)
 
         out = tf.reshape(out, (batch_size, -1, out.shape[-1]))
         return out
@@ -188,6 +166,6 @@ def get_model(name):
         raise ValueError('Requested name [{}] not a valid model'.format(name))
 
     def wrapper(*args, **kwargs):
-        return recurrent_model(model(*args), **kwargs) # the first param (i.e. model) refers to audio_model2 which is the paralinguistic network
+        return recurrent_model(model(*args), **kwargs)
 
     return wrapper # returns the recurrent_model

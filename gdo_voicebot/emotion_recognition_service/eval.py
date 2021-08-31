@@ -50,7 +50,7 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = str(FLAGS.min_log_level)
 3 = INFO, WARNING, and ERROR messages are not printed
 '''
 
-def evaluate_2(file2eval, model_path): # here, file2eval = 'tfrecords/Devel_1.tfrecord' - mifu
+def evaluate_2(file2eval, model_path):
     
     development_msg('\n******************* Enter evaluate_2() ************************')
     development_msg('file2eval = ' + str(file2eval))
@@ -58,39 +58,32 @@ def evaluate_2(file2eval, model_path): # here, file2eval = 'tfrecords/Devel_1.tf
 
     with tf.Graph().as_default():
 
-        filename_queue = tf.FIFOQueue(capacity=1, dtypes=[tf.string]) # initialising a queue to take one string - mifu
+        filename_queue = tf.FIFOQueue(capacity=1, dtypes=[tf.string])
         development_msg('\n****************** Loading dataset via get_split() **********************')
-        # Load dataset. # audio_frames refers to paralinguistic net/features and word_embeddings is the semantic features - refer to pipeline diagram - mifu
-         #  Uncomment this once finished debugging
-        #'''
+        # Load dataset
         audio_frames, word_embeddings, labels = get_split(file2eval, False,
-                                                          FLAGS.batch_size, seq_length=FLAGS.sequence_length) # word_embedding is the mapping of transcript and audio - mifu
-        #'''
-        #audio_frames = tf.convert_to_tensor(np.zeros((1, 100, 2205), dtype=np.float32)) # Tensor("strided_slice:0", shape=(1, 100, 2205), dtype=float32)
-        #word_embeddings = tf.convert_to_tensor(np.zeros((1, 100, 100), dtype=np.float64)) # Tensor("strided_slice_2:0", shape=(1, 100, 100), dtype=float64)
-        #labels = tf.convert_to_tensor(np.zeros((1, 100, 3), dtype=np.float32)) # Tensor("strided_slice_1:0", shape=(1, 100, 3), dtype=float32)
+                                                          FLAGS.batch_size, seq_length=FLAGS.sequence_length)
+        
         development_msg('audio_frames = ' + str(audio_frames))
         development_msg('word_embeddings = ' + str(word_embeddings))
         development_msg('labels = ' + str(labels))
         development_msg('\n****************** Defining model graph **********************')
         # Define model graph.
-        with slim.arg_scope([slim.layers.batch_norm, slim.layers.dropout], is_training=False): # why is it using word_embeddings event though it is not training? - I thought the paper said that it doesnt use transcript in non-training sessions?
-            # FLAG.model equals audio_model2 - mifu
-            # Defining an operation called predictions - mifu
+        with slim.arg_scope([slim.layers.batch_norm, slim.layers.dropout], is_training=False):
             
             predictions = models.get_model(FLAGS.model)(audio_frames,
-                                                       emb=tf.cast(word_embeddings, tf.float32), # this is the semantic network (see its use in models.py line 18) -  this must be the recosntructed transcript rather tahn raw transcrition - mifu
-                                                       hidden_units=FLAGS.hidden_units) # get_model() returns the function recurrent_model(net, emb=None, hidden_units=256, number_of_outputs=3)
+                                                       emb=tf.cast(word_embeddings, tf.float32),
+                                                       hidden_units=FLAGS.hidden_units)
             
 
-        coord = tf.train.Coordinator() # Coordinator = controller that maintains the set of threads and is part of tf.train.supervisor
-        saver = tf.train.Saver(slim.get_variables_to_restore()) # this saver allows to get variables such as weights, biases, gradients etc from a given model path
+        coord = tf.train.Coordinator() # controller that maintains the set of threads and is part of tf.train.supervisor
+        saver = tf.train.Saver(slim.get_variables_to_restore()) # this saver allows to get variables from a given model path
 
         development_msg('\n****************** Starting eval session **********************')
-        # execute computation - mifu
+
         with tf.Session() as sess: # 'tf.Session() as sess' initiates a TensorFlow Graph object in which tensors are processed through operations (or ops).     
             saver.restore(sess, model_path) # restores previous variables
-            tf.train.start_queue_runners(sess=sess, coord=coord) # QueueRunner = when tf is reading the input, the queue serves all the orkers that are responsible for executing the training step
+            tf.train.start_queue_runners(sess=sess, coord=coord) # QueueRunner = when tf is reading the input, the queue serves all the workers that are responsible for executing the training step
 
             evaluated_predictions = []
             evaluated_labels = []
@@ -103,17 +96,12 @@ def evaluate_2(file2eval, model_path): # here, file2eval = 'tfrecords/Devel_1.tf
             development_msg('queue size = ' + str(sess.run(filename_queue.size())))
             sess.run(filename_queue.enqueue(file2eval))
             development_msg('queue size = ' + str(sess.run(filename_queue.size())))
-            #sess.run(filename_queue.enqueue(file2eval))
-            #print('queue size = ' + str(sess.run(filename_queue.size())))
 
             development_msg('Iterating through mini batches')
             for i in range(num_batches):
                 development_msg('Running predictions on mini batch ' + str(i))
                 development_msg('labels = ' + str(labels))
-                prediction_, label_ = sess.run([predictions, labels]) # GETS STUCK
-                #development_msg(sess.run([predictions, labels]))
-                
-                #prediction_ = sess.run(predictions)
+                prediction_, label_ = sess.run([predictions, labels])
 
                 development_msg('Appending prediction')
                 evaluated_predictions.append(prediction_[0])
@@ -159,27 +147,16 @@ if __name__ == '__main__':
         print("\nPlease specify the number of steps (e.g. --steps '12161')\n")
         exit(-1)
 
-    #dataset_dir = Path(FLAGS.dataset_dir)
-    best, inx = 0.9292, 1 # originally 0.62, 1 - mifu
+    best, inx = 0.9292, 1
     cnt = 0
     model_path = FLAGS.checkpoint + '/' + 'model.ckpt-' + FLAGS.steps
 
-    # while True: # everything below this was within while true but I do not want it in loop - mifu
-    '''
-    if FLAGS.portion == 'test': # portion = Devel by default unless specified otherwise - mifu
-        
-        model_path = FLAGS.store_best_path
-    else:
-        
-        model_path = tf.train.latest_checkpoint(FLAGS.checkpoint_dir) # assign model file created in the last development session (I think...) - mifu
-    '''
     development_msg('\n**************** Setting up eval model ***************')
     predictions, labels = None, None
 
-    # assign evaluation model - mifu
     eval_model = data_metrics.metric_graph()
-    eval_arousal = eval_model.eval_metric_arousal # assign metric[0] - mifu
-    eval_valence = eval_model.eval_metric_valence # assign metric[1] - mifu
+    eval_arousal = eval_model.eval_metric_arousal # assign metric[0]
+    eval_valence = eval_model.eval_metric_valence # assign metric[1]
     
     # prediction - mifu
     if FLAGS.portion == 'test':
@@ -198,15 +175,15 @@ if __name__ == '__main__':
     development_msg('')
 
     for tf_file in portion_files:
-        # prediction results - mifu
+        # prediction results
         predictions_file, labels_file = evaluate_2(str(tf_file), model_path)
 
         development_msg(tf_file)
 
-        if predictions is not None and labels is not None: # after first iteration - mifu
+        if predictions is not None and labels is not None:
             predictions = np.vstack((predictions, predictions_file))
             labels = np.vstack((labels, labels_file))
-        else: # first iteration - mifu
+        else:
             predictions = predictions_file
             labels = labels_file
 
@@ -214,7 +191,7 @@ if __name__ == '__main__':
     development_msg(labels.shape)
 
     print('****************** Evaluating the prediction agaisnt label **********************')
-    # execute evaluation on the prediction result (evaluation model was assigned earlier in the above and defined in data_metrics.py) - mifu
+
     with tf.Session() as sess:
         e_arousal, e_valence = sess.run([eval_arousal, eval_valence],
                                                     feed_dict={
@@ -225,10 +202,10 @@ if __name__ == '__main__':
         print('e_valence (CCC) = ' + str(e_valence)) # CCC for valence
         eval_res = np.array([e_arousal, e_valence])
 
-        if FLAGS.liking: # By default FLAGS.liking = False i.e. liking feature is excluded from the loss calculation
-            eval_loss = 1 - (np.sum(eval_res) / eval_res.shape[0]) # Concordance Loss = 1 - CCC
+        if FLAGS.liking:
+            eval_loss = 1 - (np.sum(eval_res) / eval_res.shape[0])
         else:
-            eval_loss = (2 - eval_res[0] - eval_res[1]) / 2 # originally 2 - eval_res[0] - eval_res[1]
+            eval_loss = (2 - eval_res[0] - eval_res[1]) / 2
 
         print('Evaluation: %d, loss: %.4f -- arousal: %.4f -- valence: %.4f'
                 % (cnt, eval_loss, eval_res[0], eval_res[1]))

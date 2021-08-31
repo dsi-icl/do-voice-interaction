@@ -8,7 +8,8 @@ sys.path.append(".")
 from helper import get_pathlist_from_dir, AROUSAL_DIR, VALENCE_DIR, PROCESSED_LABEL_DIR
 
 def label_generator():
-    (Path(PROCESSED_LABEL_DIR)).mkdir(exist_ok=True) # create a folder if it does not exist already 
+    # create a folder if it does not exist already
+    (Path(PROCESSED_LABEL_DIR)).mkdir(exist_ok=True)
 
     arousalfiles = get_pathlist_from_dir(AROUSAL_DIR)
     valencefiles = get_pathlist_from_dir(VALENCE_DIR)
@@ -18,7 +19,8 @@ def label_generator():
         clipname = arousalfile.rsplit('/')[-1][:-4] # i.e. filename e.g. 220
         print('Creating processed labels for ' + clipname + ' and saving in ' + PROCESSED_LABEL_DIR)
         
-        (Path(PROCESSED_LABEL_DIR) / clipname).mkdir(exist_ok=True) # create a subfolder if it does not exist already 
+        # create a subfolder if it does not exist already 
+        (Path(PROCESSED_LABEL_DIR) / clipname).mkdir(exist_ok=True) 
 
         with open(arousalfile) as arousal, open(valencefile) as valence:
             next(arousal) # skip headers
@@ -27,7 +29,7 @@ def label_generator():
             prev_seg_id = -1
             # iterate each entry in both arousal and valence label file
             for row_a, row_v in zip(arousal, valence):
-                #development_msg(row_v)
+
                 time_a, value_a, seg_id_a = row_a.split(',',-1)
                 time_v, value_v, seg_id_v = row_v.split(',',-1)
 
@@ -42,7 +44,8 @@ def label_generator():
                     prev_seg_id = seg_id_a
                 
                 adjusted_timestamp = int(time_a) - int(time_to_shift)
-                adjusted_timestamp = format((adjusted_timestamp/1000), '.4f') # convert micro second to second and limit to 4 decimal places
+                # convert micro second to second and limit to 4 decimal places
+                adjusted_timestamp = format((adjusted_timestamp/1000), '.4f')
 
                 new_row = ";".join([adjusted_timestamp, value_a, value_v])
                 fo.write(new_row + '\n')

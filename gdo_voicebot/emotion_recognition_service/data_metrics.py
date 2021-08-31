@@ -1,6 +1,6 @@
 import numpy as np
 import warnings
-warnings.filterwarnings('ignore',category=FutureWarning) # needed to ignore tensorflow 1x depreciation warning
+warnings.filterwarnings('ignore',category=FutureWarning)
 import tensorflow as tf
 
 slim = tf.contrib.slim
@@ -25,9 +25,15 @@ def metric_graph():
 
         for i in [0, 1]:
             # Caluclating concordance correlation coefficient (CCC)
-            pred_mean, pred_var = tf.nn.moments(pred[:, i], [0]) # The mean and variance are calculated by aggregating the contents of x (pred[:, i]) across axes ([0])
-            gt_mean, gt_var = tf.nn.moments(label[:, i], [0]) # gt = ground truth
-            mean_cent_prod = tf.reduce_mean((pred[:, i] - pred_mean) * (label[:, i] - gt_mean)) # Computes the mean of elements across dimensions of a tensor.
+
+            # The mean and variance are calculated by aggregating the 
+            # contents of x (pred[:, i]) across axes ([0])
+            pred_mean, pred_var = tf.nn.moments(pred[:, i], [0]) 
+
+            gt_mean, gt_var = tf.nn.moments(label[:, i], [0])
+
+            # Computes the mean of elements across dimensions of a tensor
+            mean_cent_prod = tf.reduce_mean((pred[:, i] - pred_mean) * (label[:, i] - gt_mean))
             metric[i] = 2. * mean_cent_prod / (pred_var + gt_var + tf.square(pred_mean - gt_mean))
 
     return AttributeDict(

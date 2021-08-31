@@ -16,7 +16,7 @@ CHUNK_SIZE = 2205
 MAX_DATA_LENGTH = 50
 SEQUENCE_LENGTH = 100
 
-MUSE_DIR = './MuSe-CAR/' 
+MUSE_DIR = './MuSe-CAR/' # Please specify your own path if you decide to put the dataset elsewhere
 AUDIO_DIR = MUSE_DIR + 'audio/'
 TRANSCRIPT_DIR = MUSE_DIR + 'transcription/'
 AROUSAL_DIR = MUSE_DIR + 'label/arousal/'
@@ -27,7 +27,7 @@ PROCESSED_LABEL_DIR = MUSE_DIR + 'label/processed/' # Please specify your own pa
 TFRECORD_DIR = './tfrecords'  # Please specify your own path to save the tfrecords
 
 def development_msg(content):
-    #print(content)
+    print(content)
     return
 
 def get_filenames_from_dir(dir):
@@ -84,7 +84,6 @@ class WordVectorHelper(object):
                     print('Cant process word {%s}' % tmp[0])
 
         word2id = dict(zip(id2word.values(), id2word.keys()))
-        # print('Vocabulary size: %d, embedding size: %d' % (len(embeddings), embedding_size))
 
         self.embeddings_dict = embeddings_dict
         self.id2word = id2word
@@ -102,7 +101,6 @@ class WordVectorHelper(object):
             for word in v:
                 e = embeddings.get(word, None)
                 found = True if e is not None else False
-                # print(word, found)
 
                 if found:
                     s_embeddings[k] = e

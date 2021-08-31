@@ -29,7 +29,7 @@ TEST_FILES = ['21', '19', '302', '290', '285', '298', '303', '292', '232', '213'
 def serialize_sample(writer, filename):
     development_msg('Enter serialize_sample(' + filename + ')')
     for i, (audio_frame, embedding, label) in enumerate(zip(*get_samples(filename))):  # serialize every frame
-        development_msg('serialing a frame')
+        development_msg('data to serialise')
         development_msg('....................... frame ' +  str(i) + ' ......................')
         development_msg('audio_frame = ' + str(audio_frame))
         development_msg('embedding = ' + str(embedding))
@@ -43,33 +43,26 @@ def serialize_sample(writer, filename):
         }))
         
         # write all frames of a subject to a file
-        writer.write(example.SerializeToString())  
+        writer.write(example.SerializeToString()) 
+        development_msg('successfully serialised a frame') 
 
 
 def get_samples(filename):
     development_msg('Enter get_samples(' + filename + ')')
-    audio_signal, sr, labels, time_mappings = load_metadata(filename) # removed turns as 4th param
+    audio_signal, sr, labels, time_mappings = load_metadata(filename)
 
     # Process labels
-    time = labels[:, 0].astype(np.float32) # changed col 1 to col 0
+    time = labels[:, 0].astype(np.float32)
     arousal = np.reshape(labels[:, 1], (-1, 1)).astype(np.float32) # takes 1d array and makes it into 2d array with n rows and 1 col.
-    valence = np.reshape(labels[:, 2], (-1, 1)).astype(np.float32) # changed col 3 to 2
+    valence = np.reshape(labels[:, 2], (-1, 1)).astype(np.float32)
     
     labels = np.hstack([arousal, valence]).astype(np.float32) # stacks the 1 col arrays side by side
 
-    #development_msg('arousal shape = ' + str(arousal.shape))
-    #development_msg('valence shape = ' + str(valence.shape))
-    #development_msg('liking shape = ' + str(liking.shape))
-    # #development_msg(labels)
-
-    # In process audio amd process word, audio frames and word embeddings are aligned to the time stamps provided by the labels I think...
     # Process audio frames
-    target_interculator_audio = process_audio_frames(time, audio_signal, sr) # I removed turns as 4th param
-    #development_msg(len(target_interculator_audio), target_interculator_audio[0].shape)
+    target_interculator_audio = process_audio_frames(time, audio_signal, sr)
 
     # Process word mappings
-    corresponding_word, _, _ = process_word_mappings(time, time_mappings)
-    #development_msg(target_interculator_audio[0].shape, corresponding_word[0].shape, labels[0].shape)
+    corresponding_word = process_word_mappings(time, time_mappings)
 
     development_msg('Got samples for ' + filename + ' as shown below')
     development_msg('audio_frame shape = ' + str(shape(target_interculator_audio)))
@@ -91,15 +84,14 @@ def load_metadata(filename):
     #turns = np.loadtxt(str(turn_path), delimiter=';', dtype=np.float32)
     time_mappings = np.loadtxt(str(a2w_mapping_path), delimiter=';', dtype=str, ndmin=2)
 
-    return audio_signal, sampling_rate, labels, time_mappings # I removed turns which was the 4th output
+    return audio_signal, sampling_rate, labels, time_mappings
 
 
-def process_audio_frames(time, audio_signal, sr): # removed turns as 4th param
+def process_audio_frames(time, audio_signal, sr):
     development_msg('Enter process_audio_frames(time, audio_signal, sr)')
     target_interculator_audio = [np.zeros((1, 2205), dtype=np.float32) # changed from 4410 to 2205
                                  for _ in range(len(time))]  # consider interlocutor information
     
-    target_set = set()
     audio_frames = []
 
     development_msg('audio_signal = ' + str(audio_signal))
@@ -112,7 +104,7 @@ def process_audio_frames(time, audio_signal, sr): # removed turns as 4th param
         audio_frames.append(audio.astype(np.float32))
         development_msg('Gathering raw audio_signal[' + str(s) + ':' +
         str(e) + '] which is 2205-bits long audio frame starting at t = '+
-        str(t) + 'with a shape = ' + str(audio.shape))
+        str(t) + ' with a shape = ' + str(audio.shape))
 
     # Copying the content over to target_interculator_audio - this is useless in my case so I can just return audio_frames
     for i in range(len(time)):
@@ -123,18 +115,6 @@ def process_audio_frames(time, audio_signal, sr): # removed turns as 4th param
     development_msg('target_interculator_audio = ')
     development_msg(target_interculator_audio)
 
-    ''' GG
-    for turn in turns:
-        st, end = int(round(float(turn[0]), 1) * 10), int(round(float(turn[1]), 1) * 10)
-        for i in range(st, end + 1 if end + 1 < len(time) else len(time)):
-            target_set.add(i)
-            target_interculator_audio[i][0][:2205] = audio_frames[i]  # the subject is speaking
-
-    for i in range(len(time)):
-        if i not in target_set:
-            target_interculator_audio[i][0][2205:] = audio_frames[i]  # the chatting partner is speaking
-    
-    '''
     return target_interculator_audio
     
 
@@ -143,6 +123,7 @@ def process_word_mappings(time, time_mappings):
     development_msg('************************')
     development_msg(time_mappings)
     development_msg('************************')
+
     # Process word mappings
     id = time_mappings[:, 0]
     start_time = time_mappings[:, 1].astype(np.float32)
@@ -150,8 +131,6 @@ def process_word_mappings(time, time_mappings):
     word = time_mappings[:, 3]
 
     corresponding_word = [None for _ in range(len(time))]
-    corresponding_word_id = [None for _ in range(len(time))]
-    corresponding_sentence_id = [0 for _ in range(len(time))]
 
     for i, w in enumerate(word):
         development_msg('i = ' + str(i))
@@ -164,26 +143,12 @@ def process_word_mappings(time, time_mappings):
             emb = _get_embedding(w)
             corresponding_word[t] = emb.reshape((1, EMBEDDING_DIMENSION))
 
-    sid = -1
-    count = 0
     for i in range(len(time)):
         if corresponding_word[i] is None:
             corresponding_word[i] = np.zeros((1, EMBEDDING_DIMENSION))
 
-            if i > 0 and corresponding_word_id[i-1] == sid:
-                count = 2 if count == 0 else count + 1
-            else:
-                count = 0
-
-            corresponding_word_id[i] = sid
-            corresponding_sentence_id[i] = sid
-
-            if count == MAX_DATA_LENGTH:
-                sid -= 1
-                count = 0
-
     corresponding_word = np.array(corresponding_word)
-    return corresponding_word, corresponding_sentence_id, corresponding_word_id
+    return corresponding_word
 
 
 def _get_embeddings(space=''):
@@ -215,7 +180,7 @@ def _get_embedding(word):
 
 
 def _clean_word(word):
-    punctuation = '!"#$%&\'()*+,-./:;=?@[\\]^_`{|}~'  # Exclude <>
+    punctuation = '!"#$%&\'()*+,-./:;=?@[\\]^_`{|}~' 
     word_clean = word.translate(str.maketrans('', '', punctuation))
     word_clean = word_clean.lower()
     return word_clean
@@ -228,7 +193,7 @@ def _bytes_feature(value):
 def write_data():
     
     clippathlist = get_pathlist_from_dir(SYNCHRONISATION_MAPPING_DIR)
-    n_clips_to_go = 239 # 303 minus 64 as there initially were 303 clips and then I mannually removed 64 as they did not have labels
+    n_clips_to_go = 239 # 303 minus 64 as there initially were 303 clips and 64 mannually removed 64 as they did not have labels
     for path in clippathlist:
         clipname = path.rsplit('/')[-1] # i.e. folder name e.g. 201
         print('Writing tfrecords for %s' % clipname) 
@@ -259,6 +224,7 @@ def write_data():
 unk = set()
 
 if __name__ == '__main__':
+    
     # Select the embedding you want to use by setting space = 'w2v|s2v|<empty>'
     # currently word2vec vector is used
     id2word, embed_dict = _get_embeddings(space='w2v')

@@ -26,13 +26,13 @@ def development_msg(content):
     #print(content)
     return
 
-# equivalent to delete_segmentation() at data_generator.py line 90
+# equivalent to delete_segmentation() in data_generator.py
 def delete_files(filename):
     development_msg('\n***************** Deleting used wav, txt and csv files *****************\n')
     for ext in ['.wav', '.txt', '.csv']: # wav and csv exceluded here
         os.remove(filename + ext)
 
-# equivalent to execute_task() at data_generator.py line 24
+# equivalent to execute_task() in data_generator.py
 def execute_task(filename):
     # Create Task object
     config_string = u"task_language=deu|is_text_type=mplain|os_task_file_format=csv|os_task_file_levels=3"
@@ -47,7 +47,7 @@ def execute_task(filename):
     # output sync map to file
     task.output_sync_map_file()
 
-# equivalent to mapping_generator() at data_generator.py line 95
+# equivalent to mapping_generator() in data_generator.py
 def mapping_generator(filename):
     print('\n***************** Creating synchronisation map for ' + filename + ' *****************')
     
@@ -58,7 +58,7 @@ def mapping_generator(filename):
 
     fo.close()
 
-# equivalent to process_audio_frames() at data_generator.py line 220
+# equivalent to process_audio_frames() in data_generator.py 
 def process_audio_frames(time, audio_signal, sr):
     print('\n***************** Enter process_audio_frames(time, audio_signal, sr) *****************')
     target_interculator_audio = [np.zeros((1, 2205), dtype=np.float32) # changed from 4410 to 2205
@@ -95,8 +95,6 @@ def process_word_mappings(time, time_mappings):
     word = time_mappings[:, 3]
 
     corresponding_word = [None for _ in range(len(time))]
-    #corresponding_word_id = [None for _ in range(len(time))]
-    #corresponding_sentence_id = [0 for _ in range(len(time))]
 
     for i, w in enumerate(word):
         development_msg('i = ' + str(i))
@@ -107,19 +105,15 @@ def process_word_mappings(time, time_mappings):
         for t in range(st, end + 1 if end + 1 < len(time) else len(time)):
             emb = _get_embedding(w)
             corresponding_word[t] = emb.reshape((1, EMBEDDING_DIMENSION))
-            #corresponding_word_id[t] = id[i] # commented this out as not needed as of now
-            #corresponding_sentence_id[t] = int(id[i].split('w')[0].split('s')[1]) # commented this out as not needed as of now and is causing an issue
-
-    #sid = -1
-    #count = 0
+          
     for i in range(len(time)):
         if corresponding_word[i] is None:
             corresponding_word[i] = np.zeros((1, EMBEDDING_DIMENSION))
 
     corresponding_word = np.array(corresponding_word)
-    return corresponding_word#, corresponding_sentence_id, corresponding_word_id
+    return corresponding_word
 
-# equivalent to load_metadata() at data_generator.py line 205
+# equivalent to load_metadata() in data_generator.py
 def load_metadata(filename):
     print('\n***************** Enter load_metadata(' + filename + ') *****************')
     audio_signal, sampling_rate = lb.core.load('./' + filename + '.wav', sr=TARGET_SAMPLING_RATE)
@@ -131,14 +125,13 @@ def load_metadata(filename):
     return audio_signal, sampling_rate, time_mappings, time # Removed label and turns and created time
 
 
-# equivalent to get_samples() at data_generator.py line 79
+# equivalent to get_samples() in data_generator.py
 def get_samples(filename):
     print('\n***************** Getting samples *****************')
-    audio_signal, sr, time_mappings, time = load_metadata(filename) # removed turns as 4th param
+    audio_signal, sr, time_mappings, time = load_metadata(filename)
     
-    # In process audio amd process word, audio frames and word embeddings are aligned to the time stamps provided by the labels I think...
     # Process audio frames
-    target_interculator_audio = process_audio_frames(time, audio_signal, sr) # I removed turns as 4th param
+    target_interculator_audio = process_audio_frames(time, audio_signal, sr)
     development_msg(len(target_interculator_audio))
     development_msg(target_interculator_audio[0].shape)
 
@@ -264,58 +257,59 @@ def detectEmotion():
     
     audio_frames, embeddings = get_samples(filename)
     
-    development_msg(type(audio_frames)) # list
-    audio_frames = np.array(audio_frames) # converted from list to numpy array
-    development_msg(audio_frames.shape) # (11, 1, 2205)
+    development_msg(type(audio_frames))
+    audio_frames = np.array(audio_frames)
+    development_msg(audio_frames.shape)
     audio_frames = audio_frames[:, 0, :]
-    development_msg(audio_frames.shape) # (11, 2205)
-    n_frames = len(audio_frames) # 11
+    development_msg(audio_frames.shape)
+    n_frames = len(audio_frames)
     if n_frames % SEQUENCE_LENGTH != 0:
         gap_to_fill = SEQUENCE_LENGTH - (n_frames % SEQUENCE_LENGTH)
-        development_msg(gap_to_fill) # 89
-        filler = np.zeros((gap_to_fill, CHUNK_SIZE)) # (89, 2205) in this case filler is 89 rows to make a total of 100
+        development_msg(gap_to_fill)
+        filler = np.zeros((gap_to_fill, CHUNK_SIZE))
         audio_frames = np.vstack((audio_frames, filler))
-        development_msg(audio_frames.shape) # (100, 2205)
-        new_n_frames = len(audio_frames) # 100
-        n_batches = int(new_n_frames / SEQUENCE_LENGTH) # this is relevant if there are more than 100 frames
-        development_msg(n_batches) # 1
-        audio_frames = audio_frames.reshape(n_batches, SEQUENCE_LENGTH, CHUNK_SIZE) # (1, 100, 2205)
+        development_msg(audio_frames.shape)
+        new_n_frames = len(audio_frames)
+        n_batches = int(new_n_frames / SEQUENCE_LENGTH)
+        development_msg(n_batches)
+        audio_frames = audio_frames.reshape(n_batches, SEQUENCE_LENGTH, CHUNK_SIZE)
     
     audio_frames = tf.convert_to_tensor(audio_frames, dtype=np.float32)
     development_msg('\naudio_frames (tensor) = ' + str(audio_frames))
 
-    development_msg(embeddings.shape) # (11, 1, 100) first dim is number of frames
-    embeddings = embeddings[:, 0, :] # (11, 100)
-    n_frames = len(embeddings) # 11
+    development_msg(embeddings.shape)
+    embeddings = embeddings[:, 0, :]
+    n_frames = len(embeddings)
     if n_frames % SEQUENCE_LENGTH != 0:
         gap_to_fill = SEQUENCE_LENGTH - (n_frames % SEQUENCE_LENGTH)
-        development_msg(gap_to_fill) # 89
-        filler = np.zeros((gap_to_fill, EMBEDDING_DIMENSION)) # (89, 100)
+        development_msg(gap_to_fill)
+        filler = np.zeros((gap_to_fill, EMBEDDING_DIMENSION))
         embeddings = np.vstack((embeddings, filler))
-        development_msg(embeddings.shape) # (100, 100)
-        new_n_frames = len(embeddings) # 100
-        n_batches = int(new_n_frames / SEQUENCE_LENGTH) # this is relevant if there are more than 100 frames
+        development_msg(embeddings.shape)
+        new_n_frames = len(embeddings)
+        n_batches = int(new_n_frames / SEQUENCE_LENGTH)
         development_msg(n_batches) # 1
-        embeddings = embeddings.reshape(n_batches, SEQUENCE_LENGTH, EMBEDDING_DIMENSION) # (1, 100, 2205)
+        embeddings = embeddings.reshape(n_batches, SEQUENCE_LENGTH, EMBEDDING_DIMENSION)
 
     embeddings = tf.convert_to_tensor(embeddings)
     development_msg('\nembeddings (tensor) = ' + str(embeddings))
 
-    with slim.arg_scope([slim.layers.batch_norm, slim.layers.dropout], is_training=False): # why is it using word_embeddings event though it is not training? - I thought the paper said that it doesnt use transcript in non-training sessions?
+    with slim.arg_scope([slim.layers.batch_norm, slim.layers.dropout], is_training=False):
             
             predictions = models.get_model('audio_model2')(audio_frames,
-                                                       emb=tf.cast(embeddings, tf.float32), # this is the semantic network (see its use in models.py line 18) -  this must be the recosntructed transcript rather tahn raw transcrition - mifu
-                                                       hidden_units=256) # get_model() returns the function recurrent_model(net, emb=None, hidden_units=256, number_of_outputs=3)
-    saver = tf.train.Saver(slim.get_variables_to_restore()) # this saver allows to get variables such as weights, biases, gradients etc from a given model path        
+                                                       emb=tf.cast(embeddings, tf.float32),
+                                                       hidden_units=256)
+    saver = tf.train.Saver(slim.get_variables_to_restore())  
     with tf.Session() as sess:
         saver.restore(sess, CKPT_PATH)
-        sess.run(predictions) # this ouputs the predictions for fillers too (if n_frames were less than 100, then we put in a filler)
+        sess.run(predictions)
         predictions = predictions.eval() # convert tensor to numpy array (1, 100, 2) n_batches, n_frames, n_outputs
     predictions = predictions[0, :(n_frames-gap_to_fill)] # discard irrelevant predictions
+
     print('\n****************** Realtime Predictions ********************\n')
     print(predictions)
     print('\nRealtime Predictions Shape:\n')
-    print(predictions.shape) # (11, 2)
+    print(predictions.shape)
     print(type(predictions))
     delete_files(filename)
 

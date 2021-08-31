@@ -3,7 +3,7 @@ from __future__ import division
 from __future__ import print_function
 
 import warnings
-warnings.filterwarnings('ignore',category=FutureWarning) # needed to ignore tensorflow 1x depreciation warning
+warnings.filterwarnings('ignore',category=FutureWarning)
 import tensorflow as tf
 
 slim = tf.contrib.slim
