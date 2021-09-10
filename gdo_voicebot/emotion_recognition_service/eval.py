@@ -137,13 +137,13 @@ def _get_num_examples(tf_file):
 
 if __name__ == '__main__':
 
-    if FLAGS.portion == None:
+    if not FLAGS.portion:
         print("\nPlease specify portion (e.g. --portion 'devel')\n")
         exit(-1)
-    if FLAGS.checkpoint == None:
+    if not FLAGS.checkpoint:
         print("\nPlease specify checkpoint (e.g. --checkpoint 'all4_after103ksteps')\n")
         exit(-1)
-    if FLAGS.steps == None:
+    if not FLAGS.steps:
         print("\nPlease specify the number of steps (e.g. --steps '12161')\n")
         exit(-1)
 

@@ -1,6 +1,5 @@
 
 import csv
-import sys
 import numpy as np
 
 PATH_TO_PARTITION_FILE = './MuSe-CAR/partition.csv'

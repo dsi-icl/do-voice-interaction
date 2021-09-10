@@ -1,14 +1,8 @@
 import csv
 import os
 import sys
-import time
 from pathlib import Path
 sys.path.append(".")
-
-from aeneas.audiofile import AudioFile
-from aeneas.exacttiming import TimeInterval, TimeValue
-from aeneas.executetask import ExecuteTask
-from aeneas.task import Task
 
 from helper import get_pathlist_from_dir, development_msg, TRANSCRIPT_DIR, SYNCHRONISATION_MAPPING_DIR
 

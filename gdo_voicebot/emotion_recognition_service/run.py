@@ -1,6 +1,5 @@
 import base64
 import json
-import sys
 import os
 import uuid
 
@@ -49,7 +48,7 @@ def execute_task(filename):
 
 # equivalent to mapping_generator() in data_generator.py
 def mapping_generator(filename):
-    print('\n***************** Creating synchronisation map for ' + filename + ' *****************')
+    print('\n***************** Creating synchronisation map *****************')
     
     fo = open(filename + '.csv', 'w')
 
@@ -64,7 +63,6 @@ def process_audio_frames(time, audio_signal, sr):
     target_interculator_audio = [np.zeros((1, 2205), dtype=np.float32) # changed from 4410 to 2205
                                  for _ in range(len(time))]  # consider interlocutor information
     
-    target_set = set()
     audio_frames = []
 
     development_msg('audio_signal = ' + str(audio_signal))
@@ -89,7 +87,6 @@ def process_word_mappings(time, time_mappings):
     print('\n***************** Enter process_word_mappings(time, time_mappings) *****************')
 
     # Process word mappings
-    id = time_mappings[:, 0]
     start_time = time_mappings[:, 1].astype(np.float32)
     end_time = time_mappings[:, 2].astype(np.float32)
     word = time_mappings[:, 3]
@@ -115,7 +112,7 @@ def process_word_mappings(time, time_mappings):
 
 # equivalent to load_metadata() in data_generator.py
 def load_metadata(filename):
-    print('\n***************** Enter load_metadata(' + filename + ') *****************')
+    print('\n***************** Enter load_metadata *****************')
     audio_signal, sampling_rate = lb.core.load('./' + filename + '.wav', sr=TARGET_SAMPLING_RATE)
     audio_signal = np.pad(audio_signal, (0, CHUNK_SIZE - audio_signal.shape[0] % CHUNK_SIZE), 'constant')
     time_mappings = np.loadtxt('./' + filename + '.csv', delimiter=',', dtype=str, ndmin=2)
@@ -140,7 +137,7 @@ def get_samples(filename):
     development_msg(target_interculator_audio[0].shape)
     development_msg(corresponding_word[0].shape)
 
-    print('Returning samples for ' + filename)
+    print('Returning samples foor this file')
     return target_interculator_audio, corresponding_word
 
 

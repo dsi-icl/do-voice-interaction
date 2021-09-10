@@ -1,4 +1,3 @@
-import os
 from pathlib import Path
 import warnings
 warnings.filterwarnings('ignore',category=FutureWarning)
@@ -11,7 +10,7 @@ from helper import get_pathlist_from_dir, development_msg, WordVectorHelper,\
                     SPEECH2VEC_DIR, WORD2VEC_DIR, S2V_VEC, W2V_VEC, \
                     EMBEDDING_DIMENSION, PROCESSED_LABEL_DIR, AUDIO_DIR, \
                     SYNCHRONISATION_MAPPING_DIR, TFRECORD_DIR, TARGET_SAMPLING_RATE, \
-                    CHUNK_SIZE, MAX_DATA_LENGTH
+                    CHUNK_SIZE
 
 (Path(TFRECORD_DIR)).mkdir(exist_ok=True)
 (Path(TFRECORD_DIR) / 'train').mkdir(exist_ok=True)
@@ -125,7 +124,6 @@ def process_word_mappings(time, time_mappings):
     development_msg('************************')
 
     # Process word mappings
-    id = time_mappings[:, 0]
     start_time = time_mappings[:, 1].astype(np.float32)
     end_time = time_mappings[:, 2].astype(np.float32)
     word = time_mappings[:, 3]

@@ -1,9 +1,7 @@
-import csv
 import os
 import numpy as np
 import warnings
 warnings.filterwarnings('ignore',category=FutureWarning) # needed to ignore tensorflow 1x depreciation warning
-import tensorflow as tf
 
 SPEECH2VEC_DIR = 'speech2vec/'
 S2V_VEC = 's2v-processed.vec'
@@ -80,8 +78,10 @@ class WordVectorHelper(object):
                         embeddings_dict[word] = embed
                         id2word[count] = word
                         count += 1
-                except:
+                except Exception as ex:
                     print('Cant process word {%s}' % tmp[0])
+                except:
+                    pass
 
         word2id = dict(zip(id2word.values(), id2word.keys()))
 
