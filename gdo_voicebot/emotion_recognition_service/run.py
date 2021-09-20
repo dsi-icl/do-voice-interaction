@@ -151,8 +151,6 @@ def _get_embedding(word):
 
     if embed_dict.get(word, None) is not None:
         return embed_dict[word]
-    elif syn_dict.get(word, None) is not None:
-        return syn_dict[word]
     else:
         print('Word {%s} not in dict, so returning random embedding')
         return np.random.rand(EMBEDDING_DIMENSION)
