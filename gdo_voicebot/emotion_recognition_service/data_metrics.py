@@ -14,6 +14,10 @@ class AttributeDict(dict):
         dict.__init__(self, *av, **kav)
         self.__dict__ = self
 
+    def __eq__(self, other):
+        if not isinstance(other, AttributeDict):
+            return False
+        return dict.__eq__(self, other) and self.__dict__ == other.__dict__
 
 def metric_graph():
     with tf.variable_scope('CCC'):

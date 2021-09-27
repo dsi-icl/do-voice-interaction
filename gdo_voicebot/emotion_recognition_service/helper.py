@@ -80,7 +80,7 @@ class WordVectorHelper(object):
                         count += 1
                 except Exception as ex:
                     print('Cant process word {%s}' % tmp[0])
-                except:
+                except BaseException:
                     pass
 
         word2id = dict(zip(id2word.values(), id2word.keys()))
