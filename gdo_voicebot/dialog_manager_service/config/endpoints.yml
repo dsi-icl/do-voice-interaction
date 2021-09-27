@@ -1,4 +1,5 @@
 # This file contains the different endpoints your bot can use.
 
 action_endpoint:
- url: "http://localhost:5055/webhook"
+ url: "http://specify-your-ip-here:5055/webhook" # Your IP required (not 'localhost')
+ 

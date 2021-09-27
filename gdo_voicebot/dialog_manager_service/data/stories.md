@@ -302,3 +302,77 @@
 # reminder
 * EXTERNAL_reminder
   - action_react_to_reminder -->
+
+<!-- conversational -->
+
+# conversation with emotion detection
+* start_small_talk
+  - utter_confirm_start_small_talk
+  - utter_ask_to_turn_on_emotion_detection
+* affirm
+  - action_turn_on_emotion_detection
+  - utter_ask_about_today
+* tell_about_today
+  - action_respond_about_today
+
+# conversation without emotion detection
+* start_small_talk
+  - utter_confirm_start_small_talk
+  - utter_ask_to_turn_on_emotion_detection
+* deny
+  - utter_affirm
+  - action_turn_off_emotion_detection
+  - utter_ask_about_today
+* tell_about_today
+  - action_respond_about_today
+
+# turn on emotion detection
+* turn_on_emotion_detection
+  - utter_affirm
+  - action_turn_on_emotion_detection
+
+# turn off emotion detection
+* turn_off_emotion_detection
+  - utter_affirm
+  - action_turn_off_emotion_detection
+# check emotion detection status
+* check_emotion_detection_enabled
+  - action_check_emotion_detection_enabled
+# name
+* want_to_give_name
+  - utter_ask_name
+* give_name
+  - action_receive_name
+* repeat_name
+  - action_say_name
+
+# announce current emotion
+* ask_current_emotion
+  - utter_current_emotion
+
+<!--
+# conversation with emotion detection
+* start_small_talk
+  - utter_confirm_start_small_talk
+  - utter_ask_to_turn_on_emotion_detection
+* affirm
+  - utter_affirm
+  - action_turn_on_emotion_detection
+  - utter_ask_name
+* give_name
+  - action_receive_name
+  - utter_ask_about_today
+* tell_about_today
+  - utter_affirm
+
+# conversation with no emotion detection
+* start_small_talk
+  - utter_confirm_start_small_talk
+  - utter_ask_to_turn_on_emotion_detection
+* deny
+  - utter_affirm
+  - action_turn_off_emotion_detection
+  - utter_ask_name
+* give_name
+  - action_receive_name
+  -->

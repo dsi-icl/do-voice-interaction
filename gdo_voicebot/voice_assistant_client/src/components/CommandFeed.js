@@ -14,17 +14,18 @@ import "./CommandFeed.css";
 const CommandFeed = () => {
     const responses = useSelector(selectResponses);
     return <Feed className="feed-text">
-        {responses.map(e => <FeedItem key={e.id} date={e.date} command={e.command} response={e.response} error={e.error}/>)}
+        {responses.map(e => <FeedItem key={e.id} date={e.date} command={e.command} emotion={e.emotion} response={e.response} error={e.error}/>)}
     </Feed>;
 };
 
-const FeedItem = ({date, command, response, error}) => <Feed.Event>
+const FeedItem = ({date, command, emotion, response, error}) => <Feed.Event>
     <Feed.Label>
         <Icon name="comments" className="feed-icon"/>
     </Feed.Label>
     <Feed.Content>
         <Feed.Date className="feed-text">{date}</Feed.Date>
         <Feed.Summary className="feed-text">You: {ReactHtmlParser(replaceHtmlElements(command))}</Feed.Summary>
+        <Feed.Summary className="feed-text">Emotion Detected: {ReactHtmlParser(replaceHtmlElements(emotion))}</Feed.Summary>
         {response && <Feed.Extra text className="feed-text">Assistant: {ReactHtmlParser(replaceHtmlElements(response))}</Feed.Extra>}
         {error && <Feed.Extra text className="feed-text-error">Error: {ReactHtmlParser(replaceHtmlElements(error))}</Feed.Extra>}
     </Feed.Content>
@@ -33,6 +34,7 @@ const FeedItem = ({date, command, response, error}) => <Feed.Event>
 FeedItem.propTypes = {
     date: PropTypes.string,
     command: PropTypes.string,
+    emotion: PropTypes.string,
     response: PropTypes.string,
     error: PropTypes.string,
 };

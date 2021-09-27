@@ -3,14 +3,14 @@
  * @author Aurélie Beaugeard
  */
 
-import { getData, postData } from './index.js'
+import { getData, getDataRasa, postData } from './index.js'
 
 /**
  * Function that manages the actions to do if the deepspeech transcription has been successfully done
  * @param {SocketIO.Client} client The client with which the server comunicates
  * @param {JSON} sttResponse The deepspeech json response
  */
-export async function successProcess (client, sttResponse, request) {
+export async function successProcess (client, sttResponse, request, recentEmotion) {
   console.log('Speech to text transcription : SUCCESS\n')
 
   const botResult = await postData(global.config.services.dialogManagerService, '{"message":"' + sttResponse.text + '"}', 'Data Observatory Control Service')
@@ -32,6 +32,7 @@ export async function successProcess (client, sttResponse, request) {
         id: request.id,
         date: request.date,
         command: sttResponse.text,
+        emotion: recentEmotion,
         response: botResponseText,
         audio: {
           data: voiceAnswer.data,
@@ -53,7 +54,7 @@ export async function successProcess (client, sttResponse, request) {
  * @param {JSON} errorResponse The error json response
  * @param {String} sttResponseText The text received from the Speech To Text service
  */
-export async function errorProcess (client, errorResponse, sttResponseText, request) {
+export async function errorProcess (client, errorResponse, sttResponseText, request, recentEmotion = 'error') {
   // We generate an error voice message
   const voiceAnswer = await getData(global.config.services.ttsService, 'I encountered an error. Please consult technical support or try the request again')
 
@@ -63,6 +64,7 @@ export async function errorProcess (client, errorResponse, sttResponseText, requ
     id: request.id,
     date: request.date,
     command: sttResponseText !== '' ? sttResponseText : '...',
+    emotion: recentEmotion,
     audio: {
       data: voiceAnswer.data,
       contentType: voiceAnswer.contentType
@@ -71,19 +73,47 @@ export async function errorProcess (client, errorResponse, sttResponseText, requ
   })
 }
 
+export async function processEmotion (client, request, speech, sttResponse) {
+  var emotion = 'n/a'
+  // Get tracker information from rasa
+  const tracker = await getDataRasa(global.config.services.rasaTracker)
+  // Get rasa's slot values
+  const slots = tracker.data.slots
+  // Only carry out emotion recognition if the speaker currently has it enabled in the slot
+  if (slots.emotion_detection_enabled) {
+    const dataForEmotionRecognition = { audio: speech, transcript: sttResponse.text }
+    const emotionRecognitionResponse = await postData(global.config.services.emotionRecognitionService, JSON.stringify(dataForEmotionRecognition), 'Emotion Recognition Service')
+    console.log('emotionRecognitionResponse ', emotionRecognitionResponse)
+
+    if (emotionRecognitionResponse.success) {
+      emotion = emotionRecognitionResponse.data.emotion
+
+      // Set the emotion slot in rasa via http api
+      const newData = { "event": "slot", "timestamp": null, "name": "emotion", "value": emotion }
+      const botResult = await postData(global.config.services.rasaTrackerEvents, JSON.stringify(newData), 'Data Observatory Control Service')
+      console.log('set emotion in rasa ', botResult)
+
+      await successProcess(client, sttResponse, request, emotion)
+    } else {
+      await errorProcess(client, emotionRecognitionResponse.data, '', request)
+    }
+  } else {
+    await successProcess(client, sttResponse, request, emotion)
+  }
+}
+
 export async function processAudioCommand (client, request) {
   if (request.audio.type !== 'audio/wav' || request.audio.sampleRate !== 16000) {
     const error = { status: 'fail', service: 'Voice-assistant service', text: 'The record format is wrong' }
     await errorProcess(client, error, '', request)
   } else {
     const sttResponse = await postData(global.config.services.sttService, request.audio.data, 'Speech To Text Service')
-
     console.log('sttresponse', sttResponse)
 
     // If an error was encountered during the request or the string response is empty we inform the user through the event problem with the socket.
     // Else we can send the text transcript to the the text to speech service and sending the audiobuffer received to the client.
     if (sttResponse.success) {
-      await successProcess(client, sttResponse.data, request)
+      await processEmotion(client, request, request.audio.data, sttResponse.data)
     } else {
       await errorProcess(client, sttResponse.data, '', request)
     }
@@ -97,7 +127,7 @@ export async function processTextCommand (client, request) {
     const error = { status: 'fail', service: 'Voice-assistant service', text: 'Nothing has been written' }
     await errorProcess(client, error, '', request)
   } else {
-    await successProcess(client, commandData, request)
+    await successProcess(client, commandData, request, 'no detection for text-only command.')
   }
 }
 

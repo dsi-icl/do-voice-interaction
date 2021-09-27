@@ -23,6 +23,104 @@ except Exception as e:
     raise e
     print(e)
 
+class ActionRespondAboutToday(Action):
+
+    def name(self) -> Text:
+        return "action_respond_about_today"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        emotion = tracker.get_slot("emotion")
+        if emotion == "n/a" or emotion == "neutral":
+            dispatcher.utter_message(text="I see. Well, I'm glad you came by I was starting to get bored.")
+        elif emotion == "excited":
+            dispatcher.utter_message(text="Wow, you have a great energy! I need to keep it up!")
+        elif emotion == "sleepy":
+            dispatcher.utter_message(text="Hmm... You sound a bit tired.")
+        elif emotion == "happy":
+            dispatcher.utter_message(text="I like listening to you. You have a happy presence.")
+        elif emotion == "relaxed":
+            dispatcher.utter_message(text="You seem pretty relaxed.")
+        elif emotion == "frustrated":
+            dispatcher.utter_message(text="I understand your frustration. What can I do for you?")
+        elif emotion == "sad":
+            dispatcher.utter_message(text="You seem sad... What can I do to cheer you up?")
+        elif emotion == "mixed":
+            dispatcher.utter_message(text="Are you alright? You seem a little off...")
+
+        return []
+class ActionTurnOnEmotionDetection(Action):
+
+    def name(self) -> Text:
+        return "action_turn_on_emotion_detection"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        dispatcher.utter_message(text="Emotion detection has been turned on.")
+        return [SlotSet("emotion_detection_enabled", True)]
+
+class ActionTurnOffEmotionDetection(Action):
+
+    def name(self) -> Text:
+        return "action_turn_off_emotion_detection"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        dispatcher.utter_message(text="Emotion detection is turned off.")
+        # When turning of emotion detection, reset the current emotion to n/a
+        return [SlotSet("emotion_detection_enabled", False), SlotSet("emotion", "n/a")]
+class ActionCheckEmotionDetectionEnabled(Action):
+
+    def name(self) -> Text:
+        return "action_check_emotion_detection_enabled"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        emotion_detection_enabled = tracker.get_slot("emotion_detection_enabled")
+        if emotion_detection_enabled:
+            dispatcher.utter_message(text="Emotion detection is currently enabled")
+        else:
+            dispatcher.utter_message(text="Emotion detection is currently disabled")
+        
+        return []
+class ActionReceiveName(Action):
+
+    def name(self) -> Text:
+        return "action_receive_name"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        text = tracker.latest_message['text']
+        dispatcher.utter_message(text=f"I'll remember your name {text}!")
+        return [SlotSet("name", text)]
+
+
+class ActionSayName(Action):
+
+    def name(self) -> Text:
+        return "action_say_name"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        name = tracker.get_slot("name")
+        if not name:
+            dispatcher.utter_message(text="I don't know your name.")
+        else:
+            dispatcher.utter_message(text=f"Your name is {name}!")
+        return []
+         
 class ActionOpen(Action):
     """A class used to open demos"""
 

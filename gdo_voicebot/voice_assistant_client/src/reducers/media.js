@@ -17,6 +17,7 @@ export const media = createSlice({
                 id: action.payload.id,
                 date: action.payload.date,
                 command: action.payload.command,
+                emotion: action.payload.emotion,
                 response: action.payload.response,
                 error: action.payload.error
             }, ...state.responseList];

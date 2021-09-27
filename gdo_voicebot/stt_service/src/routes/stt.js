@@ -69,5 +69,4 @@ export function executeSpeechToTextRequest (req, res, model) {
     // Everything is fine, we send back the textMessage
     res.status(200).json({ status: 'ok', service: 'Speech To Text service', text: textMessage })
   }
-
 }
