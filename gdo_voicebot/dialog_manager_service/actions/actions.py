@@ -51,6 +51,49 @@ class ActionRespondAboutToday(Action):
             dispatcher.utter_message(text="Are you alright? You seem a little off...")
 
         return []
+
+class ActionTurnOnErrorCorrection(Action):
+
+    def name(self) -> Text:
+        return "action_turn_on_error_correction"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        dispatcher.utter_message(text="Error correction has been turned on.")
+        return [SlotSet("error_correction_enabled", True)]
+
+class ActionTurnOffErrorCorrection(Action):
+
+    def name(self) -> Text:
+        return "action_turn_off_error_correction"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        dispatcher.utter_message(text="Error correction has been turned off.")
+        # When turning of emotion detection, reset the current emotion to n/a
+        return [SlotSet("error_correction_enabled", False)]
+
+class ActionCheckErrorCorrectionEnabled(Action):
+
+    def name(self) -> Text:
+        return "action_check_error_correction_enabled"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        error_correction_enabled = tracker.get_slot("error_correction_enabled")
+        if error_correction_enabled:
+            dispatcher.utter_message(text="Error correction is currently enabled")
+        else:
+            dispatcher.utter_message(text="Error correction is currently disabled")
+        
+        return []
+
 class ActionTurnOnEmotionDetection(Action):
 
     def name(self) -> Text:

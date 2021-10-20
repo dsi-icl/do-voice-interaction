@@ -78,13 +78,14 @@ export async function processErrorCorrection (client, request, speech, sttRespon
   const tracker = await getDataRasa(global.config.services.rasaTracker)
   // Get rasa's slot values
   const slots = tracker.data.slots
-  // Only carry out emotion recognition if the speaker currently has it enabled in the slot
+  // Only carry out error correction if the speaker currently has it enabled in the slot
   if (slots.error_correction_enabled) {
     const dataForErrorCorrection = { audio: speech, transcript: sttResponse.text }
     const errorCorrectionResponse = await postData(global.config.services.errorCorrectionService, JSON.stringify(dataForErrorCorrection), 'Error Correction Service')
     console.log('errorCorrectionResponse ', errorCorrectionResponse)
 
     // do something with errorCorrectionResponse
+    await successProcess(client, sttResponse, request, emotion)
   }
 }
 
