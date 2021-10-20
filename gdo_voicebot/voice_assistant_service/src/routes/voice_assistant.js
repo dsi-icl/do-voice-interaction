@@ -10,7 +10,8 @@ import { getData, getDataRasa, postData } from './index.js'
  * @param {SocketIO.Client} client The client with which the server comunicates
  * @param {JSON} sttResponse The deepspeech json response
  */
-export async function successProcess (client, sttResponse, request, recentEmotion) {
+export async function successProcess (client, sttResponse, request, recentEmotion, errorCorrectionMessage) {
+  // TODO: take care of errorCorrectionMessage
   console.log('Speech to text transcription : SUCCESS\n')
 
   const botResult = await postData(global.config.services.dialogManagerService, '{"message":"' + sttResponse.text + '"}', 'Data Observatory Control Service')
@@ -73,48 +74,35 @@ export async function errorProcess (client, errorResponse, sttResponseText, requ
   })
 }
 
-export async function processErrorCorrection (client, request, speech, sttResponse) {
-  // Get tracker information from rasa
-  const tracker = await getDataRasa(global.config.services.rasaTracker)
-  // Get rasa's slot values
-  const slots = tracker.data.slots
-  // Only carry out error correction if the speaker currently has it enabled in the slot
-  if (slots.error_correction_enabled) {
-    const dataForErrorCorrection = { audio: speech, transcript: sttResponse.text }
-    const errorCorrectionResponse = await postData(global.config.services.errorCorrectionService, JSON.stringify(dataForErrorCorrection), 'Error Correction Service')
-    console.log('errorCorrectionResponse ', errorCorrectionResponse)
+export async function processErrorCorrection (sttResponse) {
+  const dataForErrorCorrection = { transcript: sttResponse.text }
+  const errorCorrectionResponse = await postData(global.config.services.errorCorrectionService, JSON.stringify(dataForErrorCorrection), 'Error Correction Service')
+  console.log('errorCorrectionResponse ', errorCorrectionResponse)
 
-    // do something with errorCorrectionResponse
-    await successProcess(client, sttResponse, request, emotion)
+  if (errorCorrectionResponse.success) {
+    return [errorCorrectionResponse, null]
+  } else {
+    return [errorCorrectionResponse, 'error']
   }
 }
 
-export async function processEmotion (client, request, speech, sttResponse) {
+export async function processEmotion (speech, sttResponse) {
   var emotion = 'n/a'
-  // Get tracker information from rasa
-  const tracker = await getDataRasa(global.config.services.rasaTracker)
-  // Get rasa's slot values
-  const slots = tracker.data.slots
-  // Only carry out emotion recognition if the speaker currently has it enabled in the slot
-  if (slots.emotion_detection_enabled) {
-    const dataForEmotionRecognition = { audio: speech, transcript: sttResponse.text }
-    const emotionRecognitionResponse = await postData(global.config.services.emotionRecognitionService, JSON.stringify(dataForEmotionRecognition), 'Emotion Recognition Service')
-    console.log('emotionRecognitionResponse ', emotionRecognitionResponse)
+  const dataForEmotionRecognition = { audio: speech, transcript: sttResponse.text }
+  const emotionRecognitionResponse = await postData(global.config.services.emotionRecognitionService, JSON.stringify(dataForEmotionRecognition), 'Emotion Recognition Service')
+  console.log('emotionRecognitionResponse ', emotionRecognitionResponse)
 
-    if (emotionRecognitionResponse.success) {
-      emotion = emotionRecognitionResponse.data.emotion
+  if (emotionRecognitionResponse.success) {
+    emotion = emotionRecognitionResponse.data.emotion
 
-      // Set the emotion slot in rasa via http api
-      const newData = { event: 'slot', timestamp: null, name: 'emotion', value: emotion }
-      const botResult = await postData(global.config.services.rasaTrackerEvents, JSON.stringify(newData), 'Data Observatory Control Service')
-      console.log('set emotion in rasa ', botResult)
+    // Set the emotion slot in rasa via http api
+    const newData = { event: 'slot', timestamp: null, name: 'emotion', value: emotion }
+    const botResult = await postData(global.config.services.rasaTrackerEvents, JSON.stringify(newData), 'Data Observatory Control Service')
+    console.log('set emotion in rasa ', botResult)
 
-      await successProcess(client, sttResponse, request, emotion)
-    } else {
-      await errorProcess(client, emotionRecognitionResponse.data, '', request)
-    }
+    return [emotion, null]
   } else {
-    await successProcess(client, sttResponse, request, emotion)
+    return [emotion, emotionRecognitionResponse.data]
   }
 }
 
@@ -129,7 +117,33 @@ export async function processAudioCommand (client, request) {
     // If an error was encountered during the request or the string response is empty we inform the user through the event problem with the socket.
     // Else we can send the text transcript to the the text to speech service and sending the audiobuffer received to the client.
     if (sttResponse.success) {
-      await processEmotion(client, request, request.audio.data, sttResponse.data)
+      // Get tracker information from rasa
+      const tracker = await getDataRasa(global.config.services.rasaTracker)
+      // Get rasa's slot values
+      const slots = tracker.data.slots
+      // Only carry out emotion recognition if the speaker currently has it enabled in the slot
+      var emotion = 'n/a'
+      var errorCorrectionMessage = 'n/a'
+      var error
+      if (slots.emotion_detection_enabled) {
+        [emotion, error] = await processEmotion(request.audio.data, sttResponse.data)
+        // TODO: look into what processEmotion failure means and if we want to fail here or continue
+        if (error != null) {
+          await errorProcess(client, error, '', request)
+          return
+        }
+      }
+
+      if (slots.error_correction_enabled) {
+        // Only carry out error correction if the speaker currently has it enabled in the slot
+        [errorCorrectionMessage, error] = await processErrorCorrection(sttResponse.data)
+        if (error != null) {
+          await errorProcess(client, error, '', request)
+          return
+        }
+      }
+
+      await successProcess(client, sttResponse, request, emotion, errorCorrectionMessage)
     } else {
       await errorProcess(client, sttResponse.data, '', request)
     }
@@ -143,7 +157,22 @@ export async function processTextCommand (client, request) {
     const error = { status: 'fail', service: 'Voice-assistant service', text: 'Nothing has been written' }
     await errorProcess(client, error, '', request)
   } else {
-    await successProcess(client, commandData, request, 'no detection for text-only command.')
+    // Get tracker information from rasa
+    const tracker = await getDataRasa(global.config.services.rasaTracker)
+    // Get rasa's slot values
+    const slots = tracker.data.slots
+    var errorCorrectionMessage = 'n/a'
+    var error
+    if (slots.error_correction_enabled) {
+      // Only carry out error correction if the speaker currently has it enabled in the slot
+      [errorCorrectionMessage, error] = await processErrorCorrection(request.command)
+      if (error != null) {
+        await errorProcess(client, error, '', request)
+        return
+      }
+    }
+
+    await successProcess(client, commandData, request, 'no detection for text-only command.', errorCorrectionMessage)
   }
 }
 

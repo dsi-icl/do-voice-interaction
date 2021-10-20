@@ -350,6 +350,20 @@
 * ask_current_emotion
   - utter_current_emotion
 
+# turn on error correction
+* turn_on_error_correction
+  - utter_affirm
+  - action_turn_on_error_correction
+
+# turn off error correction
+* turn_off_error_correction
+  - utter_affirm
+  - action_turn_off_error_correction
+
+# check error correction status
+* check_error_correction_enabled
+  - action_check_error_correction_enabled
+
 <!--
 # conversation with emotion detection
 * start_small_talk

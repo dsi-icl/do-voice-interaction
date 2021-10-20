@@ -308,3 +308,19 @@
 - turn off emotion detection
 - stop emotion recognition
 - disable emotion detection
+
+## intent:turn_on_error_correction
+- start error correction
+- turn on error correction
+- enable error correction
+
+## intent:turn_off_error_correction
+- stop error correction
+- turn off error correction
+- disable error correction
+
+## intent:check_error_correction_enabled
+- is error correction enabled?
+- is error correction on?
+- is eerror correction turned on?
+- have you turned off error correction?

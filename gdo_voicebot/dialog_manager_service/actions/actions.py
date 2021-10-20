@@ -74,7 +74,7 @@ class ActionTurnOffErrorCorrection(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
         dispatcher.utter_message(text="Error correction has been turned off.")
-        # When turning of emotion detection, reset the current emotion to n/a
+        
         return [SlotSet("error_correction_enabled", False)]
 
 class ActionCheckErrorCorrectionEnabled(Action):
