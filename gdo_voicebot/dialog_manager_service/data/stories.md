@@ -350,19 +350,19 @@
 * ask_current_emotion
   - utter_current_emotion
 
-# turn on error correction
-* turn_on_error_correction
+# turn on grammar correction
+* turn_on_grammar_correction
   - utter_affirm
-  - action_turn_on_error_correction
+  - action_turn_on_grammar_correction
 
-# turn off error correction
-* turn_off_error_correction
+# turn off grammar correction
+* turn_off_grammar_correction
   - utter_affirm
-  - action_turn_off_error_correction
+  - action_turn_off_grammar_correction
 
-# check error correction status
-* check_error_correction_enabled
-  - action_check_error_correction_enabled
+# check grammar correction status
+* check_grammar_correction_enabled
+  - action_check_grammar_correction_enabled
 
 <!--
 # conversation with emotion detection

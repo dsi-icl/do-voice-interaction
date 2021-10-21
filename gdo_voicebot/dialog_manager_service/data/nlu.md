@@ -309,18 +309,18 @@
 - stop emotion recognition
 - disable emotion detection
 
-## intent:turn_on_error_correction
-- start error correction
-- turn on error correction
-- enable error correction
+## intent:turn_on_grammar_correction
+- start grammar correction
+- turn on grammar correction
+- enable grammar correction
 
-## intent:turn_off_error_correction
-- stop error correction
-- turn off error correction
-- disable error correction
+## intent:turn_off_grammar_correction
+- stop grammar correction
+- turn off grammar correction
+- disable grammar correction
 
-## intent:check_error_correction_enabled
-- is error correction enabled?
-- is error correction on?
-- is eerror correction turned on?
-- have you turned off error correction?
+## intent:check_grammar_correction_enabled
+- is grammar correction enabled?
+- is grammar correction on?
+- is grammar correction turned on?
+- have you turned off grammar correction?

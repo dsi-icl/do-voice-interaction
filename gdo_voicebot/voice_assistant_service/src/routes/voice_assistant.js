@@ -10,8 +10,8 @@ import { getData, getDataRasa, postData } from './index.js'
  * @param {SocketIO.Client} client The client with which the server comunicates
  * @param {JSON} sttResponse The deepspeech json response
  */
-export async function successProcess (client, sttResponse, request, recentEmotion, errorCorrectionMessage) {
-  // TODO: take care of errorCorrectionMessage
+export async function successProcess (client, sttResponse, request, recentEmotion, grammarCorrectionMessage) {
+  // TODO: take care of grammarCorrectionMessage
   console.log('Speech to text transcription : SUCCESS\n')
 
   const botResult = await postData(global.config.services.dialogManagerService, '{"message":"' + sttResponse.text + '"}', 'Data Observatory Control Service')
@@ -74,15 +74,15 @@ export async function errorProcess (client, errorResponse, sttResponseText, requ
   })
 }
 
-export async function processErrorCorrection (sttResponse) {
-  const dataForErrorCorrection = { transcript: sttResponse.text }
-  const errorCorrectionResponse = await postData(global.config.services.errorCorrectionService, JSON.stringify(dataForErrorCorrection), 'Error Correction Service')
-  console.log('errorCorrectionResponse ', errorCorrectionResponse)
+export async function processGrammarCorrection (sttResponse) {
+  const dataForGrammarCorrection = { transcript: sttResponse.text }
+  const grammarCorrectionResponse = await postData(global.config.services.grammarCorrectionService, JSON.stringify(dataForGrammarCorrection), 'Error Correction Service')
+  console.log('grammarCorrectionResponse ', grammarCorrectionResponse)
 
-  if (errorCorrectionResponse.success) {
-    return [errorCorrectionResponse, null]
+  if (grammarCorrectionResponse.success) {
+    return [grammarCorrectionResponse, null]
   } else {
-    return [errorCorrectionResponse, 'error']
+    return [grammarCorrectionResponse, 'error']
   }
 }
 
@@ -123,7 +123,7 @@ export async function processAudioCommand (client, request) {
       const slots = tracker.data.slots
       // Only carry out emotion recognition if the speaker currently has it enabled in the slot
       var emotion = 'n/a'
-      var errorCorrectionMessage = 'n/a'
+      var grammarCorrectionMessage = 'n/a'
       var error
       if (slots.emotion_detection_enabled) {
         [emotion, error] = await processEmotion(request.audio.data, sttResponse.data)
@@ -134,16 +134,16 @@ export async function processAudioCommand (client, request) {
         }
       }
 
-      if (slots.error_correction_enabled) {
+      if (slots.grammar_correction_enabled) {
         // Only carry out error correction if the speaker currently has it enabled in the slot
-        [errorCorrectionMessage, error] = await processErrorCorrection(sttResponse.data)
+        [grammarCorrectionMessage, error] = await processGrammarCorrection(sttResponse.data)
         if (error != null) {
           await errorProcess(client, error, '', request)
           return
         }
       }
 
-      await successProcess(client, sttResponse, request, emotion, errorCorrectionMessage)
+      await successProcess(client, sttResponse, request, emotion, grammarCorrectionMessage)
     } else {
       await errorProcess(client, sttResponse.data, '', request)
     }
@@ -161,18 +161,18 @@ export async function processTextCommand (client, request) {
     const tracker = await getDataRasa(global.config.services.rasaTracker)
     // Get rasa's slot values
     const slots = tracker.data.slots
-    var errorCorrectionMessage = 'n/a'
+    var grammarCorrectionMessage = 'n/a'
     var error
-    if (slots.error_correction_enabled) {
-      // Only carry out error correction if the speaker currently has it enabled in the slot
-      [errorCorrectionMessage, error] = await processErrorCorrection(request.command)
+    if (slots.grammar_correction_enabled) {
+      // Only carry out grammar correction if the speaker currently has it enabled in the slot
+      [grammarCorrectionMessage, error] = await processGrammarCorrection(request.command)
       if (error != null) {
         await errorProcess(client, error, '', request)
         return
       }
     }
 
-    await successProcess(client, commandData, request, 'no detection for text-only command.', errorCorrectionMessage)
+    await successProcess(client, commandData, request, 'no detection for text-only command.', grammarCorrectionMessage)
   }
 }
 
