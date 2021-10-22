@@ -75,14 +75,15 @@ export async function errorProcess (client, errorResponse, sttResponseText, requ
 }
 
 export async function processGrammarCorrection (sttResponse) {
+  console.log('doing grammar correction stuff')
   const dataForGrammarCorrection = { transcript: sttResponse.text }
-  const grammarCorrectionResponse = await postData(global.config.services.grammarCorrectionService, JSON.stringify(dataForGrammarCorrection), 'Error Correction Service')
+  const grammarCorrectionResponse = await postData(global.config.services.grammarCorrectionService, JSON.stringify(dataForGrammarCorrection), 'Grammar Correction Service')
   console.log('grammarCorrectionResponse ', grammarCorrectionResponse)
 
   if (grammarCorrectionResponse.success) {
-    return [grammarCorrectionResponse, null]
+    return [grammarCorrectionResponse.response, null]
   } else {
-    return [grammarCorrectionResponse, 'error']
+    return [grammarCorrectionResponse.response, 'error']
   }
 }
 
@@ -152,6 +153,8 @@ export async function processAudioCommand (client, request) {
 
 export async function processTextCommand (client, request) {
   const commandData = { text: request.command }
+  console.log('the command is')
+  console.log(commandData.text)
 
   if (commandData.data === '') {
     const error = { status: 'fail', service: 'Voice-assistant service', text: 'Nothing has been written' }
@@ -161,11 +164,14 @@ export async function processTextCommand (client, request) {
     const tracker = await getDataRasa(global.config.services.rasaTracker)
     // Get rasa's slot values
     const slots = tracker.data.slots
-    var grammarCorrectionMessage = 'n/a'
+    var grammarCorrectionMessage
     var error
-    if (slots.grammar_correction_enabled) {
+    console.log('grammar correction enabled:')
+    console.log(slots.grammar_correction_enabled)
+    var value = true
+    if (value) {
       // Only carry out grammar correction if the speaker currently has it enabled in the slot
-      [grammarCorrectionMessage, error] = await processGrammarCorrection(request.command)
+      [grammarCorrectionMessage, error] = await processGrammarCorrection(commandData)
       if (error != null) {
         await errorProcess(client, error, '', request)
         return

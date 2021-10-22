@@ -43,3 +43,9 @@ services:
     build: emotion_recognition_service/
     volumes:
       - "./emotion_recognition_service:/usr/src/app"
+
+  do-voice-grammar-correction-service:
+    container_name: do-voice-grammar-correction-service
+    build: grammar_correction_service/
+    volumes:
+      - "./grammar_correction_service:/usr/src/app"
