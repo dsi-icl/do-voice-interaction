@@ -144,7 +144,7 @@ export async function processAudioCommand (client, request) {
         }
       }
 
-      await successProcess(client, sttResponse, request, emotion, grammarCorrectionMessage)
+      await successProcess(client, sttResponse.data, request, emotion, grammarCorrectionMessage)
     } else {
       await errorProcess(client, sttResponse.data, '', request)
     }
@@ -166,10 +166,7 @@ export async function processTextCommand (client, request) {
     const slots = tracker.data.slots
     var grammarCorrectionMessage
     var error
-    console.log('grammar correction enabled:')
-    console.log(slots.grammar_correction_enabled)
-    var value = true
-    if (value) {
+    if (slots.grammar_correction_enabled) {
       // Only carry out grammar correction if the speaker currently has it enabled in the slot
       [grammarCorrectionMessage, error] = await processGrammarCorrection(commandData)
       if (error != null) {

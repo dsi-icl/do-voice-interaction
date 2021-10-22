@@ -1,74 +1,178 @@
 [
   {
-    "text": "Could you open the browsers please",
-    "intent": "open_browsers",
+    "text": "Turn off the GDO",
+    "intent": "shutdown",
     "intent_prediction": {
-      "name": "out_of_scope",
-      "confidence": 0.27997732162475586
+      "name": "turn_on_gdo",
+      "confidence": 0.6091393828392029
     }
   },
   {
-    "text": "I want to open the browsers",
-    "intent": "open_browsers",
+    "text": "Can you turn off the screens",
+    "intent": "shutdown",
     "intent_prediction": {
-      "name": "out_of_scope",
-      "confidence": 0.3196272552013397
+      "name": "turn_on_gdo",
+      "confidence": 0.4767187535762787
     }
   },
   {
-    "text": "I'd like to open the browsers",
-    "intent": "open_browsers",
+    "text": "Show me available environments please",
+    "intent": "open_environment",
     "intent_prediction": {
-      "name": "out_of_scope",
-      "confidence": 0.3447205722332001
+      "name": "zoom",
+      "confidence": 0.3372003436088562
     }
   },
   {
-    "text": "I would like to open browsers please",
-    "intent": "open_browsers",
+    "text": "List of available environments",
+    "intent": "open_environment",
     "intent_prediction": {
-      "name": "out_of_scope",
-      "confidence": 0.27824920415878296
+      "name": "zoom",
+      "confidence": 0.19344905018806458
     }
   },
   {
-    "text": "Reset browsers",
-    "intent": "refresh_browsers",
+    "text": "What's the current environment",
+    "intent": "open_environment",
     "intent_prediction": {
-      "name": "clear_space",
-      "confidence": 0.4205099046230316
+      "name": "zoom",
+      "confidence": 0.3792208731174469
     }
   },
   {
     "text": "Could you reset the browsers",
     "intent": "refresh_browsers",
     "intent_prediction": {
-      "name": "zoom",
-      "confidence": 0.2890331447124481
+      "name": "close_browsers",
+      "confidence": 0.266677588224411
     }
   },
   {
     "text": "I want to reset the browsers please",
     "intent": "refresh_browsers",
     "intent_prediction": {
-      "name": "zoom",
-      "confidence": 0.4041612446308136
+      "name": "turn_off_emotion_detection",
+      "confidence": 0.2838621735572815
     }
   },
   {
-    "text": "I would like to reset browsers please",
-    "intent": "refresh_browsers",
+    "text": "Give me the list of available demos",
+    "intent": "list_available_demos",
     "intent_prediction": {
-      "name": "zoom",
-      "confidence": 0.43204158544540405
+      "name": "close_browsers",
+      "confidence": 0.1973881870508194
+    }
+  },
+  {
+    "text": "Available demos",
+    "intent": "list_available_demos",
+    "intent_prediction": {
+      "name": "goodbye",
+      "confidence": 0.36491817235946655
     }
   },
   {
     "text": "What's the list of available environments",
     "intent": "list_available_demos",
     "intent_prediction": {
-      "name": "open_environment",
-      "confidence": 0.9603561162948608
+      "name": "ask_current_emotion",
+      "confidence": 0.2177029848098755
+    }
+  },
+  {
+    "text": "is emotion detection on?",
+    "intent": "check_emotion_detection_enabled",
+    "intent_prediction": {
+      "name": "turn_off_emotion_detection",
+      "confidence": 0.3827739357948303
+    }
+  },
+  {
+    "text": "i want to tell you my name",
+    "intent": "want_to_give_name",
+    "intent_prediction": {
+      "name": "greet",
+      "confidence": 0.38243764638900757
+    }
+  },
+  {
+    "text": "repeat my name",
+    "intent": "repeat_name",
+    "intent_prediction": {
+      "name": "ask_repeat",
+      "confidence": 0.39364469051361084
+    }
+  },
+  {
+    "text": "start emotion detection",
+    "intent": "turn_on_emotion_detection",
+    "intent_prediction": {
+      "name": "turn_off_emotion_detection",
+      "confidence": 0.5357973575592041
+    }
+  },
+  {
+    "text": "turn sentiment recognition on",
+    "intent": "turn_on_emotion_detection",
+    "intent_prediction": {
+      "name": "turn_off_emotion_detection",
+      "confidence": 0.808519184589386
+    }
+  },
+  {
+    "text": "turn on emotion detection",
+    "intent": "turn_on_emotion_detection",
+    "intent_prediction": {
+      "name": "turn_off_emotion_detection",
+      "confidence": 0.5451976656913757
+    }
+  },
+  {
+    "text": "enable emotion detection",
+    "intent": "turn_on_emotion_detection",
+    "intent_prediction": {
+      "name": "turn_off_emotion_detection",
+      "confidence": 0.3646790683269501
+    }
+  },
+  {
+    "text": "start grammar correction",
+    "intent": "turn_on_grammar_correction",
+    "intent_prediction": {
+      "name": "turn_off_grammar_correction",
+      "confidence": 0.39451536536216736
+    }
+  },
+  {
+    "text": "turn on grammar correction",
+    "intent": "turn_on_grammar_correction",
+    "intent_prediction": {
+      "name": "turn_off_grammar_correction",
+      "confidence": 0.4559212327003479
+    }
+  },
+  {
+    "text": "enable grammar correction",
+    "intent": "turn_on_grammar_correction",
+    "intent_prediction": {
+      "name": "list_available_demos",
+      "confidence": 0.3408617377281189
+    }
+  },
+  {
+    "text": "is grammar correction on?",
+    "intent": "check_grammar_correction_enabled",
+    "intent_prediction": {
+      "name": "turn_off_grammar_correction",
+      "confidence": 0.6524511575698853
+    }
+  },
+  {
+    "text": "have you turned off grammar correction?",
+    "intent": "check_grammar_correction_enabled",
+    "intent_prediction": {
+      "name": "turn_off_grammar_correction",
+      "confidence": 0.4794904589653015
     }
   }
 ]
