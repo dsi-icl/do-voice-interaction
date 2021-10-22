@@ -89,7 +89,7 @@ export async function processEmotion (client, request, speech, sttResponse) {
       emotion = emotionRecognitionResponse.data.emotion
 
       // Set the emotion slot in rasa via http api
-      const newData = { "event": "slot", "timestamp": null, "name": "emotion", "value": emotion }
+      const newData = { event: 'slot', timestamp: null, name: 'emotion', value: emotion }
       const botResult = await postData(global.config.services.rasaTrackerEvents, JSON.stringify(newData), 'Data Observatory Control Service')
       console.log('set emotion in rasa ', botResult)
 
@@ -107,6 +107,9 @@ export async function processAudioCommand (client, request) {
     const error = { status: 'fail', service: 'Voice-assistant service', text: 'The record format is wrong' }
     await errorProcess(client, error, '', request)
   } else {
+    const hotwordResponse = await postData(global.config.services.hotwordService, request.audio.data, 'Hotword Service')
+    console.log('hotwordresponse', hotwordResponse)
+
     const sttResponse = await postData(global.config.services.sttService, request.audio.data, 'Speech To Text Service')
     console.log('sttresponse', sttResponse)
 
