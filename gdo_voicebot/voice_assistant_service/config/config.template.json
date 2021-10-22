@@ -1,10 +1,10 @@
 {
     "services":{
-        "sttService":"http://localhost:3000/api/stt",
-        "ttsService":"http://localhost:5000/api/tts",
-        "dialogManagerService":"http://localhost:5005/webhooks/rest/webhook",
-        "rasaTracker":"http://localhost:5005/conversations/default/tracker",
-        "rasaTrackerEvents":"http://localhost:5005/conversations/default/tracker/events",
-        "emotionRecognitionService":"http://localhost:8000/emotion-recognition"
+        "sttService":"http://do-voice-stt-service:3000/api/stt",
+        "ttsService":"http://do-voice-tts-service:5000/api/tts",
+        "dialogManagerService":"http://do-voice-dialog-manager-service:5005/webhooks/rest/webhook",
+        "rasaTracker":"http://do-voice-dialog-manager-service:5005/conversations/default/tracker",
+        "rasaTrackerEvents":"http://do-voice-dialog-manager-service:5005/conversations/default/tracker/events",
+        "emotionRecognitionService":"http://do-voice-emotion-recognition-service:8000/emotion-recognition"
     }
 }
