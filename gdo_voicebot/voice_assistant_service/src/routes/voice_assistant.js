@@ -10,7 +10,7 @@ import { getData, getDataRasa, postData } from './index.js'
  * @param {SocketIO.Client} client The client with which the server comunicates
  * @param {JSON} sttResponse The deepspeech json response
  */
-export async function successProcess (client, sttResponse, request, recentEmotion, grammarCorrectionMessage) {
+export async function successProcess (client, sttResponse, request, recentEmotion, grammarCorrectionPositions, grammarCorrectionMessage) {
   // TODO: take care of grammarCorrectionMessage
   console.log('Speech to text transcription : SUCCESS\n')
 
@@ -34,6 +34,8 @@ export async function successProcess (client, sttResponse, request, recentEmotio
         date: request.date,
         command: sttResponse.text,
         emotion: recentEmotion,
+        grammar_response: grammarCorrectionPositions,
+        grammar_message: grammarCorrectionMessage,
         response: botResponseText,
         audio: {
           data: voiceAnswer.data,
@@ -55,7 +57,7 @@ export async function successProcess (client, sttResponse, request, recentEmotio
  * @param {JSON} errorResponse The error json response
  * @param {String} sttResponseText The text received from the Speech To Text service
  */
-export async function errorProcess (client, errorResponse, sttResponseText, request, recentEmotion = 'error') {
+export async function errorProcess (client, errorResponse, sttResponseText, request, recentEmotion = 'error', grammarCorrectionPositions = [], grammarCorrectionMessage = 'error') {
   // We generate an error voice message
   const voiceAnswer = await getData(global.config.services.ttsService, 'I encountered an error. Please consult technical support or try the request again')
 
@@ -66,6 +68,8 @@ export async function errorProcess (client, errorResponse, sttResponseText, requ
     date: request.date,
     command: sttResponseText !== '' ? sttResponseText : '...',
     emotion: recentEmotion,
+    grammar_response: grammarCorrectionPositions,
+    grammar_message: grammarCorrectionMessage,
     audio: {
       data: voiceAnswer.data,
       contentType: voiceAnswer.contentType
@@ -75,15 +79,16 @@ export async function errorProcess (client, errorResponse, sttResponseText, requ
 }
 
 export async function processGrammarCorrection (sttResponse) {
-  console.log('doing grammar correction stuff')
+  var grammarResponse = []
   const dataForGrammarCorrection = { transcript: sttResponse.text }
   const grammarCorrectionResponse = await postData(global.config.services.grammarCorrectionService, JSON.stringify(dataForGrammarCorrection), 'Grammar Correction Service')
   console.log('grammarCorrectionResponse ', grammarCorrectionResponse)
 
   if (grammarCorrectionResponse.success) {
-    return [grammarCorrectionResponse.response, null]
+    grammarResponse = grammarCorrectionResponse.data.response
+    return [grammarResponse, null]
   } else {
-    return [grammarCorrectionResponse.response, 'error']
+    return [grammarResponse, 'error']
   }
 }
 
@@ -124,6 +129,7 @@ export async function processAudioCommand (client, request) {
       const slots = tracker.data.slots
       // Only carry out emotion recognition if the speaker currently has it enabled in the slot
       var emotion = 'n/a'
+      var grammarCorrectionPositions = []
       var grammarCorrectionMessage = 'n/a'
       var error
       if (slots.emotion_detection_enabled) {
@@ -137,14 +143,15 @@ export async function processAudioCommand (client, request) {
 
       if (slots.grammar_correction_enabled) {
         // Only carry out error correction if the speaker currently has it enabled in the slot
-        [grammarCorrectionMessage, error] = await processGrammarCorrection(sttResponse.data)
+        [grammarCorrectionPositions, error] = await processGrammarCorrection(sttResponse.data)
+        grammarCorrectionMessage = sttResponse.data.text
         if (error != null) {
           await errorProcess(client, error, '', request)
           return
         }
       }
 
-      await successProcess(client, sttResponse.data, request, emotion, grammarCorrectionMessage)
+      await successProcess(client, sttResponse.data, request, emotion, grammarCorrectionPositions, grammarCorrectionMessage)
     } else {
       await errorProcess(client, sttResponse.data, '', request)
     }
@@ -153,8 +160,6 @@ export async function processAudioCommand (client, request) {
 
 export async function processTextCommand (client, request) {
   const commandData = { text: request.command }
-  console.log('the command is')
-  console.log(commandData.text)
 
   if (commandData.data === '') {
     const error = { status: 'fail', service: 'Voice-assistant service', text: 'Nothing has been written' }
@@ -164,18 +169,20 @@ export async function processTextCommand (client, request) {
     const tracker = await getDataRasa(global.config.services.rasaTracker)
     // Get rasa's slot values
     const slots = tracker.data.slots
-    var grammarCorrectionMessage
+    var grammarCorrectionPositions = []
+    var grammarCorrectionMessage = 'n/a'
     var error
     if (slots.grammar_correction_enabled) {
       // Only carry out grammar correction if the speaker currently has it enabled in the slot
-      [grammarCorrectionMessage, error] = await processGrammarCorrection(commandData)
+      [grammarCorrectionPositions, error] = await processGrammarCorrection(commandData)
+      grammarCorrectionMessage = commandData.text
       if (error != null) {
         await errorProcess(client, error, '', request)
         return
       }
     }
 
-    await successProcess(client, commandData, request, 'no detection for text-only command.', grammarCorrectionMessage)
+    await successProcess(client, commandData, request, 'no detection for text-only command.', grammarCorrectionPositions, grammarCorrectionMessage)
   }
 }
 

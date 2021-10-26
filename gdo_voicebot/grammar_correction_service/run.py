@@ -19,7 +19,10 @@ def perform_grammar_correcection():
 
     # do cool bert stuff here
 
-    data = {'status': 'ok', 'service': 'grammar correction service', 'response': pos}
+    # positions at which there are errors
+    positions = [0, 2]
+
+    data = {'status': 'ok', 'service': 'grammar correction service', 'response': positions}
     
     response = app.response_class(
         response=json.dumps(data),
