@@ -18,6 +18,35 @@ class SimpleRecorder extends React.Component {
         this.state = {recorder: null, hark: null};
     }
 
+    onHotwordClick() {
+        if (this.props.status === PlayerStatus.OFF) {
+            this.props.dispatch(changeStatus({status: PlayerStatus.IDLE}));
+
+            if (this.state.recorder) {
+                this.state.recorder.destroy();
+                this.setState({recorder: null});
+            }
+
+            setupAudioRecorder().then(recorder => {
+                this.setState({recorder});
+                recorder.clearRecordedData();
+                recorder.startRecording();
+            });
+
+            setupHark().then(hark => {
+                this.setState({hark});
+                hark.on("speaking", () => {
+                    console.log("Hotword speaking");
+                });
+
+                hark.on("stopped_speaking", () => {
+                    console.log("Hotword stopped talking");
+                    // TODO send data to hotword service
+                });
+            });
+        }
+    }
+
     onRecordClick() {
         if (this.props.status === PlayerStatus.IDLE) {
             this.props.dispatch(changeStatus({status: PlayerStatus.LISTENING}));
@@ -83,6 +112,9 @@ class SimpleRecorder extends React.Component {
 
     render() {
         return <Button.Group className="toolbar-margin">
+            <Button icon onClick={this.onHotwordClick.bind(this)} disabled={this.props.status !== PlayerStatus.OFF}>
+                <Icon name="fire" color="orange"/>
+            </Button>
             <Button icon onClick={this.onRecordClick.bind(this)} disabled={this.props.status !== PlayerStatus.IDLE}>
                 <Icon name="record" color={this.recordColor(this.props.status)}/>
             </Button>

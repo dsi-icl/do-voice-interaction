@@ -4,7 +4,7 @@ import {PlayerStatus} from "./const";
 export const media = createSlice({
     name: "media",
     initialState: {
-        status: PlayerStatus.IDLE,
+        status: PlayerStatus.OFF,
         responseList: [],
         audio: null
     },
