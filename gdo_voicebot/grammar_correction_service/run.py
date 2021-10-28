@@ -2,6 +2,8 @@ from flask import Flask, request
 import json
 import spacy
 
+from model_utils.py import *
+
 app = Flask(__name__)
 nlp = spacy.load("en_core_web_sm")
 
@@ -17,10 +19,20 @@ def perform_grammar_correcection():
     for token in doc:
         pos.append(token.pos_)
 
-    # do cool bert stuff here
+    # bert stuff
+    grammar_checker = load_grammar_checker_model()
+
+    spelling_sentences = [text_data]
+
+    new_sentences = []
+
+    for sent in spelling_sentences:
+        no_error, prob_val = check_GE([sent])
+        print(no_error)
+        print(prob_val)
 
     data = {'status': 'ok', 'service': 'grammar correction service', 'response': pos}
-    
+
     response = app.response_class(
         response=json.dumps(data),
         mimetype='application/json'
@@ -32,7 +44,7 @@ def tag_parts_of_speech(text_data):
     doc = nlp(text_data)
 
     # do stuff here that will manipulate the Doc object and return useful info
-    
+
     return doc
 
 if __name__ == "__main__":
