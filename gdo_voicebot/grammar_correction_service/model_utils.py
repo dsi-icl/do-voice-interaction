@@ -38,10 +38,17 @@ def download_file_from_google_drive(id, destination):
 
     save_response_content(response, destination)
 
+
+def progress_bar(some_iter):
+    try:
+        from tqdm import tqdm
+        return tqdm(some_iter)
+    except ModuleNotFoundError:
+        return some_iter
 # --
 
 def load_grammar_checker_model():
-    download_file_from_google_drive('1M_7GJVIVEHVp2ImyHBG2xk2aw21HtHif', './bert-based-uncased-GDO-trained.pth')
+    #download_file_from_google_drive('1M_7GJVIVEHVp2ImyHBG2xk2aw21HtHif', './bert-based-uncased-GDO-trained.pth')
 
     grammar_checker =  BertForSequenceClassification.from_pretrained('bert-base-uncased', num_labels=2)
 
@@ -97,25 +104,35 @@ def check_GE(grammar_checker, sents):
 
     # Move logits and labels to CPU
     logits = logits.detach().cpu().numpy()
-    label_ids = b_labels.to("cpu").numpy()
+    #label_ids = b_labels.to("cpu").numpy()
 
     # Store predictions and true labels
     predictions.append(logits)
-    true_labels.append(label_ids)
+    #true_labels.append(label_ids)
 
-    print(predictions)
+    #print(predictions)
     flat_predictions = [item for sublist in predictions for item in sublist]
 
-    print(flat_predictions)
+    #print(flat_predictions)
     prob_vals = flat_predictions
     flat_predictions = np.argmax(flat_predictions, axis=1).flatten()
-    flat_true_labels = [item for sublist in true_labels for item in sublist]
+    #flat_true_labels = [item for sublist in true_labels for item in sublist]
 
-    print(flat_predictions)
+    #print(flat_predictions)
 
     return flat_predictions, prob_vals
 
 grammar_checker = load_grammar_checker_model()
-no_error, prob_val = check_GE(["I like food and drink"])
-print(no_error)
-print(prob_val)
+sentences = ["I love you", "I loves you.", "I has a apple.",  "I has an apple.",  "I have an apple.", 
+            "I ain't there."]
+no_error, prob_val = check_GE(grammar_checker, sentences)
+#print(no_error)
+#print(prob_val)
+for i in range(len(prob_val)):
+    exps = [np.exp(i) for i in prob_val[i]]
+    sum_of_exps = sum(exps)
+    softmax = [j/sum_of_exps for j in exps]
+    print("{0} - {1:0.4f}%".format(sentences[i], softmax[1]*100))
+  
+print("-"*60)
+print()
