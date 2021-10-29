@@ -3,7 +3,7 @@ import numpy as np
 from pytorch_pretrained_bert import BertTokenizer, BertModel, BertForMaskedLM
 from pytorch_pretrained_bert import BertForSequenceClassification
 from keras.preprocessing.sequence import pad_sequences
-
+import os.path
 # credit: https://stackoverflow.com/a/39225039
 import requests
 
@@ -48,8 +48,9 @@ def progress_bar(some_iter):
 # --
 
 def load_grammar_checker_model():
-    #download_file_from_google_drive('1M_7GJVIVEHVp2ImyHBG2xk2aw21HtHif', './bert-based-uncased-GDO-trained.pth')
-
+    if(not os.path.isfile('./bert-based-uncased-GDO-trained.pth')):
+        download_file_from_google_drive('1sPfnUFnzSxbGA9nxvGn85Eds8wU_JyuD', './bert-based-uncased-GDO-trained.pth')
+    
     grammar_checker =  BertForSequenceClassification.from_pretrained('bert-base-uncased', num_labels=2)
 
     device = torch.device('cpu')
@@ -126,8 +127,8 @@ grammar_checker = load_grammar_checker_model()
 sentences = ["I love you", "I loves you.", "I has a apple.",  "I has an apple.",  "I have an apple.", 
             "I ain't there."]
 no_error, prob_val = check_GE(grammar_checker, sentences)
-#print(no_error)
-#print(prob_val)
+print(no_error)
+print(prob_val)
 for i in range(len(prob_val)):
     exps = [np.exp(i) for i in prob_val[i]]
     sum_of_exps = sum(exps)
