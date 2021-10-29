@@ -14,7 +14,7 @@ import "./CommandFeed.css";
 const CommandFeed = () => {
     const responses = useSelector(selectResponses);
     return <Feed className="feed-text">
-        {responses.map(e => <FeedItem key={e.id} date={e.date} command={e.command} emotion={e.emotion} grammar_response={e.grammar_response} grammar_message={e.grammar_message} response={e.response} error={e.error}/>)}
+        {responses.map(e => <FeedItem key={e.id} date={e.date} command={e.command} emotion={e.emotion} grammar_positions={e.grammar_positions} grammar_prediction={e.grammar_prediction} response={e.response} error={e.error}/>)}
     </Feed>;
 };
 
@@ -25,7 +25,7 @@ function messageColor(index, positions) {
     return "white"
 }
 
-const FeedItem = ({date, command, emotion, grammar_response, grammar_message, response, error}) => <Feed.Event>
+const FeedItem = ({date, command, emotion, grammar_positions, grammar_prediction, response, error}) => <Feed.Event>
     <Feed.Label>
         <Icon name="comments" className="feed-icon"/>
     </Feed.Label>
@@ -33,12 +33,13 @@ const FeedItem = ({date, command, emotion, grammar_response, grammar_message, re
         <Feed.Date className="feed-text">{date}</Feed.Date>
         <Feed.Summary className="feed-text">You: {ReactHtmlParser(replaceHtmlElements(command))}</Feed.Summary>
         <Feed.Summary className="feed-text">Emotion Detected: {ReactHtmlParser(replaceHtmlElements(emotion))}</Feed.Summary>
-        <Feed.Summary className="feed-text">Grammar Correction output:</Feed.Summary>
-        <div>
-            {grammar_message.split(" ").map((word, index) => {
-                return <span style={{ color: messageColor(index, grammar_response) }}>{`${word} `}</span>;
+        {grammar_prediction && <Feed.Summary className="feed-text">Grammar Correction output:</Feed.Summary>}
+        {grammar_prediction && <div>
+            {command.split(" ").map((word, index) => {
+                return <span style={{ color: messageColor(index, grammar_positions) }}>{`${word} `}</span>;
             })}
-        </div>
+        </div>}
+        {grammar_prediction && <Feed.Summary className="feed-text">Correction: {ReactHtmlParser(replaceHtmlElements(grammar_prediction))}</Feed.Summary>}
         {response && <Feed.Extra text className="feed-text">Assistant: {ReactHtmlParser(replaceHtmlElements(response))}</Feed.Extra>}
         {error && <Feed.Extra text className="feed-text-error">Error: {ReactHtmlParser(replaceHtmlElements(error))}</Feed.Extra>}
     </Feed.Content>
@@ -48,8 +49,8 @@ FeedItem.propTypes = {
     date: PropTypes.string,
     command: PropTypes.string,
     emotion: PropTypes.string,
-    grammar_response: PropTypes.array,
-    grammar_message: PropTypes.string,
+    grammar_positions: PropTypes.array,
+    grammar_prediction: PropTypes.string,
     response: PropTypes.string,
     error: PropTypes.string,
 };

@@ -18,8 +18,8 @@ export const media = createSlice({
                 date: action.payload.date,
                 command: action.payload.command,
                 emotion: action.payload.emotion,
-                grammar_response: action.payload.grammar_response,
-                grammar_message: action.payload.grammar_message,
+                grammar_positions: action.payload.grammar_positions,
+                grammar_prediction: action.payload.grammar_prediction,
                 response: action.payload.response,
                 error: action.payload.error
             }, ...state.responseList];

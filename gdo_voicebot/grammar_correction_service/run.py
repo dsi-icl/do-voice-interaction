@@ -1,6 +1,6 @@
 from flask import Flask, request
 import json
-from gdo_voicebot.grammar_correction_service.model_utils import * 
+from model_utils import * 
 import spacy
 
 app = Flask(__name__)
@@ -17,6 +17,9 @@ def perform_grammar_correcection():
     # bert stuff
 
     verb_ids = get_verb_ids(doc)
+
+    print("Ids of verbs: ", verb_ids)
+
     predicted_sentence, corrections = predict_corrections(text_data, verb_ids)
 
     data = {'status': 'ok', 'service': 'grammar correction service', 'response': corrections, 'predicted_sentence': predicted_sentence}
@@ -31,7 +34,7 @@ def perform_grammar_correcection():
 def get_verb_ids(doc):
     pos = []
     for i in range(len(doc)):
-        if doc[i].pos_ == 'VERB':
+        if doc[i].pos_ == 'VERB' or doc[i].pos_ == 'AUX':
             pos.append(i)
 
     return pos
