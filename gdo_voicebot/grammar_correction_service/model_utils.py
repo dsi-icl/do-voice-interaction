@@ -9,9 +9,6 @@ from difflib import SequenceMatcher
 # credit: https://stackoverflow.com/a/39225039
 import requests
 
-# Load pre-trained model tokenizer
-tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
-
 def download_file_from_google_drive(id, destination):
     print("Trying to fetch {}".format(destination))
 
@@ -65,21 +62,19 @@ def load_grammar_checker_model():
 
     return model
 
-def create_mask_set(sentence, mask_ids):
+def create_tokenizer():
+    return BertTokenizer.from_pretrained('bert-base-uncased')
+
+def create_mask_set(sentence, mask_id):
   """
     For each input sentence create sentence with masked words at mask_ids
   """
 
-  sentences = []
   sent = sentence.strip().split()
-  for i in range(len(sent)):
-    # [MASK] each word at mask_ids
-    if i in mask_ids:
-        new_sent = sent[:]
-        new_sent[i] = '[MASK]'
-        sentences.append('[CLS] ' + " ".join(new_sent) + ' [SEP]')
+  new_sent = sent[:]
+  new_sent[mask_id] = '[MASK]'
+  return '[CLS] ' + " ".join(new_sent) + ' [SEP]'
 
-  return sentences
 
 def check_GE(grammar_checker, sents):
 
@@ -143,7 +138,7 @@ def check_GE(grammar_checker, sents):
 
     return flat_predictions, prob_vals
 
-def check_grammar(original_sentence, masked_sentences):
+def check_grammar(original_sentence, masked_sentence):
     new_sentences = []
 
     # what is the tokenized value of [MASK]
@@ -151,60 +146,42 @@ def check_grammar(original_sentence, masked_sentences):
     tokenized_text = tokenizer.tokenize(text)
     mask_token = tokenizer.convert_tokens_to_ids(tokenized_text)[0]
 
-    for sent in masked_sentences:
-        # tokenize the text
-        tokenized_text = tokenizer.tokenize(sent)
-        indexed_tokens = tokenizer.convert_tokens_to_ids(tokenized_text)
+    # tokenize the text
+    tokenized_text = tokenizer.tokenize(masked_sentence)
+    indexed_tokens = tokenizer.convert_tokens_to_ids(tokenized_text)
 
-        # Create the segments tensors.
-        segments_ids = [0] * len(tokenized_text)
+    # Create the segments tensors.
+    segments_ids = [0] * len(tokenized_text)
 
-        # Convert inputs to PyTorch tensors
-        tokens_tensor = torch.tensor([indexed_tokens])
-        segments_tensors = torch.tensor([segments_ids])
+    # Convert inputs to PyTorch tensors
+    tokens_tensor = torch.tensor([indexed_tokens])
+    segments_tensors = torch.tensor([segments_ids])
 
-        # Predict all tokens
-        with torch.no_grad():
-            predictions = model(tokens_tensor, segments_tensors)
+    # Predict all tokens
+    with torch.no_grad():
+        predictions = model(tokens_tensor, segments_tensors)
 
-        # index of the masked token
-        mask_index = (tokens_tensor == mask_token).nonzero()[0][1].item()
-        # predicted token
-        predicted_index = torch.argmax(predictions[0, mask_index]).item()
-        predicted_token = tokenizer.convert_ids_to_tokens([predicted_index])[0]
+    # index of the masked token
+    mask_index = (tokens_tensor == mask_token).nonzero()[0][1].item()
+    # predicted token
+    predicted_index = torch.argmax(predictions[0, mask_index]).item()
+    predicted_token = tokenizer.convert_ids_to_tokens([predicted_index])[0]
 
-        text = sent.strip().split()
-        mask_index = text.index('[MASK]')
+    text = masked_sentence.strip().split()
+    mask_index = text.index('[MASK]')
 
-        text[mask_index] = predicted_token
-        original_word = original_sentence.strip().split()[mask_index - 1]
-        if original_word == predicted_token:
-            continue
+    text[mask_index] = predicted_token
+    original_word = original_sentence.strip().split()[mask_index - 1]
         
-        text.remove('[SEP]')
-        text.remove('[CLS]')
-        new_sent = " ".join(text)
+    text.remove('[SEP]')
+    text.remove('[CLS]')
+    new_sent = " ".join(text)
 
-        new_sentences.append(new_sent)
+    if original_word == predicted_token:
+        return new_sent, True
 
-        # no_error, prob_val = check_GE(model, [new_sent])
-        # exps = [np.exp(i) for i in prob_val[0]]
-        # sum_of_exps = sum(exps)
-        # softmax = [j/sum_of_exps for j in exps]
-        # if no_error and softmax[1] > 0.996:
-        #     new_sentences.append(new_sent)
+    return new_sent, False
 
-    result_sentences = []
-    [result_sentences.append(sent) for sent in new_sentences]
-    result_sentences = list(dict.fromkeys(result_sentences))
-    return result_sentences
-
-    
-
-
-model = load_grammar_checker_model()
-sentences = ["There are no doubt the tracking system has bring many benefits in this information age .", "I loves you.", "I has a apple.",  "I has an apple.",  "I have an apple.", 
-                "I ain't there."]
 # no_error, prob_val = check_GE(grammar_checker, sentences)
 # #print(no_error)
 # #print(prob_val)
@@ -217,9 +194,23 @@ sentences = ["There are no doubt the tracking system has bring many benefits in 
 # print("-"*60)
 # print()
 
-sentences = create_mask_set(sentences[0], [1, 8])
-print(sentences)
+# TODO
+# verbs checking - use Spacy to check the tense
+# write the function that give you verb etc. indexes
+# connect with frontend
 
-corrections = check_grammar(sentences[0], sentences)
+def predict_corrections(original_sentence, mask_ids):
+    corrections = []
+    sentence = original_sentence
 
-print(corrections)
+    for i in range(len(mask_ids)):
+        masked_sentence = create_mask_set(sentence, mask_ids[i])
+        sentence, correct = check_grammar(sentence, masked_sentence)
+        if(not correct):
+            corrections.append(mask_ids[i])
+
+    return sentence, corrections
+
+# Load pre-trained model tokenizer
+tokenizer = create_tokenizer()
+model = load_grammar_checker_model()

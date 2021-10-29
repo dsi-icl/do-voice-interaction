@@ -1,8 +1,7 @@
 from flask import Flask, request
 import json
+from gdo_voicebot.grammar_correction_service.model_utils import * 
 import spacy
-
-from model_utils.py import *
 
 app = Flask(__name__)
 nlp = spacy.load("en_core_web_sm")
@@ -15,23 +14,12 @@ def perform_grammar_correcection():
     # perform parts of speech tagging
     doc = tag_parts_of_speech(text_data)
 
-    pos = []
-    for token in doc:
-        pos.append(token.pos_)
-
     # bert stuff
-    grammar_checker = load_grammar_checker_model()
 
-    spelling_sentences = [text_data]
+    verb_ids = get_verb_ids(doc)
+    predicted_sentence, corrections = predict_corrections(text_data, verb_ids)
 
-    new_sentences = []
-
-    for sent in spelling_sentences:
-        no_error, prob_val = check_GE([sent])
-        print(no_error)
-        print(prob_val)
-
-    data = {'status': 'ok', 'service': 'grammar correction service', 'response': pos}
+    data = {'status': 'ok', 'service': 'grammar correction service', 'response': corrections, 'predicted_sentence': predicted_sentence}
 
     response = app.response_class(
         response=json.dumps(data),
@@ -39,6 +27,14 @@ def perform_grammar_correcection():
     )
 
     return response
+
+def get_verb_ids(doc):
+    pos = []
+    for i in range(len(doc)):
+        if doc[i].pos_ == 'VERB':
+            pos.append(i)
+
+    return pos
 
 def tag_parts_of_speech(text_data):
     doc = nlp(text_data)
