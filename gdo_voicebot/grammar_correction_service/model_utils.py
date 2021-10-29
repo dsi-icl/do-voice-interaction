@@ -3,13 +3,9 @@ import numpy as np
 from pytorch_pretrained_bert import BertTokenizer, BertModel, BertForMaskedLM
 from pytorch_pretrained_bert import BertForSequenceClassification
 from keras.preprocessing.sequence import pad_sequences
-<<<<<<< HEAD
-import math
 from difflib import SequenceMatcher
-
-=======
 import os.path
->>>>>>> 8f4008c4c0ef34f3e2928971827f92474ac9548a
+
 # credit: https://stackoverflow.com/a/39225039
 import requests
 
@@ -54,22 +50,9 @@ def progress_bar(some_iter):
 # --
 
 def load_grammar_checker_model():
-<<<<<<< HEAD
     #download_file_from_google_drive('1M_7GJVIVEHVp2ImyHBG2xk2aw21HtHif', './bert-based-uncased-GDO-trained.pth')
-
-    # grammar_checker =  BertForSequenceClassification.from_pretrained('bert-base-uncased', num_labels=2)
     model = BertForMaskedLM.from_pretrained('bert-large-uncased')
     model.eval()
-=======
-    if(not os.path.isfile('./bert-based-uncased-GDO-trained.pth')):
-        download_file_from_google_drive('1sPfnUFnzSxbGA9nxvGn85Eds8wU_JyuD', './bert-based-uncased-GDO-trained.pth')
-    
-    grammar_checker =  BertForSequenceClassification.from_pretrained('bert-base-uncased', num_labels=2)
->>>>>>> 8f4008c4c0ef34f3e2928971827f92474ac9548a
-
-    # device = torch.device('cpu')
-    # grammar_checker.load_state_dict(torch.load('bert-based-uncased-GDO-trained.pth', map_location=device))
-    # grammar_checker.eval()
 
     return model
 
