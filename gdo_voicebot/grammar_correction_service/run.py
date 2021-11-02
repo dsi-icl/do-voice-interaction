@@ -41,8 +41,6 @@ def get_verb_ids(doc):
 def correct_verbs(text_data, pos_original):
     verb_ids = get_verb_ids(pos_original)
 
-    print("Ids of verbs: ", verb_ids)
-
     predicted_sentence, corrections = predict_corrections(text_data, verb_ids)
 
     # Check whether a completely new verb has been suggested by BERT
@@ -53,16 +51,16 @@ def correct_verbs(text_data, pos_original):
         predicted_token = pos_prediction[verb_id].morph
 
         # Check if the lemma is the same for the prediction
-        if original_token.lemma_ != predicted_token.lemma_:
+        if pos_original[verb_id].lemma_ != pos_prediction[verb_id].lemma_:
             # If not we compare tenses to see whether BERT just proposed
             # a 'better-fit' word or has found a mistake in the tense
-            if original_token.get("VerbForm") == predicted_token.get("VerbForm") and \
-                    original_token.get("Tense") == predicted_token.get("Tense"):
-                predicted_sentence.replace(predicted_sentence[verb_id], text_data[verb_id])
+            # TODO: check the person as well
+            if pos_original[verb_id].tag_ == pos_prediction[verb_id].tag_:
+                predicted_sentence = predicted_sentence.replace(pos_prediction[verb_id].text, pos_original[verb_id].text, 1)
                 corrections.remove(verb_id)
             else:
-                inflected_verb = pos_original[verb_id]._.inflect(pos_prediction.tag_)
-                predicted_sentence.replace(predicted_sentence[verb_id], inflected_verb)
+                inflected_verb = pos_original[verb_id]._.inflect(pos_prediction[verb_id].tag_)
+                predicted_sentence = predicted_sentence.replace(pos_prediction[verb_id].text, inflected_verb, 1)
 
     return predicted_sentence, corrections
 
