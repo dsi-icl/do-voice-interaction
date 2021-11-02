@@ -10,7 +10,7 @@ import fs from 'fs'
 import path from 'path'
 import favicon from 'serve-favicon'
 
-import { processAudioCommand, processTextCommand } from './routes/voice_assistant.js'
+import { processAudioHotword, processAudioCommand, processTextCommand } from './routes/voice_assistant.js'
 
 if (!fs.existsSync('./config/config.json')) {
   console.error('Could not find the configuration file: \'./config/config.json\'')
@@ -45,6 +45,7 @@ app.use('/', express.static(path.join(__dirname, 'public')))
 export function setupClient (client) {
   console.log('Client connected\n')
 
+  client.on('audio-hotword', (request) => processAudioHotword(client, request))
   client.on('audio-command', (request) => processAudioCommand(client, request))
   client.on('text-command', (request) => processTextCommand(client, request))
 }

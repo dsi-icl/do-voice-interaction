@@ -2,7 +2,7 @@ import io from "socket.io-client";
 
 import {v4 as uuidv4} from "uuid";
 
-import {addResponse, changeStatus} from "./media";
+import {addResponse, foundHotword, changeStatus} from "./media";
 import {PlayerStatus} from "./const";
 
 export function setupSocket(backendUrl, dispatch) {
@@ -22,6 +22,9 @@ export function setupSocket(backendUrl, dispatch) {
             }
         }));
     });
+    window.socket.on("hotword", () => {
+        dispatch(foundHotword({value: true}))
+    });
     window.socket.on("disconnect", () => console.log("Socket disconnected ..."));
 }
 
@@ -35,6 +38,15 @@ export function submitRecording(payload) {
         });
         dispatch(changeStatus({status: PlayerStatus.PROCESSING}));
     };
+}
+
+export function submitHotwordRecording(payload) {
+    return window.socket.emit("audio-hotword", {
+        type: "audio",
+        ...payload,
+        id: payload.id || uuidv4(),
+        date: payload.date || new Date()
+    });
 }
 
 export function submitCommand(payload) {

@@ -6,7 +6,8 @@ import Stream from 'stream'
 import path from 'path';
 import { fileURLToPath } from 'url';
 import fileSystem from 'fs'
-
+import streamBuffers from 'stream-buffers'
+import { Readable } from 'stream';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -27,8 +28,8 @@ export async function startListening(req, res) {
 
 export async function getHotword(audioData, res) {
 	const keywordClient = new WakewordDetector({
-		// sampleRate: 16000,
-		threshold: 0.5
+		sampleRate: 16000,
+		threshold: 0
 	})
 
 	// Define keywords
@@ -45,7 +46,7 @@ export async function getHotword(audioData, res) {
 	  './keywords/heyGalileo10.wav'
 	], {
 	  disableAveraging: true,
-	  threshold: 0.52
+	  threshold: 0
 	})
 
 	keywordClient.enableKeyword('heyGalileo')
@@ -70,7 +71,9 @@ export async function getHotword(audioData, res) {
 
 	keywordClient.on('keyword', ({keyword, score, threshold, timestamp}) => {
 		console.log(`Detected "${keyword}" with score ${score} / ${threshold}`)
-		// make api call to STT
+		
+		res.status(200).json({ status: 'ok', service: 'Hotword service', text: 'detected'})
+		return
 	})
 
 	const detectionStream = new Stream.Writable({
@@ -85,22 +88,39 @@ export async function getHotword(audioData, res) {
 
 	const filePath = path.resolve(__dirname, './keywords', './heyGalileo1.wav');
 	const readStream = fileSystem.createReadStream(filePath);
-	readStream.pipe(keywordClient)
-	console.log(readStream)
+	// readStream.pipe(keywordClient)
+	// console.log(readStream)
 
+	// Compare the frame rate ...
 	const buffer = Buffer.from(audioData, 'base64')
-	const readable = bufferToStream(buffer);
+	//const readable = bufferToStream(buffer);
+
+	// const newStream = new Readable({
+	// 	read() {
+	// 	  this.push(buffer);
+	// 	},
+	// })
+	// console.log(newStream)
+	// newStream.pipe(keywordClient)
+	// var myReadableStreamBuffer = new streamBuffers.ReadableStreamBuffer({
+	// 	frequency: 10,      // in milliseconds.
+	// 	chunkSize: 2048     // in bytes.
+	// }); 
+	// myReadableStreamBuffer.put(buffer)
+	// myReadableStreamBuffer.pipe(keywordClient)
+	//myReadableStreamBuffer.stop()
+	
+
 	// const readable = new Stream.Readable()
 	// readable._read = () => {} // _read is required but you can noop it
 	// readable.push(buffer)
 	// // readable.push(null)
 	// readable.pipe(keywordClient)
-	console.log(readable)
+	// console.log(readable)
 
 	console.log('Hotword Service started successfully')
-	setTimeout(() => {
-		res.status(200).json({ status: 'ok', service: 'Hotword service', text: 'Hotword Service responded successfully'})
-  }, 5000)
+	res.status(200).json({ status: 'ok', service: 'Hotword service', text: 'detected'})
+	// res.status(200).json({ status: 'ok', service: 'Hotword service', text: 'not-present'})
 }
 
 function bufferToStream(myBuuffer) {

@@ -102,7 +102,7 @@ export async function processEmotion (client, request, speech, sttResponse) {
   }
 }
 
-export async function processAudioCommand (client, request) {
+export async function processAudioHotword (client, request) {
   if (request.audio.type !== 'audio/wav' || request.audio.sampleRate !== 16000) {
     const error = { status: 'fail', service: 'Voice-assistant service', text: 'The record format is wrong' }
     await errorProcess(client, error, '', request)
@@ -110,6 +110,17 @@ export async function processAudioCommand (client, request) {
     const hotwordResponse = await postData(global.config.services.hotwordService, request.audio.data, 'Hotword Service')
     console.log('hotwordresponse', hotwordResponse)
 
+    if (hotwordResponse.data.text === 'detected') {
+      client.emit('hotword', {})
+    }
+  }
+}
+
+export async function processAudioCommand (client, request) {
+  if (request.audio.type !== 'audio/wav' || request.audio.sampleRate !== 16000) {
+    const error = { status: 'fail', service: 'Voice-assistant service', text: 'The record format is wrong' }
+    await errorProcess(client, error, '', request)
+  } else {
     const sttResponse = await postData(global.config.services.sttService, request.audio.data, 'Speech To Text Service')
     console.log('sttresponse', sttResponse)
 
