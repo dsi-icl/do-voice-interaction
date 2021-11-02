@@ -50,11 +50,20 @@ def progress_bar(some_iter):
 # --
 
 def load_grammar_checker_model():
-    #download_file_from_google_drive('1M_7GJVIVEHVp2ImyHBG2xk2aw21HtHif', './bert-based-uncased-GDO-trained.pth')
-    model = BertForMaskedLM.from_pretrained('bert-large-uncased')
-    model.eval()
+    # download_file_from_google_drive('1M_7GJVIVEHVp2ImyHBG2xk2aw21HtHif', './bert-based-uncased-GDO-trained.pth')
+    grammar_checker = BertForSequenceClassification.from_pretrained('bert-large-uncased', num_labels=2)
 
-    return model
+    device = torch.device('cpu')
+    grammar_checker.load_state_dict(torch.load('bert-based-uncased-GDO-trained.pth', map_location=device))
+    grammar_checker.eval()
+
+    return grammar_checker
+
+def load_grammar_corrector_model():
+    grammar_corrector = BertForMaskedLM.from_pretrained('bert-large-uncased')
+    grammar_corrector.eval()
+
+    return grammar_corrector
 
 def create_tokenizer():
     return BertTokenizer.from_pretrained('bert-base-uncased')
@@ -153,7 +162,7 @@ def check_grammar(original_sentence, masked_sentence):
 
     # Predict all tokens
     with torch.no_grad():
-        predictions = model(tokens_tensor, segments_tensors)
+        predictions = corrector_model(tokens_tensor, segments_tensors)
 
     # index of the masked token
     mask_index = (tokens_tensor == mask_token).nonzero()[0][1].item()
@@ -193,4 +202,5 @@ def predict_corrections(original_sentence, mask_ids):
 
 # Load pre-trained model tokenizer
 tokenizer = create_tokenizer()
-model = load_grammar_checker_model()
+#checker_model = load_grammar_checker_model()
+corrector_model = load_grammar_corrector_model()
