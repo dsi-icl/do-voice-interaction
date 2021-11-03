@@ -1,14 +1,13 @@
 import torch
 import numpy as np
-from pytorch_pretrained_bert import BertTokenizer, BertModel, BertForMaskedLM
+from pytorch_pretrained_bert import BertTokenizer, BertForMaskedLM
 from pytorch_pretrained_bert import BertForSequenceClassification
 from keras.preprocessing.sequence import pad_sequences
 from difflib import SequenceMatcher
 import os.path
-
-# credit: https://stackoverflow.com/a/39225039
 import requests
 
+# credit: https://stackoverflow.com/a/39225039
 def download_file_from_google_drive(id, destination):
     print("Trying to fetch {}".format(destination))
 
@@ -16,30 +15,24 @@ def download_file_from_google_drive(id, destination):
         for key, value in response.cookies.items():
           if key.startswith('download_warning'):
             return value
-
         return None
 
     def save_response_content(response, destination):
         CHUNK_SIZE = 32768
-
         with open(destination, "wb") as f:
           for chunk in progress_bar(response.iter_content(CHUNK_SIZE)):
             if chunk: # filter out keep-alive new chunks
               f.write(chunk)
 
     URL = "https://docs.google.com/uc?export=download"
-
     session = requests.Session()
-
     response = session.get(URL, params = { 'id' : id }, stream = True)
     token = get_confirm_token(response)
-
     if token:
         params = { 'id' : id, 'confirm' : token }
         response = session.get(URL, params = params, stream = True)
 
     save_response_content(response, destination)
-
 
 def progress_bar(some_iter):
     try:
@@ -51,12 +44,14 @@ def progress_bar(some_iter):
 
 def load_grammar_checker_model():
     # download_file_from_google_drive('1M_7GJVIVEHVp2ImyHBG2xk2aw21HtHif', './bert-based-uncased-GDO-trained.pth')
-    grammar_checker = BertForSequenceClassification.from_pretrained('bert-large-uncased', num_labels=2)
+    if(not os.path.isfile('./bert-based-uncased-GDO-trained.pth')):
+         download_file_from_google_drive('1sPfnUFnzSxbGA9nxvGn85Eds8wU_JyuD', './bert-based-uncased-GDO-trained.pth')
+
+    grammar_checker =  BertForSequenceClassification.from_pretrained('bert-base-uncased', num_labels=2)
 
     device = torch.device('cpu')
     grammar_checker.load_state_dict(torch.load('bert-based-uncased-GDO-trained.pth', map_location=device))
     grammar_checker.eval()
-
     return grammar_checker
 
 def load_grammar_corrector_model():
@@ -69,17 +64,13 @@ def create_tokenizer():
     return BertTokenizer.from_pretrained('bert-base-uncased')
 
 def create_mask_set(sentence, mask_id):
-  """
-    For each input sentence create sentence with masked words at mask_ids
-  """
-
   sent = sentence.strip().split()
   new_sent = sent[:]
   new_sent[mask_id] = '[MASK]'
   return '[CLS] ' + " ".join(new_sent) + ' [SEP]'
 
 
-def check_GE(grammar_checker, sents):
+def check_GE(sents):
 
     # Add tokens to begining and end of sentences
     sentences = ["[CLS] " + sentence + " [SEP]" for sentence in sents]
@@ -118,7 +109,7 @@ def check_GE(grammar_checker, sents):
 
     with torch.no_grad():
         # Forward pass, calculate logit predictions
-        logits = grammar_checker(prediction_inputs, token_type_ids=None,
+        logits = checker_model(prediction_inputs, token_type_ids=None,
                           attention_mask=prediction_masks)
 
     # Move logits and labels to CPU
@@ -139,7 +130,14 @@ def check_GE(grammar_checker, sents):
 
     #print(flat_predictions)
 
-    return flat_predictions, prob_vals
+    predictions = []
+    for i in range(len(prob_vals)):
+        exps = [np.exp(i) for i in prob_vals[i]]
+        sum_of_exps = sum(exps)
+        softmax = [j/sum_of_exps for j in exps]
+        predictions.append(softmax[1]*100)
+
+    return predictions
 
 def check_grammar(original_sentence, masked_sentence):
     new_sentences = []
@@ -202,5 +200,5 @@ def predict_corrections(original_sentence, mask_ids):
 
 # Load pre-trained model tokenizer
 tokenizer = create_tokenizer()
-#checker_model = load_grammar_checker_model()
+checker_model = load_grammar_checker_model()
 corrector_model = load_grammar_corrector_model()
