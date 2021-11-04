@@ -14,10 +14,11 @@ export async function successProcess (client, sttResponse, request, recentEmotio
   // TODO: take care of grammarCorrectionMessage
   console.log('Speech to text transcription : SUCCESS\n')
 
-  if (grammarCorrectionPrediction === '') {
-    grammarCorrectionPrediction = sttResponse.text
+  var commandForDialogManages = sttResponse.text
+  if (grammarCorrectionPrediction !== '') {
+    commandForDialogManages = grammarCorrectionPrediction
   }
-  const botResult = await postData(global.config.services.dialogManagerService, '{"message":"' + grammarCorrectionPrediction + '"}', 'Data Observatory Control Service')
+  const botResult = await postData(global.config.services.dialogManagerService, '{"message":"' + commandForDialogManages + '"}', 'Data Observatory Control Service')
 
   console.log('bot result', botResult)
 

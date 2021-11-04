@@ -5,7 +5,7 @@ from model_utils import *
 import spacy
 import pyinflect
 
-GRAMMATICALLY_CORRECT_CONFIDENCE = 96
+GRAMMATICALLY_CORRECT_CONFIDENCE = 99
 
 app = Flask(__name__)
 nlp = spacy.load("en_core_web_sm")
