@@ -27,7 +27,11 @@ def perform_grammar_correcection():
         # perform parts of speech tagging
         doc = tag_parts_of_speech(text_data)
 
-        predicted_sentence, corrections = correct_verbs(text_data, doc)
+        predicted_sentence_v, corrections_v = correct_verbs(text_data, doc)
+        predicted_sentence_adp, corrections_adp = correct_adpositions(predicted_sentence_v, doc)
+
+        corrections = corrections_v.extend(corrections_adp)
+        corrections.sort()
 
     data = {'status': 'ok', 'service': 'grammar correction service', 'response': corrections,
             'predicted_sentence': predicted_sentence}
@@ -45,6 +49,24 @@ def get_verb_ids(doc):
     for i in range(len(doc)):
         if doc[i].pos_ == 'VERB' or doc[i].pos_ == 'AUX':
             pos.append(i)
+
+    return pos
+
+
+def get_adp_ids(doc):
+    pos = []
+    for i in range(len(doc)):
+        if doc[i].pos_ == 'ADP':
+            pos.append(i)
+
+    return pos
+
+
+def get_det_ids(doc):
+    pos = []
+    for i in range(len(doc)):
+        if doc[i].pos_ == 'DET' or doc[i].pos_ == 'PRON':
+            pos.append(i + doc.start)
 
     return pos
 
@@ -78,6 +100,47 @@ def correct_verbs(text_data, pos_original):
 
     return predicted_sentence, corrections
 
+
+def correct_adpositions(text_data, pos_original):
+    adp_ids = get_adp_ids(pos_original)
+
+    # Ensure that correct adposition was used in sentence
+    predicted_sentence, corrections = predict_corrections(text_data, adp_ids)
+
+    # Check that an adposition was not missed by masking spaces
+
+    return predicted_sentence, corrections
+
+
+def correct_determiners(text_data, pos_original):
+    corrected_sentence = text_data
+    corrections = []
+    noun_phrase_id = 0
+
+    for noun_phrase in pos_original.noun_chunks:
+        start_id = noun_phrase.start
+        phrase_length = noun_phrase.end - start_id
+
+        if phrase_length > 1:
+            det_ids = get_det_ids(noun_phrase)
+            if not det_ids:
+                # there are no determiners in the noun phrase
+                modified_sent = text_data.replace(noun_phrase.text,
+                                                  "determiner {}".format(noun_phrase.text, 1))
+                predicted_sentence, predicted_corrections = predict_corrections(modified_sent, [start_id])
+
+                corrections.append(predicted_corrections)
+
+                sent = predicted_sentence.strip().split()
+                new_sent = sent[:]
+                corrected_sentence = corrected_sentence.replace(noun_phrase.text,
+                                                                "{} {}".format(new_sent[start_id], noun_phrase.text), 1)
+
+        # two determiners
+        # Case we are not covering: using a/an with uncountable nouns
+    return corrected_sentence, corrections
+
+
 def tag_parts_of_speech(text_data):
     doc = nlp(text_data)
 
@@ -85,11 +148,12 @@ def tag_parts_of_speech(text_data):
 
     return doc
 
-# sent = "Can you provides me with your skills?"
-# doc = tag_parts_of_speech(sent)
-# # predictions = check_GE([sent])
-# new_sent, ind = correct_verbs(sent, doc)
-# # print(predictions[0])
+
+sent = "I want the pretty cat and cute dog."
+doc = tag_parts_of_speech(sent)
+# predictions = check_GE([sent])
+correct_determiners(sent, doc)
+# print(predictions[0])
 # print(new_sent)
 
 # if predictions[0] < GRAMMATICALLY_CORRECT_CONFIDENCE:
