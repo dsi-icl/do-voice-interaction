@@ -64,11 +64,17 @@ def correct_verbs(text_data, pos_original):
             # If not we compare tenses to see whether BERT just proposed
             # a 'better-fit' word or has found a mistake in the tense
             if pos_original[verb_id].tag_ == pos_prediction[verb_id].tag_:
-                predicted_sentence = predicted_sentence.replace(pos_prediction[verb_id].text, pos_original[verb_id].text, 1)
+                predicted_sentence = predicted_sentence.replace(pos_prediction[verb_id].text,
+                                                                pos_original[verb_id].text, 1)
                 corrections.remove(verb_id)
             else:
                 inflected_verb = pos_original[verb_id]._.inflect(pos_prediction[verb_id].tag_)
-                predicted_sentence = predicted_sentence.replace(pos_prediction[verb_id].text, inflected_verb, 1)
+                if inflected_verb is not None:
+                    predicted_sentence = predicted_sentence.replace(pos_prediction[verb_id].text, inflected_verb, 1)
+                else:
+                    predicted_sentence = predicted_sentence.replace(pos_prediction[verb_id].text,
+                                                                    pos_original[verb_id].text, 1)
+                    corrections.remove(verb_id)
 
     return predicted_sentence, corrections
 
@@ -79,10 +85,12 @@ def tag_parts_of_speech(text_data):
 
     return doc
 
-# sent = "She provide many useful tips"
+# sent = "Can you provides me with your skills?"
 # doc = tag_parts_of_speech(sent)
-# predictions = check_GE([sent])
-# print(predictions[0])
+# # predictions = check_GE([sent])
+# new_sent, ind = correct_verbs(sent, doc)
+# # print(predictions[0])
+# print(new_sent)
 
 # if predictions[0] < GRAMMATICALLY_CORRECT_CONFIDENCE:
 #     prediction, corrections = correct_verbs(sent, doc)
