@@ -115,7 +115,6 @@ def correct_adpositions(text_data, pos_original):
 def correct_determiners(text_data, pos_original):
     corrected_sentence = text_data
     corrections = []
-    noun_phrase_id = 0
 
     for noun_phrase in pos_original.noun_chunks:
         start_id = noun_phrase.start
@@ -129,6 +128,8 @@ def correct_determiners(text_data, pos_original):
                                                   "determiner {}".format(noun_phrase.text, 1))
                 predicted_sentence, predicted_corrections = predict_corrections(modified_sent, [start_id])
 
+                # TODO: Handle case where BERT suggests something other than a determiner/possessive adj
+
                 corrections.append(predicted_corrections)
 
                 sent = predicted_sentence.strip().split()
@@ -136,8 +137,21 @@ def correct_determiners(text_data, pos_original):
                 corrected_sentence = corrected_sentence.replace(noun_phrase.text,
                                                                 "{} {}".format(new_sent[start_id], noun_phrase.text), 1)
 
-        # two determiners
+            if len(det_ids) > 1:
+                # there are multiple determiners in a noun phrase
+                sent = noun_phrase.text.strip().split()
+                new_sent = sent[:]
+
+                for i in range(1, len(det_ids)):
+                    new_sent[i] = ""
+
+                sent = " ".join(list(filter(None, new_sent)))
+                corrected_sentence = corrected_sentence.replace(noun_phrase.text, sent, 1)
+                det_ids.remove(det_ids[0])
+                corrections.append(det_ids)
+
         # Case we are not covering: using a/an with uncountable nouns
+        corrections.sort()
     return corrected_sentence, corrections
 
 
@@ -149,7 +163,7 @@ def tag_parts_of_speech(text_data):
     return doc
 
 
-sent = "I want the pretty cat and cute dog."
+sent = "I want the a my pretty cat, my the a cute dog and little bird."
 doc = tag_parts_of_speech(sent)
 # predictions = check_GE([sent])
 correct_determiners(sent, doc)
