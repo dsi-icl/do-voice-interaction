@@ -1,6 +1,7 @@
 from enum import Enum
 from model_utils import *
 import spacy
+import pyinflect
 
 nlp = spacy.load("en_core_web_sm")
 
@@ -41,7 +42,9 @@ def correct_verbs(text_data, pos_original):
     # Check whether a completely new verb has been suggested by BERT
     # instead of just a grammatically correct version
     pos_prediction = nlp(predicted_sentence)
-    for verb_id in verb_ids:
+    final_corrections = corrections.copy()
+
+    for verb_id in corrections:
 
         # Check if the lemma is the same for the prediction
         if pos_original[verb_id].lemma_ != pos_prediction[verb_id].lemma_:
@@ -50,7 +53,7 @@ def correct_verbs(text_data, pos_original):
             if pos_original[verb_id].tag_ == pos_prediction[verb_id].tag_:
                 predicted_sentence = predicted_sentence.replace(pos_prediction[verb_id].text,
                                                                 pos_original[verb_id].text, 1)
-                corrections.remove(verb_id)
+                final_corrections.remove(verb_id)
             else:
                 inflected_verb = pos_original[verb_id]._.inflect(pos_prediction[verb_id].tag_)
                 if inflected_verb is not None:
@@ -58,9 +61,9 @@ def correct_verbs(text_data, pos_original):
                 else:
                     predicted_sentence = predicted_sentence.replace(pos_prediction[verb_id].text,
                                                                     pos_original[verb_id].text, 1)
-                    corrections.remove(verb_id)
+                    final_corrections.remove(verb_id)
 
-    return predicted_sentence, corrections
+    return predicted_sentence, final_corrections
 
 
 def correct_adpositions(text_data, pos_original):
@@ -93,7 +96,6 @@ def correct_adpositions(text_data, pos_original):
 
 def correct_determiners(text_data, pos_original):
     corrected_sentence = text_data
-    corrections = []
 
     for noun_phrase in pos_original.noun_chunks:
         start_id = noun_phrase.start
@@ -108,8 +110,6 @@ def correct_determiners(text_data, pos_original):
                 predicted_sentence, predicted_corrections = predict_corrections(modified_sent, [start_id])
 
                 # TODO: Handle case where BERT suggests something other than a determiner/possessive adj
-
-                corrections.append(predicted_corrections)
 
                 sent = predicted_sentence.strip().split()
                 new_sent = sent[:]
@@ -127,11 +127,10 @@ def correct_determiners(text_data, pos_original):
                 sent = " ".join(list(filter(None, new_sent)))
                 corrected_sentence = corrected_sentence.replace(noun_phrase.text, sent, 1)
                 det_ids.remove(det_ids[0])
-                corrections.append(det_ids)
 
         # Case we are not covering: using a/an with uncountable nouns
-        corrections.sort()
-    return corrected_sentence, corrections
+
+    return corrected_sentence
 
 
 def correct_sentence(text_data):
@@ -147,16 +146,9 @@ def correct_sentence(text_data):
 
     # perform parts of speech tagging and correct the determiners
     doc = nlp(predicted_sentence_adp)
-    predicted_sentence_det, corrections_det = correct_determiners(predicted_sentence_adp, doc)
+    predicted_sentence_det = correct_determiners(predicted_sentence_adp, doc)
 
     # combine indices of all corrections in one list, remove duplicates and sort
-    corrections = corrections_v.extend(corrections_adp).extend(corrections_det)
-    corrections = list(set(corrections))
-    corrections.sort()
+    corrections = corrections_v + corrections_adp
 
-    return predicted_sentence, corrections
-
-
-sent = "I want the pretty cat and cute dog."
-pred_sent, corr = correct_sentence(sent)
-print(pred_sent)
+    return predicted_sentence_det, corrections
