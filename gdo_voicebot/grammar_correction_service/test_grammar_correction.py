@@ -1,5 +1,6 @@
 import unittest
 from model_utils import *
+from grammar_utils import *
 from run import *
 import csv
 
@@ -44,8 +45,7 @@ class TestGrammar(unittest.TestCase):
                 predictions = check_GE([incorrect])
                 if predictions[0] < GRAMMATICALLY_CORRECT_CONFIDENCE:
                     true_negatives = true_negatives + 1
-                    doc = tag_parts_of_speech(incorrect)
-                    correction, _ = correct_verbs(incorrect, doc)
+                    correction, _ = correct_sentence(incorrect)
                     predictions = check_GE([correction])
                     if predictions[0] >= GRAMMATICALLY_CORRECT_CONFIDENCE:
                         true_corrections = true_corrections + 1
