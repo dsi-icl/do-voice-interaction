@@ -3,7 +3,7 @@ from flask import Flask, request
 import json
 from model_utils import *
 import spacy
-import pyinflect
+import re
 
 GRAMMATICALLY_CORRECT_CONFIDENCE = 96
 
@@ -103,13 +103,31 @@ def correct_verbs(text_data, pos_original):
 
 def correct_adpositions(text_data, pos_original):
     adp_ids = get_adp_ids(pos_original)
+    corrected_sentence = text_data
+    corrections = []
 
-    # Ensure that correct adposition was used in sentence
-    predicted_sentence, corrections = predict_corrections(text_data, adp_ids)
+    if adp_ids:
+        # Ensure that correct adposition was used in sentence
+        corrected_sentence, corrections = predict_corrections(text_data, adp_ids)
 
     # Check that an adposition was not missed by masking spaces
 
-    return predicted_sentence, corrections
+    sent = corrected_sentence.strip().split()
+
+    for i in range(0, len(sent)):
+        new_sent = sent[:]
+        new_sent[i] = "adposition {}".format(new_sent[i])
+
+        predicted_sentence, corrections = predict_corrections(" ".join(new_sent), [i])
+        pos_predicted = nlp(predicted_sentence)
+
+        if pos_predicted[i].pos_ == 'ADP':
+            corrected_sentence = corrected_sentence.replace(pos_predicted[i + 1].text, "{} {}".format(
+                pos_predicted[i].text, pos_predicted[i + 1].text), 1)
+
+        sent = corrected_sentence.strip().split()
+
+    return corrected_sentence, corrections
 
 
 def correct_determiners(text_data, pos_original):
@@ -120,15 +138,16 @@ def correct_determiners(text_data, pos_original):
         start_id = noun_phrase.start
         phrase_length = noun_phrase.end - start_id
 
-        if phrase_length > 1:
+        if phrase_length > 1 or (phrase_length == 1 and noun_phrase[0].pos_ == 'NOUN'):
             det_ids = get_det_ids(noun_phrase)
             if not det_ids:
                 # there are no determiners in the noun phrase
                 modified_sent = text_data.replace(noun_phrase.text,
-                                                  "determiner {}".format(noun_phrase.text, 1))
+                                                  "determiner {}".format(noun_phrase.text), 1)
                 predicted_sentence, predicted_corrections = predict_corrections(modified_sent, [start_id])
 
                 # TODO: Handle case where BERT suggests something other than a determiner/possessive adj
+                # TODO: In the case where the sentence has punctuation like commas a shift in the indices is present
 
                 corrections.append(predicted_corrections)
 
@@ -163,10 +182,10 @@ def tag_parts_of_speech(text_data):
     return doc
 
 
-sent = "I want the a my pretty cat, my the a cute dog and little bird."
+sent = "I provided them for my services."
 doc = tag_parts_of_speech(sent)
 # predictions = check_GE([sent])
-correct_determiners(sent, doc)
+correct_adpositions(sent, doc)
 # print(predictions[0])
 # print(new_sent)
 
