@@ -1,75 +1,60 @@
 import unittest
 from model_utils import *
 from run import *
+import csv
 
 class TestGrammar(unittest.TestCase):
 
     def __valid_sentences_test(self):
-        valid_cases = open("tests/valid_cases.txt", "r")
+        sentences = open("tests/testing.tsv", "r")
+        tsvreader = csv.reader(sentences, delimiter="\t")
         true_positives = 0
         false_negatives = 0
-        for sent in valid_cases:
-            sent = sent.strip()
-            print("CORRECT SENTENCE:")
-            print(sent)
-            print("\n")
-            predictions = check_GE([sent])
-            print("PREDICTION CONFIDENCE:")
-            print(predictions[0])
-            print("\n")
-            if predictions[0] < GRAMMATICALLY_CORRECT_CONFIDENCE:
-                print("Predicted as incorrect")
-                false_negatives = false_negatives + 1
-            else:
-                print("Predicted as correct")
-                true_positives = true_positives + 1
+        i = 0
+        for sent in tsvreader:
+            if i % 100 == 0:
+                print(i)
+            i = i + 1
+            if sent[0] == '1':
+                sent = preprocess(sent[1])
+                predictions = check_GE([sent])
+                if predictions[0] < GRAMMATICALLY_CORRECT_CONFIDENCE:
+                    false_negatives = false_negatives + 1
+                else:
+                    true_positives = true_positives + 1
 
-            print("--------------------------------------------------------------")
-
-        valid_cases.close()
+        sentences.close()
         return true_positives, false_negatives
 
 
     def __invalid_sentences_test(self):
-        invalid_cases = open("tests/invalid_cases.txt", "r")
-        invalid_corrections = open("tests/invalid_corrections.txt", "r")
+        sentences = open("tests/testing.tsv", "r")
+        tsvreader = csv.reader(sentences, delimiter="\t")
         false_positives = 0
         true_negatives = 0
         true_corrections = 0
         false_corrections = 0
-        for sent in invalid_cases:
-            sent = sent.strip()
-            print("INCORRECT SENTENCE:")
-            print(sent)
-            print("\n")
-            expected_correction = invalid_corrections.readline().strip()
-            predictions = check_GE([sent])
-            print("PREDICTION CONFIDENCE:")
-            print(predictions[0])
-            print("\n")
-            if predictions[0] < GRAMMATICALLY_CORRECT_CONFIDENCE:
-                print("Predicted as incorrect")
-                print("\n")
-                true_negatives = true_negatives + 1
-                doc = tag_parts_of_speech(sent)
-                correction, _ = correct_verbs(sent, doc)
-                print("CORRECTION:")
-                print(correction)
-                print("\n")
-                print("EXPECTED CORRECTION:")
-                print(expected_correction)
-                if correction == expected_correction:
-                    true_corrections = true_corrections + 1
+        i = 0
+        for sent in tsvreader:
+            if i % 100 == 0:
+                print(i)
+            i = i + 1
+            if sent[0] == '0':
+                incorrect = preprocess(sent[1])
+                predictions = check_GE([incorrect])
+                if predictions[0] < GRAMMATICALLY_CORRECT_CONFIDENCE:
+                    true_negatives = true_negatives + 1
+                    doc = tag_parts_of_speech(incorrect)
+                    correction, _ = correct_verbs(incorrect, doc)
+                    predictions = check_GE([correction])
+                    if predictions[0] >= GRAMMATICALLY_CORRECT_CONFIDENCE:
+                        true_corrections = true_corrections + 1
+                    else:
+                        false_corrections = false_corrections + 1
                 else:
-                    false_corrections = false_corrections + 1
-            else:
-                print("Predicted as correct")
-                false_positives = false_positives + 1
-        
-            print("--------------------------------------------------------------")
+                    false_positives = false_positives + 1
 
-        invalid_cases.close()
-        invalid_corrections.close()
+        sentences.close()
         return false_positives, true_negatives, true_corrections, false_corrections
 
     def test_grammar_correction(self):
@@ -80,13 +65,30 @@ class TestGrammar(unittest.TestCase):
         prev_correction_score = float(metrics.readline().strip())
         metrics.close()
 
+        print("Testing valid sentences...")
         true_positives, false_negatives = self.__valid_sentences_test()
+        print("Testing invalid sentences...")
         false_positives, true_negatives, true_corrections, false_corrections = self.__invalid_sentences_test()
 
-        new_accuracy = (true_positives + true_negatives) / (true_positives + true_negatives + false_positives + false_negatives)
-        new_precision = true_positives / (true_positives + false_positives)
-        new_recall = true_positives / (true_positives + false_negatives)
-        new_correction_score = true_corrections / (true_corrections + false_corrections)
+        if (true_positives + true_negatives + false_positives + false_negatives) != 0:
+            new_accuracy = (true_positives + true_negatives) / (true_positives + true_negatives + false_positives + false_negatives)
+        else:
+            new_accuracy = 0
+
+        if (true_positives + false_positives) != 0:
+            new_precision = true_positives / (true_positives + false_positives)
+        else:
+            new_precision = 0
+
+        if (true_positives + false_negatives) != 0:
+            new_recall = true_positives / (true_positives + false_negatives)
+        else:
+            new_recall = 0
+        
+        if (true_corrections + false_corrections) != 0:
+            new_correction_score = true_corrections / (true_corrections + false_corrections)
+        else:
+            new_correction_score = 0
 
         print("--------------------------ACCURACY----------------------------")
         print(new_accuracy)

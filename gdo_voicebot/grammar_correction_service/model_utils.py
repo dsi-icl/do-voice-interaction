@@ -66,6 +66,9 @@ def create_tokenizer():
 def create_mask_set(sentence, mask_id):
   sent = sentence.strip().split()
   new_sent = sent[:]
+  if mask_id >= len(new_sent):
+      print(new_sent)
+      print(mask_id)
   new_sent[mask_id] = '[MASK]'
   return '[CLS] ' + " ".join(new_sent) + ' [SEP]'
 

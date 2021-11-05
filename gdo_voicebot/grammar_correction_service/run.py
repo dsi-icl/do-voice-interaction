@@ -5,7 +5,7 @@ from model_utils import *
 import spacy
 import pyinflect
 
-GRAMMATICALLY_CORRECT_CONFIDENCE = 99
+GRAMMATICALLY_CORRECT_CONFIDENCE = 93
 
 app = Flask(__name__)
 nlp = spacy.load("en_core_web_sm")
@@ -15,6 +15,8 @@ nlp = spacy.load("en_core_web_sm")
 def perform_grammar_correcection():
     receivedData = json.loads(request.data)
     text_data = receivedData['transcript']
+
+    text_data = preprocess(text_data)
 
     corrections = []
     predicted_sentence = text_data
@@ -39,6 +41,30 @@ def perform_grammar_correcection():
 
     return response
 
+def preprocess(text):
+    text = text.replace("don't", "do not")
+    text = text.replace("cant't", "can not")
+    text = text.replace("isn't", "is not")
+    text = text.replace("aren't", "are not")
+    text = text.replace("couldn't", "could not")
+    text = text.replace("wouldn't", "would not")
+    text = text.replace("won't", "will not")
+    text = text.replace("I'm", "I am")
+    text = text.replace("i'm", "i am")
+    text = text.replace("she's", "she is")
+    text = text.replace("he's", "he is")
+    text = text.replace("we're", "we are")
+    text = text.replace("they're", "they are")
+    text = text.replace("you're", "you are")
+    text = text.replace("it's", "it is")
+    text = text.replace("that's", "that is")
+    text = text.replace("wasn't", "was not")
+    text = text.replace("weren't", "were not")
+    text = text.replace("hasn't", "has not")
+    text = text.replace("haven't", "have not")
+    text = text.replace("doesn't", "does not")
+
+    return text
 
 def get_verb_ids(doc):
     pos = []
@@ -57,7 +83,8 @@ def correct_verbs(text_data, pos_original):
     # Check whether a completely new verb has been suggested by BERT
     # instead of just a grammatically correct version
     pos_prediction = nlp(predicted_sentence)
-    for verb_id in verb_ids:
+    final_corrections = corrections.copy()
+    for verb_id in corrections:
 
         # Check if the lemma is the same for the prediction
         if pos_original[verb_id].lemma_ != pos_prediction[verb_id].lemma_:
@@ -66,7 +93,7 @@ def correct_verbs(text_data, pos_original):
             if pos_original[verb_id].tag_ == pos_prediction[verb_id].tag_:
                 predicted_sentence = predicted_sentence.replace(pos_prediction[verb_id].text,
                                                                 pos_original[verb_id].text, 1)
-                corrections.remove(verb_id)
+                final_corrections.remove(verb_id)
             else:
                 inflected_verb = pos_original[verb_id]._.inflect(pos_prediction[verb_id].tag_)
                 if inflected_verb is not None:
@@ -74,9 +101,9 @@ def correct_verbs(text_data, pos_original):
                 else:
                     predicted_sentence = predicted_sentence.replace(pos_prediction[verb_id].text,
                                                                     pos_original[verb_id].text, 1)
-                    corrections.remove(verb_id)
+                    final_corrections.remove(verb_id)
 
-    return predicted_sentence, corrections
+    return predicted_sentence, final_corrections
 
 def tag_parts_of_speech(text_data):
     doc = nlp(text_data)
