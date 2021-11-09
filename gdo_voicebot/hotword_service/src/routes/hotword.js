@@ -6,15 +6,14 @@ const url = require('url')
 
 async function startListening(req, res) {
 	if (req.body === null || req.body === undefined) {
-		res.status(400).json({
+		return res.status(400).json({
 			status: 'fail',
 			service: 'Hotword service',
 			message: 'The request body contains nothing'
 		})
-		return
 	}
 
-	getHotword(req.body, res)
+	return getHotword(req.body, res)
 }
 
 async function getHotword(audioData, res) {
@@ -62,9 +61,7 @@ async function getHotword(audioData, res) {
 
 	keywordClient.on('keyword', ({keyword, score, threshold, timestamp}) => {
 		console.log(`Detected "${keyword}" with score ${score} / ${threshold}`)
-		
-		res.status(200).json({ status: 'ok', service: 'Hotword service', text: 'detected'})
-		return
+		return res.status(200).json({ status: 'ok', service: 'Hotword service', text: 'detected'})
 	})
 
 	const detectionStream = new Stream.Writable({
@@ -109,8 +106,8 @@ async function getHotword(audioData, res) {
 	// readable.pipe(keywordClient)
 	// console.log(readable)
 
-	console.log('Hotword Service started successfully')
-	res.status(200).json({ status: 'ok', service: 'Hotword service', text: 'detected'})
+	// console.log('Hotword Service started successfully')
+	return res.status(200).json({ status: 'ok', service: 'Hotword service', text: 'detected'})
 	// res.status(200).json({ status: 'ok', service: 'Hotword service', text: 'not-present'})
 }
 
