@@ -1,8 +1,11 @@
-import express from 'express'
+// import express from 'express'
 // import cors from 'cors'
 // import logger from 'morgan'
 
-import { startListening, getHotword } from './routes/hotword.js'
+// import { startListening, getHotword } from './routes/hotword.js'
+
+const express = require('express')
+const hotwordService = require('./routes/hotword.js')
 
 const app = express()
 
@@ -29,6 +32,6 @@ app.get('/api/status', (req, res) => res.status(200).json({ status: 'ok', servic
  * @route {POST} /api/hotword
  * @headerparam Content-type must be text/plain
  */
-app.post('/api/hotword', (req, res) => { startListening(req, res) })
+app.post('/api/hotword', (req, res) => { hotwordService.startListening(req, res) })
 
 export default app
