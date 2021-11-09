@@ -5,6 +5,10 @@ import pyinflect
 
 nlp = spacy.load("en_core_web_sm")
 
+# possessive adjectives used in the English language
+poss_adj = ['my', 'your', 'our', 'its', 'her', 'his', 'their',
+            'My', 'Your', 'Our', 'Its', 'Her', 'His', 'Their']
+
 
 class GrammarParts(Enum):
     ADPOS = 1
@@ -74,11 +78,19 @@ def correct_adpositions(text_data, pos_original):
     if adp_ids:
         # Ensure that correct adposition was used in sentence
         corrected_sentence, corrections = predict_corrections(text_data, adp_ids)
+        pos_corrected = nlp(corrected_sentence)
+
+        for i, adp_id in enumerate(adp_ids):
+            if pos_corrected[adp_id].pos_ != 'ADP':
+                corrected_sentence = corrected_sentence.replace(pos_corrected[adp_id].text,
+                                                                pos_original[adp_id].text, 1)
 
     # Check that an adposition was not missed by masking spaces
     sent = corrected_sentence.strip().split()
 
-    for i in range(0, len(sent)):
+    i = 0
+
+    while i < len(sent):
         new_sent = sent[:]
         new_sent[i] = "adposition {}".format(new_sent[i])
 
@@ -88,8 +100,10 @@ def correct_adpositions(text_data, pos_original):
         if pos_predicted[i].pos_ == 'ADP':
             corrected_sentence = corrected_sentence.replace(pos_predicted[i + 1].text, "{} {}".format(
                 pos_predicted[i].text, pos_predicted[i + 1].text), 1)
+            i = i + 1
 
         sent = corrected_sentence.strip().split()
+        i = i + 1
 
     return corrected_sentence, corrections
 
@@ -109,12 +123,21 @@ def correct_determiners(text_data, pos_original):
                                                   "determiner {}".format(noun_phrase.text), 1)
                 predicted_sentence, predicted_corrections = predict_corrections(modified_sent, [start_id])
 
-                # TODO: Handle case where BERT suggests something other than a determiner/possessive adj
+                # Case where BERT suggests something other than a determiner/possessive adj
+                pos_predicted = nlp(predicted_sentence)
+                if pos_predicted[start_id].pos == 'DET' or pos_predicted[start_id].text in poss_adj:
+                    sent = predicted_sentence.strip().split()
+                    new_sent = sent[:]
+                    corrected_sentence = corrected_sentence.replace(noun_phrase.text,
+                                                                    "{} {}".format(new_sent[start_id],
+                                                                                   noun_phrase.text), 1)
+            if len(det_ids) == 1:
+                # there is only one determiner
+                predicted_sentence, predicted_corrections = predict_corrections(text_data, det_ids)
+                pos_predicted = nlp(predicted_sentence)
 
-                sent = predicted_sentence.strip().split()
-                new_sent = sent[:]
-                corrected_sentence = corrected_sentence.replace(noun_phrase.text,
-                                                                "{} {}".format(new_sent[start_id], noun_phrase.text), 1)
+                if pos_predicted[det_ids[0]].pos_ == 'DET:':
+                    corrected_sentence = predicted_sentence
 
             if len(det_ids) > 1:
                 # there are multiple determiners in a noun phrase
