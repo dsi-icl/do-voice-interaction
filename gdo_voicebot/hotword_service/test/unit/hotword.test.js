@@ -3,6 +3,7 @@ const hotwordService = require('../../src/routes/hotword')
 const path = require('path')
 const Response = require('response')
 
+jest.setTimeout(10000)
 
 test('Returns 400 on empty body request', async () => {
     let res = new Response(null, {
