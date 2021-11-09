@@ -1,40 +1,38 @@
-0	a family seemingly a father a mother and two of their children get on a car
-1	a family seemingly a father a mother and two of their children get in a car
-0	it seems they don't care so much about its lyrics and rode on the rhythm
-1	it seems they don't care so much about its lyrics and ride on to the rhythm
+0	a mother and two of her children get on a car
+1	a mother and two of her children get in a car
+0	it seem they don't care so much about it
+1	it seems they don't care so much about it
 0	this commercial film is really reflecting what happen to english learners
-1	this commercial film is really reflecting what happens to english learners
-0	characters of the seasons are completely different each other in japan
-1	characters of the seasons are completely different from each other in japan
-0	in spring we can sees not only plum and cherry blossom but also trailing mist across some mountain which is a crowning beauty in morning
-1	in spring we can see not only plum and cherry blossoms but also a trailing mist across mountains which is a crowning beauty in the morning
-0	in summer if you go to country side many fireflies will welcome to you
+1	this commercial film really reflects what happens to english learners
+0	words are completely different each other in japan
+1	words are completely different from each other in japan
+0	in spring we can sees not only plum and cherry blossom but also trailing mist across mountain
+1	in spring we can see not only plum and cherry blossoms but also a trailing mist across mountains
+0	in summer if you go to countryside many fireflies will welcome to you
 1	in summer if you go to the countryside many fireflies will welcome you
 0	it must be fantastic scene
 1	it must be a fantastic scene
-0	in autumn especialy late autumn when you look at the reeds flushing golden and the leaves turning red or yellow you must feel as happy as if you was dreaming
-1	in autumn especialy late autumn when you look at the reeds flashing golden and the leaves turning red or yellow you will surely feel happy as if you were dreaming
-0	in winter silent snow indicate great intelligence which man can not have
-1	in winter silent snow indicates great intelligence which man can not have
-0	in response to the question as to which season does i like it must be the time of seasonal change
-1	in response to the question as to which season i like it must be the time of seasonal change
+0	in late autumn you must feel as happy as if you was dreaming
+1	in late autumn you will surely feel happy as if you were dreaming
+0	silent snow indicate great intelligence
+1	silent snow indicates great intelligence
+0	i like season of spring most
+1	i like the season of spring the most
 0	i miss passing seasons with affection while i admires coming season
 1	i miss passing seasons with affection while i admire coming seasons
-0	the beauty of the cherry blossom is not so much the appearance but evenescence
-1	the beauty of the cherry blossom is not so much in its appearance but its evanescence
 0	the life of firefly is very short
 1	the life of a firefly is very short
 0	i wanna learning japanese but i'm so busy and i can't type japanese
 1	i wanna learn japanese but i'm so busy and i can't type japanese
-0	i like here so is Eve
+0	i like here so do Eve
 1	i like it here so does Eve
 0	it taste very good
 1	it tasted very good
 0	it take two hours to commute to work each way
 1	it takes two hours to commute to work each way
 0	i a use subway to go to a work and change trains two times
-1	i take a subway to work and change trains twice
-0	i study english and read a book in trains
+1	i take a subway to go to work and change trains twice
+0	i study english and read book in trains
 1	i study my english books in the train
 0	usually we uses that only when we go far away
 1	usually we use them only when we go far away
@@ -50,24 +48,24 @@
 1	but i couldn't see the game
 0	anybody know manga cafe
 1	does anyone know about manga cafes
-0	manga cafe where you can read many manga
-1	a manga cafe is where you can read many manga
+0	in manga cafe you can reads manga
+1	a manga cafe is where you can read manga
 0	manga cafe give us separate rooms
 1	in the manga cafes they give us separate rooms
 0	manga cafe is low price so many generation use it
 1	their prices are low so many generations can use them
 0	if you come to japan and you is good at japanese i suggest going manga cafe
 1	if you come to japan and you are good at japanese i suggest going to manga cafe
-0	by the way manga cafes has many different surroundings
-1	by the way manga cafes have many different surroundings
+0   this cafe have many a different surroundings
+1	this cafe has many different surroundings
 0	they gives us good surroundings
 1	they have good surroundings
 0	thank you reading  
 1	thank you for reading  
 0	it is the first time for me to comes here
-1	it is the first time i've have come here
-0	yesterday i went to drinking with my friends since when i was college student
-1	yesterday i went drinking with my friends since when i was college student
+1	it is the first time i've come here
+0	yesterday i went to drinking with my friends
+1	yesterday i went drinking with my friends
 0	one of them is working at an japanese automaker
 1	one of them is working for a japanese automaker
 0	sometimes he is going to around of world
@@ -81,29 +79,27 @@
 0	usually i take pod to hear some music and english programs
 1	usually i carry my pod to listen to some music and english programs
 0	today i found a new things about english
-1	today i found out a new thing about english
+1	today i found a new thing about english
 0	the sentence are not okay
 1	the sentence is okay
 0	i feels this sentence sound like that person isn't grateful
-1	i felt this sentence sounded like that person isn't grateful
-0	yeah i learns today one thing today
-1	yeah i learned today one thing today
-0	i give the fish which was his favorite food to his grave
-1	i put a fish which was his favourite food on his grave
-0	i can think of nothing because of i am tired now or just pretending to be tired now
-1	i can think of nothing because i am tired now or just pretending to be tired now
+1	i felt like this sentence sounded like that person isn't grateful
+0	i learns one thing today
+1	i learned one thing today
+0	i can think of nothing because of i is tired now
+1	i can think of nothing because i am tired now
 0	what i am doing now look like nothing
 1	what i am doing now looks like nothing
 0	i have trouble with study and my girls may leaves me soon
 1	i have trouble with studying and my girls may leave me soon
 0	i went to cafe near my school to read books and i walk for a long time
 1	i went to a cafe near my school to read books and i walked for a long time
-0	honestly i have to challenges german writing
+0	honestly i have to challenges german
 1	honestly i need to challenge my german
-0	but it doesn't mean that i give it up
+0	but it doesn't mean that i gives it up
 1	but it doesn't mean that i'm giving up
-0	next we should gets a table
-1	next we should act in a polite and positive manner towards our neighbors
+0	we should gets an table
+1	we should act in a polite and positive manner towards our neighbors
 0	neighbors is a part of our life and a society
 1	neighbors are a part of our life and society
 0	we should be friendly and helpful to a strangers
@@ -124,8 +120,8 @@
 1	recently i am absent minded for a reason
 0	i keep thinking something no matter what
 1	i kept thinking about something while walking
-0	after i find out the card was not in the right place
-1	after i found out that the card was not in the right place
+0	i find out the card was not in the right place
+1	i found out that the card was not in the right place
 0	but i still can't find it so we are a unhappy
 1	but i still couldn't find it
 0	then i calls my family immediately
@@ -138,12 +134,12 @@
 1	i am now an exchange student in america and this is the first time i have ever lived without my family so my parents worry a lot
 0	but i reassured them by saying that i would sends emails
 1	but i reassured them by saying that i would send emails
-0	my first glance at my roommate actually left a very good impression on me because she was 5 years older than me which make me feel she would support me in so many ways
-1	at first glance my roommate actually left a very good impression on me because she was 5 years older than me which made me feel she would support me in so many ways
-0	when i arrived my room she was just with her japanese boyfriend so she introduce him to me
-1	when i arrived at my room she was with her japanese boyfriend so she introduced him to me
-0	i felt that i was so lucky that god gave me such a nice roommate because she seem to be a very protective
-1	i felt that i was so lucky that god gave me such a nice roommate because she seemed to be very protective
+0	my first glance at my roommate actually left a very good impression to me
+1	at first glance my roommate actually left a very good impression on me
+0	when i arrived my room she was just with her japanese boyfriend
+1	when i arrived at my room she was with her japanese boyfriend
+0	i felt that i was so lucky that god gave me such a nice roommate
+1	i felt that i was so lucky that god gave me such a nice roommate
 0	for a girl who left home first time it really help a lot
 1	for a girl who had left home for the first time it really helped a lot
 0	at least she give a the sense of security
@@ -158,10 +154,10 @@
 1	if she felt hurt i would stop doing it right away
 0	her boyfrined told me that he feels his a girlfriend was too emotional
 1	her boyfriend told me that he felt his girlfriend was too emotional
-0	sounds ironic don't it
-1	sounds ironic doesn't it
-0	so i need to be ready for school trip soon
-1	so i need to be ready for my school trip soon
+0	it do sounds ironic
+1	it does sounds ironic
+0	i need to be ready for school trip soon
+1	i need to be ready for my school trip soon
 0	so i'll write about school trip when i gets back home
 1	i'll write about my school trip when i get back home
 0	this lead to nowhere
@@ -174,27 +170,27 @@
 1	she is very good at japanese and always helps me study english
 0	however because of her good japanese skills i sometimes hesitates to speak english
 1	however because she speaks japanese so well i sometimes hesitate to speak english
-0	moreover she always speak japanese instead of using the english so i don't have enough chance to speak english
-1	moreover she always speaks japanese instead of using english so i don't have enough chances to speak english
-0	come back in time if you can
+0	moreover she always speak japanese instead of using the english
+1	moreover she always speaks japanese instead of using english
+0	comes back in time if you can
 1	come back on time if you can
-0	Jenny were a stray cat and pecked by crows in a park before a volunteer save her life
-1	Jenny was a stray cat and was pecked by crows in a park before a volunteer saved her life
+0	Jenny were a stray cat before a volunteer save her life
+1	Jenny was a stray cat before a volunteer saved her life
 0	when she come to my house for a first time she were so skinny that we couldn't hug her
 1	when she came to my house for the first time she was so skinny that we couldn't hug her tightly
 0	i study english since i was junior high school student
 1	i've been studying english since i was a junior high school student
-0	i can reads wrriten papers in english
-1	i can understand writen english
+0	i can reads written papers in english
+1	i can understand written english
 0	but i can't listens and write english
 1	but i can't listen and write in english
 0	the class consists four students and teacher
-1	the class consists of four students and a teachers
+1	the class consists of four students and a teacher
 0	i has to speaks words many times so it is profitable
 1	i had to speak many times so it was profitable
-0	gossip girl is propular american tv series that was introduced to china as fashion and life style book
-1	gossip girl is a popular american tv series that was introduced to china as a fashion and life style book
-0	in the shows serana and blair are the most lucky girls who is rich and beatiful
-1	in the shows serana and blair are the most lucky girls who are rich and beautiful
-0	they possesses all the things which the most girls want to have
-1	they possess all the things which was most girls want to have
+0	gossip girl is propular american tv series that was introduced to china as fashion and lifestyle book
+1	gossip girl is a popular american tv series that was introduced to china as a fashion and lifestyle book
+0	in the show they are the most lucky girls who is rich and beatiful
+1	in the show they are the most lucky girls who are rich and beautiful
+0	they possesses all the things which most girls want to have
+1	they possess all the things which most girls want to have

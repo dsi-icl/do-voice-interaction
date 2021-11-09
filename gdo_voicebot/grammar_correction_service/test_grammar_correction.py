@@ -30,6 +30,7 @@ class TestGrammar(unittest.TestCase):
 
     def __invalid_sentences_test(self):
         sentences = open("tests/testing.tsv", "r")
+        corrections = open("tests/corrections.txt", "w")
         tsvreader = csv.reader(sentences, delimiter="\t")
         false_positives = 0
         true_negatives = 0
@@ -47,6 +48,7 @@ class TestGrammar(unittest.TestCase):
                     true_negatives = true_negatives + 1
                     correction, _ = correct_sentence(incorrect)
                     predictions = check_GE([correction])
+                    corrections.write(correction + ' -- ' + str(predictions[0]) + '\n')
                     if predictions[0] >= GRAMMATICALLY_CORRECT_CONFIDENCE:
                         true_corrections = true_corrections + 1
                     else:
@@ -55,6 +57,7 @@ class TestGrammar(unittest.TestCase):
                     false_positives = false_positives + 1
 
         sentences.close()
+        corrections.close()
         return false_positives, true_negatives, true_corrections, false_corrections
 
     def test_grammar_correction(self):
@@ -69,6 +72,8 @@ class TestGrammar(unittest.TestCase):
         true_positives, false_negatives = self.__valid_sentences_test()
         print("Testing invalid sentences...")
         false_positives, true_negatives, true_corrections, false_corrections = self.__invalid_sentences_test()
+        print(true_corrections)
+        print(false_corrections)
 
         if (true_positives + true_negatives + false_positives + false_negatives) != 0:
             new_accuracy = (true_positives + true_negatives) / (true_positives + true_negatives + false_positives + false_negatives)
