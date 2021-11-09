@@ -1,21 +1,10 @@
-// import express from 'express'
-// import cors from 'cors'
-// import logger from 'morgan'
-
-// import { startListening, getHotword } from './routes/hotword.js'
-
 const express = require('express')
 const hotwordService = require('./routes/hotword.js')
 
 const app = express()
 
-// app.use(cors())
-// app.use(logger('dev'))
-/* Has been added to enable audio blob transfers */
 app.use(express.text({ limit: '50mb' }))
 app.use(express.urlencoded({ extended: false }))
-
-// app.get('/', getHotword)
 
 /**
  * Get service status

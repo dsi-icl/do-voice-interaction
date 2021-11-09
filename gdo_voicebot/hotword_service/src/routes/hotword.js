@@ -1,22 +1,8 @@
-// import WakewordDetector from '@mathquis/node-personal-wakeword'
-// import { ReadStream } from 'fs'
-// // import { Readable } from 'stream'
-// import Stream from 'stream'
-
-// import path from 'path';
-// import { fileURLToPath } from 'url';
-// import fileSystem from 'fs'
-// import streamBuffers from 'stream-buffers'
-// import { Readable } from 'stream'
-
 const WakewordDetector = require('@mathquis/node-personal-wakeword')
 const fs = require('fs')
 const Stream = require('stream')
 const path = require('path')
 const url = require('url')
-
-// const __filename = url.fileURLToPath(import.meta.url);
-// const __dirname = path.dirname(__filename);
 
 async function startListening(req, res) {
 	if (req.body === null || req.body === undefined) {
