@@ -2,7 +2,7 @@ from flask import Flask, request
 import json
 from grammar_utils import *
 
-GRAMMATICALLY_CORRECT_CONFIDENCE = 76
+GRAMMATICALLY_CORRECT_CONFIDENCE = 70
 
 app = Flask(__name__)
 

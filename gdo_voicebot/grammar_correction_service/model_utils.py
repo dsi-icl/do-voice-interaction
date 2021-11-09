@@ -44,13 +44,13 @@ def progress_bar(some_iter):
 
 def load_grammar_checker_model():
     # download_file_from_google_drive('1M_7GJVIVEHVp2ImyHBG2xk2aw21HtHif', './bert-based-uncased-GDO-trained.pth')
-    if(not os.path.isfile('./bert-based-uncased-GDO-trained.pth')):
-         download_file_from_google_drive('1sPfnUFnzSxbGA9nxvGn85Eds8wU_JyuD', './bert-based-uncased-GDO-trained.pth')
+    if(not os.path.isfile('./bert-based-uncased-GDO-lang-8-cola-trained.pth')):
+         download_file_from_google_drive('1sPfnUFnzSxbGA9nxvGn85Eds8wU_JyuD', './bert-based-uncased-GDO-lang-8-cola-trained.pth')
 
     grammar_checker =  BertForSequenceClassification.from_pretrained('bert-base-uncased', num_labels=2)
 
     device = torch.device('cpu')
-    grammar_checker.load_state_dict(torch.load('bert-based-uncased-GDO-trained.pth', map_location=device))
+    grammar_checker.load_state_dict(torch.load('bert-based-uncased-GDO-lang-8-cola-trained.pth', map_location=device))
     grammar_checker.eval()
     return grammar_checker
 

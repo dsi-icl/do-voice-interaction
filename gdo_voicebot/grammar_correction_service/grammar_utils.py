@@ -98,8 +98,9 @@ def correct_adpositions(text_data, pos_original):
         pos_predicted = nlp(predicted_sentence)
 
         if pos_predicted[i].pos_ == 'ADP':
-            corrected_sentence = corrected_sentence.replace(pos_predicted[i + 1].text, "{} {}".format(
-                pos_predicted[i].text, pos_predicted[i + 1].text), 1)
+            sent = corrected_sentence.strip().split()
+            new_sent = sent[:i] + [predicted_sentence.strip().split()[i]] + sent[i:]
+            corrected_sentence = " ".join(new_sent[:])
             i = i + 1
 
         sent = corrected_sentence.strip().split()
@@ -125,7 +126,7 @@ def correct_determiners(text_data, pos_original):
 
                 # Case where BERT suggests something other than a determiner/possessive adj
                 pos_predicted = nlp(predicted_sentence)
-                if pos_predicted[start_id].pos == 'DET' or pos_predicted[start_id].text in poss_adj:
+                if pos_predicted[start_id].pos_ == 'DET' or pos_predicted[start_id].pos_ == 'PRON' or pos_predicted[start_id].text in poss_adj:
                     sent = predicted_sentence.strip().split()
                     new_sent = sent[:]
                     corrected_sentence = corrected_sentence.replace(noun_phrase.text,
@@ -136,7 +137,7 @@ def correct_determiners(text_data, pos_original):
                 predicted_sentence, predicted_corrections = predict_corrections(text_data, det_ids)
                 pos_predicted = nlp(predicted_sentence)
 
-                if pos_predicted[det_ids[0]].pos_ == 'DET:':
+                if pos_predicted[det_ids[0]].pos_ == 'DET' or pos_predicted[start_id].pos_ == 'PRON':
                     corrected_sentence = predicted_sentence
 
             if len(det_ids) > 1:
