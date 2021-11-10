@@ -17,6 +17,13 @@ async function startListening(req, res) {
 }
 
 async function getHotword(audioData, res) {
+
+	const buffer = Buffer.from(audioData, 'base64')
+	 fileSystem.writeFile('/app/save/helloworld.wav', buffer, function (err) {
+	 	if (err) return console.log(err);
+		console.log("Saved");
+	});
+
 	const keywordClient = new WakewordDetector({
 		sampleRate: 16000,
 		threshold: 0
@@ -74,8 +81,9 @@ async function getHotword(audioData, res) {
 
   keywordClient.pipe(detectionStream)
 
-	const filePath = path.resolve(__dirname, './keywords', './heyGalileo1.wav');
-	const readStream = fs.createReadStream(filePath);
+  const filePath = path.resolve(__dirname, '/app/save/', 'helloworld.wav');
+  const readStream = fileSystem.createReadStream(filePath);
+  readStream.pipe(keywordClient)
 	// readStream.pipe(keywordClient)
 	// console.log(readStream)
 
