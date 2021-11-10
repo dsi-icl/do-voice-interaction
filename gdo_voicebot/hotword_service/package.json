@@ -3,10 +3,16 @@
   "version": "1.0.0",
   "private": true,
   "main": "src/app.js",
+  "jest": {
+    "verbose": true,
+    "transformIgnorePatterns": [
+      "/node_modules/"
+    ]
+  },
   "scripts": {
     "start": "node -r esm ./bin/www",
     "start:dev": "nodemon -r esm ./bin/www",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --unhandled-rejections=strict"
   },
   "dependencies": {
     "@mapbox/node-pre-gyp": "^1.0.5",
@@ -19,8 +25,12 @@
     "https": "^1.0.0",
     "morgan": "^1.10.0",
     "path": "^0.12.7",
+    "response": "^0.18.0",
     "stream": "0.0.2",
     "stream-buffers": "^3.0.2",
     "url": "^0.11.0"
+  },
+  "devDependencies": {
+    "jest": "^27.3.1"
   }
 }

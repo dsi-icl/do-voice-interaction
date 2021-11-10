@@ -1,32 +1,22 @@
-import WakewordDetector from '@mathquis/node-personal-wakeword'
-import { ReadStream } from 'fs'
-// import { Readable } from 'stream'
-import Stream from 'stream'
+const WakewordDetector = require('@mathquis/node-personal-wakeword')
+const fs = require('fs')
+const Stream = require('stream')
+const path = require('path')
+const url = require('url')
 
-import path from 'path';
-import { fileURLToPath } from 'url';
-import fileSystem from 'fs'
-import streamBuffers from 'stream-buffers'
-import { Readable } from 'stream';
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-export async function startListening(req, res) {
+async function startListening(req, res) {
 	if (req.body === null || req.body === undefined) {
-		res.status(400).json({
+		return res.status(400).json({
 			status: 'fail',
 			service: 'Hotword service',
 			message: 'The request body contains nothing'
 		})
-		return
 	}
 
-	// console.log("Body checks passed")
-	getHotword(req.body, res)
-	// keywordClient.emit('ready')
+	return getHotword(req.body, res)
 }
 
-export async function getHotword(audioData, res) {
+async function getHotword(audioData, res) {
 	const keywordClient = new WakewordDetector({
 		sampleRate: 16000,
 		threshold: 0
@@ -71,9 +61,7 @@ export async function getHotword(audioData, res) {
 
 	keywordClient.on('keyword', ({keyword, score, threshold, timestamp}) => {
 		console.log(`Detected "${keyword}" with score ${score} / ${threshold}`)
-		
-		res.status(200).json({ status: 'ok', service: 'Hotword service', text: 'detected'})
-		return
+		return res.status(200).json({ status: 'ok', service: 'Hotword service', text: 'detected'})
 	})
 
 	const detectionStream = new Stream.Writable({
@@ -87,7 +75,7 @@ export async function getHotword(audioData, res) {
   keywordClient.pipe(detectionStream)
 
 	const filePath = path.resolve(__dirname, './keywords', './heyGalileo1.wav');
-	const readStream = fileSystem.createReadStream(filePath);
+	const readStream = fs.createReadStream(filePath);
 	// readStream.pipe(keywordClient)
 	// console.log(readStream)
 
@@ -118,14 +106,16 @@ export async function getHotword(audioData, res) {
 	// readable.pipe(keywordClient)
 	// console.log(readable)
 
-	console.log('Hotword Service started successfully')
-	res.status(200).json({ status: 'ok', service: 'Hotword service', text: 'detected'})
+	// console.log('Hotword Service started successfully')
+	return res.status(200).json({ status: 'ok', service: 'Hotword service', text: 'detected'})
 	// res.status(200).json({ status: 'ok', service: 'Hotword service', text: 'not-present'})
 }
 
-function bufferToStream(myBuuffer) {
-    let tmp = new Stream.Duplex();
-    tmp.push(myBuuffer);
-    tmp.push(null);
-    return tmp;
-}
+// function bufferToStream(myBuffer) {
+//     let tmp = new Stream.Duplex();
+//     tmp.push(myBuffer);
+//     tmp.push(null);
+//     return tmp;
+// }
+
+module.exports = {startListening, getHotword}
