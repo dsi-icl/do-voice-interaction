@@ -50,4 +50,4 @@ services:
     build: hotword_service/
     volumes:
       - "./hotword_service/config/config.json:/app/config/config.json:ro"
-      - "./hotword_service/test:/app/test"
+      - "./hotword_service/save:/app/save"
