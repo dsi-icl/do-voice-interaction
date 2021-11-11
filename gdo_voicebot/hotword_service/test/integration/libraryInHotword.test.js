@@ -27,7 +27,7 @@ beforeEach(async () => {
         body: audioFile
     }
 
-    await hotwordService.startListening(req, res)
+    await hotwordService.startListening(req, res, true)
 })
 
 test('Library object is created successfully', async () => {

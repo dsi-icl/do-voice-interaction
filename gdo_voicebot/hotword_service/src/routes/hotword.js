@@ -1,10 +1,10 @@
 const WakewordDetector = require('@mathquis/node-personal-wakeword')
-const fs = require('fs')
+const fileSystem = require('fs')
 const Stream = require('stream')
 const path = require('path')
 const url = require('url')
 
-async function startListening(req, res) {
+async function startListening(req, res, testing=false) {
 	if (req.body === null || req.body === undefined) {
 		return res.status(400).json({
 			status: 'fail',
@@ -13,38 +13,61 @@ async function startListening(req, res) {
 		})
 	}
 
-	return getHotword(req.body, res)
+	return getHotword(req.body, res, testing)
 }
 
-async function getHotword(audioData, res) {
+async function getHotword(audioData, res, testing) {
 
 	const buffer = Buffer.from(audioData, 'base64')
-	 fileSystem.writeFile('/app/save/helloworld.wav', buffer, function (err) {
-	 	if (err) return console.log(err);
-		console.log("Saved");
-	});
+	if (!testing) {
+		fileSystem.writeFile('/app/save/helloworld.wav', buffer, function (err) {
+			if (err) return console.log(err);
+			console.log("Saved");
+		});
+	}
 
 	const keywordClient = new WakewordDetector({
 		sampleRate: 16000,
-		threshold: 0
+		threshold: 0.1
 	})
 
 	// Define keywords
-	await keywordClient.addKeyword('heyGalileo', [
-	  './keywords/heyGalileo1.wav',
-		'./keywords/heyGalileo2.wav',
-		'./keywords/heyGalileo3.wav',
-		'./keywords/heyGalileo4.wav',
-		'./keywords/heyGalileo5.wav',
-		'./keywords/heyGalileo6.wav',
-		'./keywords/heyGalileo7.wav',
-		'./keywords/heyGalileo8.wav',
-		'./keywords/heyGalileo9.wav',
-	  './keywords/heyGalileo10.wav'
-	], {
-	  disableAveraging: true,
-	  threshold: 0
-	})
+	if (!testing) {
+		await keywordClient.addKeyword('heyGalileo', [
+			'./keywords/heyGalileoLiveVlad_no_silence.wav',
+
+			'./keywords/heyGalileo1.wav',
+			'./keywords/heyGalileo2.wav',    
+			'./keywords/heyGalileo3.wav',
+			'./keywords/heyGalileo4.wav',
+			'./keywords/heyGalileo5.wav',    
+			'./keywords/heyGalileo6.wav',
+			'./keywords/heyGalileo7.wav',
+			'./keywords/heyGalileo8.wav',    
+			'./keywords/heyGalileo9.wav',
+			'./keywords/heyGalileo11.wav',
+			'./keywords/heyGalileo12.wav',    
+			'./keywords/heyGalileo22.wav', 
+			
+			'./keywords/heyGalileoIza1.wav',
+			'./keywords/heyGalileoIza2.wav',
+			'./keywords/heyGalileoIza3.wav',
+			'./keywords/heyGalileoIza7.wav',
+			'./keywords/heyGalileoIza8.wav',
+			'./keywords/heyGalileoIza9.wav',
+		], {
+			disableAveraging: false,
+			// threshold: 0.37
+			threshold: 0.3
+		})
+	} else {
+			await keywordClient.addKeyword('heyGalileo', [
+			'./keywords/heyGalileo1.wav'
+		], {
+			disableAveraging: false,
+			threshold: 0.4
+		})
+	}
 
 	keywordClient.enableKeyword('heyGalileo')
 
@@ -66,7 +89,7 @@ async function getHotword(audioData, res) {
 		console.error(err.stack)
 	})
 
-	keywordClient.on('keyword', ({keyword, score, threshold, timestamp}) => {
+	keywordClient.on('data', ({keyword, score, threshold, timestamp}) => {
 		console.log(`Detected "${keyword}" with score ${score} / ${threshold}`)
 		return res.status(200).json({ status: 'ok', service: 'Hotword service', text: 'detected'})
 	})
@@ -81,49 +104,17 @@ async function getHotword(audioData, res) {
 
   keywordClient.pipe(detectionStream)
 
-  const filePath = path.resolve(__dirname, '/app/save/', 'helloworld.wav');
+  let filePath;
+  if (!testing) {
+  	filePath = path.resolve(__dirname, '/app/save/', 'helloworld.wav');
+  } else {
+	filePath = audioData;
+  }
   const readStream = fileSystem.createReadStream(filePath);
   readStream.pipe(keywordClient)
-	// readStream.pipe(keywordClient)
-	// console.log(readStream)
 
-	// Compare the frame rate ...
-	const buffer = Buffer.from(audioData, 'base64')
-	//const readable = bufferToStream(buffer);
-
-	// const newStream = new Readable({
-	// 	read() {
-	// 	  this.push(buffer);
-	// 	},
-	// })
-	// console.log(newStream)
-	// newStream.pipe(keywordClient)
-	// var myReadableStreamBuffer = new streamBuffers.ReadableStreamBuffer({
-	// 	frequency: 10,      // in milliseconds.
-	// 	chunkSize: 2048     // in bytes.
-	// }); 
-	// myReadableStreamBuffer.put(buffer)
-	// myReadableStreamBuffer.pipe(keywordClient)
-	//myReadableStreamBuffer.stop()
-	
-
-	// const readable = new Stream.Readable()
-	// readable._read = () => {} // _read is required but you can noop it
-	// readable.push(buffer)
-	// // readable.push(null)
-	// readable.pipe(keywordClient)
-	// console.log(readable)
-
-	// console.log('Hotword Service started successfully')
-	return res.status(200).json({ status: 'ok', service: 'Hotword service', text: 'detected'})
-	// res.status(200).json({ status: 'ok', service: 'Hotword service', text: 'not-present'})
+	return res.status(200)
+	// return res.status(200).json({ status: 'ok', service: 'Hotword service', text: 'not-present'})
 }
-
-// function bufferToStream(myBuffer) {
-//     let tmp = new Stream.Duplex();
-//     tmp.push(myBuffer);
-//     tmp.push(null);
-//     return tmp;
-// }
 
 module.exports = {startListening, getHotword}
