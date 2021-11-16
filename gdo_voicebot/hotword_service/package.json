@@ -7,12 +7,17 @@
     "verbose": true,
     "transformIgnorePatterns": [
       "/node_modules/"
-    ]
+    ],
+    "globals": { 
+      "__DEV__": true, 
+      "__RCTProfileIsProfiling": false 
+    }
   },
   "scripts": {
     "start": "node -r esm ./bin/www",
     "start:dev": "nodemon -r esm ./bin/www",
-    "test": "jest --unhandled-rejections=strict"
+    "test": "jest --unhandled-rejections=strict --detectOpenHandles",
+    "build:docker": "npm run test && cd ../ && docker-compose build"
   },
   "dependencies": {
     "@mapbox/node-pre-gyp": "^1.0.5",

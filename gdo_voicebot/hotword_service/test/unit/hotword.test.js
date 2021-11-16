@@ -20,6 +20,7 @@ test('Returns 400 on empty body request', async () => {
         body: null
     }
 
+    await hotwordService.setUpKeywordClient(true)
     const response = await hotwordService.startListening(req, res, true)
 
     try {
@@ -46,6 +47,7 @@ test('Returns 200 on every body containing audio', async () => {
         body: audioFile
     }
 
+    await hotwordService.setUpKeywordClient(true)
     const response = await hotwordService.startListening(req, res, true)
 
     try {
