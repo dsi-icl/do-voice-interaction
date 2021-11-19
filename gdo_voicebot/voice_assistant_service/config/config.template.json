@@ -5,6 +5,7 @@
         "dialogManagerService":"http://localhost:5005/webhooks/rest/webhook",
         "rasaTracker":"http://localhost:5005/conversations/default/tracker",
         "rasaTrackerEvents":"http://localhost:5005/conversations/default/tracker/events",
-        "emotionRecognitionService":"http://localhost:8000/emotion-recognition"
+        "emotionRecognitionService":"http://localhost:8000/emotion-recognition",
+        "speechFillerService":"http://localhost:7000/speech-filler"
     }
 }
