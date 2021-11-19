@@ -308,3 +308,46 @@
 - turn off emotion detection
 - stop emotion recognition
 - disable emotion detection
+
+## intent:check_naturalization_status
+- are natural speech fillers enabled
+- Are natural speech fillers enabled
+- are natural speech fillers on
+- are you using natural speech fillers
+- are you using speech fillers
+- Are natural speech fillers enabled
+- Are speech fillers enabled
+- are you trying to sound more natural
+- what is the status of natural speech fillers
+- what is the status of speech fillers
+- What is the status of speech naturalization
+- Is speech naturalization enabled
+- Is speech naturalization on
+- status of speech naturalization
+- status of natural speech fillers
+- status of speech fillers
+
+## intent:turn_on_speech_naturalization
+- turn on natural speech fillers
+- Turn on speech fillers
+- Turn natural speech fillers on
+- turn speech fillers on
+- Enable natural speech fillers
+- enable speech fillers
+- enable naturalization
+- Enable naturalization of speech
+- Start using natural speech fillers
+- start speech naturalization
+- Sound more natural
+
+## intent:turn_off_speech_naturalization
+- turn off natural speech fillers
+- Turn off speech fillers
+- Turn natural speech fillers off
+- Turn speech fillers off
+- Disable natural speech fillers
+- disable naturalization
+- disable speech fillers
+- disable naturalization of speech
+- Stop using natural speech fillers
+- stop speech naturalization

@@ -75,6 +75,49 @@ class ActionTurnOffEmotionDetection(Action):
         dispatcher.utter_message(text="Emotion detection is turned off.")
         # When turning of emotion detection, reset the current emotion to n/a
         return [SlotSet("emotion_detection_enabled", False), SlotSet("emotion", "n/a")]
+
+
+class ActionTurnOnSpeechNaturalization(Action):
+
+    def name(self) -> Text:
+        return "action_turn_on_speech_naturalization"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        dispatcher.utter_message(text="Natural speech fillers have been enabled.")
+        return [SlotSet("natural_speech_fillers_enabled", True)]
+
+
+class ActionTurnOffSpeechNaturalization(Action):
+
+    def name(self) -> Text:
+        return "action_turn_off_speech_naturalization"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        dispatcher.utter_message(text="Natural speech fillers have been disabled.")
+
+        return [SlotSet("natural_speech_fillers_enabled", False)]
+
+
+class ActionCheckGrammarCorrectionEnabled(Action):
+
+    def name(self) -> Text:
+        return "action_check_naturalization_status"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        naturalization_enabled = tracker.get_slot("natural_speech_fillers_enabled")
+        if naturalization_enabled:
+            dispatcher.utter_message(text="Natural speech fillers are currently enabled")
+        else:
+            dispatcher.utter_message(text="Natural speech fillers are currently disabled")
+
+
 class ActionCheckEmotionDetectionEnabled(Action):
 
     def name(self) -> Text:
