@@ -27,6 +27,9 @@ class GraphQL:
             fetch_schema_from_transport=True,
         )
 
+    def get_url(self):
+        return self.self.config.get('url', None)
+
 
     def open_environment(self,name_environment):
         "Function that opens the chosen environment"
