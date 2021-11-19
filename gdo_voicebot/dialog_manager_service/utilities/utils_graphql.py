@@ -28,7 +28,7 @@ class GraphQL:
         )
 
     def get_url(self):
-        return self.self.config.get('url', None)
+        return self.config.get('url', None)
 
 
     def open_environment(self,name_environment):
