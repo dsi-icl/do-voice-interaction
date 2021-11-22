@@ -9,10 +9,11 @@ const keywordClient = new WakewordDetector({
 		threshold: 0.1
 })
 
-// The max number of audio files that can be saved at the same time
-const maxSavedFiles = 10
 // The current file count where we will save the audio data
 let currentFileCount = 0
+
+// Track the previous audio data so that no file is saved twice
+let prevAudioData
 
 // Check that the config file exists
 if (!fileSystem.existsSync('./config/config.json')) {
@@ -40,6 +41,7 @@ async function setUpKeywordClient(testing) {
 	}
 
 	keywordClient.enableKeyword(global.config.keyword.name)
+	keywordClient.setMaxListeners(3 * global.config.utils.maxSavedFiles)
 }
 
 // Function which checks the arguements received and if so, it passes them forward to the getHotword method
@@ -52,17 +54,26 @@ async function startListening(req, res, testing=false) {
 		})
 	}
 
-	return getHotword(req.body, res, testing)
+	getHotword(req.body, res, testing)
 }
 
 // Function which listens for the hotword in the given audio data using the third party library
 async function getHotword(audioData, res, testing) {
+
+	// Discard the audio data if it has already been saved
+	if (audioData === prevAudioData) {
+		return res.status(200)
+	}
+
+	// Save the audio data as prevAudioData
+	prevAudioData = audioData
+
 	// Create a buffer from the audio data
 	const buffer = Buffer.from(audioData, 'base64')
 
 	// Get the file which should contain this data and update the currentFileCount
 	const fileName = 'recording' + currentFileCount + '.wav'
-	currentFileCount = (currentFileCount + 1) % maxSavedFiles
+	currentFileCount = (currentFileCount + 1) % global.config.utils.maxSavedFiles
 
 	// Save the buffer into the file (not necessary if we are testing)
 	if (!testing) {
@@ -77,16 +88,6 @@ async function getHotword(audioData, res, testing) {
 		console.log('Listening for hotword...')
 	})
 
-	// The detector will emit a "vad-silence" event when no voice is heard
-  keywordClient.on('vad-silence', () => {
-    console.log('Hearing silence...')
-  })
-
-  // The detector will emit a "vad-voice" event when it hears a voice
-  keywordClient.on('vad-voice', () => {
-    console.log('Hearing voices...')
-  })
-
 	keywordClient.on('error', err => {
 		console.error(err.stack)
 	})
@@ -94,7 +95,10 @@ async function getHotword(audioData, res, testing) {
 	// When the keyword is detected, return the correct status and set the test to 'detected'
 	keywordClient.on('data', ({keyword, score, threshold, timestamp}) => {
 		console.log(`Detected "${keyword}" with score ${score} / ${threshold}`)
-		return res.status(200).json({ status: 'ok', service: 'Hotword service', text: 'detected'})
+		console.log('Removing all listeners ' + fileName)
+		keywordClient.removeAllListeners()
+		res.status(200).json({ status: 'ok', service: 'Hotword service', text: 'detected'})
+		return
 	})
 
 	// Create a new detection stream for the keyword client and pipe it
@@ -117,7 +121,14 @@ async function getHotword(audioData, res, testing) {
   const readStream = fileSystem.createReadStream(filePath);
   readStream.pipe(keywordClient)
 
-	return res.status(200)
+	// Destroy the recorder and detector after 2s
+  setTimeout(() => {
+    readStream.unpipe(keywordClient)
+    readStream.removeAllListeners()
+    readStream.destroy()
+
+    keywordClient.removeAllListeners()
+  }, 1000)
 }
 
 module.exports = {setUpKeywordClient, startListening, getHotword}

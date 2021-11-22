@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Button, Icon} from "semantic-ui-react";
 
-import {changeStatus, foundHotword} from "../reducers/media";
+import {changeStatus, hotwordResponse, foundHotword} from "../reducers/media";
 import {submitHotwordRecording, submitRecording} from "../reducers/socket";
 import {setupAudioRecorder, setupHark} from "../util";
 import {PlayerStatus} from "../reducers/const";
@@ -23,11 +23,15 @@ class SimpleRecorder extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.detectedHotword != this.props.detectedHotword) {
+        if (prevProps.receivedHotwordRes != this.props.receivedHotwordRes) {
             if (this.props.detectedHotword) {
                 this.onRecordClick()
                 this.props.dispatch(foundHotword(false));
+            } else {
+                this.listenForHotword()
             }
+
+            this.props.dispatch(hotwordResponse(false));
         }
     }
 
@@ -73,6 +77,7 @@ class SimpleRecorder extends React.Component {
                 });
             });
         }
+
     }
 
     onRecordClick() {
@@ -157,6 +162,6 @@ SimpleRecorder.propTypes = {
     dispatch: PropTypes.func
 };
 
-const mapStateToProps = state => ({status: state.media.status, detectedHotword: state.media.detectedHotword});
+const mapStateToProps = state => ({status: state.media.status, receivedHotwordRes: state.media.receivedHotwordRes, detectedHotword: state.media.detectedHotword});
 
 export default connect(mapStateToProps)(SimpleRecorder);

@@ -2,7 +2,7 @@ import io from "socket.io-client";
 
 import {v4 as uuidv4} from "uuid";
 
-import {addResponse, foundHotword, changeStatus} from "./media";
+import {addResponse, hotwordResponse, foundHotword, changeStatus} from "./media";
 import {PlayerStatus} from "./const";
 
 export function setupSocket(backendUrl, dispatch) {
@@ -21,6 +21,9 @@ export function setupSocket(backendUrl, dispatch) {
                 contentType: data.audio.contentType
             }
         }));
+    });
+    window.socket.on("received-hotword-response", () => {
+        dispatch(hotwordResponse({value: true}))
     });
     window.socket.on("hotword", () => {
         dispatch(foundHotword({value: true}))

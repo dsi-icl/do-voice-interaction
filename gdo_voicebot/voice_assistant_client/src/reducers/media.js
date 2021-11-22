@@ -7,6 +7,7 @@ export const media = createSlice({
         status: PlayerStatus.IDLE,
         responseList: [],
         audio: null,
+        receivedHotwordRes: false,
         detectedHotword: false
     },
     reducers: {
@@ -27,6 +28,9 @@ export const media = createSlice({
                 state.status = PlayerStatus.IDLE;
             }
         },
+        hotwordResponse: (state, action) => {
+            state.receivedHotwordRes = action.payload.value
+        },
         foundHotword: (state, action) => {
             state.detectedHotword = action.payload.value
         },
@@ -37,7 +41,7 @@ export const media = createSlice({
     },
 });
 
-export const {changeStatus, addResponse, foundHotword, clearAudio} = media.actions;
+export const {changeStatus, addResponse, hotwordResponse, foundHotword, clearAudio} = media.actions;
 
 export const selectStatus = state => state.media.status;
 export const selectResponses = state => state.media.responseList;

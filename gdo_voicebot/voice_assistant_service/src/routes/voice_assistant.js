@@ -107,11 +107,22 @@ export async function processAudioHotword (client, request) {
     const error = { status: 'fail', service: 'Voice-assistant service', text: 'The record format is wrong' }
     await errorProcess(client, error, '', request)
   } else {
-    const hotwordResponse = await postData(global.config.services.hotwordService, request.audio.data, 'Hotword Service')
-    console.log('hotwordresponse', hotwordResponse)
+    // const hotwordResponse = await postData(global.config.services.hotwordService, request.audio.data, 'Hotword Service')
+    // postData(global.config.services.hotwordService, request.audio.data, 'Hotword Service')
 
-    if (hotwordResponse.data.text === 'detected') {
+    const p1 = new Promise((resolve, reject) => {
+      resolve(postData(global.config.services.hotwordService, request.audio.data, 'Hotword Service'))
+    })
+    const p2 = new Promise((resolve, reject) => setTimeout(() => resolve('not-present'), 2000))
+
+    const hotwordResponse = await Promise.race([p1, p2])
+
+    client.emit('received-hotword-response', {})
+
+    if (hotwordResponse !== 'not-present') {
+      console.log('Hotword present')
       client.emit('hotword', {})
+      // processAudioCommand(client, request)
     }
   }
 }
