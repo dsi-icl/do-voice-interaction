@@ -5,11 +5,16 @@ import pyinflect
 
 nlp = spacy.load("en_core_web_sm")
 
-# possessive adjectives used in the English language
+# Possessive adjectives used in the English language
 poss_adj = ['my', 'your', 'our', 'its', 'her', 'his', 'their',
             'My', 'Your', 'Our', 'Its', 'Her', 'His', 'Their']
 
 
+# Enum for the parts of speech that are double checked
+# by the grammar correction service
+# ADPOS: adpositions - has the correct adposition been used / was an adposition used
+# DETERMINER: determiners - have multiple determiners been used / was a determiner missed
+# VERB: verbs - has the correct inflection of the verb been used
 class GrammarParts(Enum):
     ADPOS = 1
     DETERMINER = 2
@@ -77,20 +82,22 @@ def correct_adpositions(text_data, pos_original):
 
     if adp_ids:
         # Ensure that correct adposition was used in sentence
+        # by using BERT to mask and predict the words at adp_ids
         corrected_sentence, corrections = predict_corrections(text_data, adp_ids)
         pos_corrected = nlp(corrected_sentence)
 
         for i, adp_id in enumerate(adp_ids):
+            # Take corrections in the case that BERT has suggested a new adposition
             if pos_corrected[adp_id].pos_ != 'ADP':
                 corrected_sentence = corrected_sentence.replace(pos_corrected[adp_id].text,
                                                                 pos_original[adp_id].text, 1)
 
     # Check that an adposition was not missed by masking spaces
     sent = corrected_sentence.strip().split()
-
     i = 0
 
     while i < len(sent):
+        # Add the placeholder word "adposition" to be masked by BERT
         new_sent = sent[:]
         new_sent[i] = "adposition {}".format(new_sent[i])
 
@@ -98,6 +105,7 @@ def correct_adpositions(text_data, pos_original):
         pos_predicted = nlp(predicted_sentence)
 
         if pos_predicted[i].pos_ == 'ADP':
+            # Correct the sentence in the case that an adposition was indeed missed
             sent = corrected_sentence.strip().split()
             new_sent = sent[:i] + [predicted_sentence.strip().split()[i]] + sent[i:]
             corrected_sentence = " ".join(new_sent[:])
@@ -113,27 +121,32 @@ def correct_determiners(text_data, pos_original):
     corrected_sentence = text_data
 
     for noun_phrase in pos_original.noun_chunks:
+        # Check all noun phrases in the sentence for grammatical errors
+        # when using determiners
         start_id = noun_phrase.start
         phrase_length = noun_phrase.end - start_id
 
         if phrase_length > 1 or (phrase_length == 1 and noun_phrase[0].pos_ == 'NOUN'):
             det_ids = get_ids(noun_phrase, GrammarParts.DETERMINER)
             if not det_ids:
-                # there are no determiners in the noun phrase
+                # There are no determiners in the noun phrase
+                # Mask the beginning of the noun phrase to get a prediction for determiner
                 modified_sent = text_data.replace(noun_phrase.text,
                                                   "determiner {}".format(noun_phrase.text), 1)
                 predicted_sentence, predicted_corrections = predict_corrections(modified_sent, [start_id])
 
                 # Case where BERT suggests something other than a determiner/possessive adj
                 pos_predicted = nlp(predicted_sentence)
-                if pos_predicted[start_id].pos_ == 'DET' or pos_predicted[start_id].pos_ == 'PRON' or pos_predicted[start_id].text in poss_adj:
+                if pos_predicted[start_id].pos_ == 'DET' or pos_predicted[start_id].pos_ == 'PRON' \
+                        or pos_predicted[start_id].text in poss_adj:
                     sent = predicted_sentence.strip().split()
                     new_sent = sent[:]
                     corrected_sentence = corrected_sentence.replace(noun_phrase.text,
                                                                     "{} {}".format(new_sent[start_id],
                                                                                    noun_phrase.text), 1)
             if len(det_ids) == 1:
-                # there is only one determiner
+                # There is only one determiner
+                # Ensure that there isn't a better suggestion for a determiner
                 predicted_sentence, predicted_corrections = predict_corrections(text_data, det_ids)
                 pos_predicted = nlp(predicted_sentence)
 
@@ -141,7 +154,8 @@ def correct_determiners(text_data, pos_original):
                     corrected_sentence = predicted_sentence
 
             if len(det_ids) > 1:
-                # there are multiple determiners in a noun phrase
+                # There are multiple determiners in a noun phrase
+                # Remove all but the first determiner in the phrase
                 sent = noun_phrase.text.strip().split()
                 new_sent = sent[:]
 
@@ -158,19 +172,19 @@ def correct_determiners(text_data, pos_original):
 
 
 def correct_sentence(text_data):
-    # perform parts of speech tagging and correct the verbs
+    # Perform parts of speech tagging and correct the verbs
     doc = nlp(text_data)
     predicted_sentence_v, corrections_v = correct_verbs(text_data, doc)
 
-    # perform parts of speech tagging and correct the adpositions
+    # Perform parts of speech tagging and correct the adpositions
     doc = nlp(predicted_sentence_v)
     predicted_sentence_adp, corrections_adp = correct_adpositions(predicted_sentence_v, doc)
 
-    # perform parts of speech tagging and correct the determiners
+    # Perform parts of speech tagging and correct the determiners
     doc = nlp(predicted_sentence_adp)
     predicted_sentence_det = correct_determiners(predicted_sentence_adp, doc)
 
-    # combine indices of all corrections in one list, remove duplicates and sort
+    # Combine indices of all corrections in one list, remove duplicates and sort
     corrections = corrections_v + corrections_adp
 
     return predicted_sentence_det, corrections

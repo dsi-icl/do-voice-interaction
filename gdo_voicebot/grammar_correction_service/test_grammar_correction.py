@@ -4,6 +4,7 @@ from grammar_utils import *
 from run import *
 import csv
 
+
 class TestGrammar(unittest.TestCase):
 
     def __valid_sentences_test(self):
@@ -26,7 +27,6 @@ class TestGrammar(unittest.TestCase):
 
         sentences.close()
         return true_positives, false_negatives
-
 
     def __invalid_sentences_test(self):
         sentences = open("tests/testing.tsv", "r")
@@ -76,7 +76,8 @@ class TestGrammar(unittest.TestCase):
         print(false_corrections)
 
         if (true_positives + true_negatives + false_positives + false_negatives) != 0:
-            new_accuracy = (true_positives + true_negatives) / (true_positives + true_negatives + false_positives + false_negatives)
+            new_accuracy = (true_positives + true_negatives) / (
+                        true_positives + true_negatives + false_positives + false_negatives)
         else:
             new_accuracy = 0
 
@@ -89,7 +90,7 @@ class TestGrammar(unittest.TestCase):
             new_recall = true_positives / (true_positives + false_negatives)
         else:
             new_recall = 0
-        
+
         if (true_corrections + false_corrections) != 0:
             new_correction_score = true_corrections / (true_corrections + false_corrections)
         else:
@@ -121,13 +122,17 @@ class TestGrammar(unittest.TestCase):
             metrics.write(str(new_correction_score) + '\n')
         else:
             metrics.write(str(prev_correction_score) + '\n')
-        
+
         metrics.close()
 
         self.assertGreaterEqual(new_accuracy, prev_accuracy, "New accuracy is lower than previously achieved accuracy")
-        self.assertGreaterEqual(new_precision, prev_precision, "New precision is lower than previously achieved precision")
+        self.assertGreaterEqual(new_precision, prev_precision,
+                                "New precision is lower than previously achieved precision")
         self.assertGreaterEqual(new_recall, prev_recall, "New recall is lower than previously achieved recall")
-        self.assertGreaterEqual(new_correction_score, prev_correction_score, "New grammar correction score is lower than previously achieved grammar correction score")
+        self.assertGreaterEqual(new_correction_score, prev_correction_score,
+                                "New grammar correction score is lower than previously achieved grammar correction "
+                                "score")
+
 
 if __name__ == '__main__':
     unittest.main()

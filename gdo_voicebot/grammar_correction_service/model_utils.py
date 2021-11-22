@@ -7,32 +7,34 @@ from difflib import SequenceMatcher
 import os.path
 import requests
 
+
 # credit: https://stackoverflow.com/a/39225039
 def download_file_from_google_drive(id, destination):
     print("Trying to fetch {}".format(destination))
 
     def get_confirm_token(response):
         for key, value in response.cookies.items():
-          if key.startswith('download_warning'):
-            return value
+            if key.startswith('download_warning'):
+                return value
         return None
 
     def save_response_content(response, destination):
         CHUNK_SIZE = 32768
         with open(destination, "wb") as f:
-          for chunk in progress_bar(response.iter_content(CHUNK_SIZE)):
-            if chunk: # filter out keep-alive new chunks
-              f.write(chunk)
+            for chunk in progress_bar(response.iter_content(CHUNK_SIZE)):
+                if chunk:  # filter out keep-alive new chunks
+                    f.write(chunk)
 
     URL = "https://docs.google.com/uc?export=download"
     session = requests.Session()
-    response = session.get(URL, params = { 'id' : id }, stream = True)
+    response = session.get(URL, params={'id': id}, stream=True)
     token = get_confirm_token(response)
     if token:
-        params = { 'id' : id, 'confirm' : token }
-        response = session.get(URL, params = params, stream = True)
+        params = {'id': id, 'confirm': token}
+        response = session.get(URL, params=params, stream=True)
 
     save_response_content(response, destination)
+
 
 def progress_bar(some_iter):
     try:
@@ -40,19 +42,20 @@ def progress_bar(some_iter):
         return tqdm(some_iter)
     except ModuleNotFoundError:
         return some_iter
-# --
+
 
 def load_grammar_checker_model():
-    # download_file_from_google_drive('1M_7GJVIVEHVp2ImyHBG2xk2aw21HtHif', './bert-based-uncased-GDO-trained.pth')
-    if(not os.path.isfile('./bert-based-uncased-GDO-lang-8-cola-trained.pth')):
-         download_file_from_google_drive('1sPfnUFnzSxbGA9nxvGn85Eds8wU_JyuD', './bert-based-uncased-GDO-lang-8-cola-trained.pth')
+    if (not os.path.isfile('./bert-based-uncased-GDO-lang-8-cola-trained.pth')):
+        download_file_from_google_drive('1sPfnUFnzSxbGA9nxvGn85Eds8wU_JyuD',
+                                        './bert-based-uncased-GDO-lang-8-cola-trained.pth')
 
-    grammar_checker =  BertForSequenceClassification.from_pretrained('bert-base-uncased', num_labels=2)
+    grammar_checker = BertForSequenceClassification.from_pretrained('bert-base-uncased', num_labels=2)
 
     device = torch.device('cpu')
     grammar_checker.load_state_dict(torch.load('bert-based-uncased-GDO-lang-8-cola-trained.pth', map_location=device))
     grammar_checker.eval()
     return grammar_checker
+
 
 def load_grammar_corrector_model():
     grammar_corrector = BertForMaskedLM.from_pretrained('bert-large-uncased')
@@ -60,22 +63,23 @@ def load_grammar_corrector_model():
 
     return grammar_corrector
 
+
 def create_tokenizer():
     return BertTokenizer.from_pretrained('bert-base-uncased')
 
+
 def create_mask_set(sentence, mask_id):
-  sent = sentence.strip().split()
-  new_sent = sent[:]
-  if mask_id >= len(new_sent):
-      print(new_sent)
-      print(mask_id)
-  new_sent[mask_id] = '[MASK]'
-  return '[CLS] ' + " ".join(new_sent) + ' [SEP]'
+    sent = sentence.strip().split()
+    new_sent = sent[:]
+    if mask_id >= len(new_sent):
+        print(new_sent)
+        print(mask_id)
+    new_sent[mask_id] = '[MASK]'
+    return '[CLS] ' + " ".join(new_sent) + ' [SEP]'
 
 
 def check_GE(sents):
-
-    # Add tokens to begining and end of sentences
+    # Add tokens to beginning and end of sentences
     sentences = ["[CLS] " + sentence + " [SEP]" for sentence in sents]
     labels = [0]
 
@@ -89,15 +93,15 @@ def check_GE(sents):
 
     # Pad input tokens
     input_ids = pad_sequences(
-      [tokenizer.convert_tokens_to_ids(txt) for txt in tokenized_texts],
-      maxlen=MAX_LEN, dtype="long", truncating="post", padding="post")
+        [tokenizer.convert_tokens_to_ids(txt) for txt in tokenized_texts],
+        maxlen=MAX_LEN, dtype="long", truncating="post", padding="post")
 
     # Index Numbers and Padding
     input_ids = [tokenizer.convert_tokens_to_ids(x) for x in tokenized_texts]
 
     # Pad sentences
     input_ids = pad_sequences(input_ids, maxlen=MAX_LEN,
-                            dtype ="long", truncating="post",padding ="post")
+                              dtype="long", truncating="post", padding="post")
 
     # Create attention masks
     attention_masks = []
@@ -113,39 +117,37 @@ def check_GE(sents):
     with torch.no_grad():
         # Forward pass, calculate logit predictions
         logits = checker_model(prediction_inputs, token_type_ids=None,
-                          attention_mask=prediction_masks)
+                               attention_mask=prediction_masks)
 
     # Move logits and labels to CPU
     logits = logits.detach().cpu().numpy()
-    #label_ids = b_labels.to("cpu").numpy()
+    # label_ids = b_labels.to("cpu").numpy()
 
     # Store predictions and true labels
     predictions.append(logits)
-    #true_labels.append(label_ids)
+    # true_labels.append(label_ids)
 
-    #print(predictions)
+    # print(predictions)
     flat_predictions = [item for sublist in predictions for item in sublist]
 
-    #print(flat_predictions)
+    # print(flat_predictions)
     prob_vals = flat_predictions
     flat_predictions = np.argmax(flat_predictions, axis=1).flatten()
-    #flat_true_labels = [item for sublist in true_labels for item in sublist]
+    # flat_true_labels = [item for sublist in true_labels for item in sublist]
 
-    #print(flat_predictions)
+    # print(flat_predictions)
 
     predictions = []
     for i in range(len(prob_vals)):
         exps = [np.exp(i) for i in prob_vals[i]]
         sum_of_exps = sum(exps)
-        softmax = [j/sum_of_exps for j in exps]
-        predictions.append(softmax[1]*100)
+        softmax = [j / sum_of_exps for j in exps]
+        predictions.append(softmax[1] * 100)
 
     return predictions
 
-def check_grammar(original_sentence, masked_sentence):
-    new_sentences = []
 
-    # what is the tokenized value of [MASK]
+def check_grammar(original_sentence, masked_sentence):
     text = '[MASK]'
     tokenized_text = tokenizer.tokenize(text)
     mask_token = tokenizer.convert_tokens_to_ids(tokenized_text)[0]
@@ -176,7 +178,7 @@ def check_grammar(original_sentence, masked_sentence):
 
     text[mask_index] = predicted_token
     original_word = original_sentence.strip().split()[mask_index - 1]
-        
+
     text.remove('[SEP]')
     text.remove('[CLS]')
     new_sent = " ".join(text)
@@ -186,20 +188,21 @@ def check_grammar(original_sentence, masked_sentence):
 
     return new_sent, False
 
-# TODO
-# verbs checking - use Spacy to check the tense
 
 def predict_corrections(original_sentence, mask_ids):
+    # Check grammatical correctness by masking each word
+    # at position mask_id from list of mask_ids
     corrections = []
     sentence = original_sentence
 
     for i in range(len(mask_ids)):
         masked_sentence = create_mask_set(sentence, mask_ids[i])
         sentence, correct = check_grammar(sentence, masked_sentence)
-        if(not correct):
+        if not correct:
             corrections.append(mask_ids[i])
 
     return sentence, corrections
+
 
 # Load pre-trained model tokenizer
 tokenizer = create_tokenizer()

@@ -16,9 +16,9 @@ def perform_grammar_correction():
     predicted_sentence = text_data
     corrections = []
 
-    # check grammatical correctness of command
-    # if the confidence with which the sentence is correct is < 0.96
-    # then perform sentence correction
+    # Check grammatical correctness of command
+    # If the confidence with which the sentence is correct is < GRAMMATICALLY_CORRECT_CONFIDENCE
+    # Then perform sentence correction
     predictions = check_GE([text_data])
     if predictions[0] < GRAMMATICALLY_CORRECT_CONFIDENCE:
         predicted_sentence, corrections = correct_sentence(text_data)
@@ -32,6 +32,7 @@ def perform_grammar_correction():
     )
 
     return response
+
 
 def preprocess(text):
     text = text.replace("don't", "do not")
@@ -57,6 +58,7 @@ def preprocess(text):
     text = text.replace("doesn't", "does not")
 
     return text
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000, debug=False)  # set debug=False for production
