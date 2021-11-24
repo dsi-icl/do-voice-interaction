@@ -2,7 +2,7 @@ from flask import Flask, request
 import json
 from grammar_utils import *
 
-GRAMMATICALLY_CORRECT_CONFIDENCE = 70
+INCORRECT = 0
 
 app = Flask(__name__)
 
@@ -20,7 +20,7 @@ def perform_grammar_correction():
     # If the confidence with which the sentence is correct is < GRAMMATICALLY_CORRECT_CONFIDENCE
     # Then perform sentence correction
     predictions = check_GE([text_data])
-    if predictions[0] < GRAMMATICALLY_CORRECT_CONFIDENCE:
+    if predictions[0] == INCORRECT:
         predicted_sentence, corrections = correct_sentence(text_data)
 
     data = {'status': 'ok', 'service': 'grammar correction service', 'response': corrections,

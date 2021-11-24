@@ -7,6 +7,21 @@ from difflib import SequenceMatcher
 import os.path
 import requests
 
+class CustomBERTModel(torch.nn.Module):
+    def __init__(self):
+          super(CustomBERTModel, self).__init__()
+          self.bert = BertModel.from_pretrained('bert-base-uncased')
+          ### New layer:
+          self.linear = nn.Linear(768, 1)
+
+    def forward(self, input_ids):
+          outputs = self.bert(input_ids, token_type_ids=None)
+          last_hidden_states = outputs.last_hidden_state
+
+          # last_hidden_states has the following shape: (batch_size, sequence_length, hidden_size)
+          linear_output = self.linear(last_hidden_states[:,0,:])
+
+          return linear_output
 
 # credit: https://stackoverflow.com/a/39225039
 def download_file_from_google_drive(id, destination):
@@ -49,11 +64,11 @@ def load_grammar_checker_model():
         download_file_from_google_drive('1sPfnUFnzSxbGA9nxvGn85Eds8wU_JyuD',
                                         './bert-based-uncased-GDO-lang-8-cola-trained.pth')
 
-    grammar_checker = BertForSequenceClassification.from_pretrained('bert-base-uncased', num_labels=2)
-
     device = torch.device('cpu')
+    grammar_checker = CustomBERTModel()
     grammar_checker.load_state_dict(torch.load('bert-based-uncased-GDO-lang-8-cola-trained.pth', map_location=device))
     grammar_checker.eval()
+
     return grammar_checker
 
 
@@ -79,70 +94,27 @@ def create_mask_set(sentence, mask_id):
 
 
 def check_GE(sents):
-    # Add tokens to beginning and end of sentences
-    sentences = ["[CLS] " + sentence + " [SEP]" for sentence in sents]
-    labels = [0]
-
-    tokenized_texts = [tokenizer.tokenize(sent) for sent in sentences]
+    tokenized_texts = [tokenizer.tokenize(str(sent)) for sent in sents]
 
     # Padding Sentences
-    MAX_LEN = 128
+    padded_sequence = [tokenizer.convert_tokens_to_ids(txt) for txt in tokenized_texts]
+    max_len = max([len(txt) for txt in padded_sequence])
 
-    predictions = []
-    true_labels = []
-
-    # Pad input tokens
-    input_ids = pad_sequences(
-        [tokenizer.convert_tokens_to_ids(txt) for txt in tokenized_texts],
-        maxlen=MAX_LEN, dtype="long", truncating="post", padding="post")
-
-    # Index Numbers and Padding
-    input_ids = [tokenizer.convert_tokens_to_ids(x) for x in tokenized_texts]
-
-    # Pad sentences
-    input_ids = pad_sequences(input_ids, maxlen=MAX_LEN,
-                              dtype="long", truncating="post", padding="post")
-
-    # Create attention masks
-    attention_masks = []
-
-    for seq in input_ids:
-        seq_mask = [float(i > 0) for i in seq]
-        attention_masks.append(seq_mask)
+    # Pad our input tokens
+    input_ids = pad_sequences(padded_sequence, maxlen=max_len, dtype="long",
+                              truncating="post", padding="post")
 
     prediction_inputs = torch.tensor(input_ids)
-    prediction_masks = torch.tensor(attention_masks)
     prediction_labels = torch.tensor(labels)
 
     with torch.no_grad():
         # Forward pass, calculate logit predictions
-        logits = checker_model(prediction_inputs, token_type_ids=None,
-                               attention_mask=prediction_masks)
+        logits = checker_model(prediction_inputs, token_type_ids=None)
 
     # Move logits and labels to CPU
     logits = logits.detach().cpu().numpy()
-    # label_ids = b_labels.to("cpu").numpy()
 
-    # Store predictions and true labels
-    predictions.append(logits)
-    # true_labels.append(label_ids)
-
-    # print(predictions)
-    flat_predictions = [item for sublist in predictions for item in sublist]
-
-    # print(flat_predictions)
-    prob_vals = flat_predictions
-    flat_predictions = np.argmax(flat_predictions, axis=1).flatten()
-    # flat_true_labels = [item for sublist in true_labels for item in sublist]
-
-    # print(flat_predictions)
-
-    predictions = []
-    for i in range(len(prob_vals)):
-        exps = [np.exp(i) for i in prob_vals[i]]
-        sum_of_exps = sum(exps)
-        softmax = [j / sum_of_exps for j in exps]
-        predictions.append(softmax[1] * 100)
+    predictions = torch.round(torch.sigmoid(y_pred))
 
     return predictions
 
