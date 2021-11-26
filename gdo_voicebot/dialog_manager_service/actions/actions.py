@@ -4,7 +4,7 @@
 # See this guide on how to implement these action:
 # https://rasa.com/docs/rasa/core/actions/#custom-actions/
 
-
+import logging
 from typing import Any, Text, Dict, List
 
 from rasa_sdk import Action, Tracker
@@ -16,12 +16,15 @@ from functools import lru_cache
 from utilities.utils_graphql import GraphQL
 from utilities.utils_actions import *
 
+logger = logging.getLogger(__name__)
+
 try:
-    print('Connection to graphql')
     my_graphQL = GraphQL('./config/config.yml')
+    logger.info('Connection to graphql: ' + my_graphQL.get_url())
 except Exception as e:
+    logger.error(e)
     raise e
-    print(e)
+
 
 class ActionRespondAboutToday(Action):
 

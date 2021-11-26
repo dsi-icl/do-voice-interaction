@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import {Feed, Icon} from "semantic-ui-react";
 import {useSelector} from "react-redux";
 
-import ReactHtmlParser from "react-html-parser";
+import parse from "html-react-parser";
 
 import {selectResponses} from "../reducers/media";
 import {replaceHtmlElements} from "../util";
@@ -24,10 +24,10 @@ const FeedItem = ({date, command, emotion, response, error}) => <Feed.Event>
     </Feed.Label>
     <Feed.Content>
         <Feed.Date className="feed-text">{date}</Feed.Date>
-        <Feed.Summary className="feed-text">You: {ReactHtmlParser(replaceHtmlElements(command))}</Feed.Summary>
-        <Feed.Summary className="feed-text">Emotion Detected: {ReactHtmlParser(replaceHtmlElements(emotion))}</Feed.Summary>
-        {response && <Feed.Extra text className="feed-text">Assistant: {ReactHtmlParser(replaceHtmlElements(response))}</Feed.Extra>}
-        {error && <Feed.Extra text className="feed-text-error">Error: {ReactHtmlParser(replaceHtmlElements(error))}</Feed.Extra>}
+        <Feed.Summary className="feed-text">You: {parse(replaceHtmlElements(command))}</Feed.Summary>
+        <Feed.Summary className="feed-text">Emotion Detected: {parse(replaceHtmlElements(emotion))}</Feed.Summary>
+        {response && <Feed.Extra text className="feed-text">Assistant: {parse(replaceHtmlElements(response))}</Feed.Extra>}
+        {error && <Feed.Extra text className="feed-text-error">Error: {parse(replaceHtmlElements(error))}</Feed.Extra>}
     </Feed.Content>
 </Feed.Event>;
 

@@ -12,11 +12,11 @@ import fs from 'fs'
  * @import { loadDeepSpeechModel, executeSpeechToTextRequest } from "./routes/stt.js"
  * @see {@link ./routes/stt.js|stt.js}
  */
-import { executeSpeechToTextRequest, loadDeepSpeechModel } from './routes/stt.js'
+import {executeSpeechToTextRequest, loadDeepSpeechModel} from './routes/stt.js'
 
 if (!fs.existsSync('./config/config.json')) {
-  console.error('Could not find the configuration file: \'./config/config.json\'')
-  process.exit(1)
+    console.error('Could not find the configuration file: \'./config/config.json\'')
+    process.exit(1)
 }
 
 global.config = JSON.parse(fs.readFileSync('./config/config.json').toString())
@@ -26,18 +26,18 @@ const app = express()
 // Generate the deepspeech model and if it fails, returns the error to the server console
 let model
 try {
-  model = loadDeepSpeechModel()
+    model = loadDeepSpeechModel()
 } catch (error) {
-  console.error('Error during deepspeech model construction')
-  console.error(error)
-  process.exit(2)
+    console.error('Error during deepspeech model construction')
+    console.error(error)
+    process.exit(2)
 }
 
 app.use(cors())
 app.use(logger('dev'))
 // Has been added to enable audio blob transfers
-app.use(express.text({ limit: '50mb' }))
-app.use(express.urlencoded({ extended: false }))
+app.use(express.text({limit: '50mb'}))
+app.use(express.urlencoded({extended: false}))
 
 /**
  * Get service status
@@ -54,6 +54,8 @@ app.get('/api/status', (req, res) => res.status(200).send('Service is running'))
  * @route {POST} /api/stt
  * @headerparam Content-type must be text/plain
  */
-app.post('/api/stt', (req, res) => { executeSpeechToTextRequest(req, res, model) })
+app.post('/api/stt', (req, res) => {
+    executeSpeechToTextRequest(req, res, model)
+})
 
 export default app
