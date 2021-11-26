@@ -3,18 +3,6 @@ const fileSystem = require('fs')
 const Stream = require('stream')
 const path = require('path')
 
-// Create the keyword client from the Node-Personal-Wakeword third-party library
-const keywordClient = new WakewordDetector({
-		sampleRate: 16000,
-		threshold: 0.1
-})
-
-// The current file count where we will save the audio data
-let currentFileCount = 0
-
-// Track the previous audio data so that no file is saved twice
-let prevAudioData
-
 // Check that the config file exists
 if (!fileSystem.existsSync('./config/config.json')) {
   console.error('Could not find the configuration file: \'./config/config.json\'')
@@ -23,6 +11,18 @@ if (!fileSystem.existsSync('./config/config.json')) {
 
 // Get the config variables
 global.config = JSON.parse(fileSystem.readFileSync('./config/config.json').toString())
+
+// Create the keyword client from the Node-Personal-Wakeword third-party library
+const keywordClient = new WakewordDetector({
+	sampleRate: 16000,
+	threshold: 0.1
+})
+
+// The current file count where we will save the audio data
+let currentFileCount = 0
+
+// Track the previous audio data so that no file is saved twice
+let prevAudioData
 
 // Function that sets up the keyword client and which is called when the service starts only
 async function setUpKeywordClient(testing) {

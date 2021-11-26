@@ -107,9 +107,6 @@ export async function processAudioHotword (client, request) {
     const error = { status: 'fail', service: 'Voice-assistant service', text: 'The record format is wrong' }
     await errorProcess(client, error, '', request)
   } else {
-    // const hotwordResponse = await postData(global.config.services.hotwordService, request.audio.data, 'Hotword Service')
-    // postData(global.config.services.hotwordService, request.audio.data, 'Hotword Service')
-
     const p1 = new Promise((resolve, reject) => {
       resolve(postData(global.config.services.hotwordService, request.audio.data, 'Hotword Service'))
     })
