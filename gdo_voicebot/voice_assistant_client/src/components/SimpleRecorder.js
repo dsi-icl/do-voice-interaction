@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Button, Icon} from "semantic-ui-react";
 
-import {changeStatus} from "../reducers/media";
-import {submitRecording} from "../reducers/socket";
+import {changeStatus, hotwordResponse, foundHotword} from "../reducers/media";
+import {submitHotwordRecording, submitRecording} from "../reducers/socket";
 import {setupAudioRecorder, setupHark} from "../util";
 import {PlayerStatus} from "../reducers/const";
 
@@ -15,7 +15,69 @@ class SimpleRecorder extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {recorder: null, hark: null};
+        this.state = {recorder: null, hark: null, backgroundRecorder: null, backgroundHark: null};
+    }
+
+    componentDidMount() {
+        this.listenForHotword()
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.receivedHotwordRes != this.props.receivedHotwordRes) {
+            if (this.props.detectedHotword) {
+                this.onRecordClick()
+                this.props.dispatch(foundHotword(false));
+            } else {
+                this.listenForHotword()
+            }
+
+            this.props.dispatch(hotwordResponse(false));
+        }
+    }
+
+    listenForHotword() {
+        if (this.props.status === PlayerStatus.IDLE) {
+            if (this.state.backgroundRecorder) {
+                this.state.backgroundRecorder.destroy();
+                this.setState({backgroundRecorder: null});
+            }
+
+            setupAudioRecorder().then(backgroundRecorder => {
+                this.setState({backgroundRecorder});
+                backgroundRecorder.clearRecordedData();
+                backgroundRecorder.startRecording();
+            });
+
+            setupHark().then(backgroundHark => {
+                this.setState({backgroundHark});
+                backgroundHark.on("speaking", () => {
+                    console.log("Hotword speaking");
+                });
+
+                backgroundHark.on("stopped_speaking", () => {
+                    console.log("Hotword stopped talking");
+                    this.sendHotwordRecording()
+                });
+            });
+        }
+    }
+
+    sendHotwordRecording() {
+        if (this.props.status === PlayerStatus.IDLE && this.state.backgroundRecorder) {
+            this.state.backgroundRecorder.stopRecording(() => {
+                this.state.backgroundRecorder.getDataURL((audioDataURL) => {
+                    submitHotwordRecording({
+                        audio: {
+                            type: this.state.backgroundRecorder.getBlob().type || "audio/wav",
+                            sampleRate: this.state.backgroundRecorder.sampleRate,
+                            bufferSize: this.state.backgroundRecorder.bufferSize,
+                            data: audioDataURL.split(",").pop()
+                        }
+                    })
+                });
+            });
+        }
+
     }
 
     onRecordClick() {
@@ -70,6 +132,8 @@ class SimpleRecorder extends React.Component {
         if (this.state.hark) {
             this.state.hark.stop();
         }
+
+        this.listenForHotword()
     }
 
     recordColor(status) {
@@ -98,6 +162,6 @@ SimpleRecorder.propTypes = {
     dispatch: PropTypes.func
 };
 
-const mapStateToProps = state => ({status: state.media.status});
+const mapStateToProps = state => ({status: state.media.status, receivedHotwordRes: state.media.receivedHotwordRes, detectedHotword: state.media.detectedHotword});
 
 export default connect(mapStateToProps)(SimpleRecorder);

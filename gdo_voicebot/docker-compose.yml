@@ -43,3 +43,11 @@ services:
     build: emotion_recognition_service/
     volumes:
       - "./emotion_recognition_service:/usr/src/app"
+
+  do-voice-hotword-service:
+    image: dsi-icl/do-voice-hotword-service:latest
+    container_name: do-voice-hotword-service
+    build: hotword_service/
+    volumes:
+      - "./hotword_service/config/config.json:/app/config/config.json:ro"
+      - "./hotword_service/save:/app/save"

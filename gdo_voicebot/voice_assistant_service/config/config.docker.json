@@ -1,10 +1,11 @@
 {
-  "services":{
-      "sttService":"http://do-voice-stt-service:3000/api/stt",
-      "ttsService":"http://do-voice-tts-service:5000/api/tts",
-      "dialogManagerService":"http://do-voice-dialog-manager-service:5005/webhooks/rest/webhook",
-      "rasaTracker":"http://do-voice-dialog-manager-service:5005/conversations/default/tracker",
-      "rasaTrackerEvents":"http://do-voice-dialog-manager-service:5005/conversations/default/tracker/events",
-      "emotionRecognitionService":"http://do-voice-emotion-recognition-service:8000/emotion-recognition"
-  }
+    "services":{
+        "sttService":"http://do-voice-stt-service:3000/api/stt",
+        "ttsService":"http://do-voice-tts-service:5000/api/tts",
+        "dialogManagerService":"http://do-voice-dialog-manager-service:5005/webhooks/rest/webhook",
+        "rasaTracker":"http://do-voice-dialog-manager-service:5005/conversations/default/tracker",
+        "rasaTrackerEvents":"http://do-voice-dialog-manager-service:5005/conversations/default/tracker/events",
+        "emotionRecognitionService":"http://do-voice-emotion-recognition-service:8000/emotion-recognition",
+        "hotwordService":"http://do-voice-hotword-service:6006/api/hotword"
+    }
 }
