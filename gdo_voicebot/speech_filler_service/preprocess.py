@@ -61,4 +61,5 @@ def get_filler_dicts():
                     predecessors[(words[idx], words[idx+1])] = (predecessors[(words[idx], words[idx+1])] if (words[idx], words[idx+1]) in predecessors else 0) + 1
                     successors[(words[idx-1], words[idx])] = (successors[(words[idx-1], words[idx])] if (words[idx-1], words[idx]) in successors else 0) + 1
 
-    return predecessors.items(), successors.items()
+    return list(predecessors.items()), list(successors.items())
+    
