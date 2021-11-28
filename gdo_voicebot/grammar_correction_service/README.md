@@ -12,7 +12,7 @@ The tool uses two Bert models, one for checking the grammatical correctness of a
 
 ### Get all necessary files
 1. Download the files ['here'](https://imperialcollegelondon.box.com/s/okzb2csabvgn2wcm6n03cxhol6jdim57).
-2. Place them all in the tests/ folder
+2. Place them all in the `tests/` folder
 
 ## Testing
 
