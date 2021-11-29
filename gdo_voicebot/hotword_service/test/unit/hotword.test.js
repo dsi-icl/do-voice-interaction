@@ -1,4 +1,3 @@
-const WakewordDetector = require('@mathquis/node-personal-wakeword')
 const hotwordService = require('../../src/routes/hotword')
 const path = require('path')
 const Response = require('response')
@@ -20,7 +19,7 @@ test('Returns 400 on empty body request', async () => {
         body: null
     }
 
-    await hotwordService.setUpKeywordClient(true)
+    hotwordService.setUpKeywordClient(true)
     const response = await hotwordService.startListening(req, res, true)
 
     try {
@@ -30,87 +29,60 @@ test('Returns 400 on empty body request', async () => {
     }
 })
 
-test('No response on body not containing hotword', async () => {
-    const audioFile = path.resolve(__dirname, '../../keywords', './abrakadabra1.wav')
+describe('Sending hotword audio to service ', () => {
+    let res
+    let req
 
-    let res = new Response(null, {
-        status: 100,
-        statusText: "",
-        headers: {
-        'Content-type': 'application/json'
+    beforeAll(() => {
+        const audioFile = path.resolve(__dirname, '../../keywords', './heyGalileo2.wav')
+
+        res = new Response(null, {
+            status: 100,
+            statusText: "",
+            headers: {
+            'Content-type': 'application/json'
+            }
+        })
+
+        req = {
+            method: 'post',
+            headers: { 'Content-type': 'text/plain' },
+            body: audioFile
         }
+
     })
 
-    const req = {
-        method: 'post',
-        headers: { 'Content-type': 'text/plain' },
-        body: audioFile
-    }
-
-    await hotwordService.setUpKeywordClient(true)
-    const response = await hotwordService.startListening(req, res, true)
-
-    try {
-        expect(response).toBe(undefined)
-    } catch (err) {
-        fail(`Expected no response`)
-    }
+    it('should give response', (done) => {
+        hotwordService.startListening(req, res, true, doneDetected = done, doneRandom = () => {})
+    })
 })
 
-test('Empty message if NO hotword is detected', async () => {
-    const audioFile = path.resolve(__dirname, '../../keywords', './abrakadabra1.wav')
+describe('Sending random audio to service ', () => {
+    let res
+    let req
 
-    let res = new Response(null, {
-        status: 100,
-        statusText: "",
-        headers: {
-        'Content-type': 'application/json'
+    beforeAll(() => {
+        const audioFile = path.resolve(__dirname, '../../keywords', './abrakadabra1.wav')
+
+        res = new Response(null, {
+            status: 100,
+            statusText: "",
+            headers: {
+            'Content-type': 'application/json'
+            }
+        })
+
+        req = {
+            method: 'post',
+            headers: { 'Content-type': 'text/plain' },
+            body: audioFile
         }
+
     })
 
-    const req = {
-        method: 'post',
-        headers: { 'Content-type': 'text/plain' },
-        body: audioFile
-    }
-
-//     const response = await hotwordService.startListening(req, res, true)
-
-//     console.log(response.json().text)
-
-//     try {
-//         // expect(response.json().text).toBe('')
-//     } catch (err) {
-//         fail(`Expected "not-present" message response`)
-//     }
-})
-
-test('"detected" message if hotword is detected', async () => {
-    const audioFile = path.resolve(__dirname, '../../keywords', './heyGalileo1.wav')
-
-    let res = new Response(null, {
-        status: 100,
-        statusText: "",
-        headers: {
-        'Content-type': 'application/json'
-        }
+    it('should not detect anything', (done) => {
+        hotwordService.startListening(req, res, true, doneDetected = () => {}, doneRandom = done)
     })
-
-    const req = {
-        method: 'post',
-        headers: { 'Content-type': 'text/plain' },
-        body: audioFile
-    }
-
-    // const response = await hotwordService.startListening(req, res, true)
-
-    // console.log(response.json().text)
-
-    // try {
-    //     expect(response.json().text).toBe('detected')
-    // } catch (err) {
-    //     fail(`Expected "detected" message response`)
-    // }
 })
 
 function fail(reason) {
@@ -118,3 +90,56 @@ function fail(reason) {
 }
 
 global.fail = fail;
+
+// test('My test ', (done) => {
+// 	let detected = false
+// 	main(done, detected)
+// })
+
+// async function main(done, detected) {
+// 	const audioFile = path.resolve(__dirname, '../../keywords', './heyGalileo2.wav')
+
+//   let detector = new WakewordDetector({
+// 		sampleRate: 16000,
+//     threshold: 0.4
+//   })
+
+//   await detector.addKeyword('heyGalileo', [
+//     './keywords/heyGalileo1.wav',
+// 		'./keywords/heyGalileo2.wav',
+// 		'./keywords/heyGalileo3.wav'
+//   ], {
+//     disableAveraging: true,
+//     threshold: 0.4
+//   })
+
+//   detector.enableKeyword('heyGalileo')
+
+//   detector.on('data', ({keyword, score, threshold, timestamp}) => {
+// 		detected = true
+//   })
+
+// 	const detectionStream = new Stream.Writable({
+//     objectMode: true,
+//     write: (data, enc, done) => {
+//       console.log(data)
+//     }
+//   })
+
+//   detector.pipe(detectionStream)
+
+// 	let stream = fileSystem.createReadStream(audioFile)
+//   stream.pipe(detector)
+
+//   setTimeout(() => {
+//     stream.unpipe(detector)
+//     stream.removeAllListeners()
+//     stream.destroy()
+//     stream = null
+
+// 		detector.removeAllListeners()
+// 		if (detected) {
+// 			done()
+// 		}
+//   }, 4000)
+// }
