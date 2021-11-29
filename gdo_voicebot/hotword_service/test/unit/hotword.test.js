@@ -30,7 +30,7 @@ test('Returns 400 on empty body request', async () => {
     }
 })
 
-test('Returns 200 on every body containing audio', async () => {
+test('No response on body not containing hotword', async () => {
     const audioFile = path.resolve(__dirname, '../../keywords', './abrakadabra1.wav')
 
     let res = new Response(null, {
@@ -51,9 +51,9 @@ test('Returns 200 on every body containing audio', async () => {
     const response = await hotwordService.startListening(req, res, true)
 
     try {
-        expect(response.statusCode).toBe(200)
+        expect(response).toBe(undefined)
     } catch (err) {
-        fail(`Expected 200 response`)
+        fail(`Expected no response`)
     }
 })
 

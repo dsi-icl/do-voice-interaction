@@ -52,6 +52,5 @@ test('"Hey Galileo" hotword enabled', async () => {
 test('Audio received is piped to library', async () => {
     const mockWakewordDetectorInstance = WakewordDetector.mock.instances[0]
     const mockPipe = mockWakewordDetectorInstance.pipe
-    // expect(mocPipe).toHaveBeenCalledWith('heyGalileo') -- check arguments here
-    expect(mockPipe).toHaveBeenCalledTimes(4)
+    expect(mockPipe).toHaveBeenCalledTimes(1)
 })
