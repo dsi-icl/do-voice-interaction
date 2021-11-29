@@ -80,9 +80,8 @@ async function getHotword(audioData, res, testing, doneDetected, doneRandom, det
 			disableAveraging: true,
 			threshold: global.config.keyword.productionThreshold
 		})
+		keywordClient.enableKeyword(global.config.keyword.name)
 	}
-
-	keywordClient.enableKeyword(global.config.keyword.name)
 
 	// The detector will emit this message when it is ready
 	keywordClient.on('ready', () => {
