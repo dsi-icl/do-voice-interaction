@@ -117,7 +117,6 @@ export async function processAudioHotword (client, request) {
     client.emit('received-hotword-response', {})
 
     if (hotwordResponse !== 'not-present') {
-      console.log('Hotword present')
       client.emit('hotword', {})
       // processAudioCommand(client, request)
     }

@@ -14,8 +14,8 @@ global.config = JSON.parse(fileSystem.readFileSync('./config/config.json').toStr
 
 // Create the keyword client from the Node-Personal-Wakeword third-party library
 const keywordClient = new WakewordDetector({
-	sampleRate: 16000,
-	threshold: 0.1
+	sampleRate: global.config.keyword.sampleRate,
+	threshold: global.config.keyword.detectorThreshold
 })
 
 // The current file count where we will save the audio data
@@ -30,18 +30,17 @@ async function setUpKeywordClient(testing) {
 	if (!testing) {
 		await keywordClient.addKeyword(global.config.keyword.name, global.config.keyword.productionSamples, {
 			disableAveraging: false,
-			// threshold: 0.37
-			threshold: 0.3
+			threshold: global.config.keyword.productionThreshold
 		})
 	} else {
 			await keywordClient.addKeyword(global.config.keyword.name, global.config.keyword.testSamples, {
 			disableAveraging: false,
-			threshold: 0.4
+			threshold: global.config.keyword.testingThreshold
 		})
 	}
 
 	keywordClient.enableKeyword(global.config.keyword.name)
-	keywordClient.setMaxListeners(3 * global.config.utils.maxSavedFiles)
+	keywordClient.setMaxListeners(global.config.utils.listenersPerStream * global.config.utils.maxSavedFiles)
 }
 
 // Function which checks the arguements received and if so, it passes them forward to the getHotword method
@@ -95,8 +94,7 @@ async function getHotword(audioData, res, testing) {
 	// When the keyword is detected, return the correct status and set the test to 'detected'
 	keywordClient.on('data', ({keyword, score, threshold, timestamp}) => {
 		console.log(`Detected "${keyword}" with score ${score} / ${threshold}`)
-		console.log('Removing all listeners ' + fileName)
-		keywordClient.removeAllListeners()
+		// keywordClient.removeAllListeners()
 		res.status(200).json({ status: 'ok', service: 'Hotword service', text: 'detected'})
 		return
 	})
@@ -118,7 +116,7 @@ async function getHotword(audioData, res, testing) {
   } else {
 		filePath = audioData;
   }
-  const readStream = fileSystem.createReadStream(filePath);
+  let readStream = fileSystem.createReadStream(filePath);
   readStream.pipe(keywordClient)
 
 	// Destroy the recorder and detector after 2s
@@ -127,8 +125,10 @@ async function getHotword(audioData, res, testing) {
     readStream.removeAllListeners()
     readStream.destroy()
 
+		readStream = null
+
     keywordClient.removeAllListeners()
-  }, 1000)
+  }, global.config.utils.timeoutValue)
 }
 
 module.exports = {setUpKeywordClient, startListening, getHotword}
