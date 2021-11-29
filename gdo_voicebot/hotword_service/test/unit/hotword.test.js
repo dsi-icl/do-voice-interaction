@@ -86,60 +86,7 @@ describe('Sending random audio to service ', () => {
 })
 
 function fail(reason) {
-    throw new Error(reason);
+    throw new Error(reason)
 }
 
-global.fail = fail;
-
-// test('My test ', (done) => {
-// 	let detected = false
-// 	main(done, detected)
-// })
-
-// async function main(done, detected) {
-// 	const audioFile = path.resolve(__dirname, '../../keywords', './heyGalileo2.wav')
-
-//   let detector = new WakewordDetector({
-// 		sampleRate: 16000,
-//     threshold: 0.4
-//   })
-
-//   await detector.addKeyword('heyGalileo', [
-//     './keywords/heyGalileo1.wav',
-// 		'./keywords/heyGalileo2.wav',
-// 		'./keywords/heyGalileo3.wav'
-//   ], {
-//     disableAveraging: true,
-//     threshold: 0.4
-//   })
-
-//   detector.enableKeyword('heyGalileo')
-
-//   detector.on('data', ({keyword, score, threshold, timestamp}) => {
-// 		detected = true
-//   })
-
-// 	const detectionStream = new Stream.Writable({
-//     objectMode: true,
-//     write: (data, enc, done) => {
-//       console.log(data)
-//     }
-//   })
-
-//   detector.pipe(detectionStream)
-
-// 	let stream = fileSystem.createReadStream(audioFile)
-//   stream.pipe(detector)
-
-//   setTimeout(() => {
-//     stream.unpipe(detector)
-//     stream.removeAllListeners()
-//     stream.destroy()
-//     stream = null
-
-// 		detector.removeAllListeners()
-// 		if (detected) {
-// 			done()
-// 		}
-//   }, 4000)
-// }
+global.fail = fail
