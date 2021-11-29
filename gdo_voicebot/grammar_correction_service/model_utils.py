@@ -1,7 +1,7 @@
 import torch
 import numpy as np
-from pytorch_pretrained_bert import BertTokenizer, BertForMaskedLM
-from pytorch_pretrained_bert import BertForSequenceClassification
+from pytorch_pretrained_bert import BertForMaskedLM
+from transformers import BertModel, BertTokenizer
 from keras.preprocessing.sequence import pad_sequences
 from difflib import SequenceMatcher
 import os.path
@@ -9,19 +9,30 @@ import requests
 
 class CustomBERTModel(torch.nn.Module):
     def __init__(self):
-          super(CustomBERTModel, self).__init__()
-          self.bert = BertModel.from_pretrained('bert-base-uncased')
-          ### New layer:
-          self.linear = nn.Linear(768, 1)
+        super(CustomBERTModel, self).__init__()
+        self.bert = BertModel.from_pretrained('bert-base-uncased')
+        ### New layer:
+        self.linear = torch.nn.Linear(768, 1)
 
     def forward(self, input_ids):
-          outputs = self.bert(input_ids, token_type_ids=None)
-          last_hidden_states = outputs.last_hidden_state
+        outputs = self.bert(input_ids, token_type_ids=None)
+        last_hidden_states = outputs.last_hidden_state
 
-          # last_hidden_states has the following shape: (batch_size, sequence_length, hidden_size)
-          linear_output = self.linear(last_hidden_states[:,0,:])
+        # last_hidden_states has the following shape: (batch_size, sequence_length, hidden_size)
+        linear_output = self.linear(last_hidden_states[:,0,:])
 
-          return linear_output
+        return linear_output
+
+    def state_dict(self):
+        return self.linear.state_dict()
+
+    def load_state_dict(self, state_dict):
+        self.linear.load_state_dict(state_dict)
+
+
+def sigmoid(x):
+    return 1/(1 + np.exp(-x))
+
 
 # credit: https://stackoverflow.com/a/39225039
 def download_file_from_google_drive(id, destination):
@@ -60,13 +71,13 @@ def progress_bar(some_iter):
 
 
 def load_grammar_checker_model():
-    if (not os.path.isfile('./bert-based-uncased-GDO-lang-8-cola-trained.pth')):
-        download_file_from_google_drive('1sPfnUFnzSxbGA9nxvGn85Eds8wU_JyuD',
-                                        './bert-based-uncased-GDO-lang-8-cola-trained.pth')
+    # if (not os.path.isfile('./bert-based-uncased-GDO-lang-8-cola-trained.pth')):
+    #     download_file_from_google_drive('1sPfnUFnzSxbGA9nxvGn85Eds8wU_JyuD',
+    #                                     './bert-based-uncased-GDO-lang-8-cola-trained.pth')
 
     device = torch.device('cpu')
     grammar_checker = CustomBERTModel()
-    grammar_checker.load_state_dict(torch.load('bert-based-uncased-GDO-lang-8-cola-trained.pth', map_location=device))
+    grammar_checker.load_state_dict(torch.load('bert-based-uncased-GDO-trained.pth', map_location=device))
     grammar_checker.eval()
 
     return grammar_checker
@@ -105,16 +116,19 @@ def check_GE(sents):
                               truncating="post", padding="post")
 
     prediction_inputs = torch.tensor(input_ids)
-    prediction_labels = torch.tensor(labels)
 
     with torch.no_grad():
         # Forward pass, calculate logit predictions
-        logits = checker_model(prediction_inputs, token_type_ids=None)
+        logits = checker_model(prediction_inputs)
 
     # Move logits and labels to CPU
     logits = logits.detach().cpu().numpy()
 
-    predictions = torch.round(torch.sigmoid(y_pred))
+    # 0 for incorrect, 1 for correct
+    predictions = np.rint(sigmoid(logits))
+
+    # uncomment for numerical preditions (not class-based)
+    predictions = sigmoid(logits)
 
     return predictions
 
@@ -177,6 +191,26 @@ def predict_corrections(original_sentence, mask_ids):
 
 
 # Load pre-trained model tokenizer
+print("Loading tokeniser...")
 tokenizer = create_tokenizer()
+print("Loading checker_model...")
 checker_model = load_grammar_checker_model()
-corrector_model = load_grammar_corrector_model()
+# print("Loading corrector_model...")
+# corrector_model = load_grammar_corrector_model()
+
+sentences = [
+    "the grammar correction on\t\t",
+    "is the grammar correction on\t\t",
+    "is grammar correction on\t\t",
+    "turn on grammar correct\t\t",
+    "turn on grammar correction\t\t",
+    "the laboratory display are pretty good\t",
+    "the laboratory displays are pretty good",
+    "the laboratory displays are pretty match",
+    "displays are pretty good\t\t"
+]
+
+print("Checking sentences...")
+predictions = check_GE(sentences)
+for i in range(len(sentences)):
+    print(" " + str(sentences[i]) + "\t" + str(predictions[i][0]))
