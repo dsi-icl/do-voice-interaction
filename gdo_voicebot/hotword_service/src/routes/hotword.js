@@ -130,7 +130,7 @@ async function getHotword(audioData, res, testing, doneDetected, doneRandom, det
   if (!testing) {
   	filePath = path.resolve(__dirname, '/app/save/', fileName);
   } else {
-		filePath = audioData;
+	filePath = audioData;
   }
   let readStream = fileSystem.createReadStream(filePath);
   readStream.pipe(keywordClient)
@@ -141,17 +141,17 @@ async function getHotword(audioData, res, testing, doneDetected, doneRandom, det
     readStream.removeAllListeners()
     readStream.destroy()
 
-		readStream = null
+	readStream = null
 
     keywordClient.removeAllListeners()
-		if (detected) {
-			doneDetected()
-			res.status(200).json({ status: 'ok', service: 'Hotword service', text: 'detected'})
-		}
-		if (!detected) {
-			doneRandom()
-			res.status(200).json({ status: 'ok', service: 'Hotword service', text: 'not-detected'})
-		}
+	if (detected) {
+		doneDetected()
+		res.status(200).json({ status: 'ok', service: 'Hotword service', text: 'detected'})
+	}
+	if (!detected) {
+		doneRandom()
+		res.status(200).json({ status: 'ok', service: 'Hotword service', text: 'not-detected'})
+	}
   }, testing ? global.config.utils.testTimeoutValue : global.config.utils.timeoutValue)
 }
 
