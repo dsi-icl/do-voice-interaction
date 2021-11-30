@@ -14,8 +14,6 @@ if (!fs.existsSync('./config/config.json')) {
 
 global.config = JSON.parse(fs.readFileSync('./config/config.json').toString())
 
-hotwordService.setUpKeywordClient(false)
-
 /**
  * Get service status
  *

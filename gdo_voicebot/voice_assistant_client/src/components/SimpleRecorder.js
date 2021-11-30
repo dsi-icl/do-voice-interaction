@@ -29,7 +29,8 @@ class SimpleRecorder extends React.Component {
                 this.listenForHotword()
             }
         }
-        if (prevProps.receivedHotwordRes != this.props.receivedHotwordRes) {
+        if (prevProps.receivedHotwordRes != this.props.receivedHotwordRes || 
+                prevProps.detectedHotword != this.props.detectedHotword) {
             if (this.props.detectedHotword) {
                 this.onRecordClick()
                 this.props.dispatch(foundHotword(false));
@@ -51,7 +52,6 @@ class SimpleRecorder extends React.Component {
 
             setupAudioRecorder().then(backgroundRecorder => {
                 this.setState({backgroundRecorder});
-                // backgroundRecorder.clearRecordedData();
                 backgroundRecorder.startRecording();
             });
 
@@ -83,7 +83,6 @@ class SimpleRecorder extends React.Component {
                     })
                 });
             });
-            // backgroundRecorder.clearRecordedData();
         }
 
     }

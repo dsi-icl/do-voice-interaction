@@ -13,10 +13,11 @@ if (!fileSystem.existsSync('./config/config.json')) {
 global.config = JSON.parse(fileSystem.readFileSync('./config/config.json').toString())
 
 // Create the keyword client from the Node-Personal-Wakeword third-party library
-const keywordClient = new WakewordDetector({
-	sampleRate: global.config.keyword.sampleRate,
-	threshold: global.config.keyword.detectorThreshold
-})
+let keywordClient 
+// = new WakewordDetector({
+// 	sampleRate: global.config.keyword.sampleRate,
+// 	threshold: global.config.keyword.detectorThreshold
+// })
 
 // The current file count where we will save the audio data
 let currentFileCount = 0
@@ -26,6 +27,11 @@ let prevAudioData
 
 // Function that sets up the keyword client and which is called when the service starts only
 async function setUpKeywordClient(testing) {
+	keywordClient = new WakewordDetector({
+		sampleRate: global.config.keyword.sampleRate,
+		threshold: global.config.keyword.detectorThreshold
+	})
+
 	// Define keywords
 	if (!testing) {
 		await keywordClient.addKeyword(global.config.keyword.name, global.config.keyword.productionSamples, {
@@ -56,6 +62,10 @@ async function getHotword(audioData, res, testing, doneDetected, doneRandom, det
 	if (audioData === prevAudioData) {
 		return res.status(200)
 	}
+
+	setUpKeywordClient(testing)
+
+	console.log('Keyword destroyed top - ', keywordClient.destroyed)
 
 	// Save the audio data as prevAudioData
 	prevAudioData = audioData
@@ -98,9 +108,18 @@ async function getHotword(audioData, res, testing, doneDetected, doneRandom, det
 	keywordClient.on('data', ({keyword, score, threshold, timestamp}) => {
 		console.log(`Detected "${keyword}" with score ${score} / ${threshold}`)
 		detected = true
+		console.log('Keyword destroyed in detect listener - ', keywordClient.destroyed)
 		if (!testing) {
 			res.status(200).json({ status: 'ok', service: 'Hotword service', text: 'detected'})
 		}
+	})
+
+	keywordClient.on('close', () => {
+		console.log('Keyword destroyed in close listener - ', keywordClient.destroyed)
+	})
+
+	keywordClient.on('end', () => {
+		console.log('Keyword destroyed in end listener - ', keywordClient.destroyed)
 	})
 
 	// Create a new detection stream for the keyword client and pipe it
@@ -122,9 +141,12 @@ async function getHotword(audioData, res, testing, doneDetected, doneRandom, det
   }
   let readStream = fileSystem.createReadStream(filePath);
   readStream.pipe(keywordClient)
+	console.log('Keyword destroyed after piping - ', keywordClient.destroyed)
 
 	// Destroy the recorder and detector after 2s
   setTimeout(() => {
+		// keywordClient.destroyed = false
+		console.log('Keyword destroyed before unpiping - ', keywordClient.destroyed)
     readStream.unpipe(keywordClient)
     readStream.removeAllListeners()
     readStream.destroy()

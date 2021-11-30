@@ -118,7 +118,6 @@ export async function processAudioHotword (client, request) {
 
     if (hotwordResponse !== 'not-present') {
       client.emit('hotword', {})
-      // processAudioCommand(client, request)
     }
   }
 }
