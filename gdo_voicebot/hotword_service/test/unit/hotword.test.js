@@ -19,7 +19,6 @@ test('Returns 400 on empty body request', async () => {
         body: null
     }
 
-    // hotwordService.setUpKeywordClient(true)
     const response = await hotwordService.startListening(req, res, true)
 
     try {

@@ -24,7 +24,6 @@ beforeEach(async () => {
         body: audioFile
     }
 
-    // await hotwordService.setUpKeywordClient(true)
     await hotwordService.startListening(req, res, true)
 })
 
