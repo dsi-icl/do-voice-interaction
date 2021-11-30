@@ -59,15 +59,13 @@ async function getHotword(audioData, res, testing, doneDetected, doneRandom, det
 		return res.status(200)
 	}
 
+	// Save the audio data as prevAudioData
+	prevAudioData = audioData
+
 	// The keyword client needs to be created every time a call is made as the library destroys it
 	// after detecting a keyword (this happens in the close listener, after 'close' is emitted automatically) 
 	// and hence we cannot reuse it for later detections
 	setUpKeywordClient(testing)
-
-	console.log('Keyword destroyed top - ', keywordClient.destroyed)
-
-	// Save the audio data as prevAudioData
-	prevAudioData = audioData
 
 	// Create a buffer from the audio data
 	const buffer = Buffer.from(audioData, 'base64')

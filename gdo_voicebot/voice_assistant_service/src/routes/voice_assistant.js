@@ -114,7 +114,7 @@ export async function processAudioHotword (client, request) {
 
     const hotwordResponse = await Promise.race([p1, p2])
 
-    console.log('Promise result - ', hotwordResponse)
+    console.log('Hotword response - ', hotwordResponse)
     client.emit('received-hotword-response', {})
 
     if (hotwordResponse.data.text === 'detected') {
