@@ -1,9 +1,11 @@
 import csv
 
+
 def preprocess_pauses(sent):
     sent = sent.replace('...', ' (pause) ')
     sent = sent.replace('..', ' (pause) ')
     return sent.replace('--', ' (pause) ')
+
 
 def preprocess_fillers(sent):
     sent = sent.replace(' uhm ', ' (um) ')
@@ -12,6 +14,7 @@ def preprocess_fillers(sent):
     sent = sent.replace(' uh ', ' (uh) ')
     sent = sent.replace(' uhh ', ' (uh) ')
     return sent
+
 
 def preprocess_shortcuts(sent):
     sent = sent.replace("don't", "do not")
@@ -38,6 +41,7 @@ def preprocess_shortcuts(sent):
 
     return sent
 
+
 def get_filler_dicts():
     movie_file = open("movie_lines.tsv", "r")
     tsvreader = csv.reader(movie_file, delimiter="\t")
@@ -58,8 +62,11 @@ def get_filler_dicts():
 
             for idx in range(1, len(words) - 1):
                 if words[idx] == '(pause)' or words[idx] == '(uh)' or words[idx] == '(um)':
-                    predecessors[(words[idx], words[idx+1])] = (predecessors[(words[idx], words[idx+1])] if (words[idx], words[idx+1]) in predecessors else 0) + 1
-                    successors[(words[idx-1], words[idx])] = (successors[(words[idx-1], words[idx])] if (words[idx-1], words[idx]) in successors else 0) + 1
+                    predecessors[(words[idx], words[idx + 1])] = (predecessors[(words[idx], words[idx + 1])]
+                                                                  if (words[idx], words[idx + 1])
+                                                                  in predecessors else 0) + 1
+                    successors[(words[idx - 1], words[idx])] = (successors[(words[idx - 1], words[idx])]
+                                                                if (words[idx - 1], words[idx])
+                                                                in successors else 0) + 1
 
-    return list(predecessors.items()), list(successors.items())
-    
+    return predecessors.items(), successors.items()
