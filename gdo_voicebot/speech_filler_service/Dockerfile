@@ -1,11 +1,12 @@
-FROM node:current-buster
-LABEL maintainer="o.serban@imperial.ac.uk"
+FROM python:3.7-slim
 
-ENV APPLICATION_PATH /app
+ENV PYTHONIOENCODING=UTF-8
 
-WORKDIR $APPLICATION_PATH
+WORKDIR /usr/src/app
+
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
-RUN npm install
 
-CMD ["npm", "start"] 
+CMD ["python", "./run.py"] 

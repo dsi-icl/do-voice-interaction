@@ -4,7 +4,7 @@ import numpy as np
 from numpy.random import choice
 
 # TODO: Add to docker-compose files/requirements?
-# nltk.download('punkt')
+nltk.download('punkt')
 
 # Parameter that controls the degree of naturalisation
 DEGREE_OF_NAT = 0.15
@@ -28,7 +28,7 @@ def is_nsf(word):
 # corresponding to the approved natural speech fillers
 def add_cereproc_commands(sentence):
     sentence = sentence.replace("(um)", "<spurt audio=\"g0001_015\">umm</spurt>")
-    sentence = sentence.replace("(uh)", "spurt audio=\"g0001_014\">hmm thinking</spurt>")
+    sentence = sentence.replace("(uh)", "<spurt audio=\"g0001_014\">hmm thinking</spurt>")
     sentence = sentence.replace("(pause)", "...")
 
     sentence = sentence.replace("START", "")
@@ -56,9 +56,9 @@ def generate_nsf_sentence(sentence, draw_set):
     new_sent = sentence.split()
     for (bigram, pos) in draw_set:
         if is_nsf(bigram[0][0]):
-            new_sent = new_sent[:(pos - 1)] + [bigram[0][0]] + new_sent[(pos - 1):]
+            new_sent = new_sent[:pos+1] + [bigram[0][0]] + new_sent[pos+1:]
         else:
-            new_sent = new_sent[:pos] + [bigram[0][1]] + new_sent[pos:]
+            new_sent = new_sent[:pos+1] + [bigram[0][1]] + new_sent[pos+1:]
 
     return ' '.join(word for word in new_sent)
 
@@ -73,7 +73,7 @@ def insert_speech_fillers(text, predecessors, successors):
     # TODO: Not sure this is necessary as we are
     #  only filling in commands given by the assistant?
     sentence = text.translate(string.punctuation)
-    sentence = "START " + sentence.lower() + " END"
+    sentence = sentence.lower()
 
     # Split sentence into bigrams
     tokenized_sent = nltk.word_tokenize(sentence)
@@ -95,7 +95,7 @@ def insert_speech_fillers(text, predecessors, successors):
     # Draw a subset from D based on the degree of naturalization and a probability distribution.
     possible_fillers = speech_filler_num(tokenized_sent)
     draw_subset = np.array(draw_set, dtype=object)
-    draw_subset = draw_subset[choice(draw_subset.shape[0], possible_fillers, p=create_nsf_distribution(draw_set))]
+    draw_subset = draw_subset[choice(draw_subset.shape[0], possible_fillers, p=create_nsf_distribution(draw_set), replace=False)]
 
     # Construct the output sentence by adding the bigrams (filler word included) that are
     # part of the subset of D

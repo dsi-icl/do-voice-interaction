@@ -18,8 +18,22 @@ export async function successProcess (client, sttResponse, request, recentEmotio
   console.log('bot result', botResult)
 
   if (botResult.success) {
-    const botResponseText = mergeText(botResult.data, '\n')
-    const botResponseVoice = mergeText(botResult.data, ', ')
+    var botResultData = botResult.data
+
+    const botResponseText = mergeText(botResultData, '\n')
+    var botResponseVoice = mergeText(botResultData, ', ')
+
+    // Get tracker information from rasa
+    const tracker = await getDataRasa(global.config.services.rasaTracker)
+    // Get rasa's slot values
+    const slots = tracker.data.slots
+    if (slots.natural_speech_fillers_enabled) {
+      const dataForSpeechFillers = { text: botResponseVoice }
+      const responseWithFillers = await postData(global.config.services.speechFillerService, JSON.stringify(dataForSpeechFillers), 'Speech Fillers Service')
+      if (responseWithFillers.success) {
+        botResponseVoice = responseWithFillers.data.response
+      }
+    }
 
     // We send the text message to the tts service to get back the voice answer.
     const voiceAnswer = await getData(global.config.services.ttsService, botResponseVoice)

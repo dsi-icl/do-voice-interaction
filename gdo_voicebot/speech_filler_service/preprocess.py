@@ -42,7 +42,7 @@ def preprocess_shortcuts(sent):
     return sent
 
 
-def get_filler_dicts():
+def get_filler_lists():
     movie_file = open("movie_lines.tsv", "r")
     tsvreader = csv.reader(movie_file, delimiter="\t")
 
@@ -68,5 +68,13 @@ def get_filler_dicts():
                     successors[(words[idx - 1], words[idx])] = (successors[(words[idx - 1], words[idx])]
                                                                 if (words[idx - 1], words[idx])
                                                                 in successors else 0) + 1
+
+    for (pred, succ) in predecessors:
+        if pred == '(uh)' or pred == '(um)':
+            predecessors[(pred, succ)] = predecessors[(pred, succ)] * 50
+
+    for (pred, succ) in successors:
+        if succ == '(uh)' or succ == '(um)':
+            successors[(pred, succ)] = successors[(pred, succ)] * 50
 
     return predecessors.items(), successors.items()

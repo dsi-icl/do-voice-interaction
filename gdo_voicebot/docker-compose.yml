@@ -45,6 +45,7 @@ services:
       - "./emotion_recognition_service:/usr/src/app"
 
   do-speech-filler-service:
-    image: dsi-icl/do-speech-filler-service-latest
     container_name: do-speech-filler-service
     build: speech_filler_service/
+    volumes:
+      - "./speech_filler_service:/usr/src/app"
