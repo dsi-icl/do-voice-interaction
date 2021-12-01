@@ -8,9 +8,9 @@
     "transformIgnorePatterns": [
       "/node_modules/"
     ],
-    "globals": { 
-      "__DEV__": true, 
-      "__RCTProfileIsProfiling": false 
+    "globals": {
+      "__DEV__": true,
+      "__RCTProfileIsProfiling": false
     }
   },
   "scripts": {
@@ -22,6 +22,7 @@
   "dependencies": {
     "@mapbox/node-pre-gyp": "^1.0.5",
     "@mathquis/node-personal-wakeword": "^1.1.1",
+    "audio": "^1.2.0",
     "esm": "^3.2.25",
     "express": "^4.17.1",
     "fs": "0.0.1-security",
@@ -30,6 +31,7 @@
     "https": "^1.0.0",
     "morgan": "^1.10.0",
     "path": "^0.12.7",
+    "posix": "^4.2.0",
     "response": "^0.18.0",
     "stream": "0.0.2",
     "stream-buffers": "^3.0.2",

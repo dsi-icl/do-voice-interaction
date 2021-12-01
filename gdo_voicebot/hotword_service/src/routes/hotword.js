@@ -3,6 +3,9 @@ const fileSystem = require('fs')
 const Stream = require('stream')
 const path = require('path')
 
+// The config file is loaded here because the tests do not reach the app.js file, and 
+// importing twice should be avoided if not necessary
+
 // Check that the config file exists
 if (!fileSystem.existsSync('./config/config.json')) {
   console.error('Could not find the configuration file: \'./config/config.json\'')
@@ -13,10 +16,7 @@ if (!fileSystem.existsSync('./config/config.json')) {
 global.config = JSON.parse(fileSystem.readFileSync('./config/config.json').toString())
 
 // Create the keyword client from the Node-Personal-Wakeword third-party library
-const keywordClient = new WakewordDetector({
-	sampleRate: 16000,
-	threshold: 0.1
-})
+let keywordClient 
 
 // The current file count where we will save the audio data
 let currentFileCount = 0
@@ -24,28 +24,26 @@ let currentFileCount = 0
 // Track the previous audio data so that no file is saved twice
 let prevAudioData
 
-// Function that sets up the keyword client and which is called when the service starts only
+// Function that sets up the keyword client
 async function setUpKeywordClient(testing) {
+	keywordClient = new WakewordDetector({
+		sampleRate: global.config.keyword.sampleRate,
+		threshold: global.config.keyword.detectorThreshold
+	})
+
 	// Define keywords
 	if (!testing) {
 		await keywordClient.addKeyword(global.config.keyword.name, global.config.keyword.productionSamples, {
 			disableAveraging: false,
-			// threshold: 0.37
-			threshold: 0.3
-		})
-	} else {
-			await keywordClient.addKeyword(global.config.keyword.name, global.config.keyword.testSamples, {
-			disableAveraging: false,
-			threshold: 0.4
+			threshold: global.config.keyword.productionThreshold
 		})
 	}
 
-	keywordClient.enableKeyword(global.config.keyword.name)
-	keywordClient.setMaxListeners(3 * global.config.utils.maxSavedFiles)
+	keywordClient.setMaxListeners(global.config.utils.listenersPerStream * global.config.utils.maxSavedFiles)
 }
 
 // Function which checks the arguements received and if so, it passes them forward to the getHotword method
-async function startListening(req, res, testing=false) {
+async function startListening(req, res, testing = false, doneDetected = () => {}, doneRandom = ()=>{}) {
 	if (req.body === null || req.body === undefined) {
 		return res.status(400).json({
 			status: 'fail',
@@ -54,12 +52,11 @@ async function startListening(req, res, testing=false) {
 		})
 	}
 
-	getHotword(req.body, res, testing)
+	getHotword(req.body, res, testing, doneDetected, doneRandom)
 }
 
 // Function which listens for the hotword in the given audio data using the third party library
-async function getHotword(audioData, res, testing) {
-
+async function getHotword(audioData, res, testing, doneDetected, doneRandom, detected=false) {
 	// Discard the audio data if it has already been saved
 	if (audioData === prevAudioData) {
 		return res.status(200)
@@ -67,6 +64,11 @@ async function getHotword(audioData, res, testing) {
 
 	// Save the audio data as prevAudioData
 	prevAudioData = audioData
+
+	// The keyword client needs to be created every time a call is made as the library destroys it
+	// after detecting a keyword (this happens in the close listener, after 'close' is emitted automatically) 
+	// and hence we cannot reuse it for later detections
+	setUpKeywordClient(testing)
 
 	// Create a buffer from the audio data
 	const buffer = Buffer.from(audioData, 'base64')
@@ -83,9 +85,19 @@ async function getHotword(audioData, res, testing) {
 		});
 	}
 
+	if (testing) {
+		await keywordClient.addKeyword(global.config.keyword.name, global.config.keyword.testSamples, {
+			disableAveraging: true,
+			threshold: global.config.keyword.productionThreshold
+		})
+		keywordClient.enableKeyword(global.config.keyword.name)
+	}
+
 	// The detector will emit this message when it is ready
 	keywordClient.on('ready', () => {
-		console.log('Listening for hotword...')
+		if (!testing) {
+			console.log('Listening for hotword...')
+		}
 	})
 
 	keywordClient.on('error', err => {
@@ -95,10 +107,15 @@ async function getHotword(audioData, res, testing) {
 	// When the keyword is detected, return the correct status and set the test to 'detected'
 	keywordClient.on('data', ({keyword, score, threshold, timestamp}) => {
 		console.log(`Detected "${keyword}" with score ${score} / ${threshold}`)
-		console.log('Removing all listeners ' + fileName)
-		keywordClient.removeAllListeners()
-		res.status(200).json({ status: 'ok', service: 'Hotword service', text: 'detected'})
-		return
+		detected = true
+	})
+
+	keywordClient.on('close', () => {
+		console.log('Keyword destroyed in close listener - ', keywordClient.destroyed)
+	})
+
+	keywordClient.on('end', () => {
+		console.log('Keyword destroyed in end listener - ', keywordClient.destroyed)
 	})
 
 	// Create a new detection stream for the keyword client and pipe it
@@ -116,9 +133,9 @@ async function getHotword(audioData, res, testing) {
   if (!testing) {
   	filePath = path.resolve(__dirname, '/app/save/', fileName);
   } else {
-		filePath = audioData;
+	filePath = audioData;
   }
-  const readStream = fileSystem.createReadStream(filePath);
+  let readStream = fileSystem.createReadStream(filePath);
   readStream.pipe(keywordClient)
 
 	// Destroy the recorder and detector after 2s
@@ -127,8 +144,18 @@ async function getHotword(audioData, res, testing) {
     readStream.removeAllListeners()
     readStream.destroy()
 
+	readStream = null
+
     keywordClient.removeAllListeners()
-  }, 1000)
+	if (detected) {
+		doneDetected()
+		res.status(200).json({ status: 'ok', service: 'Hotword service', text: 'detected'})
+	}
+	if (!detected) {
+		doneRandom()
+		res.status(200).json({ status: 'ok', service: 'Hotword service', text: 'not-detected'})
+	}
+  }, testing ? global.config.utils.testTimeoutValue : global.config.utils.timeoutValue)
 }
 
 module.exports = {setUpKeywordClient, startListening, getHotword}

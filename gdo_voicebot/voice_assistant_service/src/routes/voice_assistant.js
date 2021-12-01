@@ -110,16 +110,15 @@ export async function processAudioHotword (client, request) {
     const p1 = new Promise((resolve, reject) => {
       resolve(postData(global.config.services.hotwordService, request.audio.data, 'Hotword Service'))
     })
-    const p2 = new Promise((resolve, reject) => setTimeout(() => resolve('not-present'), 2000))
+    const p2 = new Promise((resolve, reject) => setTimeout(() => resolve('not-present'), global.config.hotword.timeout))
 
     const hotwordResponse = await Promise.race([p1, p2])
 
+    console.log('Hotword response - ', hotwordResponse)
     client.emit('received-hotword-response', {})
 
-    if (hotwordResponse !== 'not-present') {
-      console.log('Hotword present')
+    if (hotwordResponse.data.text === 'detected') {
       client.emit('hotword', {})
-      // processAudioCommand(client, request)
     }
   }
 }

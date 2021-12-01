@@ -7,5 +7,8 @@
         "rasaTrackerEvents":"http://do-voice-dialog-manager-service:5005/conversations/default/tracker/events",
         "emotionRecognitionService":"http://do-voice-emotion-recognition-service:8000/emotion-recognition",
         "hotwordService":"http://do-voice-hotword-service:6006/api/hotword"
+    },
+    "hotword": {
+        "timeout": 10000
     }
 }

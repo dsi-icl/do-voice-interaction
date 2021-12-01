@@ -24,6 +24,9 @@ services:
       - "2000:2000"
     volumes:
       - "./voice_assistant_service/config/config.docker.json:/app/config/config.json:ro"
+      - "./voice_assistant_service/ssl:/app/ssl:ro"
+    environment:
+      - PORT=2000
 
   do-voice-dialog-manager-service:
     image: rasa/rasa:1.10.11-full

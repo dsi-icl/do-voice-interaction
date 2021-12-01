@@ -23,7 +23,14 @@ class SimpleRecorder extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.receivedHotwordRes != this.props.receivedHotwordRes) {
+        if (prevProps.status != this.props.status) {
+            console.log('Changed status to ', this.props.status)
+            if (this.props.status === PlayerStatus.IDLE) {
+                this.listenForHotword()
+            }
+        }
+        if (prevProps.receivedHotwordRes != this.props.receivedHotwordRes || 
+                prevProps.detectedHotword != this.props.detectedHotword) {
             if (this.props.detectedHotword) {
                 this.onRecordClick()
                 this.props.dispatch(foundHotword(false));
@@ -37,6 +44,7 @@ class SimpleRecorder extends React.Component {
 
     listenForHotword() {
         if (this.props.status === PlayerStatus.IDLE) {
+            console.log('Listening in the background')
             if (this.state.backgroundRecorder) {
                 this.state.backgroundRecorder.destroy();
                 this.setState({backgroundRecorder: null});
@@ -44,7 +52,6 @@ class SimpleRecorder extends React.Component {
 
             setupAudioRecorder().then(backgroundRecorder => {
                 this.setState({backgroundRecorder});
-                backgroundRecorder.clearRecordedData();
                 backgroundRecorder.startRecording();
             });
 
@@ -63,7 +70,7 @@ class SimpleRecorder extends React.Component {
     }
 
     sendHotwordRecording() {
-        if (this.props.status === PlayerStatus.IDLE && this.state.backgroundRecorder) {
+        if (this.props.status === PlayerStatus.IDLE && this.state.backgroundRecorder.state === "recording") {
             this.state.backgroundRecorder.stopRecording(() => {
                 this.state.backgroundRecorder.getDataURL((audioDataURL) => {
                     submitHotwordRecording({

@@ -1,9 +1,8 @@
-const WakewordDetector = require('@mathquis/node-personal-wakeword')
 const hotwordService = require('../../src/routes/hotword')
 const path = require('path')
 const Response = require('response')
 
-jest.setTimeout(10000)
+jest.setTimeout(30000)
 
 test('Returns 400 on empty body request', async () => {
     let res = new Response(null, {
@@ -20,7 +19,6 @@ test('Returns 400 on empty body request', async () => {
         body: null
     }
 
-    await hotwordService.setUpKeywordClient(true)
     const response = await hotwordService.startListening(req, res, true)
 
     try {
@@ -30,91 +28,102 @@ test('Returns 400 on empty body request', async () => {
     }
 })
 
-test('Returns 200 on every body containing audio', async () => {
-    const audioFile = path.resolve(__dirname, '../../keywords', './abrakadabra1.wav')
+describe('Sending hotword audio to service ', () => {
+    let res
+    let req
 
-    let res = new Response(null, {
-        status: 100,
-        statusText: "",
-        headers: {
-        'Content-type': 'application/json'
+    beforeAll(() => {
+        const audioFile = path.resolve(__dirname, '../../keywords', './heyGalileo2.wav')
+
+        res = new Response(null, {
+            status: 100,
+            statusText: "",
+            headers: {
+            'Content-type': 'application/json'
+            }
+        })
+
+        req = {
+            method: 'post',
+            headers: { 'Content-type': 'text/plain' },
+            body: audioFile
         }
+
     })
 
-    const req = {
-        method: 'post',
-        headers: { 'Content-type': 'text/plain' },
-        body: audioFile
-    }
-
-    await hotwordService.setUpKeywordClient(true)
-    const response = await hotwordService.startListening(req, res, true)
-
-    try {
-        expect(response.statusCode).toBe(200)
-    } catch (err) {
-        fail(`Expected 200 response`)
-    }
+    it('should give response', (done) => {
+        hotwordService.startListening(req, res, true, doneDetected = done, doneRandom = () => {})
+    })
 })
 
-test('Empty message if NO hotword is detected', async () => {
-    const audioFile = path.resolve(__dirname, '../../keywords', './abrakadabra1.wav')
+describe('Sending random audio to service ', () => {
+    let res
+    let req
 
-    let res = new Response(null, {
-        status: 100,
-        statusText: "",
-        headers: {
-        'Content-type': 'application/json'
+    beforeAll(() => {
+        const audioFile = path.resolve(__dirname, '../../keywords', './abrakadabra1.wav')
+
+        res = new Response(null, {
+            status: 100,
+            statusText: "",
+            headers: {
+            'Content-type': 'application/json'
+            }
+        })
+
+        req = {
+            method: 'post',
+            headers: { 'Content-type': 'text/plain' },
+            body: audioFile
         }
+
     })
 
-    const req = {
-        method: 'post',
-        headers: { 'Content-type': 'text/plain' },
-        body: audioFile
-    }
-
-//     const response = await hotwordService.startListening(req, res, true)
-
-//     console.log(response.json().text)
-
-//     try {
-//         // expect(response.json().text).toBe('')
-//     } catch (err) {
-//         fail(`Expected "not-present" message response`)
-//     }
+    it('should not detect anything', (done) => {
+        hotwordService.startListening(req, res, true, doneDetected = () => {}, doneRandom = done)
+    })
 })
 
-test('"detected" message if hotword is detected', async () => {
-    const audioFile = path.resolve(__dirname, '../../keywords', './heyGalileo1.wav')
+describe('Sending multiple requests ', () => {
+    let res
+    let req1
+    let req2
 
-    let res = new Response(null, {
-        status: 100,
-        statusText: "",
-        headers: {
-        'Content-type': 'application/json'
+    beforeAll(() => {
+        const audioFile1 = path.resolve(__dirname, '../../keywords', './heyGalileo2.wav')
+        const audioFile2 = path.resolve(__dirname, '../../keywords', './abrakadabra1.wav')
+
+        res = new Response(null, {
+            status: 100,
+            statusText: "",
+            headers: {
+            'Content-type': 'application/json'
+            }
+        })
+
+        req1 = {
+            method: 'post',
+            headers: { 'Content-type': 'text/plain' },
+            body: audioFile1
         }
+
+        req2 = {
+            method: 'post',
+            headers: { 'Content-type': 'text/plain' },
+            body: audioFile2
+        }
+
     })
 
-    const req = {
-        method: 'post',
-        headers: { 'Content-type': 'text/plain' },
-        body: audioFile
-    }
-
-    // const response = await hotwordService.startListening(req, res, true)
-
-    // console.log(response.json().text)
-
-    // try {
-    //     expect(response.json().text).toBe('detected')
-    // } catch (err) {
-    //     fail(`Expected "detected" message response`)
-    // }
+    it('should not destroy detector', (done) => {
+        hotwordService.startListening(req1, res, true, doneDetected = done, doneRandom = () => {})
+        hotwordService.startListening(req2, res, true, doneDetected = () => {}, doneRandom = done)
+        hotwordService.startListening(req1, res, true, doneDetected = done, doneRandom = () => {})
+    })
 })
 
 function fail(reason) {
-    throw new Error(reason);
+    throw new Error(reason)
 }
 
-global.fail = fail;
+global.fail = fail
