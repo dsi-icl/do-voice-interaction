@@ -3,6 +3,9 @@ const fileSystem = require('fs')
 const Stream = require('stream')
 const path = require('path')
 
+// The config file is loaded here because the tests do not reach the app.js file, and 
+// importing twice should be avoided if not necessary
+
 // Check that the config file exists
 if (!fileSystem.existsSync('./config/config.json')) {
   console.error('Could not find the configuration file: \'./config/config.json\'')
