@@ -11,7 +11,6 @@ class CustomBERTModel(torch.nn.Module):
     def __init__(self):
         super(CustomBERTModel, self).__init__()
         self.bert = BertModel.from_pretrained('bert-base-uncased')
-        ### New layer:
         self.linear = torch.nn.Linear(768, 1)
 
     def forward(self, input_ids):
@@ -34,34 +33,6 @@ def sigmoid(x):
     return 1/(1 + np.exp(-x))
 
 
-# credit: https://stackoverflow.com/a/39225039
-def download_file_from_google_drive(id, destination):
-    print("Trying to fetch {}".format(destination))
-
-    def get_confirm_token(response):
-        for key, value in response.cookies.items():
-            if key.startswith('download_warning'):
-                return value
-        return None
-
-    def save_response_content(response, destination):
-        CHUNK_SIZE = 32768
-        with open(destination, "wb") as f:
-            for chunk in progress_bar(response.iter_content(CHUNK_SIZE)):
-                if chunk:  # filter out keep-alive new chunks
-                    f.write(chunk)
-
-    URL = "https://docs.google.com/uc?export=download"
-    session = requests.Session()
-    response = session.get(URL, params={'id': id}, stream=True)
-    token = get_confirm_token(response)
-    if token:
-        params = {'id': id, 'confirm': token}
-        response = session.get(URL, params=params, stream=True)
-
-    save_response_content(response, destination)
-
-
 def progress_bar(some_iter):
     try:
         from tqdm import tqdm
@@ -71,13 +42,9 @@ def progress_bar(some_iter):
 
 
 def load_grammar_checker_model():
-    # if (not os.path.isfile('./bert-based-uncased-GDO-lang-8-cola-trained.pth')):
-    #     download_file_from_google_drive('1sPfnUFnzSxbGA9nxvGn85Eds8wU_JyuD',
-    #                                     './bert-based-uncased-GDO-lang-8-cola-trained.pth')
-
     device = torch.device('cpu')
     grammar_checker = CustomBERTModel()
-    grammar_checker.load_state_dict(torch.load('bert-based-uncased-GDO-trained.pth', map_location=device))
+    grammar_checker.load_state_dict(torch.load('bert-base-uncased-GDO-trained.pth', map_location=device))
     grammar_checker.eval()
 
     return grammar_checker
@@ -121,7 +88,7 @@ def check_GE(sents):
         # Forward pass, calculate logit predictions
         logits = checker_model(prediction_inputs)
 
-    # Move logits and labels to CPU
+    # Move predictions and labels to CPU
     logits = logits.detach().cpu().numpy()
 
     # 0 for incorrect, 1 for correct
