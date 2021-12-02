@@ -1,0 +1,43 @@
+{
+  "name": "hotword_service",
+  "version": "1.0.0",
+  "private": true,
+  "main": "src/app.js",
+  "jest": {
+    "verbose": true,
+    "transformIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "globals": {
+      "__DEV__": true,
+      "__RCTProfileIsProfiling": false
+    }
+  },
+  "scripts": {
+    "start": "node -r esm ./bin/www",
+    "start:dev": "nodemon -r esm ./bin/www",
+    "test": "jest --unhandled-rejections=strict --detectOpenHandles",
+    "build:docker": "npm run test && cd ../ && docker-compose build"
+  },
+  "dependencies": {
+    "@mapbox/node-pre-gyp": "^1.0.5",
+    "@mathquis/node-personal-wakeword": "^1.1.1",
+    "audio": "^1.2.0",
+    "esm": "^3.2.25",
+    "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "graceful-fs": "^4.2.8",
+    "http": "0.0.1-security",
+    "https": "^1.0.0",
+    "morgan": "^1.10.0",
+    "path": "^0.12.7",
+    "posix": "^4.2.0",
+    "response": "^0.18.0",
+    "stream": "0.0.2",
+    "stream-buffers": "^3.0.2",
+    "url": "^0.11.0"
+  },
+  "devDependencies": {
+    "jest": "^27.3.1"
+  }
+}

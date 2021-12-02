@@ -12,18 +12,18 @@ app.use((err, req, res, _) => {
     res.status(500).send("Internal server error");
 });
 
-startServer(http.createServer(app), normalizePort(process.env.PORT || "2000"));
-
-if (fs.existsSync("./ssl/privkey.pem")) {
+if (fs.existsSync("./ssl/server.key")) {
     console.log("Loading security certificate");
 
     const credentials = {
-        key: fs.readFileSync("./ssl/privkey.pem", "utf8"),
-        cert: fs.readFileSync("./ssl/cert.pem", "utf8"),
-        ca: fs.readFileSync("./ssl/chain.pem", "utf8")
+        key: fs.readFileSync("./ssl/server.key", "utf8"),
+        cert: fs.readFileSync("./ssl/server.cert", "utf8"),
+        // ca: fs.readFileSync("./ssl/chain.pem", "utf8")
     };
 
     startServer(https.createServer(credentials, app), normalizePort(process.env.PORT || "443"));
+} else {
+    startServer(http.createServer(app), normalizePort(process.env.PORT || "2000"));
 }
 
 function startServer(server, port) {

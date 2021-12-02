@@ -6,6 +6,10 @@
         "rasaTracker":"http://localhost:5005/conversations/default/tracker",
         "rasaTrackerEvents":"http://localhost:5005/conversations/default/tracker/events",
         "emotionRecognitionService":"http://localhost:8000/emotion-recognition",
-        "grammarCorrectionService":"http://localhost:5000/grammar-correction"
+        "grammarCorrectionService":"http://localhost:5000/grammar-correction",
+        "hotwordService":"http://localhost:6006/api/hotword"
+    },
+    "hotword": {
+        "timeout": 10000
     }
 }

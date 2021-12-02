@@ -118,6 +118,27 @@ export async function processEmotion (speech, sttResponse) {
   }
 }
 
+export async function processAudioHotword (client, request) {
+  if (request.audio.type !== 'audio/wav' || request.audio.sampleRate !== 16000) {
+    const error = { status: 'fail', service: 'Voice-assistant service', text: 'The record format is wrong' }
+    await errorProcess(client, error, '', request)
+  } else {
+    const p1 = new Promise((resolve, reject) => {
+      resolve(postData(global.config.services.hotwordService, request.audio.data, 'Hotword Service'))
+    })
+    const p2 = new Promise((resolve, reject) => setTimeout(() => resolve('not-present'), global.config.hotword.timeout))
+
+    const hotwordResponse = await Promise.race([p1, p2])
+
+    console.log('Hotword response - ', hotwordResponse)
+    client.emit('received-hotword-response', {})
+
+    if (hotwordResponse.data.text === 'detected') {
+      client.emit('hotword', {})
+    }
+  }
+}
+
 export async function processAudioCommand (client, request) {
   if (request.audio.type !== 'audio/wav' || request.audio.sampleRate !== 16000) {
     const error = { status: 'fail', service: 'Voice-assistant service', text: 'The record format is wrong' }
