@@ -19,13 +19,9 @@ The tool uses two Bert models, one for checking the grammatical correctness of a
 To test the service and obtain metrics simply run `test_grammar_correction.py`. Make sure you have downloaded the `testing.tsv` file
 from the box before. The test uses a sample from the lang-8 dataset to check the performance of the grammar correction tool. It calculates different metrics such as the accuracy, recall, precision and if they are better than the previously achieved ones overwrites the tests/metrics.txt file. The file should contain 4 lines meaning the following: accuracy, precision, recall of the grammar checking model and the percentage of well corrected sentences.
 
-## Model
+## Grammar Checker Model
 
-Add some comment about the model, how it works etc.
-
-### Troubleshooting
-
-If the model doesn't download automatically when running the service you can download it manually from ['here'](TODO:_paste_link_to_model_here)
+The process of creating our model and how to use it can be found in the `grammar_checker_model` directory. It is used within the service in `model_utils.py`.
 
 ## Code structure
 
