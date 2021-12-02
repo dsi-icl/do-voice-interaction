@@ -17,7 +17,7 @@ def perform_grammar_correction():
     corrections = []
 
     # Check grammatical correctness of command
-    # If the confidence with which the sentence is correct is < GRAMMATICALLY_CORRECT_CONFIDENCE
+    # If the confidence with which the sentence is correct is INCORRECT
     # Then perform sentence correction
     predictions = check_GE([text_data])
     if predictions[0] == INCORRECT:
