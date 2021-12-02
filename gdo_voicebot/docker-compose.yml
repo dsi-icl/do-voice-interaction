@@ -13,6 +13,7 @@ services:
     build: tts_service/
     volumes:
       - "./tts_service/config/config.json:/app/config/config.json:ro"
+      - "./tts_service/cereproc:/app/cereproc:ro"
 
   do-voice-assistant-service:
     image: dsi-icl/do-voice-assistant-service:latest
