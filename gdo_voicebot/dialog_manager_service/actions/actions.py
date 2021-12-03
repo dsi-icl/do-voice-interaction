@@ -54,6 +54,49 @@ class ActionRespondAboutToday(Action):
             dispatcher.utter_message(text="Are you alright? You seem a little off...")
 
         return []
+
+class ActionTurnOnGrammarCorrection(Action):
+
+    def name(self) -> Text:
+        return "action_turn_on_grammar_correction"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        dispatcher.utter_message(text="Grammar correction has been turned on.")
+        return [SlotSet("grammar_correction_enabled", True)]
+
+class ActionTurnOffGrammarCorrection(Action):
+
+    def name(self) -> Text:
+        return "action_turn_off_grammar_correction"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        dispatcher.utter_message(text="Grammar correction has been turned off.")
+        
+        return [SlotSet("grammar_correction_enabled", False)]
+
+class ActionCheckGrammarCorrectionEnabled(Action):
+
+    def name(self) -> Text:
+        return "action_check_grammar_correction_enabled"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        grammar_correction_enabled = tracker.get_slot("grammar_correction_enabled")
+        if grammar_correction_enabled:
+            dispatcher.utter_message(text="Grammar correction is currently enabled")
+        else:
+            dispatcher.utter_message(text="Grammar correction is currently disabled")
+        
+        return []
+
 class ActionTurnOnEmotionDetection(Action):
 
     def name(self) -> Text:

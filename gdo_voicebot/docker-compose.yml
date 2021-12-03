@@ -29,7 +29,7 @@ services:
       - PORT=2000
 
   do-voice-dialog-manager-service:
-    image: rasa/rasa:1.10.11-full
+    image: rasa/rasa:2.8.11-full
     volumes:
       - ./dialog_manager_service/models:/app/models:ro
       - ./dialog_manager_service/config/credentials.docker.yml:/app/config/credentials.yml:ro
@@ -46,6 +46,12 @@ services:
     build: emotion_recognition_service/
     volumes:
       - "./emotion_recognition_service:/usr/src/app"
+
+  do-voice-grammar-correction-service:
+    container_name: do-voice-grammar-correction-service
+    build: grammar_correction_service/
+    volumes:
+      - "./grammar_correction_service:/usr/src/app"
 
   do-voice-hotword-service:
     image: dsi-icl/do-voice-hotword-service:latest

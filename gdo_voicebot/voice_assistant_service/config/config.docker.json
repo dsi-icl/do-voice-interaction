@@ -6,6 +6,7 @@
         "rasaTracker":"http://do-voice-dialog-manager-service:5005/conversations/default/tracker",
         "rasaTrackerEvents":"http://do-voice-dialog-manager-service:5005/conversations/default/tracker/events",
         "emotionRecognitionService":"http://do-voice-emotion-recognition-service:8000/emotion-recognition",
+        "grammarCorrectionService":"http://do-voice-grammar-correction-service:5000/grammar-correction",
         "hotwordService":"http://do-voice-hotword-service:6006/api/hotword"
     },
     "hotword": {

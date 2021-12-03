@@ -30,6 +30,9 @@ intents:
   - ask_current_emotion
   - turn_on_emotion_detection
   - turn_off_emotion_detection
+  - turn_on_grammar_correction
+  - turn_off_grammar_correction
+  - check_grammar_correction_enabled
 
 
 entities:
@@ -56,6 +59,9 @@ slots:
     type: text
     initial_value: "n/a"
   emotion_detection_enabled:
+    type: bool
+    initial_value: false
+  grammar_correction_enabled:
     type: bool
     initial_value: false
   demo:
@@ -175,6 +181,9 @@ actions:
   - action_turn_on_emotion_detection
   - action_turn_off_emotion_detection
   - action_check_emotion_detection_enabled
+  - action_turn_on_grammar_correction
+  - action_turn_off_grammar_correction
+  - action_check_grammar_correction_enabled
   - action_receive_name
   - action_say_name
   - action_respond_about_today
