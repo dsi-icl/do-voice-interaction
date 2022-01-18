@@ -61,3 +61,9 @@ services:
     volumes:
       - "./hotword_service/config/config.json:/app/config/config.json:ro"
       - "./hotword_service/save:/app/save"
+
+  do-speech-filler-service:
+    container_name: do-speech-filler-service
+    build: speech_filler_service/
+    volumes:
+      - "./speech_filler_service:/usr/src/app"

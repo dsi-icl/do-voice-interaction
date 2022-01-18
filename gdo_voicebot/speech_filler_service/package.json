@@ -1,0 +1,20 @@
+{
+  "name": "speech_filler_service",
+  "version": "1.0.0",
+  "private": true,
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "start:dev": "nodemon src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@mapbox/node-pre-gyp": "^1.0.5",
+    "esm": "^3.2.25",
+    "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "graceful-fs": "^4.2.8",
+    "http": "0.0.1-security",
+    "https": "^1.0.0"
+  }
+}

@@ -364,6 +364,20 @@
 * check_grammar_correction_enabled
   - action_check_grammar_correction_enabled
 
+# turn on natural speech fillers
+* turn_on_speech_naturalization
+  - utter_affirm
+  - action_turn_on_speech_naturalization
+
+# turn off natural speech fillers
+* turn_off_speech_naturalization
+  - utter_affirm
+  - action_turn_off_speech_naturalization
+
+# check natural speech fillers status
+* check_naturalization_status
+  - action_check_naturalization_status
+
 <!--
 # conversation with emotion detection
 * start_small_talk
