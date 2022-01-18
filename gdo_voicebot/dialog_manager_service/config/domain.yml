@@ -37,7 +37,6 @@ intents:
   - turn_off_speech_naturalization
   - check_naturalization_status
 
-
 entities:
   - demo
   - control_command

@@ -7,9 +7,22 @@
  * @import { isEmpty } from "./routes/index.js"
  * @see {@link "./routes/index.js"|index.js}
  */
-import { isEmpty } from './index.js'
+import {isEmpty} from './index.js'
 
-const DeepSpeech = require('deepspeech')
+let DeepSpeech = null;
+try {
+    DeepSpeech = require('deepspeech-gpu')
+    console.info("DeepSpeech GPU loaded");
+} catch (e) {
+    console.warn("Could not load DeepSpeech gpu, trying the cpu version");
+    try {
+        DeepSpeech = require('deepspeech')
+        console.info("DeepSpeech CPU loaded");
+    } catch (e_) {
+        throw new Error("Unable to load DeepSpeech module");
+    }
+}
+
 
 /**
  * Function that returns the transcription of an audioBuffer using deepspeech node.
@@ -19,8 +32,8 @@ const DeepSpeech = require('deepspeech')
  * @returns {String} The text message from the user
  * @see {@link https://deepspeech.readthedocs.io/en/v0.7.4/NodeJS-API.html|DeepSpeech}
  */
-function speechToText (audioBuffer, model) {
-  return model.stt(audioBuffer)
+function speechToText(audioBuffer, model) {
+    return model.stt(audioBuffer)
 }
 
 /**
@@ -32,14 +45,14 @@ function speechToText (audioBuffer, model) {
  * @see {@link https://deepspeech.readthedocs.io/en/latest/NodeJS-API.html|DeepSpeech}
  * @returns {DeepSpeech.Model} The model to be used for the transcription
  */
-export function loadDeepSpeechModel () {
-  const model = new DeepSpeech.Model(global.config.deepSpeechParameters.modelPath)
-  model.setBeamWidth(global.config.deepSpeechParameters.BEAM_WIDTH)
+export function loadDeepSpeechModel() {
+    const model = new DeepSpeech.Model(global.config.deepSpeechParameters.modelPath)
+    model.setBeamWidth(global.config.deepSpeechParameters.BEAM_WIDTH)
 
-  model.enableExternalScorer(global.config.deepSpeechParameters.scorerPath)
-  model.setScorerAlphaBeta(global.config.deepSpeechParameters.LM_ALPHA, global.config.deepSpeechParameters.LM_BETA)
+    model.enableExternalScorer(global.config.deepSpeechParameters.scorerPath)
+    model.setScorerAlphaBeta(global.config.deepSpeechParameters.LM_ALPHA, global.config.deepSpeechParameters.LM_BETA)
 
-  return model
+    return model
 }
 
 /**
@@ -48,25 +61,25 @@ export function loadDeepSpeechModel () {
  * @param {Response} res the response in json format
  * @param {DeepSpeech.Model} model the DeepSppech model to make the speech to text transcription
  */
-export function executeSpeechToTextRequest (req, res, model) {
-  // If we receive an empty buffer or an undefined object we send back an error to the voice assistant service.
-  if (isEmpty(req.body)) {
-    res.status(400).json({
-      status: 'fail',
-      service: 'Speech To Text service',
-      message: 'The request body contains nothing'
-    })
-    return
-  }
+export function executeSpeechToTextRequest(req, res, model) {
+    // If we receive an empty buffer or an undefined object we send back an error to the voice assistant service.
+    if (isEmpty(req.body)) {
+        res.status(400).json({
+            status: 'fail',
+            service: 'Speech To Text service',
+            message: 'The request body contains nothing'
+        })
+        return
+    }
 
-  const buffer = Buffer.from(req.body, 'base64')
-  const textMessage = speechToText(buffer, model)
+    const buffer = Buffer.from(req.body, 'base64')
+    const textMessage = speechToText(buffer, model)
 
-  // If deepspeech transcription is empty we send back an error to the voice assistant service.
-  if (textMessage.length === 0) {
-    res.status(400).json({ status: 'fail', service: 'Speech To Text service', text: 'No transcription for this' })
-  } else {
-    // Everything is fine, we send back the textMessage
-    res.status(200).json({ status: 'ok', service: 'Speech To Text service', text: textMessage })
-  }
+    // If deepspeech transcription is empty we send back an error to the voice assistant service.
+    if (textMessage.length === 0) {
+        res.status(400).json({status: 'fail', service: 'Speech To Text service', text: 'No transcription for this'})
+    } else {
+        // Everything is fine, we send back the textMessage
+        res.status(200).json({status: 'ok', service: 'Speech To Text service', text: textMessage})
+    }
 }

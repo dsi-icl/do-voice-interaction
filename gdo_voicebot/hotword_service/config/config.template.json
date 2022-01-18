@@ -1,0 +1,57 @@
+{
+    "keyword": {
+        "name": "heyGalileo",
+		"sampleRate": 16000,
+		"detectorThreshold": 0.3,
+		"productionThreshold": 0.2,
+		"testingThreshold": 0.3,
+        "productionSamples": [
+			"./keywords/heyGalileoLiveVlad_no_silence.wav",
+			"./keywords/heyGalileo1.wav",
+			"./keywords/heyGalileo2.wav",    
+			"./keywords/heyGalileo3.wav",
+			"./keywords/heyGalileo4.wav",
+			"./keywords/heyGalileo5.wav",    
+			"./keywords/heyGalileo6.wav",
+			"./keywords/heyGalileo7.wav",
+			"./keywords/heyGalileo8.wav",    
+			"./keywords/heyGalileo9.wav",
+			"./keywords/heyGalileo11.wav",
+			"./keywords/heyGalileo12.wav",    
+			"./keywords/heyGalileo22.wav", 
+			"./keywords/heyGalileoIza1.wav",
+			"./keywords/heyGalileoIza2.wav",
+			"./keywords/heyGalileoIza3.wav",
+			"./keywords/heyGalileoIza7.wav",
+			"./keywords/heyGalileoIza8.wav",
+			"./keywords/heyGalileoIza9.wav",
+			"./keywords/heyGalileoNicole1.wav",
+			"./keywords/heyGalileoNicole4.wav",
+			"./keywords/heyGalileoNicole6.wav",
+			"./keywords/heyGalileoNicole8.wav",
+			"./keywords/heyGalileoNicole10.wav",
+			"./keywords/heyGalileoNicole11.wav",
+			"./keywords/heyGalileoUna1.wav",
+			"./keywords/heyGalileoUna2.wav",
+			"./keywords/heyGalileoUna5.wav",
+			"./keywords/heyGalileoUna7.wav",
+			"./keywords/heyGalileoUna8.wav",
+			"./keywords/heyGalileoBianca1.wav",
+			"./keywords/heyGalileoBianca3.wav",
+			"./keywords/heyGalileoBianca6.wav",
+			"./keywords/heyGalileoBianca7.wav",
+			"./keywords/heyGalileoBianca10.wav"
+		],
+        "testSamples": [
+			"./keywords/heyGalileo1.wav",
+			"./keywords/heyGalileo2.wav",
+			"./keywords/heyGalileo3.wav"
+		]
+    },
+	"utils": {
+		"maxSavedFiles": 10,
+		"timeoutValue": 5000,
+		"testTimeoutValue": 5000,
+		"listenersPerStream": 3
+	}
+}
