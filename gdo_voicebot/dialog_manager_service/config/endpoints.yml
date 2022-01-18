@@ -1,5 +1,5 @@
 # This file contains the different endpoints your bot can use.
 
 action_endpoint:
- url: "http://do-voice-dialog-manager-actions-service:5055/webhook" # Your IP required (not 'localhost')
+ url: "http://specify-your-ip-here:5055/webhook" # Your IP required (not 'localhost')
  

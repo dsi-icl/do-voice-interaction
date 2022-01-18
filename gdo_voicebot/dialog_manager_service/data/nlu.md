@@ -309,6 +309,30 @@
 - stop emotion recognition
 - disable emotion detection
 
+## intent:turn_on_grammar_correction
+- start grammar correction
+- turn on grammar correction
+- turn grammar correction on
+- enable grammar correction
+- start correcting my grammar
+
+## intent:turn_off_grammar_correction
+- stop grammar correction
+- turn off grammar correction
+- turn grammar correction off
+- disable grammar correction
+- stop correcting my grammar
+
+## intent:check_grammar_correction_enabled
+- grammar correction status
+- is grammar correction enabled?
+- is grammar correction on
+- is grammar correction turned on
+- have you turned off grammar correction?
+- have you turned on grammar correction?
+- can you check if grammar correction is on
+- are you going to correct my grammar?
+
 ## intent:check_naturalization_status
 - are natural speech fillers enabled
 - Are natural speech fillers enabled
