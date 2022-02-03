@@ -1,0 +1,11 @@
+node_modules/
+
+package-lock.json
+
+.idea/
+*.iml
+
+*.log
+
+# do not commit the real config file, use the template instead
+config/config.json 

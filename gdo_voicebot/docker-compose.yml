@@ -13,6 +13,7 @@ services:
     build: tts_service/
     volumes:
       - "./tts_service/config/config.json:/app/config/config.json:ro"
+      - "./tts_service/cereproc:/app/cereproc:ro"
 
   do-voice-assistant-service:
     image: dsi-icl/do-voice-assistant-service:latest
@@ -46,6 +47,11 @@ services:
     build: emotion_recognition_service/
     volumes:
       - "./emotion_recognition_service:/usr/src/app"
+
+  do-speech-filler-service:
+    image: dsi-icl/do-speech-filler-service-latest
+    container_name: do-speech-filler-service
+    build: speech_filler_service/
 
   do-voice-grammar-correction-service:
     image: dsi-icl/do-voice-grammar-correction-service
