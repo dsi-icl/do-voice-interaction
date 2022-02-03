@@ -364,6 +364,20 @@
 * check_naturalization_status
   - action_check_naturalization_status
 
+# turn on grammar correction
+* turn_on_grammar_correction
+  - utter_affirm
+  - action_turn_on_grammar_correction
+
+# turn off grammar correction
+* turn_off_grammar_correction
+  - utter_affirm
+  - action_turn_off_grammar_correction
+
+# check grammar correction status
+* check_grammar_correction_enabled
+  - action_check_grammar_correction_enabled
+
 <!--
 # conversation with emotion detection
 * start_small_talk

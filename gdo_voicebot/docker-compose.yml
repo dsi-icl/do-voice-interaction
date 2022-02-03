@@ -25,6 +25,9 @@ services:
       - "2000:2000"
     volumes:
       - "./voice_assistant_service/config/config.docker.json:/app/config/config.json:ro"
+      - "./voice_assistant_service/ssl:/app/ssl:ro"
+    environment:
+      - PORT=2000
 
   do-voice-dialog-manager-service:
     image: rasa/rasa:2.8.11-full
@@ -49,3 +52,18 @@ services:
     image: dsi-icl/do-speech-filler-service-latest
     container_name: do-speech-filler-service
     build: speech_filler_service/
+
+  do-voice-grammar-correction-service:
+    image: dsi-icl/do-voice-grammar-correction-service
+    container_name: do-voice-grammar-correction-service
+    build: grammar_correction_service/
+    volumes:
+      - "./grammar_correction_service:/usr/src/app"
+
+  do-voice-hotword-service:
+    image: dsi-icl/do-voice-hotword-service:latest
+    container_name: do-voice-hotword-service
+    build: hotword_service/
+    volumes:
+      - "./hotword_service/config/config.json:/app/config/config.json:ro"
+      - "./hotword_service/save:/app/save"

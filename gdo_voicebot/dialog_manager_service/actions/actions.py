@@ -4,7 +4,7 @@
 # See this guide on how to implement these action:
 # https://rasa.com/docs/rasa/core/actions/#custom-actions/
 
-
+import logging
 from typing import Any, Text, Dict, List
 
 from rasa_sdk import Action, Tracker
@@ -16,12 +16,15 @@ from functools import lru_cache
 from utilities.utils_graphql import GraphQL
 from utilities.utils_actions import *
 
+logger = logging.getLogger(__name__)
+
 try:
-    print('Connection to graphql')
     my_graphQL = GraphQL('./config/config.yml')
+    logger.info('Connection to graphql: ' + my_graphQL.get_url())
 except Exception as e:
+    logger.error(e)
     raise e
-    print(e)
+
 
 class ActionRespondAboutToday(Action):
 
@@ -51,6 +54,49 @@ class ActionRespondAboutToday(Action):
             dispatcher.utter_message(text="Are you alright? You seem a little off...")
 
         return []
+
+class ActionTurnOnGrammarCorrection(Action):
+
+    def name(self) -> Text:
+        return "action_turn_on_grammar_correction"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        dispatcher.utter_message(text="Grammar correction has been turned on.")
+        return [SlotSet("grammar_correction_enabled", True)]
+
+class ActionTurnOffGrammarCorrection(Action):
+
+    def name(self) -> Text:
+        return "action_turn_off_grammar_correction"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        dispatcher.utter_message(text="Grammar correction has been turned off.")
+        
+        return [SlotSet("grammar_correction_enabled", False)]
+
+class ActionCheckGrammarCorrectionEnabled(Action):
+
+    def name(self) -> Text:
+        return "action_check_grammar_correction_enabled"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        grammar_correction_enabled = tracker.get_slot("grammar_correction_enabled")
+        if grammar_correction_enabled:
+            dispatcher.utter_message(text="Grammar correction is currently enabled")
+        else:
+            dispatcher.utter_message(text="Grammar correction is currently disabled")
+        
+        return []
+
 class ActionTurnOnEmotionDetection(Action):
 
     def name(self) -> Text:

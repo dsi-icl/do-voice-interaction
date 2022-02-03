@@ -7,5 +7,10 @@
         "rasaTrackerEvents":"http://localhost:5005/conversations/default/tracker/events",
         "emotionRecognitionService":"http://localhost:8000/emotion-recognition",
         "speechFillerService":"http://localhost:7000/speech-filler"
+        "grammarCorrectionService":"http://localhost:5000/grammar-correction",
+        "hotwordService":"http://localhost:6006/api/hotword"
+    },
+    "hotword": {
+        "timeout": 10000
     }
 }
