@@ -1,6 +1,6 @@
 # Data Observatory - Voice Assistant
 
-The goal of this project is to provide a voice assistant to the Data Observatory able to execute various commands and to support users during their presentation. 
+The goal of this project is to provide a voice assistant to the [Data Observatory](https://www.imperial.ac.uk/data-science/data-observatory/) able to execute various commands and to support users during their presentation. 
 
 ## Description
 
@@ -40,3 +40,11 @@ These models will help you to better understand how the project works:
 * [Front-end perpective](https://github.com/dsi-icl/do-voice-interaction/blob/master/diagrams/front_end.png)
 * [Back-end perspective](https://github.com/dsi-icl/do-voice-interaction/blob/master/diagrams/back_end.png)
 * [Dialogue Use Case](https://github.com/dsi-icl/do-voice-interaction/blob/master/diagrams/use_case.png)
+
+## Getting started
+
+The various components of the project can be configured using the [docker compose file](https://github.com/dsi-icl/do-voice-interaction/blob/master/voicebot/docker-compose.yml). Several components require a bit of tweaking and configuration. All details should be available in the component readme file.
+
+## Development
+
+All the components can be run independently and the instruction should be found in the readme file of each service. 
