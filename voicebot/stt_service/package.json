@@ -14,7 +14,7 @@
     "cookie-parser": "1.4.5",
     "cors": "2.8.5",
     "debug": "4.3.1",
-    "deepspeech": "0.8.2",
+    "deepspeech": "0.9.3",
     "esm": "3.2.25",
     "express": "4.17.1",
     "http-errors": "1.8.0",
