@@ -14,7 +14,7 @@ This project offers a modular framework for a voice-enabled chat service. The [v
 * [Emotion recognition service](https://github.com/dsi-icl/do-voice-interaction/blob/master/voicebot/emotion_recognition_service/README.md)
 * [Hotword detection service](https://github.com/dsi-icl/do-voice-interaction/blob/master/voicebot/hotword_service/Readme.md)
 * [Grammar correction service](https://github.com/dsi-icl/do-voice-interaction/blob/master/voicebot/grammar_correction_service/README.md)
-* [(Draft) Speech Filler service](https://github.com/dsi-icl/do-voice-interaction/blob/experimental/bigram_naturalisation/voicebot/speech_filler_service/README.md)
+* [(Draft) Speech Filler service](https://github.com/dsi-icl/do-voice-interaction/blob/experimental/bigram_naturalisation/gdo_voicebot/speech_filler_service/README.md)
 
 There's also a [web client](https://github.com/dsi-icl/do-voice-interaction/blob/master/voicebot/voice_assistant_client/README.md) to help you with the interaction.
 
