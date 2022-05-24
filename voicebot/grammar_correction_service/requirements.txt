@@ -3,6 +3,6 @@ Flask==1.1.2
 torch==1.10.0
 pytorch_pretrained_bert==0.6.2
 keras==2.6.0
-tensorflow==2.6.0
+tensorflow==2.6.4
 pyinflect==0.5.1
 transformers==4.12.5
