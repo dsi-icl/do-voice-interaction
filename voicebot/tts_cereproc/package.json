@@ -1,0 +1,48 @@
+{
+  "name": "tts_service",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node -r esm ./bin/www",
+    "start:dev": "nodemon -r esm ./bin/www",
+    "build": "ncc build ./bin/www -o dist -m",
+    "lint": "standard ./src/**/*.js ./src/*.js",
+    "lint:fix": "standard --fix ./src/**/*.js ./src/*.js"
+  },
+  "dependencies": {
+    "axios": "0.21.1",
+    "base64-arraybuffer": "^1.0.2",
+    "base64-stream": "1.0.0",
+    "cookie-parser": "1.4.5",
+    "cors": "2.8.5",
+    "debug": "4.3.1",
+    "esm": "3.2.25",
+    "express": "4.17.1",
+    "gtts": "0.2.1",
+    "http-errors": "1.8.0",
+    "jsdoc-route-plugin": "0.1.0",
+    "lodash": "4.17.21",
+    "morgan": "1.10.0",
+    "node-fetch": "2.6.1",
+    "node-wav": "^0.0.2",
+    "stream-to-promise": "3.0.0",
+    "uuid": "8.3.2",
+    "wav": "1.0.2",
+    "web-audio-api": "^0.2.2",
+    "yargs-parser": "20.2.7"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "0.28.6",
+    "babel-eslint": "10.1.0",
+    "eslint": "7.28.0",
+    "jsdoc": "3.6.7",
+    "nodemon": "2.0.7",
+    "standard": "14.3.4"
+  },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/__utils"
+    ]
+  }
+}
