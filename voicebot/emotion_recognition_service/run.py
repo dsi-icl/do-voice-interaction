@@ -196,6 +196,8 @@ def processPrediction(prediction):
         n_emotions = len(prediction) // 20 + 1
 
     classifiedEmotions = []
+    arousals=[]
+    valences=[]
     for i in range(n_emotions):
         print('')
         chunk = prediction[i*20:(i+1)*20]
@@ -203,6 +205,8 @@ def processPrediction(prediction):
         mean_a, mean_v = np.mean(chunk, axis=0)
         print('mean arousal = ' + str(mean_a))
         print('mean valence = ' + str(mean_v))
+        arousals.append(mean_a)
+        valences.append(mean_v)
         emotion = classifyEmotion(mean_a, mean_v)
         classifiedEmotions.append(emotion)
         print(emotion)
@@ -221,7 +225,8 @@ def processPrediction(prediction):
     else:
         final_emotion =  most_common_emotion[0][0]
     print('\nFinal single emotion is: ' + str(final_emotion) + '\n')
-    return final_emotion
+    thayers = str(sum(valences)/n_emotions)+","+str(sum(arousals)/n_emotions)
+    return final_emotion, thayers
 
 
 @app.route("/emotion-recognition", methods=['POST'])
@@ -308,10 +313,10 @@ def detectEmotion():
     print(type(predictions))
     delete_files(filename)
 
-    emotion = processPrediction(predictions)
+    (emotion, thayers) = processPrediction(predictions)
 
     # Send the detected emotion back to voice assistant service
-    data = {'status': 'ok', 'service': 'emotion recognition service', 'emotion': emotion}
+    data = {'status': 'ok', 'service': 'emotion recognition service', 'emotion': emotion, 'thayers':thayers}
     
     response = app.response_class(
         response=json.dumps(data),
