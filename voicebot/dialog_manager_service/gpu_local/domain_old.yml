@@ -1,0 +1,265 @@
+version: "3.1"
+
+intents:
+- greet
+- affirm
+- deny
+- goodbye
+- help
+- open
+- out_of_scope
+- search
+- shutdown
+- control
+- clear_space
+- switch_modes
+- turn_on_gdo
+- open_environment
+- open_browsers
+- close_browsers
+- refresh_browsers
+- ask_repeat
+- list_available_demos
+- zoom
+- move
+- start_small_talk
+- check_emotion_detection_enabled
+- want_to_give_name
+- give_name
+- repeat_name
+- tell_about_today
+- ask_current_emotion
+- turn_on_emotion_detection
+- turn_off_emotion_detection
+- turn_on_grammar_correction
+- turn_off_grammar_correction
+- check_grammar_correction_enabled
+entities:
+- demo
+- control_command
+- mode
+- work_environment
+- switch_action
+- tag
+- search_mode
+- zoom_action
+- zoom_big_level
+- zoom_small_level
+- open_browsers
+- close_browsers
+- reset_browsers
+- direction
+slots:
+  name:
+    type: text
+    initial_value: ''
+    mappings:
+    - type: custom
+  emotion:
+    type: text
+    initial_value: n/a
+    mappings:
+    - type: custom
+  emotion_detection_enabled:
+    type: bool
+    initial_value: false
+    mappings:
+    - type: custom
+  grammar_correction_enabled:
+    type: bool
+    initial_value: false
+    mappings:
+    - type: custom
+  demo:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: demo
+  tag:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: tag
+  control_command:
+    type: categorical
+    values:
+    - refresh
+    - stop
+    - reset
+    - play
+    - mute
+    - pause
+    - play loop
+    mappings:
+    - type: from_entity
+      entity: control_command
+  mode:
+    type: categorical
+    values:
+    - section
+    - cluster
+    mappings:
+    - type: from_entity
+      entity: mode
+  work_environment:
+    type: categorical
+    values:
+    - students
+    - production
+    - development
+    mappings:
+    - type: from_entity
+      entity: work_environment
+  switch_action:
+    type: categorical
+    values:
+    - switch
+    mappings:
+    - type: from_entity
+      entity: switch_action
+  search_mode:
+    type: categorical
+    values:
+    - tag
+    - keyword
+    - tags
+    - keywords
+    mappings:
+    - type: from_entity
+      entity: search_mode
+  read_list:
+    type: bool
+    mappings:
+    - type: custom
+  restart:
+    type: bool
+    mappings:
+    - type: custom
+  zoom_action:
+    type: categorical
+    values:
+    - in
+    - out
+    mappings:
+    - type: from_entity
+      entity: zoom_action
+  zoom_big_level:
+    type: categorical
+    values:
+    - a lot
+    - hard
+    - large
+    - big
+    mappings:
+    - type: from_entity
+      entity: zoom_big_level
+  zoom_small_level:
+    type: categorical
+    values:
+    - a little
+    - small
+    - a bit
+    mappings:
+    - type: from_entity
+      entity: zoom_small_level
+  open_browsers:
+    type: categorical
+    values:
+    - open browsers
+    - open the browsers
+    - Open browsers
+    - Open the browsers
+    mappings:
+    - type: from_entity
+      entity: open_browsers
+  close_browsers:
+    type: categorical
+    values:
+    - close browsers
+    - close the browsers
+    - Close browsers
+    - Close the browsers
+    mappings:
+    - type: from_entity
+      entity: close_browsers
+  reset_browsers:
+    type: categorical
+    values:
+    - reset browsers
+    - reset the browsers
+    - Reset the browsers
+    - Reset browsers
+    mappings:
+    - type: from_entity
+      entity: reset_browsers
+  direction:
+    type: categorical
+    values:
+    - up
+    - top
+    - down
+    - bottom
+    - right
+    - left
+    mappings:
+    - type: from_entity
+      entity: direction
+actions:
+- action_open
+- action_list_demos
+- action_shutdown
+- action_turn_on_gdo
+- action_control
+- action_search
+- action_clear_space
+- action_switch_modes
+- action_open_environment
+- action_help
+- action_reset_slot_open
+- action_reset_slot_search
+- action_open_browsers
+- action_close_browsers
+- action_refresh_browsers
+- action_repeat
+- action_zoom
+- action_reset_slot_zoom
+- action_move
+- action_reset_slot_direction
+- action_reset_slot_browsers
+- action_turn_on_emotion_detection
+- action_turn_off_emotion_detection
+- action_check_emotion_detection_enabled
+- action_turn_on_grammar_correction
+- action_turn_off_grammar_correction
+- action_check_grammar_correction_enabled
+- action_receive_name
+- action_say_name
+- action_respond_about_today
+responses:
+  utter_greet:
+  - text: Welcome to the Data Observatory. I am your voice assistant. Can I help you ?
+  utter_goodbye:
+  - text: The Data Observatory thanks you for your presentation. I hope to see you soon
+  utter_affirm:
+  - text: Fine
+  - text: No worries
+  utter_out_of_scope:
+  - text: Sorry, I can't handle that request.
+  utter_confirm_shutdown:
+  - text: Do you really want to shutdown the screens ?
+  - text: Do you really want to shutdown the GDO ?
+  utter_confirm_turn_on_gdo:
+  - text: Do you really want to turn on the Global Data Observatory ?
+  utter_confirm_start_small_talk:
+  - text: Sure let's have a chat!
+  utter_ask_to_turn_on_emotion_detection:
+  - text: Can I turn on emotion detection so that I can understand you better?
+  utter_ask_name:
+  - text: So, what is your name?
+  utter_ask_about_today:
+  - text: What have you been up to today {name}?
+  utter_current_emotion:
+  - text: '{emotion}'
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

@@ -1,5 +1,6 @@
 requests
 requests-cache
-graphql-core==2.3.2
+graphql-core<3.3,>=3.2
 gql
 pyaml
+requests_toolbelt
