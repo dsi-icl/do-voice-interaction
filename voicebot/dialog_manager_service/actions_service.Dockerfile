@@ -1,11 +1,11 @@
 # Extend the official Rasa SDK image
-FROM rasa/rasa-sdk:1.10.2
+FROM python:3.8-buster
 
 # Use subdirectory as working directory
 WORKDIR /app
 
 # Copy any additional custom requirements
-COPY actions/requirements-actions.txt ./
+COPY ./dialog_manager_service/actions/requirements-actions.txt ./
 
 # Change back to root user to install dependencies
 USER root
@@ -14,18 +14,18 @@ USER root
 RUN pip install -r requirements-actions.txt
 
 # Copy actions folder to working directory
-COPY ./actions /app/actions
+COPY ./dialog_manager_service/actions /app/actions
 
 # Copy utilities folder to working directory
-COPY ./utilities /app/utilities
+COPY ./dialog_manager_service/utilities /app/utilities
 
 # Copy configuration
-COPY ./config/config.docker.yml /app/config/config.yml
+COPY ./dialog_manager_service/config/config.docker.yml /app/config/config.yml
 
 # Copy module file
-COPY __init__.py ./
+COPY ./dialog_manager_service/__init__.py ./
 
 # By best practices, don't run the code with root user
 USER 1001
 
-CMD ["start", "--actions", "actions.actions"]
+CMD ["python", "-m", "rasa_sdk", "--actions", "actions.actions"]

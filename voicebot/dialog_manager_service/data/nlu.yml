@@ -327,906 +327,906 @@ nlu:
     - have you turned on grammar correction?
     - can you check if grammar correction is on
     - are you going to correct my grammar?
-- intent: dev,4,7,0,0
-  examples: |
-    - Oh my God, he's lost it. He's totally lost it.
-    - oh dear my my god, he's lost it. he'll s totally lost it.
-    - and oh my god, he's lost it. surely he's totally already lost it.
-    - but my god, jules'hasn lost it. he's totally lost it.
-    - oh my goodness, he't lost it. she's totally lost it.
-    - Oh my God, he lost it. He completely lost it.
-    - Oh my god he lost it. He totally lost it.
-- intent: dev,4,4,1,0
-  examples: |
-    - Or! Or, we could go to the bank, close our accounts and cut them off at the source.
-    - or! or, we even could go to call the bank, close our accounts and totally cut them off at the source.
-    - or! or, we could go round to the nearest bank, close our accounts to and cut them off at the source.
-    - or! or, we could go on the bank, close our ears and hit them off at the source.
-    - ha! or, we could go to the source, close some accounts and cut them off at the source.
-    - Or! Or we can go to the bank, close our accounts and cut them off at the source.
-    - Or! Or we could go to the bank, close our accounts and cut them off at the source.
-- intent: dev,4,4,1,1
-  examples: |
-    - You're a genius!
-    - hey you're so a genius!
-    - or you're a computer genius!
-    - sha'ra a genius!
-    - you'r a freak!
-    - You are a genius!
-    - You are a genius!
-- intent: dev,4,4,1,2
-  examples: |
-    - Aww, man, now we won't be bank buddies!
-    - well aww, man, now we won't always be playing bank buddies!
-    - but aww, man, maybe now we won't be old bank buddies!
-    - aww, babe, now we won't be good friends!
-    - aww, man, pretend we didn't become bank buddies!
-    - Aww, man, now we won't be couch buddies!
-    - Aww man, now we're not going to be bank buddies anymore!
-- intent: dev,4,4,1,3
-  examples: |
-    - Now, there's two reasons.
-    - not now, there'ain s no two reasons.
-    - now, though there's definitely two valid reasons.
-    - surely, there'are more reasons.
-    - now, you'ave more reasons.
-    - Now, there are two reasons.
-    - Well, there are two reasons.
-- intent: dev,4,4,1,4
-  examples: |
-    - Hey.
-    - but hey.
-    - ... hey.
-    - ch.
-    - ed.
-    - Shark.
-    - hey
-- intent: dev,4,4,1,5
-  examples: |
-    - Hey!
-    - yo hey!
-    - « hey!
-    - no!
-    - loud!
-    - Shark!
-    - Hey!
-- intent: dev,4,4,1,6
-  examples: |
-    - Ohh, you guys, remember that cute client I told you about? I bit him.
-    - ohh, you guys, you remember oh that cute client i told you about? i just bit him.
-    - ohh, you guys, remember that cute client that i probably told on you about? i bit him.
-    - well, you wish, remember that cute client i told mom about? i bit him.
-    - yeah, and guys, remember that cute client i told you about? he bit him.
-    - Oh, you guys, remember that cute client I told you about? I bit him.
-    - Oh, folks, remember that cute customer I told you about? i bit him
-- intent: dev,4,4,1,7
-  examples: |
-    - Where?!
-    - check where?!
-    - since where?!
-    - seriously?!
-    - you?!
-    - Where?!
-    - Where?!
-- intent: dev,4,4,1,8
-  examples: |
-    - On the touchy.
-    - on to the surface touchy.
-    - on for the record touchy.
-    - on its roof.
-    - not... touchy.
-    - On the tangent.
-    - On the sensitive.
-- intent: dev,4,4,1,9
-  examples: |
-    - And
-    - books and
-    - 35 and
-    - ...
-    - ex
-    - And
-    - and
-- intent: dev,4,4,1,10
-  examples: |
-    - No, I know!
-    - oh no, all i know!
-    - but no, i do know!
-    - shit, i thought!
-    - ah, you know!
-    - No, I know!
-    - No, I know!
-- intent: dev,4,4,1,11
-  examples: |
-    - I-I'm sorry, but the moment I touch him, I just wanna throw out my old oath and take a new, dirty one.
-    - i - i'm completely sorry, but the first moment i touch him, i just wanna throw out my old oath and take it a new, dirty one.
-    - i - i'm sorry, but the moment before i touch him, tonight i just wanna throw back out my old oath and take a new, dirty one.
-    - i - i'm sorry, but the moment not touch him, i just wanna throw out my old girlfriend and take a big, dirty one.
-    - i - i'm sorry, but the way i touch him, i just wanna throw out my old tears and take a new, dirty breath.
-    - I-I'm sorry, but the moment I touch him, I just want to throw out my old oath and take a new, dirty one.
-    - I'm sorry, but the moment I touch it, I just want to jettison my old oath and take a new, dirty one.
-- intent: dev,4,4,1,12
-  examples: |
-    - Well, next time your massaging him, you should try and distract yourself.
-    - well, next time your massaging fits him, then you just should try and distract yourself.
-    - well, next world time your are massaging him, you definitely should try and distract yourself.
-    - and, next time... massaging him, we should try and distract yourself.
-    - well, that time about massaging him, you always try and distract yourself.
-    - Well, next time you massage him, try to distract yourself.
-    - Well, next time you massage him, you should try to distract yourself.
-- intent: dev,4,4,1,13
-  examples: |
-    - Yeah! Yeah! Yeah! Like-like when I'm doing something exciting and I don't wanna get
-    - yeah! yeah yeah! yeah! like - like when i'm doing something exciting and stuff i just don't wanna get
-    - yeah! yeah! yeah! like - well like when i'm doing just something exciting and i don't really wanna get
-    - huh! yeah! yeah! like - like when i'm doing some exciting and i don't wanna shit
-    - huh! yeah! yeah! like - like when i's doing something exciting and i don'm wanna get
-    - Yes! Yes! Yes! Like-like when I do something exciting and I don't want to get
-    - Yes! Yes! Yes! Like-like when I'm doing something exciting and don't want to get it
-- intent: dev,4,4,1,14
-  examples: |
-    - Thank you, Joey.
-    - but thank goodness you, joey.
-    - with thank you, master joey.
-    - thank goodness, sarah.
-    - damn ye, joey.
-    - Thanks, Joey.
-    - Thank you Joey
-- intent: dev,6,4,2,0
-  examples: |
-    - Hey Estelle, listen
-    - and hey estelle, please listen
-    - hey old estelle, now listen
-    - just hey, listen
-    - dear ben, listen
-    - Hey Estelle, listen
-    - Hey Estelle, listen
-- intent: dev,6,4,2,1
-  examples: |
-    - Well! Well! Well! Joey Tribbiani! So you came back huh? They
-    - well! well! well! joey tribbiani! so you actually came back to huh? go they
-    - and well! well! well! joey and tribbiani! so you came back recently huh? they
-    - well! well! well! joey tribbiani! and what came back here? they
-    - well! well! well! joey said! when they came back huh? they
-    - Well! Well! Well! Joey Tribbiani! So you came back huh? They
-    - So! So! So! Joey Tribbiani! So you came back, huh? she
-- intent: dev,6,4,2,2
-  examples: |
-    - What are you talkin' about? I never left you! You've always been my agent!
-    - what are you men talkin'here about? if i never left you! you've always been my agent!
-    - what are these you talkin'about? i never left with you! you've always been... my agent!
-    - what are you talkin'about? i almost mentioned you! you've never been my agent!
-    - what are you all'about? i never left you! we've long been my agent!
-    - What are you talking about? I never left you! You have always been my agent!
-    - What are you talking about? I never left you! You were always my agent!
-- intent: dev,6,4,2,3
-  examples: |
-    - Really?!
-    - oh really?!
-    - not really?!
-    - where?!
-    - what?!
-    - Really?!
-    - For real?!
-- intent: dev,6,4,2,4
-  examples: |
-    - Yeah!
-    - hey yeah!
-    - ah yeah!
-    - smash!
-    - oh!
-    - Yes!
-    - Yes!
-- intent: dev,5,20,3,0
-  examples: |
-    - Okay, you guys free tonight?
-    - and okay, keep you three guys free tonight?
-    - ... okay, are you and guys free tonight?
-    - like, these guys free lunch?
-    - so, you feeling free today?
-    - Okay, you free tonight?
-    - Okay, are you free tonight?
-- intent: dev,5,20,3,1
-  examples: |
-    - Yeah!!
-    - the yeah!!
-    - hell yeah!!
-    - kill!!
-    - bam!!
-    - Yes!!
-    - Yes!!
-- intent: dev,7,7,4,0
-  examples: |
-    - Yes? Yes?! How can I help you?
-    - yes? yes?! how i can if i help please you?
-    - yes? yes?! because how can it i not help you?
-    - yes?...?! so can anyone help you?
-    - yes? yes?! how will i say it?
-    - Yes? Yes?! How can I help you?
-    - Yes? Yes?! How can I help you?
-- intent: dev,7,7,4,1
-  examples: |
-    - Yeah, we were…we were just looking around.
-    - yeah, we were quiet … though we were also just looking around.
-    - yeah, since we were … we usually were just looking carefully around.
-    - yeah, we were sorry people were just kidding around.
-    - eventually, we knew … we were just looking at.
-    - Yeah, we were...we were just looking around.
-    - Yes, we were... we were just looking around.
-- intent: dev,7,7,4,2
-  examples: |
-    - Oh-oh, you're-you're fellow scholars.
-    - oh oh - uh oh, you're - you're fellow christian scholars.
-    - oh - no oh, you're - you'er re fellow great scholars.
-    - they - what, you're - they're fellow scholars.
-    - oh - oh, their're - and're fellow passengers.
-    - Oh-oh, you are-you are fellow scholars.
-    - Uh-oh, you are scholars.
-- intent: dev,7,7,4,3
-  examples: |
-    - What exactly were you looking for, hmm?
-    - one what reason exactly were you obviously looking for, hmm?
-    - what exactly were both you looking forward for, serial hmm?
-    - which exactly were you paying for, alex?
-    - whom exactly were they looking toward, hmm?
-    - What exactly were you looking for, hmm?
-    - What exactly were you looking for, huh?
-- intent: dev,7,7,4,4
-  examples: |
-    - Perhaps,  perhaps Dr. Chester Stock's musings on the Smiledon Californicus?
-    - perhaps, perhaps dr. chester randall stock's musings based on the smiledon codex californicus?
-    - perhaps, perhaps even dr. chester stock's musings on the ancient smiledon tablet californicus?
-    - perhaps, remember h. chester beatty's musings on the smiledon californicus?
-    - perhaps, perhaps dr. chester woolf's musings concerning the smiledon equation?
-    - Maybe, maybe Dr. Chester Stock's musings on the Smiledon Californicus?
-    - Maybe, maybe dr. Chester Stock's Thoughts on the Smiledon Californicus?
-- intent: dev,7,7,4,5
-  examples: |
-    - Uhh….
-    - no uhh no ….
-    - oh uhh no ….
-    - so....
-    - and oh.
-    - Uhh….
-    - uh...
-- intent: dev,7,7,4,6
-  examples: |
-    - Ah… Ah…Get out of here!  Uh, meeting someone? Or-or are you just here to brush up on Marion's views on evolution?
-    - ah … to ah … get out of here! uh, meeting someone? or - or are you just here to brush up on that marion'latest s views on evolution?
-    - ah … ah … an get out of here! uh, meeting someone? or - or are you actually just here to brush up on marion's liberal views on evolution?
-    - ah … please … get out of here! uh, meeting someone? or - or are you just here to brush up on marion'm notes on evolution?
-    - ah … ah … get out of here! uh, ask someone? ah - or are you just trying to brush up on marion's views on evolution?
-    - Oh... Oh... Get out of here! Uh, meet someone? Either-or are you just here to brush up on Marion's views on evolution?
-    - Ah... Ah... get out of here! Uh, meet someone? Or-or are you just here to refresh Marion's views on evolution?
-- intent: dev,7,7,4,7
-  examples: |
-    - Uh, actually I find Marion's views far too progressionist.
-    - or uh, actually then i find marion's views far from too progressionist.
-    - uh, actually i can find marion's negative views far been too progressionist.
-    - uh, actually i considered marion's room far too pretty.
-    - uh, actually i viewed marion's approach as too progressionist.
-    - Uh, actually I find Marion's views far too progressionist.
-    - Uh, actually I think Marion's views are far too progressive.
-- intent: dev,7,7,4,8
-  examples: |
-    - I find Marion's views far too progressionist.
-    - i find when marion'does s views far seem too progressionist.
-    - i honestly find marion's views here far too highly progressionist.
-    - i find marion'current views entirely too optimistic.
-    - they find marion's pregnancy far more progressionist.
-    - I find Marion's views far too progressionist.
-    - I find Marion's views far too progressive.
-- intent: dev,7,7,4,9
-  examples: |
-    - I'm sorry, who are you?
-    - i'l m sorry, who exactly are the you?
-    - say i'i m sorry, who are... you?
-    - i'k scared, but are you?
-    - i'metre there, gone are you?
-    - I'm sorry, who are you?
-    - sorry who are you
-- intent: dev,7,7,4,10
-  examples: |
-    - I'm a professor here uh, Ross…Geller.
-    - i'a m doing a professor here on uh, ross … geller.
-    - i'd m a biology professor in here uh, ross … geller.
-    - i'm a newcomer here uh, major michael geller.
-    - i'm a professor here only, under peter geller.
-    - I'm a professor here, Ross... Geller.
-    - I'm a professor here, uh, Ross... Geller.
-- intent: dev,7,7,4,11
-  examples: |
-    - Ross Geller, why do I know that name? It's uh—Wait!  Did you write this?
-    - rachel ross geller, why do i ever know that name? it's uh um — wait! did you write this?
-    - ross geller, why do... i... know that strange name? it's uh — wait! did you write this?
-    - ross geller, why do i know that text? it's because or wait! did you write this?
-    - ross geller, why do i know that name? it'isn uh — wait! could someone write this?
-    - Ross Geller, why do I know that name? It's uh—wait! Did you write it?
-    - Ross Geller, how do I know that name? It's uh - wait a minute! Did you write that?
-- intent: dev,7,7,4,12
-  examples: |
-    - Yes! You're the person who checked out my book?!
-    - yes! maybe you're actually the person who checked out my school book?!
-    - yes! you're the person you who checked out in my travel book?!
-    - yes! you'd the person that checked out his book?!
-    - yes! we're a person i checked out my book?!
-    - Yes! You're the person who reviewed my book?!
-    - Yes! You're the person who checked out my book?!
-- intent: dev,7,7,4,13
-  examples: |
-    - Y'know, you look nothing like I would've thought. You're…you're so young.
-    - y'know, you look truly nothing like i would'd ve likely thought. you're … you're so young.
-    - y'know, you look nothing like i and would'ya ve thought. you're … you'way re so young.
-    - y'are, you look nothing like he would've thought. you're awful you're so young.
-    - y'know, you look nothing what i would've thought. th'make … you're so young.
-    - You know, you look nothing like I would have thought. You are...you are so young.
-    - You know, you don't look like what I thought you would at all. You are... you are so young.
-- intent: dev,2,7,5,0
-  examples: |
-    - You had no right to tell me you ever had feelings for me.
-    - you had no real right but to tell me have you ever had feelings for me.
-    - if you guys had no right to tell me only you ever had feelings for me.
-    - ye had no right to tell me you ever had love for sarah.
-    - you had no right to tell me this ever caused trouble for me.
-    - You had no right to tell me that you ever had feelings for me.
-    - You had no right to tell me you ever had feelings for me.
-- intent: dev,2,7,5,1
-  examples: |
-    - What?
-    - know what?
-    - with what?
-    - 7?
-    - really?
-    - What?
-    - What?
-- intent: dev,2,7,5,2
-  examples: |
-    - I was doing great with Julie before I found out about you.
-    - i certainly was doing great with julie now before i found out something about you.
-    - i was doing great with young julie long before when i found out about you.
-    - i was doing great with julie when grace found out about derek.
-    - dad was no great with julie before i found out from you.
-    - I was doing well with Julie before I found out about you.
-    - I was great with Julie before I found out about you.
-- intent: dev,2,7,5,3
-  examples: |
-    - Hey, I was doin' great before I found out about you. You think it's easy for me to see you with Julie?
-    - hey, i always was doin'great before i found out about you. you think it's that easy for me to see you there with julie?
-    - hey, i was doin'real great before i found out about you. and you think it's easy for me to see you here with julie?
-    - hey, i was doin'great before i found out around you. you think it's easy loving me to see that with julie?
-    - hey, i was doin'great once i found out about you. do think it's easy for me to see you now julie?
-    - Hey, I was doing well before I found out about you. Do you think it's easy for me to see you with Julie?
-    - Hey, I was great before I found out about you. Do you think it's easy for me to see you with Julie?
-- intent: dev,2,7,5,4
-  examples: |
-    - The point is I...
-    - the key point... is because i...
-    - and the end point is that i...
-    - its other being i...
-    - the heart not broken...
-    - The point is I…
-    - The point is I...
-- intent: dev,2,7,5,5
-  examples: |
-    - I don't need this right now, OK.
-    - i really don'l t need this right right now, ok.
-    - i probably don't need some this help right now, ok.
-    - mike doesn't need this right away, ok.
-    - we don't need blood right here, ok.
-    - I don't need it now, OK.
-    - I don't need this now, okay.
-- intent: dev,2,7,5,6
-  examples: |
-    - It, it's too late, I'm with somebody else, I'm happy.
-    - it, or it's quite too late, i'm with somebody else, but i'm happy.
-    - it, it's all too late, although i'm with somebody else else, i'm happy.
-    - jack, it's really late, i'm hurting somebody else, i'm happy.
-    - it, it's too late, him'n with somebody else, he'm happy.
-    - It, it's too late, I'm with someone else, I'm happy.
-    - It's too late, I'm with someone else, I'm happy.
-- intent: dev,2,7,5,7
-  examples: |
-    - This ship has sailed.
-    - this great ship has yet sailed.
-    - this ship also has not sailed.
-    - this morning they sailed.
-    - then treasure has sailed.
-    - This ship has sailed.
-    - This ship has sailed.
-- intent: dev,2,7,5,8
-  examples: |
-    - Alright, fine, you go ahead and you do that, alright Ross.
-    - alright, just fine, well you go for ahead and you do that, alright ross.
-    - alright, fine, you better go straight ahead and you do remember that, alright ross.
-    - yeah, fine, now go ahead after you do that, alright ross.
-    - alright, alright, alright go ahead on you do that, alright ross.
-    - Okay, okay, you go ahead and you do it, okay Ross.
-    - All right, well, go ahead and do that, all right, Ross.
-- intent: dev,2,7,5,9
-  examples: |
-    - Fine.
-    - not fine.
-    - not fine.
-    - b.
-    - p.
-    - Well.
-    - Fine.
-- intent: dev,2,7,5,10
-  examples: |
-    - Cause I don't need your stupid ship.
-    - damn cause and i don'f t need your stupid ship.
-    - cause i don'touch t necessarily need this your stupid ship.
-    - cause i m'n know your stupid ship.
-    - sorry i don't need your financial help.
-    - Because I don't need your stupid ship.
-    - 'Cause I don't need your stupid ship.
-- intent: dev,2,7,5,11
-  examples: |
-    - Good.
-    - dead good.
-    - so good.
-    - ii.
-    - math.
-    - Well.
-    - Good.
-- intent: dev,8,3,6,0
-  examples: |
-    - Oh, it's so romantic to send people off on their honeymoon.
-    - oh, sure it's so romantic... to send people setting off on their honeymoon.
-    - oh, it'isn s so romantic to send people all off on their wonderful honeymoon.
-    - oh, she's so romantic to send them off on their dates.
-    - oh, it's how romantic they send people off and their honeymoon.
-    - Oh, it's so romantic to send people off on their honeymoon.
-    - Oh, it's so romantic to send people on honeymoons.
-- intent: dev,8,3,6,1
-  examples: |
-    - Y'know, Monica and Chandler are married. Ross and Rachel are having a baby. Maybe you and I should do something.
-    - y'heard know, monica and chandler are married. monica ross and rachel are having a baby. maybe you and i should do together something.
-    - y'know, monica and chandler are married. ross and rachel are just having possibly a baby. maybe you come and i should do something.
-    - y'know, monica and chandler are married. ross and rachel are having that baby. believe you and i should do our.
-    - z'know, monica and chandler are married. sean and rachel are having a kid. maybe you and i should do something.
-    - You know, Monica and Chandler are married. Ross and Rachel have a baby. Maybe you and I should do something.
-    - You know, Monica and Chandler are married. Ross and Rachel have a baby. Maybe you and I should do something.
-- intent: dev,8,3,6,2
-  examples: |
-    - All in good time my love.
-    - all is in the good good time my love.
-    - nothing all done in good time but my love.
-    - all in good terms you ladies.
-    - not in no time my lieutenant.
-    - All in time my love.
-    - All at the right time, my love.
-- intent: dev,8,3,6,3
-  examples: |
-    - All in good time.
-    - all else in the good time.
-    - was all over in good time.
-    - placed in good conditions.
-    - sorry about good time.
-    - All on time.
-    - All in good time.
-- intent: dev,8,3,6,4
-  examples: |
-    - Oh shoot!
-    - oh lord shoot!
-    - oh holy shoot!
-    - oh good!
-    - oh hi!
-    - Oh shoot!
-    - Oh shoot!
-- intent: dev,8,3,6,5
-  examples: |
-    - I left my guitar in their apartment.
-    - plus i only left my guitar in through their apartment.
-    - somehow i have left my heavy guitar in their apartment.
-    - i left my phone in the garage.
-    - i found my message in your apartment.
-    - I left my guitar in their apartment.
-    - I left my guitar at her apartment.
-- intent: dev,8,3,6,6
-  examples: |
-    - Well you can let me in later.
-    - well you can certainly let last me in there later.
-    - well you can probably let the me call in later.
-    - well ya should let me out later.
-    - think you can slip me in tonight.
-    - Well, you can let me in later.
-    - Well, you can let me in later.
-- intent: dev,8,3,6,7
-  examples: |
-    - I don't have a key, they took mine to give to you.
-    - i really don't have a single key, although they took mine to give to you.
-    - i don't have a key, they both took mine to give birth to change you.
-    - just don't have a key, they took this by give to you.
-    - i don't take my key, they took mine before give to you.
-    - I don't have a key, they took mine to give you.
-    - I don't have a key, they took mine to give to you.
-- intent: dev,8,3,6,8
-  examples: |
-    - What?! They took mine to give to you!
-    - forget what?! they only took mine to give to destroy you!
-    - so what?! they who took out mine to give to you!
-    - where?! they send mine to give them you!
-    - me?! they took mine to pack away you!
-    - What?! They took mine to give to you!
-    - What?! They took mine to give to you!
-- intent: dev,8,20,7,0
-  examples: |
-    - Wow! It looks like we got a lot of good stuff.
-    - ah wow! but it looks like we got a whole lot of good stuff.
-    - wow! it looks like we both got in a little lot of good stuff.
-    - wow! it sounds like we got a lot in good advice.
-    - wow! it s like we encounter a lot of bad stuff.
-    - Wow! Looks like we got a lot of good stuff.
-    - Wow! It looks like we have a lot of good stuff.
-- intent: dev,8,20,7,1
-  examples: |
-    - Oh we did, but my mom got us the greatest gift of all.
-    - oh dear we did, but my mom always got us together the greatest gift of all.
-    - oh we did, but then my mom got us the greatest damn gift one of all.
-    - oh we did, but my momma got us her greatest gift of mine.
-    - oh wow did, baby my father got us the greatest gift of all.
-    - Oh, we did, but my mother gave us the greatest gift of all.
-    - Oh we did, but my mother gave us the greatest gift of all.
-- intent: dev,8,20,7,2
-  examples: |
-    - A
-    - a a
-    - type a
-    - ...
-    - on
-    - A
-    - A
-- intent: dev,8,20,7,3
-  examples: |
-    - No. She's going to live with us for eight weeks.
-    - no. she'd s really going to live with us together for eight weeks.
-    - no. she's going to come live alone with us for approximately eight weeks.
-    - 2. she's going on ride with us for eight weeks.
-    - 10. she's going to live under us of eight weeks.
-    - No. She will stay with us for eight weeks.
-    - no She will stay with us for eight weeks.
-- intent: dev,8,20,7,4
-  examples: |
-    - Uh, what?
-    - and uh, like what?
-    - he uh, about what?
-    - no, really?
-    - now, why?
-    - Uh, what?
-    - Uh what?
-- intent: dev,8,20,7,5
-  examples: |
-    - Yes! She's gonna help us take care of the baby! Woo-hoo.
-    - yes! yes she's gonna help us take care... of the baby! oh woo - hoo.
-    - ... yes! she's gonna help us there take care... of the baby! woo - hoo.
-    - hey! she's gonna help us take him to the baby! woo - hoo.
-    - yes! you'z gonna help us take charge of the baby! woo - hoo.
-    - Yes! She's going to help us take care of the baby! Wow-how.
-    - Yes! She will help us take care of the baby! Woo-hoo.
-- intent: dev,8,20,7,6
-  examples: |
-    - What—You're not serious.
-    - but what — you'′ re not doing serious.
-    - what happened — you're truly not this serious.
-    - what though she're not beautiful.
-    - what if you've more serious.
-    - What—You're not serious.
-    - What - you're not serious.
-- intent: dev,8,20,7,7
-  examples: |
-    - I mean she's a very nice woman, but there is no way we can take eight weeks of her.
-    - i mean she's obviously a very nice woman, but there is just no way we can take eight weeks ahead of her.
-    - i mean she's a very nice woman, but there absolutely is completely no way we possibly can take eight weeks of her.
-    - i mean more'n a very nice woman, but there is no way we can take five weeks of her.
-    - i mean she's a very nice woman, but there is a way anyone can take eighteen weeks of her.
-    - I mean she's a very nice woman, but there's no way we can take eight weeks from her.
-    - I mean, she's a very nice woman, but there's no way we can take eight weeks from her.
-- intent: dev,8,20,7,8
-  examples: |
-    - She'll drive us totally crazy.
-    - she'll still drive us apart totally freaking crazy.
-    - though she'll also drive us totally fucking crazy.
-    - y'we take us totally crazy.
-    - dad'll drive us straight out.
-    - She will drive us completely crazy.
-    - She's gonna drive us all crazy.
-- intent: dev,8,20,7,9
-  examples: |
-    - Hi Ross!
-    - hi james ross!
-    - because hi ross!
-    - hi sara!
-    - hi nana!
-    - Hi Ross!
-    - Hello Ross!
-- intent: dev,7,19,8,0
-  examples: |
-    - Hey! What did you decide to do about the movie?
-    - hey! now what else did you decide to do about about the movie?
-    - hey! what did you decide now to do... about the fantasy movie?
-    - hey! what make you decide i do to the movie?
-    - hey! what makes you decide to do at this movie?
-    - Shark! What did you decide to do about the movie?
-    - Hey! What are your plans for the film?
-- intent: dev,7,19,8,1
-  examples: |
-    - I don't know!
-    - he i don't fucking know!
-    - but i don't... know!
-    - i doesn't care!
-    - i don'don remember!
-    - I do not know!
-    - I do not know!
-- intent: dev,7,19,8,2
-  examples: |
-    - It's not like it's porn!
-    - it'm s really not like it'd s porn!
-    - it's not like what it'm s watching porn!
-    - it's true that it't porn!
-    - ya'c not like it're porn!
-    - It's not like it's porn!
-    - It's not like it's a porn!
-- intent: dev,7,19,8,3
-  examples: |
-    - This is a serious, legitimate movie.
-    - but this is obviously a serious, legitimate fantasy movie.
-    - this is still a pretty serious, legitimate fantasy movie.
-    - you were a pure, legitimate movie.
-    - she means a serious, legitimate emergency.
-    - This is a serious, legitimate movie.
-    - This is a serious, legitimate film.
-- intent: dev,7,19,8,4
-  examples: |
-    - And the nudity is really important to the story.
-    - it and the nudity is suddenly really important to finish the story.
-    - pornography and the nudity aspect is really more important to the story.
-    - and that nudity is very important to her story.
-    - and the man becomes really important to her story.
-    - And the nudity is really important to the story.
-    - And the nudity is really important to the story.
-- intent: dev,7,19,8,5
-  examples: |
-    - That's what you say about porn.
-    - now that'don s simply what you say about porn.
-    - that'′ s what all you say about internet porn.
-    - that's how you feel about her.
-    - that's what she did with porn.
-    - This is what you say about pornography.
-    - That's what they say about porn.
-- intent: dev,7,19,8,6
-  examples: |
-    - You're right. Maybe I shouldn't even go on the call back.
-    - maybe you're right. maybe then i shouldn't even go on the call way back.
-    - you're not right. maybe that i shouldn't even go on getting the call back.
-    - you're right. but this shouldn't even go over the call back.
-    - you're right. maybe i shouldn'n even go on a journey back.
-    - You're right. Maybe I shouldn't even call back.
-    - You're right. Maybe I shouldn't even go for the call back.
-- intent: dev,7,19,8,7
-  examples: |
-    - No! No you should! A lot of major actors do nude scenes! I mean, the chance to star in a movie? Come on!
-    - no! oh no you should! a lot of major actors do nude scenes! which i mean, the chance to star in a movie? oh come on!
-    - no! no say you should! a lot of major actors do nude scenes! i mean, the chance to almost star in a porn movie? come on!
-    - no! no you idiot! a pair of major actors do nude scenes! i mean, that chance to star in a movie? come on!
-    - no! no you should! a lot of major celebrities do nude scenes! i mean, the chance to star with a film? come on!
-    - No! No you must! Many great actors do nude scenes! I mean, the chance to star in a movie? Come on!
-    - No! No you should! Many great actors do nude scenes! I mean, the chance to be in a movie? Come on!
-- intent: dev,7,19,8,8
-  examples: |
-    - Well that's true.
-    - well yes that's probably true.
-    - ah well that'l s true.
-    - well proven'n true.
-    - but this's true.
-    - Well that's true.
-    - Well that's true.
-- intent: dev,7,19,8,9
-  examples: |
-    - And I am only naked in one scene.
-    - kate and i am essentially only naked in one epic scene.
-    - and that i honestly am only naked in one more scene.
-    - with myself am only clad in one scene.
-    - and ii am only naked here one minute.
-    - And I'm only naked in one scene.
-    - And I'm only naked in one scene.
-- intent: dev,7,19,8,10
-  examples: |
-    - Plus it sounds really great.
-    - plus it just sounds really pretty great.
-    - plus it just sounds really goddamn great.
-    - plus it sounds so cool.
-    - ... it was really great.
-    - Plus it sounds really great.
-    - Also, it sounds really great.
-- intent: dev,7,19,8,11
-  examples: |
-    - My character's catholic and he falls in love with this Jewish girl.
-    - my character's catholic himself and he falls right in love with this lovely jewish girl.
-    - my own character's catholic too and he just falls in love with this jewish girl.
-    - his character's catholic and he falls the love with this jewish woman.
-    - my husband's changed and he falls inside love with this jewish girl.
-    - My character is catholic and he falls in love with this Jewish girl.
-    - My character is Catholic and falls in love with this Jewish girl.
-- intent: dev,7,19,8,12
-  examples: |
-    - Who run away together and they get caught in this big rainstorm.
-    - who run away together twice and they get very caught even in this big rainstorm.
-    - parents who run away together and together they get caught in by this big rainstorm.
-    - who walk away together but they get caught off this big rainstorm.
-    - who run away together once they got caught in their big rainstorm.
-    - Who run away together and they get caught in this big downpour.
-    - Who run away together and get caught in this big rainstorm.
-- intent: dev,7,19,8,13
-  examples: |
-    - So we go into this barn and undress each other and hold each other.
-    - so we go into about this barn and undress for each other together and hold each other.
-    - so we go up into this barn and undress each each other and i hold each other.
-    - so you go into his barn and undress each body and hold each other.
-    - so we go into a barn and undress each other and hold for breath.
-    - So we go into this barn and undress each other and hold each other.
-    - So we go in this barn and undress each other and hold tight.
-- intent: dev,6,3,9,0
-  examples: |
-    - Hey, what's up?
-    - hey hey, now what'l s up?
-    - but hey, what'an s is up?
-    - man, w'r up?
-    - oh, kids're up?
-    - Hey how does it look?
-    - Hey whats up?
-- intent: dev,6,3,9,1
-  examples: |
-    - Nothing, Monica and I had a stupid fight.
-    - then nothing, monica had and i had a stupid enough fight.
-    - ... nothing, monica said and ricky i had a stupid fight.
-    - well, kate and i picking a stupid fight.
-    - nothing, but und i had a little fight.
-    - Nothing, Monica and I had a stupid fight.
-    - Nothing, Monica and I had a stupid argument.
-- intent: dev,6,3,9,2
-  examples: |
-    - But you're still moving in together, right? Because my ad came out today.
-    - but you're still moving right in again together, right? because my ad came rolling out today.
-    - but you're still moving on in there together, right? because that my ad came out today.
-    - but you'rec still closing in together, right? because his ad came out today.
-    - but you't still stepping in together, right? because your ad came out today.
-    - But you still move in together, right? Because my ad came out today.
-    - But you're still moving in together, right? Because my ad came out today.
-- intent: dev,6,3,9,3
-  examples: |
-    - Wanted. Female roommate, non-smoker, non-ugly. Nice!
-    - many wanted. male female roommate, non - heavy smoker, non - ugly. nice!
-    - wanted. this female lab roommate, non - smoker, but non - ugly. nice!
-    - wanted. on phone, non - date, non - ugly. nice!
-    - wanted. female patient, non - smoker, free - smoking. nice!
-    - Wanted. Female roommate, non-smoker, non-ugly. Nice!
-    - Searched. Roommate, non-smoker, not ugly. Kind!
-- intent: dev,6,3,9,4
-  examples: |
-    - Yeah?
-    - ¿ yeah?
-    - the yeah?
-    - where?
-    - you?
-    - Yes?
-    - Yes?
-- intent: dev,6,3,9,5
-  examples: |
-    - I just figured y'know, after living with you it'd be an interesting change of pace to have a female roommate, y'know?
-    - actually i just... figured y'know, after living with you it'd be an interesting change of pace to have a female roommate, y'tell know?
-    - i just figured y'may know, after contemplating living forever with you it'd be an interesting change of pace to have a female roommate, y'know?
-    - i just figured o'know, after living with you it'could be... interesting change of pace to have a female roommate, y'know?
-    - i just figured y'know, after living with you it'd be an easier sort of pace to have a permanent roommate, y'know?
-    - I just thought you know, after living with you, it would be an interesting change of pace to have a female roommate, you know?
-    - I just thought, you know, after living with you, it would be an interesting change to have a female roommate, you know?
-- intent: dev,6,3,9,6
-  examples: |
-    - Someone I can learn from, someone-someone who's different than me.
-    - someone i just can never learn anything from, someone - someone who's different than me.
-    - someone who i can learn better from, someone - someone who's different... than me.
-    - someone will probably learn from, someone - someone who'm different than me.
-    - someone i could learn from, like - person who's different than me.
-    - Someone I can learn from, someone-someone who is different from me.
-    - Someone I can learn from, someone different from me.
-- intent: dev,5,20,10,0
-  examples: |
-    - So where are we going next?
-    - so right where exactly are we going then next?
-    - so... where are we really going next next?
-    - like when am we going next?
-    - ... why re we going next?
-    - So where do we go next?
-    - So where do we go next?
-- intent: dev,5,20,10,1
-  examples: |
-    - This witness won't return my calls so we're gonna see if we can surprise him coming home.
-    - this witness still won't return my calls so we'l re gonna see if even we can surprise him coming home.
-    - this witness board won't return my calls so we're gonna see if we can possibly surprise him coming right home.
-    - your witness wouldn't return my calls so he're gonna see if we can surprise him coming home.
-    - each witness won't return my calls so we're watching see if we ever surprise him coming home.
-    - This witness won't return my calls, so we're going to see if we can surprise him into coming home.
-    - This witness won't be returning my calls, so we'll see if we can surprise him when he gets home.
-- intent: dev,5,20,10,2
-  examples: |
-    - Sur-surprise him? We're not, we're not gonna make anybody mad are we?
-    - sur - surprise at him? we're not, we're not gonna make that anybody go mad are we?
-    - sur - surprise him? although we'm re not, we're not not gonna make anybody mad are we?
-    - re - surprise what? we're not, our're not gonna make anybody mad are we?
-    - sur - surprise him? i're fine, we're not gonna get anybody mad are we?
-    - surprise him? We're not, we're not going to offend anyone, are we?
-    - surprise him? We won't, we won't drive anyone crazy, will we?
-- intent: dev,5,20,10,3
-  examples: |
-    - Come on man!  Listen so uh, are you gonna squeeze the perps shoes a little bit before he lawyers up?
-    - but come on man! listen where so uh, are you gonna squeeze the perps own shoes a little bit before he lawyers up?
-    - come on man! listen so uh, are you gonna squeeze the perps for shoes a little little bit before he lawyers them up?
-    - come on man! listen so uh, are you gonna squeeze the perps shoes a little bit whilst ty stands up?
-    - come on man! listen so uh, were you gonna squeeze the perps shoes a safe bit before he lawyers for?
-    - Come on man! Listen so uh, are you going to push the perps shoes a little before he lawyers up?
-    - come on man Listen, um, will you push the offender's shoes a little bit before he gets in touch?
-- intent: dev,5,20,10,4
-  examples: |
-    - It's a witness not a perp. And no one talks like that!
-    - it's a witness not a perp. damn and no straight one just talks like that!
-    - it's a witness not a silent perp. forever and then no one talks like that!
-    - it'll a witness not a perp. and another one talks like him!
-    - he's a girl not a perp. and no one acts like that!
-    - It is a witness not a perpetrator. And nobody talks like that!
-    - It's a witness, not a perpetrator. And nobody talks like that!
-- intent: dev,5,20,10,5
-  examples: |
-    - Yeah, no one talks like that!
-    - now yeah, no single one talks like all that!
-    - yeah, no other one much talks like just that!
-    - dammit, no anyone talks like it!
-    - yeah, no ma should like dat!
-    - Yes, nobody talks like that!
-    - Yes, nobody talks like that!
-- intent: dev,5,20,10,6
-  examples: |
-    - Oh what? Like your Mr. Cop!
-    - even oh what? like your own mr. good cop!
-    - oh what? like is your boss mr. perfect cop!
-    - oh why? like on dad. cop!
-    - oh lord? and... mr. cop!
-    - oh what? Like your mr. Crap!
-    - oh what Like your Mr. Cop!
-- intent: dev,5,20,10,7
-  examples: |
-    - Hey, I'm more cop than you two!
-    - an hey, thinks i'm more general cop than you two!
-    - hey, i'm more cop guy than man you make two!
-    - plus, he'm more useful than you two!
-    - hey, my'm more cop than they admit!
-    - Hey, I'm more of a cop than you two!
-    - Hey, I'm more cop than you two!
-- intent: dev,5,20,10,8
-  examples: |
-    - How do you figure that?
-    - then how big do you figure that?
-    - just how far do you figure that?
-    - why do soldiers figure that?
-    - perhaps could you figure that?
-    - How do you calculate it?
-    - What makes you think that?
-- intent: dev,5,19,11,0
-  examples: |
-    - I guess so.
-    - that i really guess so.
-    - or i guess glad so.
-    - i know not.
-    - just hope so.
-    - I think so.
-    - I guess so.
-- intent: dev,5,19,11,1
-  examples: |
-    - Here you go. Thank you!
-    - here that you must go. thank fuck you!
-    - here alone you guys go. thank all you!
-    - if you die. thank luck!
-    - need you been. miss you!
-    - Here you go. Thank you!
-    - Please. Thanks very much!
+# - intent: dev,4,7,0,0
+#   examples: |
+#     - Oh my God, he's lost it. He's totally lost it.
+#     - oh dear my my god, he's lost it. he'll s totally lost it.
+#     - and oh my god, he's lost it. surely he's totally already lost it.
+#     - but my god, jules'hasn lost it. he's totally lost it.
+#     - oh my goodness, he't lost it. she's totally lost it.
+#     - Oh my God, he lost it. He completely lost it.
+#     - Oh my god he lost it. He totally lost it.
+# - intent: dev,4,4,1,0
+#   examples: |
+#     - Or! Or, we could go to the bank, close our accounts and cut them off at the source.
+#     - or! or, we even could go to call the bank, close our accounts and totally cut them off at the source.
+#     - or! or, we could go round to the nearest bank, close our accounts to and cut them off at the source.
+#     - or! or, we could go on the bank, close our ears and hit them off at the source.
+#     - ha! or, we could go to the source, close some accounts and cut them off at the source.
+#     - Or! Or we can go to the bank, close our accounts and cut them off at the source.
+#     - Or! Or we could go to the bank, close our accounts and cut them off at the source.
+# - intent: dev,4,4,1,1
+#   examples: |
+#     - You're a genius!
+#     - hey you're so a genius!
+#     - or you're a computer genius!
+#     - sha'ra a genius!
+#     - you'r a freak!
+#     - You are a genius!
+#     - You are a genius!
+# - intent: dev,4,4,1,2
+#   examples: |
+#     - Aww, man, now we won't be bank buddies!
+#     - well aww, man, now we won't always be playing bank buddies!
+#     - but aww, man, maybe now we won't be old bank buddies!
+#     - aww, babe, now we won't be good friends!
+#     - aww, man, pretend we didn't become bank buddies!
+#     - Aww, man, now we won't be couch buddies!
+#     - Aww man, now we're not going to be bank buddies anymore!
+# - intent: dev,4,4,1,3
+#   examples: |
+#     - Now, there's two reasons.
+#     - not now, there'ain s no two reasons.
+#     - now, though there's definitely two valid reasons.
+#     - surely, there'are more reasons.
+#     - now, you'ave more reasons.
+#     - Now, there are two reasons.
+#     - Well, there are two reasons.
+# - intent: dev,4,4,1,4
+#   examples: |
+#     - Hey.
+#     - but hey.
+#     - ... hey.
+#     - ch.
+#     - ed.
+#     - Shark.
+#     - hey
+# - intent: dev,4,4,1,5
+#   examples: |
+#     - Hey!
+#     - yo hey!
+#     - « hey!
+#     - no!
+#     - loud!
+#     - Shark!
+#     - Hey!
+# - intent: dev,4,4,1,6
+#   examples: |
+#     - Ohh, you guys, remember that cute client I told you about? I bit him.
+#     - ohh, you guys, you remember oh that cute client i told you about? i just bit him.
+#     - ohh, you guys, remember that cute client that i probably told on you about? i bit him.
+#     - well, you wish, remember that cute client i told mom about? i bit him.
+#     - yeah, and guys, remember that cute client i told you about? he bit him.
+#     - Oh, you guys, remember that cute client I told you about? I bit him.
+#     - Oh, folks, remember that cute customer I told you about? i bit him
+# - intent: dev,4,4,1,7
+#   examples: |
+#     - Where?!
+#     - check where?!
+#     - since where?!
+#     - seriously?!
+#     - you?!
+#     - Where?!
+#     - Where?!
+# - intent: dev,4,4,1,8
+#   examples: |
+#     - On the touchy.
+#     - on to the surface touchy.
+#     - on for the record touchy.
+#     - on its roof.
+#     - not... touchy.
+#     - On the tangent.
+#     - On the sensitive.
+# - intent: dev,4,4,1,9
+#   examples: |
+#     - And
+#     - books and
+#     - 35 and
+#     - ...
+#     - ex
+#     - And
+#     - and
+# - intent: dev,4,4,1,10
+#   examples: |
+#     - No, I know!
+#     - oh no, all i know!
+#     - but no, i do know!
+#     - shit, i thought!
+#     - ah, you know!
+#     - No, I know!
+#     - No, I know!
+# - intent: dev,4,4,1,11
+#   examples: |
+#     - I-I'm sorry, but the moment I touch him, I just wanna throw out my old oath and take a new, dirty one.
+#     - i - i'm completely sorry, but the first moment i touch him, i just wanna throw out my old oath and take it a new, dirty one.
+#     - i - i'm sorry, but the moment before i touch him, tonight i just wanna throw back out my old oath and take a new, dirty one.
+#     - i - i'm sorry, but the moment not touch him, i just wanna throw out my old girlfriend and take a big, dirty one.
+#     - i - i'm sorry, but the way i touch him, i just wanna throw out my old tears and take a new, dirty breath.
+#     - I-I'm sorry, but the moment I touch him, I just want to throw out my old oath and take a new, dirty one.
+#     - I'm sorry, but the moment I touch it, I just want to jettison my old oath and take a new, dirty one.
+# - intent: dev,4,4,1,12
+#   examples: |
+#     - Well, next time your massaging him, you should try and distract yourself.
+#     - well, next time your massaging fits him, then you just should try and distract yourself.
+#     - well, next world time your are massaging him, you definitely should try and distract yourself.
+#     - and, next time... massaging him, we should try and distract yourself.
+#     - well, that time about massaging him, you always try and distract yourself.
+#     - Well, next time you massage him, try to distract yourself.
+#     - Well, next time you massage him, you should try to distract yourself.
+# - intent: dev,4,4,1,13
+#   examples: |
+#     - Yeah! Yeah! Yeah! Like-like when I'm doing something exciting and I don't wanna get
+#     - yeah! yeah yeah! yeah! like - like when i'm doing something exciting and stuff i just don't wanna get
+#     - yeah! yeah! yeah! like - well like when i'm doing just something exciting and i don't really wanna get
+#     - huh! yeah! yeah! like - like when i'm doing some exciting and i don't wanna shit
+#     - huh! yeah! yeah! like - like when i's doing something exciting and i don'm wanna get
+#     - Yes! Yes! Yes! Like-like when I do something exciting and I don't want to get
+#     - Yes! Yes! Yes! Like-like when I'm doing something exciting and don't want to get it
+# - intent: dev,4,4,1,14
+#   examples: |
+#     - Thank you, Joey.
+#     - but thank goodness you, joey.
+#     - with thank you, master joey.
+#     - thank goodness, sarah.
+#     - damn ye, joey.
+#     - Thanks, Joey.
+#     - Thank you Joey
+# - intent: dev,6,4,2,0
+#   examples: |
+#     - Hey Estelle, listen
+#     - and hey estelle, please listen
+#     - hey old estelle, now listen
+#     - just hey, listen
+#     - dear ben, listen
+#     - Hey Estelle, listen
+#     - Hey Estelle, listen
+# - intent: dev,6,4,2,1
+#   examples: |
+#     - Well! Well! Well! Joey Tribbiani! So you came back huh? They
+#     - well! well! well! joey tribbiani! so you actually came back to huh? go they
+#     - and well! well! well! joey and tribbiani! so you came back recently huh? they
+#     - well! well! well! joey tribbiani! and what came back here? they
+#     - well! well! well! joey said! when they came back huh? they
+#     - Well! Well! Well! Joey Tribbiani! So you came back huh? They
+#     - So! So! So! Joey Tribbiani! So you came back, huh? she
+# - intent: dev,6,4,2,2
+#   examples: |
+#     - What are you talkin' about? I never left you! You've always been my agent!
+#     - what are you men talkin'here about? if i never left you! you've always been my agent!
+#     - what are these you talkin'about? i never left with you! you've always been... my agent!
+#     - what are you talkin'about? i almost mentioned you! you've never been my agent!
+#     - what are you all'about? i never left you! we've long been my agent!
+#     - What are you talking about? I never left you! You have always been my agent!
+#     - What are you talking about? I never left you! You were always my agent!
+# - intent: dev,6,4,2,3
+#   examples: |
+#     - Really?!
+#     - oh really?!
+#     - not really?!
+#     - where?!
+#     - what?!
+#     - Really?!
+#     - For real?!
+# - intent: dev,6,4,2,4
+#   examples: |
+#     - Yeah!
+#     - hey yeah!
+#     - ah yeah!
+#     - smash!
+#     - oh!
+#     - Yes!
+#     - Yes!
+# - intent: dev,5,20,3,0
+#   examples: |
+#     - Okay, you guys free tonight?
+#     - and okay, keep you three guys free tonight?
+#     - ... okay, are you and guys free tonight?
+#     - like, these guys free lunch?
+#     - so, you feeling free today?
+#     - Okay, you free tonight?
+#     - Okay, are you free tonight?
+# - intent: dev,5,20,3,1
+#   examples: |
+#     - Yeah!!
+#     - the yeah!!
+#     - hell yeah!!
+#     - kill!!
+#     - bam!!
+#     - Yes!!
+#     - Yes!!
+# - intent: dev,7,7,4,0
+#   examples: |
+#     - Yes? Yes?! How can I help you?
+#     - yes? yes?! how i can if i help please you?
+#     - yes? yes?! because how can it i not help you?
+#     - yes?...?! so can anyone help you?
+#     - yes? yes?! how will i say it?
+#     - Yes? Yes?! How can I help you?
+#     - Yes? Yes?! How can I help you?
+# - intent: dev,7,7,4,1
+#   examples: |
+#     - Yeah, we were…we were just looking around.
+#     - yeah, we were quiet … though we were also just looking around.
+#     - yeah, since we were … we usually were just looking carefully around.
+#     - yeah, we were sorry people were just kidding around.
+#     - eventually, we knew … we were just looking at.
+#     - Yeah, we were...we were just looking around.
+#     - Yes, we were... we were just looking around.
+# - intent: dev,7,7,4,2
+#   examples: |
+#     - Oh-oh, you're-you're fellow scholars.
+#     - oh oh - uh oh, you're - you're fellow christian scholars.
+#     - oh - no oh, you're - you'er re fellow great scholars.
+#     - they - what, you're - they're fellow scholars.
+#     - oh - oh, their're - and're fellow passengers.
+#     - Oh-oh, you are-you are fellow scholars.
+#     - Uh-oh, you are scholars.
+# - intent: dev,7,7,4,3
+#   examples: |
+#     - What exactly were you looking for, hmm?
+#     - one what reason exactly were you obviously looking for, hmm?
+#     - what exactly were both you looking forward for, serial hmm?
+#     - which exactly were you paying for, alex?
+#     - whom exactly were they looking toward, hmm?
+#     - What exactly were you looking for, hmm?
+#     - What exactly were you looking for, huh?
+# - intent: dev,7,7,4,4
+#   examples: |
+#     - Perhaps,  perhaps Dr. Chester Stock's musings on the Smiledon Californicus?
+#     - perhaps, perhaps dr. chester randall stock's musings based on the smiledon codex californicus?
+#     - perhaps, perhaps even dr. chester stock's musings on the ancient smiledon tablet californicus?
+#     - perhaps, remember h. chester beatty's musings on the smiledon californicus?
+#     - perhaps, perhaps dr. chester woolf's musings concerning the smiledon equation?
+#     - Maybe, maybe Dr. Chester Stock's musings on the Smiledon Californicus?
+#     - Maybe, maybe dr. Chester Stock's Thoughts on the Smiledon Californicus?
+# - intent: dev,7,7,4,5
+#   examples: |
+#     - Uhh….
+#     - no uhh no ….
+#     - oh uhh no ….
+#     - so....
+#     - and oh.
+#     - Uhh….
+#     - uh...
+# - intent: dev,7,7,4,6
+#   examples: |
+#     - Ah… Ah…Get out of here!  Uh, meeting someone? Or-or are you just here to brush up on Marion's views on evolution?
+#     - ah … to ah … get out of here! uh, meeting someone? or - or are you just here to brush up on that marion'latest s views on evolution?
+#     - ah … ah … an get out of here! uh, meeting someone? or - or are you actually just here to brush up on marion's liberal views on evolution?
+#     - ah … please … get out of here! uh, meeting someone? or - or are you just here to brush up on marion'm notes on evolution?
+#     - ah … ah … get out of here! uh, ask someone? ah - or are you just trying to brush up on marion's views on evolution?
+#     - Oh... Oh... Get out of here! Uh, meet someone? Either-or are you just here to brush up on Marion's views on evolution?
+#     - Ah... Ah... get out of here! Uh, meet someone? Or-or are you just here to refresh Marion's views on evolution?
+# - intent: dev,7,7,4,7
+#   examples: |
+#     - Uh, actually I find Marion's views far too progressionist.
+#     - or uh, actually then i find marion's views far from too progressionist.
+#     - uh, actually i can find marion's negative views far been too progressionist.
+#     - uh, actually i considered marion's room far too pretty.
+#     - uh, actually i viewed marion's approach as too progressionist.
+#     - Uh, actually I find Marion's views far too progressionist.
+#     - Uh, actually I think Marion's views are far too progressive.
+# - intent: dev,7,7,4,8
+#   examples: |
+#     - I find Marion's views far too progressionist.
+#     - i find when marion'does s views far seem too progressionist.
+#     - i honestly find marion's views here far too highly progressionist.
+#     - i find marion'current views entirely too optimistic.
+#     - they find marion's pregnancy far more progressionist.
+#     - I find Marion's views far too progressionist.
+#     - I find Marion's views far too progressive.
+# - intent: dev,7,7,4,9
+#   examples: |
+#     - I'm sorry, who are you?
+#     - i'l m sorry, who exactly are the you?
+#     - say i'i m sorry, who are... you?
+#     - i'k scared, but are you?
+#     - i'metre there, gone are you?
+#     - I'm sorry, who are you?
+#     - sorry who are you
+# - intent: dev,7,7,4,10
+#   examples: |
+#     - I'm a professor here uh, Ross…Geller.
+#     - i'a m doing a professor here on uh, ross … geller.
+#     - i'd m a biology professor in here uh, ross … geller.
+#     - i'm a newcomer here uh, major michael geller.
+#     - i'm a professor here only, under peter geller.
+#     - I'm a professor here, Ross... Geller.
+#     - I'm a professor here, uh, Ross... Geller.
+# - intent: dev,7,7,4,11
+#   examples: |
+#     - Ross Geller, why do I know that name? It's uh—Wait!  Did you write this?
+#     - rachel ross geller, why do i ever know that name? it's uh um — wait! did you write this?
+#     - ross geller, why do... i... know that strange name? it's uh — wait! did you write this?
+#     - ross geller, why do i know that text? it's because or wait! did you write this?
+#     - ross geller, why do i know that name? it'isn uh — wait! could someone write this?
+#     - Ross Geller, why do I know that name? It's uh—wait! Did you write it?
+#     - Ross Geller, how do I know that name? It's uh - wait a minute! Did you write that?
+# - intent: dev,7,7,4,12
+#   examples: |
+#     - Yes! You're the person who checked out my book?!
+#     - yes! maybe you're actually the person who checked out my school book?!
+#     - yes! you're the person you who checked out in my travel book?!
+#     - yes! you'd the person that checked out his book?!
+#     - yes! we're a person i checked out my book?!
+#     - Yes! You're the person who reviewed my book?!
+#     - Yes! You're the person who checked out my book?!
+# - intent: dev,7,7,4,13
+#   examples: |
+#     - Y'know, you look nothing like I would've thought. You're…you're so young.
+#     - y'know, you look truly nothing like i would'd ve likely thought. you're … you're so young.
+#     - y'know, you look nothing like i and would'ya ve thought. you're … you'way re so young.
+#     - y'are, you look nothing like he would've thought. you're awful you're so young.
+#     - y'know, you look nothing what i would've thought. th'make … you're so young.
+#     - You know, you look nothing like I would have thought. You are...you are so young.
+#     - You know, you don't look like what I thought you would at all. You are... you are so young.
+# - intent: dev,2,7,5,0
+#   examples: |
+#     - You had no right to tell me you ever had feelings for me.
+#     - you had no real right but to tell me have you ever had feelings for me.
+#     - if you guys had no right to tell me only you ever had feelings for me.
+#     - ye had no right to tell me you ever had love for sarah.
+#     - you had no right to tell me this ever caused trouble for me.
+#     - You had no right to tell me that you ever had feelings for me.
+#     - You had no right to tell me you ever had feelings for me.
+# - intent: dev,2,7,5,1
+#   examples: |
+#     - What?
+#     - know what?
+#     - with what?
+#     - 7?
+#     - really?
+#     - What?
+#     - What?
+# - intent: dev,2,7,5,2
+#   examples: |
+#     - I was doing great with Julie before I found out about you.
+#     - i certainly was doing great with julie now before i found out something about you.
+#     - i was doing great with young julie long before when i found out about you.
+#     - i was doing great with julie when grace found out about derek.
+#     - dad was no great with julie before i found out from you.
+#     - I was doing well with Julie before I found out about you.
+#     - I was great with Julie before I found out about you.
+# - intent: dev,2,7,5,3
+#   examples: |
+#     - Hey, I was doin' great before I found out about you. You think it's easy for me to see you with Julie?
+#     - hey, i always was doin'great before i found out about you. you think it's that easy for me to see you there with julie?
+#     - hey, i was doin'real great before i found out about you. and you think it's easy for me to see you here with julie?
+#     - hey, i was doin'great before i found out around you. you think it's easy loving me to see that with julie?
+#     - hey, i was doin'great once i found out about you. do think it's easy for me to see you now julie?
+#     - Hey, I was doing well before I found out about you. Do you think it's easy for me to see you with Julie?
+#     - Hey, I was great before I found out about you. Do you think it's easy for me to see you with Julie?
+# - intent: dev,2,7,5,4
+#   examples: |
+#     - The point is I...
+#     - the key point... is because i...
+#     - and the end point is that i...
+#     - its other being i...
+#     - the heart not broken...
+#     - The point is I…
+#     - The point is I...
+# - intent: dev,2,7,5,5
+#   examples: |
+#     - I don't need this right now, OK.
+#     - i really don'l t need this right right now, ok.
+#     - i probably don't need some this help right now, ok.
+#     - mike doesn't need this right away, ok.
+#     - we don't need blood right here, ok.
+#     - I don't need it now, OK.
+#     - I don't need this now, okay.
+# - intent: dev,2,7,5,6
+#   examples: |
+#     - It, it's too late, I'm with somebody else, I'm happy.
+#     - it, or it's quite too late, i'm with somebody else, but i'm happy.
+#     - it, it's all too late, although i'm with somebody else else, i'm happy.
+#     - jack, it's really late, i'm hurting somebody else, i'm happy.
+#     - it, it's too late, him'n with somebody else, he'm happy.
+#     - It, it's too late, I'm with someone else, I'm happy.
+#     - It's too late, I'm with someone else, I'm happy.
+# - intent: dev,2,7,5,7
+#   examples: |
+#     - This ship has sailed.
+#     - this great ship has yet sailed.
+#     - this ship also has not sailed.
+#     - this morning they sailed.
+#     - then treasure has sailed.
+#     - This ship has sailed.
+#     - This ship has sailed.
+# - intent: dev,2,7,5,8
+#   examples: |
+#     - Alright, fine, you go ahead and you do that, alright Ross.
+#     - alright, just fine, well you go for ahead and you do that, alright ross.
+#     - alright, fine, you better go straight ahead and you do remember that, alright ross.
+#     - yeah, fine, now go ahead after you do that, alright ross.
+#     - alright, alright, alright go ahead on you do that, alright ross.
+#     - Okay, okay, you go ahead and you do it, okay Ross.
+#     - All right, well, go ahead and do that, all right, Ross.
+# - intent: dev,2,7,5,9
+#   examples: |
+#     - Fine.
+#     - not fine.
+#     - not fine.
+#     - b.
+#     - p.
+#     - Well.
+#     - Fine.
+# - intent: dev,2,7,5,10
+#   examples: |
+#     - Cause I don't need your stupid ship.
+#     - damn cause and i don'f t need your stupid ship.
+#     - cause i don'touch t necessarily need this your stupid ship.
+#     - cause i m'n know your stupid ship.
+#     - sorry i don't need your financial help.
+#     - Because I don't need your stupid ship.
+#     - 'Cause I don't need your stupid ship.
+# - intent: dev,2,7,5,11
+#   examples: |
+#     - Good.
+#     - dead good.
+#     - so good.
+#     - ii.
+#     - math.
+#     - Well.
+#     - Good.
+# - intent: dev,8,3,6,0
+#   examples: |
+#     - Oh, it's so romantic to send people off on their honeymoon.
+#     - oh, sure it's so romantic... to send people setting off on their honeymoon.
+#     - oh, it'isn s so romantic to send people all off on their wonderful honeymoon.
+#     - oh, she's so romantic to send them off on their dates.
+#     - oh, it's how romantic they send people off and their honeymoon.
+#     - Oh, it's so romantic to send people off on their honeymoon.
+#     - Oh, it's so romantic to send people on honeymoons.
+# - intent: dev,8,3,6,1
+#   examples: |
+#     - Y'know, Monica and Chandler are married. Ross and Rachel are having a baby. Maybe you and I should do something.
+#     - y'heard know, monica and chandler are married. monica ross and rachel are having a baby. maybe you and i should do together something.
+#     - y'know, monica and chandler are married. ross and rachel are just having possibly a baby. maybe you come and i should do something.
+#     - y'know, monica and chandler are married. ross and rachel are having that baby. believe you and i should do our.
+#     - z'know, monica and chandler are married. sean and rachel are having a kid. maybe you and i should do something.
+#     - You know, Monica and Chandler are married. Ross and Rachel have a baby. Maybe you and I should do something.
+#     - You know, Monica and Chandler are married. Ross and Rachel have a baby. Maybe you and I should do something.
+# - intent: dev,8,3,6,2
+#   examples: |
+#     - All in good time my love.
+#     - all is in the good good time my love.
+#     - nothing all done in good time but my love.
+#     - all in good terms you ladies.
+#     - not in no time my lieutenant.
+#     - All in time my love.
+#     - All at the right time, my love.
+# - intent: dev,8,3,6,3
+#   examples: |
+#     - All in good time.
+#     - all else in the good time.
+#     - was all over in good time.
+#     - placed in good conditions.
+#     - sorry about good time.
+#     - All on time.
+#     - All in good time.
+# - intent: dev,8,3,6,4
+#   examples: |
+#     - Oh shoot!
+#     - oh lord shoot!
+#     - oh holy shoot!
+#     - oh good!
+#     - oh hi!
+#     - Oh shoot!
+#     - Oh shoot!
+# - intent: dev,8,3,6,5
+#   examples: |
+#     - I left my guitar in their apartment.
+#     - plus i only left my guitar in through their apartment.
+#     - somehow i have left my heavy guitar in their apartment.
+#     - i left my phone in the garage.
+#     - i found my message in your apartment.
+#     - I left my guitar in their apartment.
+#     - I left my guitar at her apartment.
+# - intent: dev,8,3,6,6
+#   examples: |
+#     - Well you can let me in later.
+#     - well you can certainly let last me in there later.
+#     - well you can probably let the me call in later.
+#     - well ya should let me out later.
+#     - think you can slip me in tonight.
+#     - Well, you can let me in later.
+#     - Well, you can let me in later.
+# - intent: dev,8,3,6,7
+#   examples: |
+#     - I don't have a key, they took mine to give to you.
+#     - i really don't have a single key, although they took mine to give to you.
+#     - i don't have a key, they both took mine to give birth to change you.
+#     - just don't have a key, they took this by give to you.
+#     - i don't take my key, they took mine before give to you.
+#     - I don't have a key, they took mine to give you.
+#     - I don't have a key, they took mine to give to you.
+# - intent: dev,8,3,6,8
+#   examples: |
+#     - What?! They took mine to give to you!
+#     - forget what?! they only took mine to give to destroy you!
+#     - so what?! they who took out mine to give to you!
+#     - where?! they send mine to give them you!
+#     - me?! they took mine to pack away you!
+#     - What?! They took mine to give to you!
+#     - What?! They took mine to give to you!
+# - intent: dev,8,20,7,0
+#   examples: |
+#     - Wow! It looks like we got a lot of good stuff.
+#     - ah wow! but it looks like we got a whole lot of good stuff.
+#     - wow! it looks like we both got in a little lot of good stuff.
+#     - wow! it sounds like we got a lot in good advice.
+#     - wow! it s like we encounter a lot of bad stuff.
+#     - Wow! Looks like we got a lot of good stuff.
+#     - Wow! It looks like we have a lot of good stuff.
+# - intent: dev,8,20,7,1
+#   examples: |
+#     - Oh we did, but my mom got us the greatest gift of all.
+#     - oh dear we did, but my mom always got us together the greatest gift of all.
+#     - oh we did, but then my mom got us the greatest damn gift one of all.
+#     - oh we did, but my momma got us her greatest gift of mine.
+#     - oh wow did, baby my father got us the greatest gift of all.
+#     - Oh, we did, but my mother gave us the greatest gift of all.
+#     - Oh we did, but my mother gave us the greatest gift of all.
+# - intent: dev,8,20,7,2
+#   examples: |
+#     - A
+#     - a a
+#     - type a
+#     - ...
+#     - on
+#     - A
+#     - A
+# - intent: dev,8,20,7,3
+#   examples: |
+#     - No. She's going to live with us for eight weeks.
+#     - no. she'd s really going to live with us together for eight weeks.
+#     - no. she's going to come live alone with us for approximately eight weeks.
+#     - 2. she's going on ride with us for eight weeks.
+#     - 10. she's going to live under us of eight weeks.
+#     - No. She will stay with us for eight weeks.
+#     - no She will stay with us for eight weeks.
+# - intent: dev,8,20,7,4
+#   examples: |
+#     - Uh, what?
+#     - and uh, like what?
+#     - he uh, about what?
+#     - no, really?
+#     - now, why?
+#     - Uh, what?
+#     - Uh what?
+# - intent: dev,8,20,7,5
+#   examples: |
+#     - Yes! She's gonna help us take care of the baby! Woo-hoo.
+#     - yes! yes she's gonna help us take care... of the baby! oh woo - hoo.
+#     - ... yes! she's gonna help us there take care... of the baby! woo - hoo.
+#     - hey! she's gonna help us take him to the baby! woo - hoo.
+#     - yes! you'z gonna help us take charge of the baby! woo - hoo.
+#     - Yes! She's going to help us take care of the baby! Wow-how.
+#     - Yes! She will help us take care of the baby! Woo-hoo.
+# - intent: dev,8,20,7,6
+#   examples: |
+#     - What—You're not serious.
+#     - but what — you'′ re not doing serious.
+#     - what happened — you're truly not this serious.
+#     - what though she're not beautiful.
+#     - what if you've more serious.
+#     - What—You're not serious.
+#     - What - you're not serious.
+# - intent: dev,8,20,7,7
+#   examples: |
+#     - I mean she's a very nice woman, but there is no way we can take eight weeks of her.
+#     - i mean she's obviously a very nice woman, but there is just no way we can take eight weeks ahead of her.
+#     - i mean she's a very nice woman, but there absolutely is completely no way we possibly can take eight weeks of her.
+#     - i mean more'n a very nice woman, but there is no way we can take five weeks of her.
+#     - i mean she's a very nice woman, but there is a way anyone can take eighteen weeks of her.
+#     - I mean she's a very nice woman, but there's no way we can take eight weeks from her.
+#     - I mean, she's a very nice woman, but there's no way we can take eight weeks from her.
+# - intent: dev,8,20,7,8
+#   examples: |
+#     - She'll drive us totally crazy.
+#     - she'll still drive us apart totally freaking crazy.
+#     - though she'll also drive us totally fucking crazy.
+#     - y'we take us totally crazy.
+#     - dad'll drive us straight out.
+#     - She will drive us completely crazy.
+#     - She's gonna drive us all crazy.
+# - intent: dev,8,20,7,9
+#   examples: |
+#     - Hi Ross!
+#     - hi james ross!
+#     - because hi ross!
+#     - hi sara!
+#     - hi nana!
+#     - Hi Ross!
+#     - Hello Ross!
+# - intent: dev,7,19,8,0
+#   examples: |
+#     - Hey! What did you decide to do about the movie?
+#     - hey! now what else did you decide to do about about the movie?
+#     - hey! what did you decide now to do... about the fantasy movie?
+#     - hey! what make you decide i do to the movie?
+#     - hey! what makes you decide to do at this movie?
+#     - Shark! What did you decide to do about the movie?
+#     - Hey! What are your plans for the film?
+# - intent: dev,7,19,8,1
+#   examples: |
+#     - I don't know!
+#     - he i don't fucking know!
+#     - but i don't... know!
+#     - i doesn't care!
+#     - i don'don remember!
+#     - I do not know!
+#     - I do not know!
+# - intent: dev,7,19,8,2
+#   examples: |
+#     - It's not like it's porn!
+#     - it'm s really not like it'd s porn!
+#     - it's not like what it'm s watching porn!
+#     - it's true that it't porn!
+#     - ya'c not like it're porn!
+#     - It's not like it's porn!
+#     - It's not like it's a porn!
+# - intent: dev,7,19,8,3
+#   examples: |
+#     - This is a serious, legitimate movie.
+#     - but this is obviously a serious, legitimate fantasy movie.
+#     - this is still a pretty serious, legitimate fantasy movie.
+#     - you were a pure, legitimate movie.
+#     - she means a serious, legitimate emergency.
+#     - This is a serious, legitimate movie.
+#     - This is a serious, legitimate film.
+# - intent: dev,7,19,8,4
+#   examples: |
+#     - And the nudity is really important to the story.
+#     - it and the nudity is suddenly really important to finish the story.
+#     - pornography and the nudity aspect is really more important to the story.
+#     - and that nudity is very important to her story.
+#     - and the man becomes really important to her story.
+#     - And the nudity is really important to the story.
+#     - And the nudity is really important to the story.
+# - intent: dev,7,19,8,5
+#   examples: |
+#     - That's what you say about porn.
+#     - now that'don s simply what you say about porn.
+#     - that'′ s what all you say about internet porn.
+#     - that's how you feel about her.
+#     - that's what she did with porn.
+#     - This is what you say about pornography.
+#     - That's what they say about porn.
+# - intent: dev,7,19,8,6
+#   examples: |
+#     - You're right. Maybe I shouldn't even go on the call back.
+#     - maybe you're right. maybe then i shouldn't even go on the call way back.
+#     - you're not right. maybe that i shouldn't even go on getting the call back.
+#     - you're right. but this shouldn't even go over the call back.
+#     - you're right. maybe i shouldn'n even go on a journey back.
+#     - You're right. Maybe I shouldn't even call back.
+#     - You're right. Maybe I shouldn't even go for the call back.
+# - intent: dev,7,19,8,7
+#   examples: |
+#     - No! No you should! A lot of major actors do nude scenes! I mean, the chance to star in a movie? Come on!
+#     - no! oh no you should! a lot of major actors do nude scenes! which i mean, the chance to star in a movie? oh come on!
+#     - no! no say you should! a lot of major actors do nude scenes! i mean, the chance to almost star in a porn movie? come on!
+#     - no! no you idiot! a pair of major actors do nude scenes! i mean, that chance to star in a movie? come on!
+#     - no! no you should! a lot of major celebrities do nude scenes! i mean, the chance to star with a film? come on!
+#     - No! No you must! Many great actors do nude scenes! I mean, the chance to star in a movie? Come on!
+#     - No! No you should! Many great actors do nude scenes! I mean, the chance to be in a movie? Come on!
+# - intent: dev,7,19,8,8
+#   examples: |
+#     - Well that's true.
+#     - well yes that's probably true.
+#     - ah well that'l s true.
+#     - well proven'n true.
+#     - but this's true.
+#     - Well that's true.
+#     - Well that's true.
+# - intent: dev,7,19,8,9
+#   examples: |
+#     - And I am only naked in one scene.
+#     - kate and i am essentially only naked in one epic scene.
+#     - and that i honestly am only naked in one more scene.
+#     - with myself am only clad in one scene.
+#     - and ii am only naked here one minute.
+#     - And I'm only naked in one scene.
+#     - And I'm only naked in one scene.
+# - intent: dev,7,19,8,10
+#   examples: |
+#     - Plus it sounds really great.
+#     - plus it just sounds really pretty great.
+#     - plus it just sounds really goddamn great.
+#     - plus it sounds so cool.
+#     - ... it was really great.
+#     - Plus it sounds really great.
+#     - Also, it sounds really great.
+# - intent: dev,7,19,8,11
+#   examples: |
+#     - My character's catholic and he falls in love with this Jewish girl.
+#     - my character's catholic himself and he falls right in love with this lovely jewish girl.
+#     - my own character's catholic too and he just falls in love with this jewish girl.
+#     - his character's catholic and he falls the love with this jewish woman.
+#     - my husband's changed and he falls inside love with this jewish girl.
+#     - My character is catholic and he falls in love with this Jewish girl.
+#     - My character is Catholic and falls in love with this Jewish girl.
+# - intent: dev,7,19,8,12
+#   examples: |
+#     - Who run away together and they get caught in this big rainstorm.
+#     - who run away together twice and they get very caught even in this big rainstorm.
+#     - parents who run away together and together they get caught in by this big rainstorm.
+#     - who walk away together but they get caught off this big rainstorm.
+#     - who run away together once they got caught in their big rainstorm.
+#     - Who run away together and they get caught in this big downpour.
+#     - Who run away together and get caught in this big rainstorm.
+# - intent: dev,7,19,8,13
+#   examples: |
+#     - So we go into this barn and undress each other and hold each other.
+#     - so we go into about this barn and undress for each other together and hold each other.
+#     - so we go up into this barn and undress each each other and i hold each other.
+#     - so you go into his barn and undress each body and hold each other.
+#     - so we go into a barn and undress each other and hold for breath.
+#     - So we go into this barn and undress each other and hold each other.
+#     - So we go in this barn and undress each other and hold tight.
+# - intent: dev,6,3,9,0
+#   examples: |
+#     - Hey, what's up?
+#     - hey hey, now what'l s up?
+#     - but hey, what'an s is up?
+#     - man, w'r up?
+#     - oh, kids're up?
+#     - Hey how does it look?
+#     - Hey whats up?
+# - intent: dev,6,3,9,1
+#   examples: |
+#     - Nothing, Monica and I had a stupid fight.
+#     - then nothing, monica had and i had a stupid enough fight.
+#     - ... nothing, monica said and ricky i had a stupid fight.
+#     - well, kate and i picking a stupid fight.
+#     - nothing, but und i had a little fight.
+#     - Nothing, Monica and I had a stupid fight.
+#     - Nothing, Monica and I had a stupid argument.
+# - intent: dev,6,3,9,2
+#   examples: |
+#     - But you're still moving in together, right? Because my ad came out today.
+#     - but you're still moving right in again together, right? because my ad came rolling out today.
+#     - but you're still moving on in there together, right? because that my ad came out today.
+#     - but you'rec still closing in together, right? because his ad came out today.
+#     - but you't still stepping in together, right? because your ad came out today.
+#     - But you still move in together, right? Because my ad came out today.
+#     - But you're still moving in together, right? Because my ad came out today.
+# - intent: dev,6,3,9,3
+#   examples: |
+#     - Wanted. Female roommate, non-smoker, non-ugly. Nice!
+#     - many wanted. male female roommate, non - heavy smoker, non - ugly. nice!
+#     - wanted. this female lab roommate, non - smoker, but non - ugly. nice!
+#     - wanted. on phone, non - date, non - ugly. nice!
+#     - wanted. female patient, non - smoker, free - smoking. nice!
+#     - Wanted. Female roommate, non-smoker, non-ugly. Nice!
+#     - Searched. Roommate, non-smoker, not ugly. Kind!
+# - intent: dev,6,3,9,4
+#   examples: |
+#     - Yeah?
+#     - ¿ yeah?
+#     - the yeah?
+#     - where?
+#     - you?
+#     - Yes?
+#     - Yes?
+# - intent: dev,6,3,9,5
+#   examples: |
+#     - I just figured y'know, after living with you it'd be an interesting change of pace to have a female roommate, y'know?
+#     - actually i just... figured y'know, after living with you it'd be an interesting change of pace to have a female roommate, y'tell know?
+#     - i just figured y'may know, after contemplating living forever with you it'd be an interesting change of pace to have a female roommate, y'know?
+#     - i just figured o'know, after living with you it'could be... interesting change of pace to have a female roommate, y'know?
+#     - i just figured y'know, after living with you it'd be an easier sort of pace to have a permanent roommate, y'know?
+#     - I just thought you know, after living with you, it would be an interesting change of pace to have a female roommate, you know?
+#     - I just thought, you know, after living with you, it would be an interesting change to have a female roommate, you know?
+# - intent: dev,6,3,9,6
+#   examples: |
+#     - Someone I can learn from, someone-someone who's different than me.
+#     - someone i just can never learn anything from, someone - someone who's different than me.
+#     - someone who i can learn better from, someone - someone who's different... than me.
+#     - someone will probably learn from, someone - someone who'm different than me.
+#     - someone i could learn from, like - person who's different than me.
+#     - Someone I can learn from, someone-someone who is different from me.
+#     - Someone I can learn from, someone different from me.
+# - intent: dev,5,20,10,0
+#   examples: |
+#     - So where are we going next?
+#     - so right where exactly are we going then next?
+#     - so... where are we really going next next?
+#     - like when am we going next?
+#     - ... why re we going next?
+#     - So where do we go next?
+#     - So where do we go next?
+# - intent: dev,5,20,10,1
+#   examples: |
+#     - This witness won't return my calls so we're gonna see if we can surprise him coming home.
+#     - this witness still won't return my calls so we'l re gonna see if even we can surprise him coming home.
+#     - this witness board won't return my calls so we're gonna see if we can possibly surprise him coming right home.
+#     - your witness wouldn't return my calls so he're gonna see if we can surprise him coming home.
+#     - each witness won't return my calls so we're watching see if we ever surprise him coming home.
+#     - This witness won't return my calls, so we're going to see if we can surprise him into coming home.
+#     - This witness won't be returning my calls, so we'll see if we can surprise him when he gets home.
+# - intent: dev,5,20,10,2
+#   examples: |
+#     - Sur-surprise him? We're not, we're not gonna make anybody mad are we?
+#     - sur - surprise at him? we're not, we're not gonna make that anybody go mad are we?
+#     - sur - surprise him? although we'm re not, we're not not gonna make anybody mad are we?
+#     - re - surprise what? we're not, our're not gonna make anybody mad are we?
+#     - sur - surprise him? i're fine, we're not gonna get anybody mad are we?
+#     - surprise him? We're not, we're not going to offend anyone, are we?
+#     - surprise him? We won't, we won't drive anyone crazy, will we?
+# - intent: dev,5,20,10,3
+#   examples: |
+#     - Come on man!  Listen so uh, are you gonna squeeze the perps shoes a little bit before he lawyers up?
+#     - but come on man! listen where so uh, are you gonna squeeze the perps own shoes a little bit before he lawyers up?
+#     - come on man! listen so uh, are you gonna squeeze the perps for shoes a little little bit before he lawyers them up?
+#     - come on man! listen so uh, are you gonna squeeze the perps shoes a little bit whilst ty stands up?
+#     - come on man! listen so uh, were you gonna squeeze the perps shoes a safe bit before he lawyers for?
+#     - Come on man! Listen so uh, are you going to push the perps shoes a little before he lawyers up?
+#     - come on man Listen, um, will you push the offender's shoes a little bit before he gets in touch?
+# - intent: dev,5,20,10,4
+#   examples: |
+#     - It's a witness not a perp. And no one talks like that!
+#     - it's a witness not a perp. damn and no straight one just talks like that!
+#     - it's a witness not a silent perp. forever and then no one talks like that!
+#     - it'll a witness not a perp. and another one talks like him!
+#     - he's a girl not a perp. and no one acts like that!
+#     - It is a witness not a perpetrator. And nobody talks like that!
+#     - It's a witness, not a perpetrator. And nobody talks like that!
+# - intent: dev,5,20,10,5
+#   examples: |
+#     - Yeah, no one talks like that!
+#     - now yeah, no single one talks like all that!
+#     - yeah, no other one much talks like just that!
+#     - dammit, no anyone talks like it!
+#     - yeah, no ma should like dat!
+#     - Yes, nobody talks like that!
+#     - Yes, nobody talks like that!
+# - intent: dev,5,20,10,6
+#   examples: |
+#     - Oh what? Like your Mr. Cop!
+#     - even oh what? like your own mr. good cop!
+#     - oh what? like is your boss mr. perfect cop!
+#     - oh why? like on dad. cop!
+#     - oh lord? and... mr. cop!
+#     - oh what? Like your mr. Crap!
+#     - oh what Like your Mr. Cop!
+# - intent: dev,5,20,10,7
+#   examples: |
+#     - Hey, I'm more cop than you two!
+#     - an hey, thinks i'm more general cop than you two!
+#     - hey, i'm more cop guy than man you make two!
+#     - plus, he'm more useful than you two!
+#     - hey, my'm more cop than they admit!
+#     - Hey, I'm more of a cop than you two!
+#     - Hey, I'm more cop than you two!
+# - intent: dev,5,20,10,8
+#   examples: |
+#     - How do you figure that?
+#     - then how big do you figure that?
+#     - just how far do you figure that?
+#     - why do soldiers figure that?
+#     - perhaps could you figure that?
+#     - How do you calculate it?
+#     - What makes you think that?
+# - intent: dev,5,19,11,0
+#   examples: |
+#     - I guess so.
+#     - that i really guess so.
+#     - or i guess glad so.
+#     - i know not.
+#     - just hope so.
+#     - I think so.
+#     - I guess so.
+# - intent: dev,5,19,11,1
+#   examples: |
+#     - Here you go. Thank you!
+#     - here that you must go. thank fuck you!
+#     - here alone you guys go. thank all you!
+#     - if you die. thank luck!
+#     - need you been. miss you!
+#     - Here you go. Thank you!
+#     - Please. Thanks very much!
 
 
 

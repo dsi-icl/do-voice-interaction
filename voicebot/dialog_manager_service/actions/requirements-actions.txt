@@ -4,3 +4,4 @@ graphql-core<3.3,>=3.2
 gql
 pyaml
 requests_toolbelt
+rasa-sdk==3.2.0
