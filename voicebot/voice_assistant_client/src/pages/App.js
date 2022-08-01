@@ -8,11 +8,14 @@ import SimpleRecorder from "../components/SimpleRecorder";
 import SimplePlayer from "../components/SimplePlayer";
 import TextBox from "../components/TextBox";
 import CommandFeed from "../components/CommandFeed";
+import { HumanThayers, BotThayers } from "../components/ThayersCharts";
 
 import {selectStatus} from "../reducers/media";
 import {PlayerStatus} from "../reducers/const";
 
 import "./App.css";
+
+
 
 const App = () => {
     return <Container>
@@ -35,6 +38,13 @@ const App = () => {
             </Grid>
             <CommandFeed/>
         </div>
+        <div className="left">
+            <HumanThayers/>
+        </div>
+        <div className="right">
+            <BotThayers/>
+        </div>
+        
     </Container>;
 };
 

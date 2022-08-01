@@ -118,3 +118,15 @@ body {
     margin-right: auto;
 }
 
+.left {
+    margin-left: -120px;
+    position: absolute;
+    top: 75px;
+}
+
+.right{
+    margin-left: 970px;
+    position: absolute;
+    top: 75px;
+}
+
