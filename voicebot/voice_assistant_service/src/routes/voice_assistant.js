@@ -10,7 +10,7 @@
   * @param {SocketIO.Client} client The client with which the server comunicates
   * @param {JSON} sttResponse The deepspeech json response
   */
- export async function successProcess (client, sttResponse, request, humanEmotion, botThayers, grammarCorrectionPositions, grammarCorrectionPrediction) {
+ export async function successProcess (client, sttResponse, request, humanEmotion, humanThayers, botThayers, grammarCorrectionPositions, grammarCorrectionPrediction) {
    // TODO: take care of grammarCorrectionMessage
    console.log('Speech to text transcription : SUCCESS\n')
  
@@ -38,6 +38,8 @@
          date: request.date,
          command: sttResponse.text,
          emotion: humanEmotion,
+         human_thayers: humanThayers,
+         bot_thayers: botThayers,
          grammar_positions: grammarCorrectionPositions,
          grammar_prediction: grammarCorrectionPrediction,
          response: botResponseText,
@@ -185,7 +187,7 @@
          }
        }
  
-       await successProcess(client, sttResponse.data, request, humanEmotion, botThayers, grammarCorrectionPositions, grammarCorrectionPrediction)
+       await successProcess(client, sttResponse.data, request, humanEmotion, humanThayers, botThayers, grammarCorrectionPositions, grammarCorrectionPrediction)
      } else {
        await errorProcess(client, sttResponse.data, '', request)
      }
@@ -220,7 +222,7 @@
        }
      }
  
-     await successProcess(client, commandData, request, 'no detection for text-only command.', "n/a", grammarCorrectionPositions, grammarCorrectionPrediction)
+     await successProcess(client, commandData, request, 'no detection for text-only command.', "n/a", "n/a", grammarCorrectionPositions, grammarCorrectionPrediction)
    }
  }
  
