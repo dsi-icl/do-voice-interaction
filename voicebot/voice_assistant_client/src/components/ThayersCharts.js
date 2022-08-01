@@ -1,15 +1,8 @@
-import React, { Component } from 'react'
+/* eslint-disable */
+import React from 'react'
 import Chart from 'react-google-charts'
-
-const humanCoordinates = [
-  ['Arousal', 'Valence'],
-  [-.8, .12]
-]
-const botCoordinates = [
-    ['Arousal', 'Valence'],
-    [.8, .72]
-  ]
-
+import {useSelector} from "react-redux";
+import {selectResponses} from "../reducers/media";
 
 const humanGraph = {
   title: 'Human Emotion',
@@ -24,9 +17,15 @@ const botGraph = {
     legend: 'none',
   }
 
+const toCoordinates = (thayers)=>{
+    if (thayers==='n/a'){
+        return [0,0]
+    }
+    return [parseFloat(thayers.split(",")[0]), parseFloat(thayers.split(",")[1])]
+}
 
-export class HumanThayers extends Component {
-  render() {
+export const HumanThayers = () => {
+    const responses = useSelector(selectResponses)
     return (
       <div>
         <Chart
@@ -34,15 +33,18 @@ export class HumanThayers extends Component {
           height={'280px'}
           chartType="ScatterChart"
           loader={<div>Loading Chart</div>}
-          data={humanCoordinates}
+          data={[
+            ['Arousal', 'Valence'],
+            responses[0]? toCoordinates(responses[0].human_thayers):[0,0]
+          ]}
           options={humanGraph}
         />
       </div>
     )
-  }
 }
-export class BotThayers extends Component {
-    render() {
+export const BotThayers = () => {
+    const responses = useSelector(selectResponses)
+
       return (
         <div>
           <Chart
@@ -50,10 +52,12 @@ export class BotThayers extends Component {
             height={'280px'}
             chartType="ScatterChart"
             loader={<div>Loading Chart</div>}
-            data={botCoordinates}
+            data={[
+                ['Arousal', 'Valence'],
+                responses[0]? toCoordinates(responses[0].bot_thayers):[0,0]
+              ]}
             options={botGraph}
           />
         </div>
       )
-    }
   }

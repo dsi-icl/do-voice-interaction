@@ -20,6 +20,8 @@ export const media = createSlice({
                 date: action.payload.date,
                 command: action.payload.command,
                 emotion: action.payload.emotion,
+                human_thayers: action.payload.human_thayers,
+                bot_thayers: action.payload.bot_thayers,
                 grammar_positions: action.payload.grammar_positions,
                 grammar_prediction: action.payload.grammar_prediction,
                 response: action.payload.response,
