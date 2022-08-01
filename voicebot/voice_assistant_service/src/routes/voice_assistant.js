@@ -14,12 +14,12 @@
    // TODO: take care of grammarCorrectionMessage
    console.log('Speech to text transcription : SUCCESS\n')
  
-   var commandForDialogManages = sttResponse.text
+   var commandForDialogManager = sttResponse.text
    if (grammarCorrectionPrediction !== '') {
-     commandForDialogManages = grammarCorrectionPrediction
+     commandForDialogManager = grammarCorrectionPrediction
    }
-   const botResult = await postDataRasa(global.config.services.dialogManagerService, '{"message":"' + commandForDialogManages + '"}', 'Data Observatory Control Service')
- 
+   console.log(botThayers)
+   const botResult = await postDataRasa(global.config.services.dialogManagerService, '{"message":"' + commandForDialogManager + '","emotion":"' + botThayers + '"}', 'Data Observatory Control Service')
    console.log('bot result', botResult)
  
    if (botResult.success) {
@@ -131,7 +131,7 @@
  
      const hotwordResponse = await Promise.race([p1, p2])
  
-     console.log('Hotword response - ', hotwordResponse)
+    //  console.log('Hotword response - ', hotwordResponse)
      client.emit('received-hotword-response', {})
  
      if (hotwordResponse.data.text === 'detected') {
@@ -142,7 +142,7 @@
  
  export async function processAudioCommand (client, request) {
    try{
-   let botThayers='n/a'
+   let botThayers="n/a"
    if (request.audio.type !== 'audio/wav' || request.audio.sampleRate !== 16000) {
      const error = { status: 'fail', service: 'Voice-assistant service', text: 'The record format is wrong' }
      await errorProcess(client, error, '', request)
@@ -220,7 +220,7 @@
        }
      }
  
-     await successProcess(client, commandData, request, 'no detection for text-only command.', 'n/a', grammarCorrectionPositions, grammarCorrectionPrediction)
+     await successProcess(client, commandData, request, 'no detection for text-only command.', "n/a", grammarCorrectionPositions, grammarCorrectionPrediction)
    }
  }
  

@@ -17,6 +17,7 @@ def updatePersonality():
     global personality
     personality.updateThayers(emotion)
     personalityState = np.array2string(personality.getThayers(), precision=3, separator=',', suppress_small=True)
+    personalityState = personalityState[1:-1]
     data = {'status': 'ok', 'service': 'personality-service', 'personalityState': personalityState}
     response = app.response_class(
         response=json.dumps(data),
