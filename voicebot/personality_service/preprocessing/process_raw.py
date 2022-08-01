@@ -50,33 +50,28 @@ for i in range(len(line_ones)):
     intents.append([line_ones[i][0] + "," + str(line_ones[i][1]) + "," + str(line_ones[i][2]) + "," + str(line_ones[i][3]) + "," + str(line_ones[i][4]), line_ones[i][5]])
     responses.append(["utter_" + line_twos[i][0] + "_" + str(line_twos[i][1]) + "_" + str(line_twos[i][2]) + "_" + str(line_twos[i][3]) + "_" + str(line_twos[i][4])+","+line_twos[i][6]+","+line_twos[i][7], line_twos[i][5]]) 
 
-aug1 = naw.ContextualWordEmbsAug(model_path='bert-base-uncased', action="insert", aug_max=3)
-aug2 = naw.ContextualWordEmbsAug(model_path='bert-base-uncased', action="insert", aug_max=6)
-aug3 = naw.ContextualWordEmbsAug(model_path='bert-base-uncased', action="substitute", aug_max=3)
-aug4 = naw.ContextualWordEmbsAug(model_path='bert-base-uncased', action="substitute", aug_max=6)
+aug1 = naw.ContextualWordEmbsAug(model_path='bert-base-uncased', action="insert", aug_max=6)
+aug2 = naw.ContextualWordEmbsAug(model_path='bert-base-uncased', action="substitute", aug_max=6)
 translator = Translator()
 
 # YML
 
-# with open("./data_yml/nlu.yml", "w") as f:
-#     f.write('version: "3.1"\n')
-#     f.write("nlu:\n")
-#     li_no=0
-#     for identifier, content in intents:
-#         f.write("- intent: "+identifier+"\n")
-#         f.write("  examples: |\n")
-#         f.write("    - "+content+"\n")
-#         f.write("    - "+aug1.augment(content)[0]+"\n")
-#         f.write("    - "+aug1.augment(content)[0]+"\n")
-#         f.write("    - "+aug3.augment(content)[0]+"\n")
-#         f.write("    - "+aug3.augment(content)[0]+"\n")
-#         f.write("    - "+translator.translate(translator.translate(content, dest='af', src='en').text, dest='en', src='af').text+"\n")
-#         f.write("    - "+translator.translate(translator.translate(content, dest='de', src='en').text, dest='en', src='de').text+"\n")
-#         li_no+=1
-#         print(li_no)
+with open("./data_yml/nlu.yml", "w") as f:
+    f.write('version: "3.1"\n')
+    f.write("nlu:\n")
+    li_no=0
+    for identifier, content in intents:
+        f.write("- intent: "+identifier+"\n")
+        f.write("  examples: |\n")
+        f.write("    - "+content+"\n")
+        f.write("    - "+aug1.augment(content)[0]+"\n")
+        f.write("    - "+aug2.augment(content)[0]+"\n")
+        f.write("    - "+translator.translate(translator.translate(content, dest='af', src='en').text, dest='en', src='af').text+"\n")
+        li_no+=1
+        print(li_no)
 
 
-# f.close()
+f.close()
 
 with open("./data_yml/stories.yml", "w") as f:
     f.write('version: "3.1"\n')

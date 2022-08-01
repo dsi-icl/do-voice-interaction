@@ -1,0 +1,570 @@
+version: "3.1"
+
+intents:
+- greet
+- affirm
+- deny
+- goodbye
+- help
+- open
+- out_of_scope
+- search
+- shutdown
+- control
+- clear_space
+- switch_modes
+- turn_on_gdo
+- open_environment
+- open_browsers
+- close_browsers
+- refresh_browsers
+- ask_repeat
+- list_available_demos
+- zoom
+- move
+- start_small_talk
+- check_emotion_detection_enabled
+- want_to_give_name
+- give_name
+- repeat_name
+- tell_about_today
+- ask_current_emotion
+- turn_on_emotion_detection
+- turn_off_emotion_detection
+- turn_on_grammar_correction
+- turn_off_grammar_correction
+- check_grammar_correction_enabled
+# - dev,4,7,0,0
+# - dev,4,4,1,0
+# - dev,4,4,1,1
+# - dev,4,4,1,2
+# - dev,4,4,1,3
+# - dev,4,4,1,4
+# - dev,4,4,1,5
+# - dev,4,4,1,6
+# - dev,4,4,1,7
+# - dev,4,4,1,8
+# - dev,4,4,1,9
+# - dev,4,4,1,10
+# - dev,4,4,1,11
+# - dev,4,4,1,12
+# - dev,4,4,1,13
+# - dev,4,4,1,14
+# - dev,6,4,2,0
+# - dev,6,4,2,1
+# - dev,6,4,2,2
+# - dev,6,4,2,3
+# - dev,6,4,2,4
+# - dev,5,20,3,0
+# - dev,5,20,3,1
+# - dev,7,7,4,0
+# - dev,7,7,4,1
+# - dev,7,7,4,2
+# - dev,7,7,4,3
+# - dev,7,7,4,4
+# - dev,7,7,4,5
+# - dev,7,7,4,6
+# - dev,7,7,4,7
+# - dev,7,7,4,8
+# - dev,7,7,4,9
+# - dev,7,7,4,10
+# - dev,7,7,4,11
+# - dev,7,7,4,12
+# - dev,7,7,4,13
+# - dev,2,7,5,0
+# - dev,2,7,5,1
+# - dev,2,7,5,2
+# - dev,2,7,5,3
+# - dev,2,7,5,4
+# - dev,2,7,5,5
+# - dev,2,7,5,6
+# - dev,2,7,5,7
+# - dev,2,7,5,8
+# - dev,2,7,5,9
+# - dev,2,7,5,10
+# - dev,2,7,5,11
+# - dev,8,3,6,0
+# - dev,8,3,6,1
+# - dev,8,3,6,2
+# - dev,8,3,6,3
+# - dev,8,3,6,4
+# - dev,8,3,6,5
+# - dev,8,3,6,6
+# - dev,8,3,6,7
+# - dev,8,3,6,8
+# - dev,8,20,7,0
+# - dev,8,20,7,1
+# - dev,8,20,7,2
+# - dev,8,20,7,3
+# - dev,8,20,7,4
+# - dev,8,20,7,5
+# - dev,8,20,7,6
+# - dev,8,20,7,7
+# - dev,8,20,7,8
+# - dev,8,20,7,9
+# - dev,7,19,8,0
+# - dev,7,19,8,1
+# - dev,7,19,8,2
+# - dev,7,19,8,3
+# - dev,7,19,8,4
+# - dev,7,19,8,5
+# - dev,7,19,8,6
+# - dev,7,19,8,7
+# - dev,7,19,8,8
+# - dev,7,19,8,9
+# - dev,7,19,8,10
+# - dev,7,19,8,11
+# - dev,7,19,8,12
+# - dev,7,19,8,13
+# - dev,6,3,9,0
+# - dev,6,3,9,1
+# - dev,6,3,9,2
+# - dev,6,3,9,3
+# - dev,6,3,9,4
+# - dev,6,3,9,5
+# - dev,6,3,9,6
+# - dev,5,20,10,0
+# - dev,5,20,10,1
+# - dev,5,20,10,2
+# - dev,5,20,10,3
+# - dev,5,20,10,4
+# - dev,5,20,10,5
+# - dev,5,20,10,6
+# - dev,5,20,10,7
+# - dev,5,20,10,8
+# - dev,5,19,11,0
+# - dev,5,19,11,1
+entities:
+- demo
+- control_command
+- mode
+- work_environment
+- switch_action
+- tag
+- search_mode
+- zoom_action
+- zoom_big_level
+- zoom_small_level
+- open_browsers
+- close_browsers
+- reset_browsers
+- direction
+slots:
+  name:
+    type: text
+    initial_value: ''
+    mappings:
+    - type: custom
+  emotion:
+    type: text
+    initial_value: n/a
+    mappings:
+    - type: custom
+  emotion_detection_enabled:
+    type: bool
+    initial_value: false
+    mappings:
+    - type: custom
+  grammar_correction_enabled:
+    type: bool
+    initial_value: false
+    mappings:
+    - type: custom
+  demo:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: demo
+  tag:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: tag
+  control_command:
+    type: categorical
+    values:
+    - refresh
+    - stop
+    - reset
+    - play
+    - mute
+    - pause
+    - play loop
+    mappings:
+    - type: from_entity
+      entity: control_command
+  mode:
+    type: categorical
+    values:
+    - section
+    - cluster
+    mappings:
+    - type: from_entity
+      entity: mode
+  work_environment:
+    type: categorical
+    values:
+    - students
+    - production
+    - development
+    mappings:
+    - type: from_entity
+      entity: work_environment
+  switch_action:
+    type: categorical
+    values:
+    - switch
+    mappings:
+    - type: from_entity
+      entity: switch_action
+  search_mode:
+    type: categorical
+    values:
+    - tag
+    - keyword
+    - tags
+    - keywords
+    mappings:
+    - type: from_entity
+      entity: search_mode
+  read_list:
+    type: bool
+    mappings:
+    - type: custom
+  restart:
+    type: bool
+    mappings:
+    - type: custom
+  zoom_action:
+    type: categorical
+    values:
+    - in
+    - out
+    mappings:
+    - type: from_entity
+      entity: zoom_action
+  zoom_big_level:
+    type: categorical
+    values:
+    - a lot
+    - hard
+    - large
+    - big
+    mappings:
+    - type: from_entity
+      entity: zoom_big_level
+  zoom_small_level:
+    type: categorical
+    values:
+    - a little
+    - small
+    - a bit
+    mappings:
+    - type: from_entity
+      entity: zoom_small_level
+  open_browsers:
+    type: categorical
+    values:
+    - open browsers
+    - open the browsers
+    - Open browsers
+    - Open the browsers
+    mappings:
+    - type: from_entity
+      entity: open_browsers
+  close_browsers:
+    type: categorical
+    values:
+    - close browsers
+    - close the browsers
+    - Close browsers
+    - Close the browsers
+    mappings:
+    - type: from_entity
+      entity: close_browsers
+  reset_browsers:
+    type: categorical
+    values:
+    - reset browsers
+    - reset the browsers
+    - Reset the browsers
+    - Reset browsers
+    mappings:
+    - type: from_entity
+      entity: reset_browsers
+  direction:
+    type: categorical
+    values:
+    - up
+    - top
+    - down
+    - bottom
+    - right
+    - left
+    mappings:
+    - type: from_entity
+      entity: direction
+actions:
+- action_open
+- action_list_demos
+- action_shutdown
+- action_turn_on_gdo
+- action_control
+- action_search
+- action_clear_space
+- action_switch_modes
+- action_open_environment
+- action_help
+- action_reset_slot_open
+- action_reset_slot_search
+- action_open_browsers
+- action_close_browsers
+- action_refresh_browsers
+- action_repeat
+- action_zoom
+- action_reset_slot_zoom
+- action_move
+- action_reset_slot_direction
+- action_reset_slot_browsers
+- action_turn_on_emotion_detection
+- action_turn_off_emotion_detection
+- action_check_emotion_detection_enabled
+- action_turn_on_grammar_correction
+- action_turn_off_grammar_correction
+- action_check_grammar_correction_enabled
+- action_receive_name
+- action_say_name
+- action_respond_about_today
+responses:
+  utter_greet:
+  - text: Welcome to the Data Observatory. I am your voice assistant. Can I help you ?
+  utter_goodbye:
+  - text: The Data Observatory thanks you for your presentation. I hope to see you soon
+  utter_affirm:
+  - text: Fine
+  - text: No worries
+  utter_out_of_scope:
+  - text: Sorry, I can't handle that request.
+  utter_confirm_shutdown:
+  - text: Do you really want to shutdown the screens ?
+  - text: Do you really want to shutdown the GDO ?
+  utter_confirm_turn_on_gdo:
+  - text: Do you really want to turn on the Global Data Observatory ?
+  utter_confirm_start_small_talk:
+  - text: Sure let's have a chat!
+  utter_ask_to_turn_on_emotion_detection:
+  - text: Can I turn on emotion detection so that I can understand you better?
+  utter_ask_name:
+  - text: So, what is your name?
+  utter_ask_about_today:
+  - text: What have you been up to today {name}?
+  utter_current_emotion:
+  - text: '{emotion}'
+  # utter_dev_4_7_0_1,surprise,negative:
+  # - text: "What?"
+  # utter_dev_4_4_1_1,joy,positive:
+  # - text: "You're a genius!"
+  # utter_dev_4_4_1_2,sadness,negative:
+  # - text: "Aww, man, now we won't be bank buddies!"
+  # utter_dev_4_4_1_3,neutral,neutral:
+  # - text: "Now, there's two reasons."
+  # utter_dev_4_4_1_4,neutral,neutral:
+  # - text: "Hey."
+  # utter_dev_4_4_1_5,joy,positive:
+  # - text: "Hey!"
+  # utter_dev_4_4_1_6,neutral,neutral:
+  # - text: "Ohh, you guys, remember that cute client I told you about? I bit him."
+  # utter_dev_4_4_1_7,surprise,negative:
+  # - text: "Where?!"
+  # utter_dev_4_4_1_8,neutral,neutral:
+  # - text: "On the touchy."
+  # utter_dev_4_4_1_9,neutral,neutral:
+  # - text: "And"
+  # utter_dev_4_4_1_10,surprise,negative:
+  # - text: "No, I know!"
+  # utter_dev_4_4_1_11,anger,negative:
+  # - text: "I-I'm sorry, but the moment I touch him, I just wanna throw out my old oath and take a new, dirty one."
+  # utter_dev_4_4_1_12,neutral,neutral:
+  # - text: "Well, next time your massaging him, you should try and distract yourself."
+  # utter_dev_4_4_1_13,joy,positive:
+  # - text: "Yeah! Yeah! Yeah! Like-like when I'm doing something exciting and I don't wanna get"
+  # utter_dev_4_4_1_14,neutral,neutral:
+  # - text: "Thank you, Joey."
+  # utter_dev_4_4_1_15,neutral,neutral:
+  # - text: "No-no, thank you."
+  # utter_dev_6_4_2_1,surprise,positive:
+  # - text: "Well! Well! Well! Joey Tribbiani! So you came back huh? They"
+  # utter_dev_6_4_2_2,surprise,negative:
+  # - text: "What are you talkin' about? I never left you! You've always been my agent!"
+  # utter_dev_6_4_2_3,surprise,positive:
+  # - text: "Really?!"
+  # utter_dev_6_4_2_4,joy,positive:
+  # - text: "Yeah!"
+  # utter_dev_6_4_2_5,neutral,neutral:
+  # - text: "Oh well, no harm, no foul."
+  # utter_dev_5_20_3_1,joy,positive:
+  # - text: "Yeah!!"
+  # utter_dev_5_20_3_2,surprise,negative:
+  # - text: "Tonight? You-you didn't say it was going to be at nighttime."
+  # utter_dev_7_7_4_1,neutral,neutral:
+  # - text: "Yeah, we were…we were just looking around."
+  # utter_dev_7_7_4_2,surprise,negative:
+  # - text: "Oh-oh, you're-you're fellow scholars."
+  # utter_dev_7_7_4_3,neutral,neutral:
+  # - text: "What exactly were you looking for, hmm?"
+  # utter_dev_7_7_4_4,neutral,neutral:
+  # - text: "Perhaps,  perhaps Dr. Chester Stock's musings on the Smiledon Californicus?"
+  # utter_dev_7_7_4_5,neutral,neutral:
+  # - text: "Uhh…."
+  # utter_dev_7_7_4_6,anger,negative:
+  # - text: "Ah… Ah…Get out of here!  Uh, meeting someone? Or-or are you just here to brush up on Marion's views on evolution?"
+  # utter_dev_7_7_4_7,neutral,neutral:
+  # - text: "Uh, actually I find Marion's views far too progressionist."
+  # utter_dev_7_7_4_8,neutral,neutral:
+  # - text: "I find Marion's views far too progressionist."
+  # utter_dev_7_7_4_9,surprise,positive:
+  # - text: "I'm sorry, who are you?"
+  # utter_dev_7_7_4_10,neutral,neutral:
+  # - text: "I'm a professor here uh, Ross…Geller."
+  # utter_dev_7_7_4_11,surprise,positive:
+  # - text: "Ross Geller, why do I know that name? It's uh—Wait!  Did you write this?"
+  # utter_dev_7_7_4_12,surprise,positive:
+  # - text: "Yes! You're the person who checked out my book?!"
+  # utter_dev_7_7_4_13,surprise,positive:
+  # - text: "Y'know, you look nothing like I would've thought. You're…you're so young."
+  # utter_dev_7_7_4_14,neutral,neutral:
+  # - text: "Well I uh, I skipped forth grade."
+  # utter_dev_2_7_5_1,surprise,negative:
+  # - text: "What?"
+  # utter_dev_2_7_5_2,anger,negative:
+  # - text: "I was doing great with Julie before I found out about you."
+  # utter_dev_2_7_5_3,anger,negative:
+  # - text: "Hey, I was doin' great before I found out about you. You think it's easy for me to see you with Julie?"
+  # utter_dev_2_7_5_4,anger,negative:
+  # - text: "The point is I..."
+  # utter_dev_2_7_5_5,anger,negative:
+  # - text: "I don't need this right now, OK."
+  # utter_dev_2_7_5_6,anger,negative:
+  # - text: "It, it's too late, I'm with somebody else, I'm happy."
+  # utter_dev_2_7_5_7,anger,negative:
+  # - text: "This ship has sailed."
+  # utter_dev_2_7_5_8,anger,negative:
+  # - text: "Alright, fine, you go ahead and you do that, alright Ross."
+  # utter_dev_2_7_5_9,anger,negative:
+  # - text: "Fine."
+  # utter_dev_2_7_5_10,anger,negative:
+  # - text: "Cause I don't need your stupid ship."
+  # utter_dev_2_7_5_11,anger,negative:
+  # - text: "Good."
+  # utter_dev_2_7_5_12,anger,negative:
+  # - text: "Good."
+  # utter_dev_8_3_6_1,neutral,neutral:
+  # - text: "Y'know, Monica and Chandler are married. Ross and Rachel are having a baby. Maybe you and I should do something."
+  # utter_dev_8_3_6_2,neutral,neutral:
+  # - text: "All in good time my love."
+  # utter_dev_8_3_6_3,neutral,neutral:
+  # - text: "All in good time."
+  # utter_dev_8_3_6_4,surprise,negative:
+  # - text: "Oh shoot!"
+  # utter_dev_8_3_6_5,sadness,negative:
+  # - text: "I left my guitar in their apartment."
+  # utter_dev_8_3_6_6,neutral,neutral:
+  # - text: "Well you can let me in later."
+  # utter_dev_8_3_6_7,neutral,neutral:
+  # - text: "I don't have a key, they took mine to give to you."
+  # utter_dev_8_3_6_8,surprise,negative:
+  # - text: "What?! They took mine to give to you!"
+  # utter_dev_8_3_6_9,surprise,negative:
+  # - text: "Why would they take away our keys?"
+  # utter_dev_8_20_7_1,joy,positive:
+  # - text: "Oh we did, but my mom got us the greatest gift of all."
+  # utter_dev_8_20_7_2,neutral,neutral:
+  # - text: "A"
+  # utter_dev_8_20_7_3,neutral,neutral:
+  # - text: "No. She's going to live with us for eight weeks."
+  # utter_dev_8_20_7_4,surprise,positive:
+  # - text: "Uh, what?"
+  # utter_dev_8_20_7_5,joy,positive:
+  # - text: "Yes! She's gonna help us take care of the baby! Woo-hoo."
+  # utter_dev_8_20_7_6,surprise,negative:
+  # - text: "What—You're not serious."
+  # utter_dev_8_20_7_7,anger,negative:
+  # - text: "I mean she's a very nice woman, but there is no way we can take eight weeks of her."
+  # utter_dev_8_20_7_8,disgust,negative:
+  # - text: "She'll drive us totally crazy."
+  # utter_dev_8_20_7_9,joy,positive:
+  # - text: "Hi Ross!"
+  # utter_dev_8_20_7_10,joy,positive:
+  # - text: "Hi roomie!"
+  # utter_dev_7_19_8_1,neutral,neutral:
+  # - text: "I don't know!"
+  # utter_dev_7_19_8_2,neutral,neutral:
+  # - text: "It's not like it's porn!"
+  # utter_dev_7_19_8_3,neutral,neutral:
+  # - text: "This is a serious, legitimate movie."
+  # utter_dev_7_19_8_4,neutral,neutral:
+  # - text: "And the nudity is really important to the story."
+  # utter_dev_7_19_8_5,neutral,neutral:
+  # - text: "That's what you say about porn."
+  # utter_dev_7_19_8_6,neutral,neutral:
+  # - text: "You're right. Maybe I shouldn't even go on the call back."
+  # utter_dev_7_19_8_7,joy,positive:
+  # - text: "No! No you should! A lot of major actors do nude scenes! I mean, the chance to star in a movie? Come on!"
+  # utter_dev_7_19_8_8,neutral,neutral:
+  # - text: "Well that's true."
+  # utter_dev_7_19_8_9,neutral,neutral:
+  # - text: "And I am only naked in one scene."
+  # utter_dev_7_19_8_10,neutral,neutral:
+  # - text: "Plus it sounds really great."
+  # utter_dev_7_19_8_11,neutral,neutral:
+  # - text: "My character's catholic and he falls in love with this Jewish girl."
+  # utter_dev_7_19_8_12,neutral,neutral:
+  # - text: "Who run away together and they get caught in this big rainstorm."
+  # utter_dev_7_19_8_13,neutral,neutral:
+  # - text: "So we go into this barn and undress each other and hold each other."
+  # utter_dev_7_19_8_14,joy,positive:
+  # - text: "It's really sweet and-and tender."
+  # utter_dev_6_3_9_1,sadness,negative:
+  # - text: "Nothing, Monica and I had a stupid fight."
+  # utter_dev_6_3_9_2,neutral,neutral:
+  # - text: "But you're still moving in together, right? Because my ad came out today."
+  # utter_dev_6_3_9_3,joy,positive:
+  # - text: "Wanted. Female roommate, non-smoker, non-ugly. Nice!"
+  # utter_dev_6_3_9_4,neutral,neutral:
+  # - text: "Yeah?"
+  # utter_dev_6_3_9_5,neutral,neutral:
+  # - text: "I just figured y'know, after living with you it'd be an interesting change of pace to have a female roommate, y'know?"
+  # utter_dev_6_3_9_6,neutral,neutral:
+  # - text: "Someone I can learn from, someone-someone who's different than me."
+  # utter_dev_6_3_9_7,neutral,neutral:
+  # - text: "And what's more different than me. A guy who's"
+  # utter_dev_5_20_10_1,neutral,neutral:
+  # - text: "This witness won't return my calls so we're gonna see if we can surprise him coming home."
+  # utter_dev_5_20_10_2,fear,negative:
+  # - text: "Sur-surprise him? We're not, we're not gonna make anybody mad are we?"
+  # utter_dev_5_20_10_3,joy,positive:
+  # - text: "Come on man!  Listen so uh, are you gonna squeeze the perps shoes a little bit before he lawyers up?"
+  # utter_dev_5_20_10_4,anger,negative:
+  # - text: "It's a witness not a perp. And no one talks like that!"
+  # utter_dev_5_20_10_5,anger,negative:
+  # - text: "Yeah, no one talks like that!"
+  # utter_dev_5_20_10_6,anger,negative:
+  # - text: "Oh what? Like your Mr. Cop!"
+  # utter_dev_5_20_10_7,anger,negative:
+  # - text: "Hey, I'm more cop than you two!"
+  # utter_dev_5_20_10_8,neutral,neutral:
+  # - text: "How do you figure that?"
+  # utter_dev_5_20_10_9,neutral,neutral:
+  # - text: "Hello! I'm in the front seat, okay? I'm Gary's partner!"
+  # utter_dev_5_19_11_1,neutral,neutral:
+  # - text: "Here you go. Thank you!"
+  # utter_dev_5_19_11_2,neutral,neutral:
+  # - text: "Wait, Rach! Where's the other one?"
+
+
+
+
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
