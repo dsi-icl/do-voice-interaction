@@ -25,7 +25,7 @@ PROCESSED_LABEL_DIR = MUSE_DIR + 'label/processed/' # Please specify your own pa
 TFRECORD_DIR = './tfrecords'  # Please specify your own path to save the tfrecords
 
 def development_msg(content):
-    print(content)
+    # print(content)
     return
 
 def get_filenames_from_dir(dir):
@@ -60,7 +60,6 @@ class WordVectorHelper(object):
     def load_vec(self):
         embeddings = []
         embeddings_dict = {}
-
         id2word = dict()
 
         with open(self.path, 'r') as f:
