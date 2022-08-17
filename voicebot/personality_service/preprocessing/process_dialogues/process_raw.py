@@ -13,6 +13,7 @@ utt_id = df_train['Utterance_ID'].tolist()
 emotions = df_train['Emotion'].tolist() 
 sentiments = df_train['Sentiment'].tolist()
 sets = df_train['Set'].tolist()
+speakers = df_train['Speaker'].tolist()
 stories = []
 line_ones = []
 line_twos= []
@@ -23,32 +24,46 @@ for i in range(len(utt)):
 dia_num=0
 dialogues=[]
 dialogue=[]
-for u, sd, ed, dd, ud, set, emo, sent in zip(utt, sea_id, epi_id, dia_id, utt_id, sets, emotions, sentiments):
+for u, sd, ed, dd, ud, set, emo, sent, spea in zip(utt, sea_id, epi_id, dia_id, utt_id, sets, emotions, sentiments, speakers):
     if (dd==dia_num):
-        dialogue.append([set, sd, ed, dd, ud, u, emo, sent])
+        dialogue.append([set, sd, ed, dd, ud, u, emo, sent, spea])
     else:
         dialogues.append(dialogue)
         dialogue=[]
-        dialogue.append([set, sd, ed, dd, ud, u, emo, sent])
+        dialogue.append([set, sd, ed, dd, ud, u, emo, sent, spea])
         dia_num=dd
 dialogues.append(dialogue)
 
-for d in dialogues:
-    count = 0
-    for u in d:
-        line_ones.append(u)
-        line_twos.append(u)
-        count+=1
-    line_ones.pop(len(line_ones)-1)
-    line_twos.pop(len(line_twos)-count)
+personality = "Phoebe"
+
+
+if personality=='full':
+    for d in dialogues:
+        count = 0
+        for u in d:
+            line_ones.append(u)
+            line_twos.append(u)
+            count+=1
+        line_ones.pop(len(line_ones)-1)
+        line_twos.pop(len(line_twos)-count)
+else:
+    for i in range(len(dialogues)):
+        for u in range(1, len(dialogues[i])):
+            if dialogues[i][u][8]==personality and dialogues[i][u-1][8]!=personality:
+                line_ones.append(dialogues[i][u-1])
+                line_twos.append(dialogues[i][u])
+    with open(personality+".txt","w") as f:
+        for a, b in zip(line_ones, line_twos):
+            f.write(str(a)+"\n")
+            f.write(str(b)+"\n\n")
 
 responses=[]
 intents=[]
 
 for i in range(len(line_ones)):
     stories.append("Dataset:" + line_ones[i][0] + "_Season:" + str(line_ones[i][1]) + "_Episode:" + str(line_ones[i][2]) + "_Dialogue:" + str(line_ones[i][3]) + "_Utterance:" + str(line_ones[i][4])) 
-    intents.append([line_ones[i][0] + "," + str(line_ones[i][1]) + "," + str(line_ones[i][2]) + "," + str(line_ones[i][3]) + "," + str(line_ones[i][4]), line_ones[i][5]])
-    responses.append(["utter_" + line_twos[i][0] + "_" + str(line_twos[i][1]) + "_" + str(line_twos[i][2]) + "_" + str(line_twos[i][3]) + "_" + str(line_twos[i][4])+","+line_twos[i][6]+","+line_twos[i][7], line_twos[i][5]]) 
+    intents.append([line_twos[i][0] + "_" + str(line_twos[i][1]) + "_" + str(line_twos[i][2]) + "_" + str(line_twos[i][3]) + "_" + str(line_twos[i][4])+","+line_twos[i][6]+","+line_twos[i][7], line_ones[i][5]])
+    responses.append([line_twos[i][0] + "_" + str(line_twos[i][1]) + "_" + str(line_twos[i][2]) + "_" + str(line_twos[i][3]) + "_" + str(line_twos[i][4])+","+line_twos[i][6]+","+line_twos[i][7], line_twos[i][5]]) 
 
 aug1 = naw.ContextualWordEmbsAug(model_path='bert-base-uncased', action="insert", aug_max=6)
 aug2 = naw.ContextualWordEmbsAug(model_path='bert-base-uncased', action="substitute", aug_max=6)
@@ -56,12 +71,12 @@ translator = Translator()
 
 # YML
 
-with open("./data_yml/nlu.yml", "w") as f:
+with open("./"+personality+"_yml/nlu.yml", "w") as f:
     f.write('version: "3.1"\n')
     f.write("nlu:\n")
     li_no=0
     for identifier, content in intents:
-        f.write("- intent: "+identifier+"\n")
+        f.write("- intent: "+"chitchat/"+identifier+"\n")
         f.write("  examples: |\n")
         f.write("    - "+content+"\n")
         f.write("    - "+aug1.augment(content)[0]+"\n")
@@ -73,24 +88,24 @@ with open("./data_yml/nlu.yml", "w") as f:
 
 f.close()
 
-with open("./data_yml/stories.yml", "w") as f:
-    f.write('version: "3.1"\n')
-    f.write("stories:\n")
-    for s, i, r in zip(stories, intents, responses):
-        f.write("- story: "+s+"\n")
-        f.write("  steps:\n")
-        f.write("  - intent: "+i[0]+"\n")
-        f.write("  - action: "+r[0]+"\n")
-f.close()
+# with open("./"+personality+"_yml/", "w") as f:
+#     f.write('version: "3.1"\n')
+#     f.write("rules:\n")
+#     for s, i, r in zip(stories, intents, responses):
+#         f.write("- rule: "+s+"\n")
+#         f.write("  steps:\n")
+#         f.write("  - intent: "+i[0]+"\n")
+#         f.write("  - action: "+r[0]+"\n")
+# f.close()
 
-with open("./data_yml/domain.yml", "w") as f:
+with open("./"+personality+"_yml/domain.yml", "w") as f:
     f.write('version: "3.1"\n\n')
-    f.write("intents:\n")
-    for i in intents:
-        f.write("  - "+i[0]+"\n")
+    # f.write("intents:\n")
+    # for i in intents:
+    #     f.write("  - "+i[0]+"\n")
     f.write("\n\nresponses:\n")
     for r in responses:
-        f.write("  "+r[0]+":\n")
+        f.write("  "+"utter_chitchat/"+r[0]+":\n")
         f.write('  - text: "'+r[1]+'"\n')
 f.close()
 
