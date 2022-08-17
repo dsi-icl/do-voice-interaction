@@ -6,14 +6,14 @@ import {selectResponses} from "../reducers/media";
 
 const humanGraph = {
   title: 'Human Emotion',
-  hAxis: { title: 'Arousal', minValue: -1, maxValue: 1 },
-  vAxis: { title: 'Valence', minValue: -1, maxValue: 1 },
+  hAxis: { title: 'Valence', minValue: -1, maxValue: 1 },
+  vAxis: { title: 'Arousal', minValue: -1, maxValue: 1 },
   legend: 'none',
 }
 const botGraph = {
     title: 'Bot Emotion',
-    hAxis: { title: 'Arousal', minValue: -1, maxValue: 1 },
-    vAxis: { title: 'Valence', minValue: -1, maxValue: 1 },
+    hAxis: { title: 'Valence', minValue: -1, maxValue: 1 },
+    vAxis: { title: 'Arousal', minValue: -1, maxValue: 1 },
     legend: 'none',
   }
 
@@ -34,7 +34,7 @@ export const HumanThayers = () => {
           chartType="ScatterChart"
           loader={<div>Loading Chart</div>}
           data={[
-            ['Arousal', 'Valence'],
+            ['Valence', 'Arousal'],
             responses[0]? toCoordinates(responses[0].human_thayers):[0,0]
           ]}
           options={humanGraph}
@@ -53,7 +53,7 @@ export const BotThayers = () => {
             chartType="ScatterChart"
             loader={<div>Loading Chart</div>}
             data={[
-                ['Arousal', 'Valence'],
+                ['Valence', 'Arousal'],
                 responses[0]? toCoordinates(responses[0].bot_thayers):[0,0]
               ]}
             options={botGraph}
