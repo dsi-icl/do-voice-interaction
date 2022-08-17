@@ -1,6 +1,6 @@
 {
     "cereprocOn": true,
-    "cereFile": false,
+    "cereFile": true,
     "cerevoice_eng": "/app/cerevoice/sdk/cerevoice_eng/jslib/cerevoice_eng.node",
     "voice_file": "/app/cerevoice/cerevoice_Heather_48k_standard.voice",
     "licence_file": "/app/cerevoice/licenses/299D199D-6698-4122-BD5A-F30AD1E91108_FMM_license.lic",

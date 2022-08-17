@@ -70,7 +70,7 @@ function speak ({ text, lang }) {
 
 function cereSpeak ({text, thayers}, res) {
   if (thayers!=="n/a"){
-    let thayersArray=thayers.substring(1,thayers.length-1).split(",").map(str=>Number(str))
+    let thayersArray=thayers.split(",").map(str=>Number(str))
     text = addMarkers(text, thayersArray)
   }
   if (global.config.cereFile){
@@ -83,7 +83,7 @@ function cereSpeak ({text, thayers}, res) {
 
 
 function cereFile (text, res) {
-  const file='./cerefile.wav'
+  const file='./recordings/cerefile.wav'
   cerevoiceEng.CPRCEN_engine_speak_to_file(eng, text, file)
   const data = fs.readFileSync(file, { encoding: 'base64' })
   res.status(200).json({ status: 'success', service: 'Text To Speech service', data, contentType: 'audio/wav' })
@@ -178,21 +178,19 @@ function countSections(str = "") {
 }
 
 function addMarkers(text, thayersArray){
-  if (Math.abs(thayersArray[0])<=0.5 && Math.abs(thayersArray[1])<=0.5){
-    return text
+  if (thayersArray[0]>0.5 && thayersArray[1]>0){
+    return "<voice emotion='happy'> " + text + ", </voice>"
   }
-  if (thayersArray[0]>0.5 && thayersArray[1]>0.5){
-    return "<spurt audio='g0001_022'>c</spurt>" + "<voice emotion='happy'> " + text + ", </voice>"
+  if (thayersArray[0]>0.5 && thayersArray[1]<0){
+    return "<voice emotion='calm'>" + text + ", </voice>"
   }
-  if (thayersArray[0]>0.5 && thayersArray[1]<-0.5){
-    return "<spurt audio='g0001_010'>c</spurt>" + "<voice emotion='calm'>" + text + ", </voice>"
+  if (thayersArray[0]<-0.5 && thayersArray[1]<0){
+    return "<voice emotion='sad'>" + text + ", </voice>"
   }
-  if (thayersArray[0]<-0.5 && thayersArray[1]<-0.5){
-    return "<spurt audio='g0001_011'>c</spurt>"+"<voice emotion='sad'>" + text + ", </voice>"
+  if (thayersArray[0]<-0.5 && thayersArray[1]>0){
+    return "<voice emotion='cross'>" + text + ", </voice>"
   }
-  if (thayersArray[0]<-0.5 && thayersArray[1]>0.5){
-    return "<spurt audio='g0001_032'>c</spurt>" + "<voice emotion='cross'>" + text + ", </voice>"
-  }
+  return text
 }
 
 
