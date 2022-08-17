@@ -23,9 +23,9 @@ services:
     volumes:
       - "./tts_cereproc/config/config.docker.json:/app/config/config.json:ro"
       - "./tts_cereproc/cerevoice/:/app/cerevoice/:ro"
-    # stdin_open: true # docker run -i
-    # tty: true        # docker run -t
-    # entrypoint: /bin/sh
+      # - "./tts_cereproc/test/:/app/test/:rw"
+      - "./tts_cereproc/recordings/:/app/recordings/:rw"
+ 
 
 
   do-voice-assistant-service:
