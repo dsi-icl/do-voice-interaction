@@ -1,7 +1,7 @@
 from flask import Flask
 from flask import request
 import json
-from personality import Personality
+from personality_full import Personality
 import numpy as np
 
 app = Flask(__name__)
@@ -28,9 +28,13 @@ def updatePersonality():
 def selectPersonality(selected):
     global personality
     if selected == "angry":
-        personality  = Personality([-0.6, 0.6], 0.2, 4)
+        personality  = Personality([-0.7, 0.7], -2, 3)
+    if selected == "neutral":
+        personality = Personality([0,0],1, 10)
+    if selected == "sad":
+        personality = Personality([-0.7, -0.7], 2, 3)
     elif selected == "excited":
-        personality  = Personality([0.6, 0.6], 0.1, 4)
+        personality  = Personality([0.8, 0.5], 0.2, 3)
     
 
 selectPersonality("excited")
