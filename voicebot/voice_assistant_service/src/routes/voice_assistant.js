@@ -25,6 +25,7 @@
    if (botResult.success) {
      const botResponseText = mergeText(botResult.data, '\n')
      const botResponseVoice = mergeText(botResult.data, ', ')
+     botThayers=botResult.data[0].bot_thayers
  
      // We send the text message to the tts service to get back the voice answer.
      const voiceAnswer = await postDataTTS(global.config.services.ttsService, botResponseVoice, botThayers)
