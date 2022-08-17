@@ -1,8 +1,9 @@
+const fetch = require('node-fetch')
 
 
 async function getBotEmotion(url, humanEmotion){
     try {
-      const response = await fetch(url + "?" + new URLSearchParams({"emotion": "-0.34,-0.14"}), {
+      const response = await fetch(url + "?" + new URLSearchParams({"emotion": "-0.34,-0.20"}), {
         method: 'get',
         headers: { 'Content-type': 'text/plain' }
       })
@@ -19,4 +20,4 @@ async function getBotEmotion(url, humanEmotion){
     }
   }
 
-getBotEmotion('http://localhost:4000/personality-service')
+console.log(getBotEmotion('http://localhost:4000/personality-service'))
