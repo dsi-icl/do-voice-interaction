@@ -24,12 +24,12 @@ try {
 }
 
 
-// let commandForDialogManager = "turn on emotion recognition"
-// let commandForDialogManager = "lets have a chat"
-// let commandForDialogManager = "yes"
+let commandForDialogManager = "Because I don't want others to gossip about me"
+// let commandForDialogManager = "Or! Or, we could go to the bank, close our accounts and cut them off at the source."
+// let commandForDialogManager = "good morning"
 let dialogManagerService="http://localhost:5005/webhooks/rest/webhook"
 
-let botThayers="0.4,0.5"//"n/a"
+let botThayers="-0.8,0.9"//"n/a"
 
 async function dod (){
     const botResult = await postDataRasa(dialogManagerService, '{"message":"' + commandForDialogManager + '","emotion":"' + botThayers + '"}', 'Data Observatory Control Service')
