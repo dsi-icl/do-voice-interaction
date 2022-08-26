@@ -4,7 +4,6 @@ import streamToPromise from 'stream-to-promise'
 import fs from 'fs'
 import wav from 'node-wav'
 import cerevoiceEng from './cerevoice/sdk/cerevoice_eng/jslib/cerevoice_eng.node'
-let sectionCount;
 let buf = new Float32Array(0)
 let eng;
 let userData
@@ -98,24 +97,32 @@ function cereBuffer(text, res) {
 
   const resParameter = channel_callback.bind(null, res)
 
-  let formattedText;
-
-  ({sectionCount, formattedText} = countSections(text))
-
   cerevoiceEng.CPRCEN_engine_set_callback(eng, chan_handle, userData, resParameter);
 
-  cerevoiceEng.CPRCEN_engine_channel_speak(eng, chan_handle, formattedText + "\n", formattedText.length + 1, 1);
+  cerevoiceEng.CPRCEN_engine_channel_speak(eng, chan_handle, text + "\n", text.length + 1, 1);
   cerevoiceEng.CPRCEN_engine_callback_delete()
   cerevoiceEng.CPRCEN_engine_channel_close(eng, chan_handle);
   return 
 }
 
-
-
-
 function channel_callback(res, abuf, userdata) {
-
   var cerevoice_eng = userdata.crvc_eng;
+  var final = false
+
+  var trans_mk = cerevoice_eng.CPRC_abuf_trans_mk(abuf);
+    var trans_done = cerevoice_eng.CPRC_abuf_trans_done(abuf);
+    for (var i = trans_mk; i < trans_done; i++) {
+        var trans = cerevoice_eng.CPRC_abuf_get_trans(abuf, i);
+        var name = cerevoice_eng.CPRC_abuf_trans_name(trans);
+        var type = cerevoice_eng.CPRC_abuf_trans_type(trans);
+        if (type == cerevoice_eng.CPRC_ABUF_TRANS.CPRC_ABUF_TRANS_MARK) {
+            if (name==="cprc_spurt_final"){
+              final=true
+            }
+        }
+    }
+
+
 
   var wav_added = cerevoice_eng.CPRC_abuf_added_wav_sz(abuf);
   var wav_mk = cerevoice_eng.CPRC_abuf_wav_mk(abuf);
@@ -125,9 +132,8 @@ function channel_callback(res, abuf, userdata) {
   } 
 
   buf=Float32Concat(buf, f32a)
-  sectionCount-=1
 
-  if (sectionCount ===0){
+  if (final){
     var sample_rate = cerevoice_eng.CPRC_abuf_wav_srate(abuf);
 
     buf = (new Array(1)).fill(buf)
@@ -156,27 +162,6 @@ function Float32Concat(first, second)
 }
 
 
-
-function countSections(str = "") {
-  let sectionCount = 0;
-  str = str.replace(/[.,!?\n()"]/g, ",")
-  str = str.replace(/(,)\1{1,}/g, ",")
-  str=str.replace(/ '/g, ", ")
-  str=str.replace(/\S,(\S)/g, ', $1')
-  if (str.slice(-1)!==","&&str.slice(-1)!==">"){
-    str+=","
-  }
-  for (const ch of str) {
-    if (ch===",") {
-      sectionCount++;
-    }
-    if (ch===">"){
-      sectionCount+=0.5;
-    }
-  }
-  return {"sectionCount": sectionCount, "formattedText": str};
-}
-
 function addMarkers(text, thayersArray){
   if (thayersArray[0]>0.5 && thayersArray[1]>0){
     return "<voice emotion='happy'> " + text + ", </voice>"
@@ -193,57 +178,3 @@ function addMarkers(text, thayersArray){
   return text
 }
 
-
-
-// "<spurt audio='g0001_001'>c</spurt>"
-// + "<spurt audio='g0001_002'>c</spurt>"
-// + "<spurt audio='g0001_003'>c</spurt>"
-// + "<spurt audio='g0001_004'>c</spurt>"
-// + "<spurt audio='g0001_005'>c</spurt>"
-// + "<spurt audio='g0001_006'>c</spurt>"
-// + "<spurt audio='g0001_007'>c</spurt>"
-// + "<spurt audio='g0001_008'>c</spurt>"
-// + "<spurt audio='g0001_009'>c</spurt>"
-// + "<spurt audio='g0001_010'>c</spurt>"
-// + "<spurt audio='g0001_011'>c</spurt>"
-// + "<spurt audio='g0001_012'>c</spurt>"
-// + "<spurt audio='g0001_013'>c</spurt>"
-// + "<spurt audio='g0001_014'>c</spurt>"
-// + "<spurt audio='g0001_015'>c</spurt>"
-// + "<spurt audio='g0001_016'>c</spurt>"
-// + "<spurt audio='g0001_017'>c</spurt>"
-// + "<spurt audio='g0001_018'>c</spurt>"
-// + "<spurt audio='g0001_019'>c</spurt>"
-// + "<spurt audio='g0001_020'>c</spurt>"
-// + "<spurt audio='g0001_021'>c</spurt>"
-// + "<spurt audio='g0001_022'>c</spurt>"
-// + "<spurt audio='g0001_023'>c</spurt>"
-// + "<spurt audio='g0001_024'>c</spurt>"
-// + "<spurt audio='g0001_025'>c</spurt>"
-// + "<spurt audio='g0001_026'>c</spurt>"
-// + "<spurt audio='g0001_027'>c</spurt>"
-// + "<spurt audio='g0001_028'>c</spurt>"
-// + "<spurt audio='g0001_029'>c</spurt>"
-// + "<spurt audio='g0001_030'>c</spurt>"
-// + "<spurt audio='g0001_031'>c</spurt>"
-// + "<spurt audio='g0001_032'>c</spurt>"
-// + "<spurt audio='g0001_033'>c</spurt>"
-// + "<spurt audio='g0001_034'>c</spurt>"
-// + "<spurt audio='g0001_035'>c</spurt>"
-// + "<spurt audio='g0001_036'>c</spurt>"
-// + "<spurt audio='g0001_037'>c</spurt>"
-// + "<spurt audio='g0001_038'>c</spurt>"
-// + "<spurt audio='g0001_039'>c</spurt>"
-// + "<spurt audio='g0001_040'>c</spurt>"
-// + "<spurt audio='g0001_041'>c</spurt>"
-// + "<spurt audio='g0001_042'>c</spurt>"
-// + "<spurt audio='g0001_043'>c</spurt>"
-// + "<spurt audio='g0001_044'>c</spurt>"
-// + "<spurt audio='g0001_045'>c</spurt>"
-// + "<spurt audio='g0001_046'>c</spurt>"
-// + "<spurt audio='g0001_047'>c</spurt>"
-// + "<spurt audio='g0001_048'>c</spurt>"
-// + "<spurt audio='g0001_049'>c</spurt>"
-// + "<spurt audio='g0001_050'>c</spurt>"
-// + "<spurt audio='g0001_051'>c</spurt>"
-// + "<spurt audio='g0001_052'>c</spurt>"
