@@ -11,19 +11,22 @@ pipeline:
 # # If you'd like to customize it, uncomment and adjust the pipeline.
 # # See https://rasa.com/docs/rasa/tuning-your-model for more information.
   - name: WhitespaceTokenizer
-  - name: RegexFeaturizer
-  - name: LexicalSyntacticFeaturizer
+  - name: LanguageModelFeaturizer
+    model_name: "bert"
+    model_weights: "rasa/LaBSE"
+    cache_dir: null
   - name: CountVectorsFeaturizer
   - name: CountVectorsFeaturizer
     analyzer: char_wb
     min_ngram: 1
     max_ngram: 4
   - name: DIETClassifier
-    epochs: 100
-    constrain_similarities: true
+    epochs: 30
+    constrain_similarities: True
+    use_masked_language_model: True
   - name: EntitySynonymMapper
   - name: ResponseSelector
-    epochs: 100
+    epochs: 50
     retrieval_intent: chitchat
     constrain_similarities: True
 
@@ -38,7 +41,7 @@ policies:
     epochs: 100
     enable_fallback_prediction: False
   - name: MemoizationPolicy
-    max_history: 2
+    max_history: 3
   - name: TEDPolicy
     epochs: 30
     constrain_similarities: True
