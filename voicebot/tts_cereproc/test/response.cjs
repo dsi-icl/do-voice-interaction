@@ -13,8 +13,6 @@ x= [
   {
     recipient_id: 'default',
     text: "I don't know, Chandler is supposed to be passin' ‘em around...",
-    // text: "Something went wrong. HTTPConnectionPool(host='gdo-students.dsi.ic.ac.uk', port=4000): Max retries exceeded with url: /graphql (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7fc03608dd60>: Failed to establish a new connection: [Errno 111] Connection refused'))"
-    // text: 'Do you want me to try again ?' 
   }
 ]
 
