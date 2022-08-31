@@ -6,9 +6,8 @@ services:
     build: stt_service/
     volumes:
       - "./stt_service/config/config.json:/app/config/config.json:ro"
-    # tty: true       
-    # entrypoint: /bin/sh
 
+  ###  alternative to new cereproc service  ###
   # do-voice-tts-service:
   #   image: dsi-icl/do-voice-tts-service:latest
   #   container_name: do-voice-tts-service
@@ -23,7 +22,6 @@ services:
     volumes:
       - "./tts_cereproc/config/config.docker.json:/app/config/config.json:ro"
       - "./tts_cereproc/cerevoice/:/app/cerevoice/:ro"
-      # - "./tts_cereproc/test/:/app/test/:rw"
       - "./tts_cereproc/recordings/:/app/recordings/:rw"
  
 
@@ -39,8 +37,6 @@ services:
     volumes:
       - "./voice_assistant_service/config/config.docker.json:/app/config/config.json:ro"
       - "./voice_assistant_service/ssl:/app/ssl:ro"
-    # tty: true        
-    # entrypoint: /bin/sh
 
 
   do-voice-dialog-manager-service:
@@ -54,8 +50,6 @@ services:
     build: 
       context: .
       dockerfile: dialog_manager_service/manager_service.Dockerfile
-    # tty: true        
-    # entrypoint: /bin/sh
 
 
   do-voice-dialog-manager-actions-service:
@@ -81,18 +75,17 @@ services:
       - "./personality_service:/usr/src/app"
 
 
+  do-voice-grammar-correction-service:
+    image: dsi-icl/do-voice-grammar-correction-service
+    container_name: do-voice-grammar-correction-service
+    build: grammar_correction_service/
+    volumes:
+      - "./grammar_correction_service:/usr/src/app"
 
-  # do-voice-grammar-correction-service:
-  #   image: dsi-icl/do-voice-grammar-correction-service
-  #   container_name: do-voice-grammar-correction-service
-  #   build: grammar_correction_service/
-  #   volumes:
-  #     - "./grammar_correction_service:/usr/src/app"
-
-  # do-voice-hotword-service:
-  #   image: dsi-icl/do-voice-hotword-service:latest
-  #   container_name: do-voice-hotword-service
-  #   build: hotword_service/
-  #   volumes:
-  #     - "./hotword_service/config/config.json:/app/config/config.json:ro"
-  #     - "./hotword_service/save:/app/save"
+  do-voice-hotword-service:
+    image: dsi-icl/do-voice-hotword-service:latest
+    container_name: do-voice-hotword-service
+    build: hotword_service/
+    volumes:
+      - "./hotword_service/config/config.json:/app/config/config.json:ro"
+      - "./hotword_service/save:/app/save"

@@ -22,7 +22,6 @@ RUN adduser -D -g '' $APPLICATION_USER && mkdir -p $APPLICATION_PATH && chown -R
 USER $APPLICATION_USER
 
 COPY --from=builder /code/dist/index.js .
-# COPY --from=builder /code/cerevoice/ ./cerevoice/
 
 ENV LD_LIBRARY_PATH /app/cerevoice/sdk/cerevoice_eng/lib/
 
