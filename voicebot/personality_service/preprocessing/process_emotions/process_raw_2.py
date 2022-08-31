@@ -2,7 +2,7 @@ import pandas as pd
 import copy
 import os
 
-os.chdir('/home/dodev/ben_msc_project/do-voice-interaction/voicebot/personality_service/preprocessing/part2')
+os.chdir('/home/dodev/ben_msc_project/do-voice-interaction/voicebot/personality_service/preprocessing/process_emotions')
 
 
 def make_continuous(emotion, sentiment):

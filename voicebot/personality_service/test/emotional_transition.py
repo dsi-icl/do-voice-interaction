@@ -1,8 +1,8 @@
 import pickle
 import numpy as np
 
-personality="Joey"
-type="2"
+personality="Monica"
+type="1"
 
 model = pickle.load(open("../models/type_"+type+"/"+personality+".pickle", 'rb'))
 

@@ -2,7 +2,7 @@ import pandas as pd
 import copy
 import os
 
-os.chdir('/home/dodev/ben_msc_project/do-voice-interaction/voicebot/personality_service/preprocessing/part2')
+os.chdir('/home/dodev/ben_msc_project/do-voice-interaction/voicebot/personality_service/preprocessing/process_emotions')
 
 
 def make_continuous(emotion, sentiment):
@@ -55,7 +55,7 @@ def get_data(character):
             if dialogues[i][u][0]==character:
                 indices.append(i)
 
-    indices=list(dict.fromkeys(indices))    
+    indices=list(dict.fromkeys(indices))  
     build_ups=[]
 
     for i in indices:
@@ -93,3 +93,5 @@ def get_data(character):
             g.write("Label: "+str(l)+"\n\n\n")
 
     return examples, labels
+
+# get_data("Joey")

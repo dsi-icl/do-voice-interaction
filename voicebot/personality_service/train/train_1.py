@@ -1,50 +1,22 @@
 import tensorflow as tf
-from keras import Sequential
-from keras.layers import LSTM, Dense, Input
+from tensorflow.keras import Sequential, optimizers
+from tensorflow.keras.layers import LSTM, Dense, Masking
+from tensorflow.keras.metrics import RootMeanSquaredError
 import numpy as np
 import sys
 import pickle
 import os
-sys.path.append('../preprocessing/part2')
+from matplotlib import pyplot as plt
+from scikeras.wrappers import KerasRegressor
+from sklearn.model_selection import GridSearchCV, train_test_split
+from sklearn.dummy import DummyRegressor
+from sklearn.metrics import mean_squared_error
+
+
+sys.path.append('../preprocessing/process_emotions')
 from process_raw_1 import get_data
+tf.compat.v1.enable_eager_execution()
 
-character="Monica"
-
-examples, labels = get_data(character)
-
-batches=np.array([example for example in examples], dtype=object)
-batch_labels=np.array([np.array(label) for label in labels], dtype='float64')
-
-
-# Parameters
-N = len(batches)
-n_feats = 3
-latent_dim = 32
-out_dim= 2
-train_split=0.9
-train_no=int(np.floor(N*train_split))
-p = np.random.permutation(N)  
-X=batches[p]
-Y=batch_labels[p]
-x_train=X[:train_no]
-x_test=X[train_no:]
-y_train=Y[:train_no]
-y_test=Y[train_no:]
-
-
-
-model=Sequential()
-model.add(Input(shape=[None, n_feats], ragged=True, batch_size=1))
-# model.add(LSTM(latent_dim, return_sequences=True))
-model.add(LSTM(latent_dim))
-model.add(Dense(out_dim))
-
-model.summary()
-model.compile(loss='mse', metrics=[tf.keras.metrics.RootMeanSquaredError()])
-
-
-x_train=tf.ragged.constant(np.ndarray.tolist(x_train))
-x_test=tf.ragged.constant(np.ndarray.tolist(x_test))
 
 class TestCallback(tf.keras.callbacks.Callback):
     def __init__(self, test_data):
@@ -54,47 +26,120 @@ class TestCallback(tf.keras.callbacks.Callback):
         x, y = self.test_data
         self.model.evaluate(x, y, verbose=2, batch_size=1)
 
-model.fit(x_train, y_train, epochs=100, verbose=2, batch_size=1, callbacks=[TestCallback((x_test, y_test))])
+
+character="Joey"
+examples, labels = get_data(character)
+
+####### Batch_size = 1 Approach ##########
 
 
-# print(model.predict(np.array([[[1,0,0],[0,0,0]]])))
-
-from sklearn.dummy import DummyRegressor
-X_train=np.zeros((len(y_train)))
-dummy_train = DummyRegressor(strategy="mean")
-
-print(np.sum(y_train[:,:1])/len(y_train))
-print(np.sum(y_train[:,1:])/len(y_train))
-
-print(dummy_train.fit(X_train, y_train))
-
-y_predicted=dummy_train.predict(X_train)
-# print(y_predicted)
-
-from sklearn.metrics import mean_squared_error
-
-rms = mean_squared_error(y_train, y_predicted, squared=False)
-
-print(rms)
+# batches=np.array([example for example in examples], dtype=object)
+# batch_labels=np.array([np.array(label) for label in labels], dtype='float64')
 
 
-X_test=np.zeros((len(y_test)))
-
-dummy_test = DummyRegressor(strategy="mean")
-
-print(np.sum(y_test[:,:1])/len(y_test))
-print(np.sum(y_test[:,1:])/len(y_test))
-
-print(dummy_train.fit(X_test, y_test))
-
-y_predicted=dummy_train.predict(X_test)
-# print(y_predicted)
-
-rms = mean_squared_error(y_test, y_predicted, squared=False)
-
-print(rms)
-
-os.chdir('/home/dodev/ben_msc_project/do-voice-interaction/voicebot/personality_service/models/type_1')
+##### Parameters  #####
+# N = len(batches)
+# n_feats = 3
+# latent_dim = 32
+# out_dim= 2
+# train_split=0.9
 
 
-pickle.dump(model, open(character+".pickle", 'wb'))
+###### Train split  #######
+# train_no=int(np.floor(N*train_split))
+# p = np.random.permutation(N)  
+# X=batches[p]
+# Y=batch_labels[p]
+# x_train=X[:train_no]
+# x_test=X[train_no:]
+# y_train=Y[:train_no]
+# y_test=Y[train_no:]
+# x_train=tf.ragged.constant(np.ndarray.tolist(x_train))
+# x_test=tf.ragged.constant(np.ndarray.tolist(x_test))
+
+
+# model=Sequential()
+# model.add(Input(shape=[None, n_feats], ragged=True, batch_size=1))
+# model.add(LSTM(latent_dim))
+# model.add(Dense(out_dim, activation='tanh'))
+# model.summary()
+# model.compile(loss='mse', metrics=[tf.keras.metrics.RootMeanSquaredError()])
+
+
+# # model.fit(x_train, y_train, epochs=5, verbose=2, batch_size=1, callbacks=[TestCallback((x_test, y_test))])
+
+
+
+
+
+
+####### Masking Approach #########
+
+
+
+mask_value=5
+padded_x = tf.keras.preprocessing.sequence.pad_sequences(examples, padding="pre", value=mask_value, dtype='float32')
+y= tf.convert_to_tensor(labels, dtype='float32').numpy()
+
+x_train, x_test, y_train, y_test = train_test_split(padded_x,
+                                                    y,
+                                                    test_size=0.1,
+                                                    random_state=43)
+
+input_shape=tf.shape(x_train)[1:]
+
+
+def create_model(neurons):
+    model=Sequential()
+    model.add(Masking(mask_value=mask_value, input_shape=input_shape))
+    model.add(LSTM(neurons))
+    model.add(Dense(2, activation='tanh'))
+    model.compile(optimizer=optimizers.Adam(learning_rate=0.01),loss='mse', metrics=[RootMeanSquaredError()])
+    model.summary()
+    return model
+
+######   Grid Search   #######
+# param_grid = dict(epochs=[20, 30], batch_size=[30, 100], optimizer__learning_rate= [0.01, 0.1, 0.2], model__neurons=[32, 64])
+# grid = GridSearchCV(scoring='neg_mean_squared_error', verbose=2, estimator=KerasRegressor(create_model), param_grid=param_grid, cv=10 )
+# grid_result = grid.fit(x_train, y_train)
+# ## print out configurations
+# print("Best: %f using %s" % (grid_result.best_score_, grid_result.best_params_))
+# means = grid_result.cv_results_['mean_test_score']
+# stds = grid_result.cv_results_['std_test_score']
+# params = grid_result.cv_results_['params']
+# for mean, stdev, param in zip(means, stds, params):
+#     print("%f (%f) with: %r" % (mean, stdev, param))
+
+##### Train without grid seaarch  #######
+
+model=create_model(32)
+history = model.fit(x_train, y_train, epochs=20, verbose=1, batch_size=100)
+print(history.history)
+print(model.evaluate(x_test, y_test))
+# plt.plot(history.history['root_mean_squared_error'])
+# plt.plot(history.history['val_root_mean_squared_error'])
+# plt.title('model accuracy')
+# plt.ylabel('accuracy')
+# plt.xlabel('epoch')
+# plt.legend(['train', 'val'], loc='upper left')
+# plt.show()
+
+######## Compare with dummy regressor  ##########
+
+
+# X_train=np.zeros((len(y_train)))
+# X_test=np.zeros((len(y_test)))
+# dummy_train = DummyRegressor(strategy="mean")
+# dummy_train.fit(X_train, y_train)
+# y_predicted=dummy_train.predict(X_test)
+# rms = mean_squared_error(y_test, y_predicted, squared=False)
+# print(rms)
+
+
+
+########   Save model   ########
+
+# os.chdir('/home/dodev/ben_msc_project/do-voice-interaction/voicebot/personality_service/models/type_1')
+
+
+# pickle.dump(model, open(character+".pickle", 'wb'))

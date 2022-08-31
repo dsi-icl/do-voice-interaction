@@ -65,8 +65,8 @@ for i in range(len(line_ones)):
     intents.append([line_twos[i][0] + "_" + str(line_twos[i][1]) + "_" + str(line_twos[i][2]) + "_" + str(line_twos[i][3]) + "_" + str(line_twos[i][4])+","+line_twos[i][6]+","+line_twos[i][7], line_ones[i][5]])
     responses.append([line_twos[i][0] + "_" + str(line_twos[i][1]) + "_" + str(line_twos[i][2]) + "_" + str(line_twos[i][3]) + "_" + str(line_twos[i][4])+","+line_twos[i][6]+","+line_twos[i][7], line_twos[i][5]]) 
 
-aug1 = naw.ContextualWordEmbsAug(model_path='bert-base-uncased', action="insert", aug_max=6)
-aug2 = naw.ContextualWordEmbsAug(model_path='bert-base-uncased', action="substitute", aug_max=6)
+aug1 = naw.ContextualWordEmbsAug(model_path='bert-base-uncased', action="insert", aug_max=4)
+aug2 = naw.ContextualWordEmbsAug(model_path='bert-base-uncased', action="substitute", aug_max=4)
 translator = Translator()
 
 # YML
