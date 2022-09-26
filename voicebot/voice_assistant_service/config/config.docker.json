@@ -1,6 +1,6 @@
 {
     "services":{
-        "sttService":"http://do-voice-stt-service:3000/api/stt",
+        "sttService":"http://do-voice-stt-whisper:3000/api/stt",
         "ttsService":"http://do-voice-tts-cereproc:5000/api/tts",
         "dialogManagerService":"http://do-voice-dialog-manager-service:5005/webhooks/rest/webhook",
         "rasaTracker":"http://do-voice-dialog-manager-service:5005/conversations/default/tracker",

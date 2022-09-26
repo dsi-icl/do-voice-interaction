@@ -1,19 +1,20 @@
 version: '3.1'
 services:
-  do-voice-stt-service:
-    image: dsi-icl/do-voice-stt-service:latest
-    container_name: do-voice-stt-service
-    build: stt_service/
-    volumes:
-      - "./stt_service/config/config.json:/app/config/config.json:ro"
 
-  ###  alternative to new cereproc service  ###
-  # do-voice-tts-service:
-  #   image: dsi-icl/do-voice-tts-service:latest
-  #   container_name: do-voice-tts-service
-  #   build: tts_service/
+  do-voice-stt-whisper:
+    image: dsi-icl/do-voice-stt-whisper:latest
+    container_name: do-voice-stt-whisper
+    build: stt_whisper_service/
+    volumes:
+      - "./stt_whisper_service:/usr/src/app"
+
+
+  # do-voice-stt-service:
+  #   image: dsi-icl/do-voice-stt-service:latest
+  #   container_name: do-voice-stt-service
+  #   build: stt_service/
   #   volumes:
-  #     - "./tts_service/config/config.json:/app/config/config.json:ro"
+  #     - "./stt_service/config/config.json:/app/config/config.json:ro"
 
   do-voice-tts_cereproc:
     image: dsi-icl/do-voice-tts-cereproc:latest
@@ -23,7 +24,14 @@ services:
       - "./tts_cereproc/config/config.docker.json:/app/config/config.json:ro"
       - "./tts_cereproc/cerevoice/:/app/cerevoice/:ro"
       - "./tts_cereproc/recordings/:/app/recordings/:rw"
- 
+
+  ###  alternative to new cereproc service  ###
+  # do-voice-tts-service:
+  #   image: dsi-icl/do-voice-tts-service:latest
+  #   container_name: do-voice-tts-service
+  #   build: tts_service/
+  #   volumes:
+  #     - "./tts_service/config/config.json:/app/config/config.json:ro"
 
 
   do-voice-assistant-service:
@@ -75,17 +83,17 @@ services:
       - "./personality_service:/usr/src/app"
 
 
-  do-voice-grammar-correction-service:
-    image: dsi-icl/do-voice-grammar-correction-service
-    container_name: do-voice-grammar-correction-service
-    build: grammar_correction_service/
-    volumes:
-      - "./grammar_correction_service:/usr/src/app"
+  # do-voice-grammar-correction-service:
+  #   image: dsi-icl/do-voice-grammar-correction-service
+  #   container_name: do-voice-grammar-correction-service
+  #   build: grammar_correction_service/
+  #   volumes:
+  #     - "./grammar_correction_service:/usr/src/app"
 
-  do-voice-hotword-service:
-    image: dsi-icl/do-voice-hotword-service:latest
-    container_name: do-voice-hotword-service
-    build: hotword_service/
-    volumes:
-      - "./hotword_service/config/config.json:/app/config/config.json:ro"
-      - "./hotword_service/save:/app/save"
+  # do-voice-hotword-service:
+  #   image: dsi-icl/do-voice-hotword-service:latest
+  #   container_name: do-voice-hotword-service
+  #   build: hotword_service/
+  #   volumes:
+  #     - "./hotword_service/config/config.json:/app/config/config.json:ro"
+  #     - "./hotword_service/save:/app/save"

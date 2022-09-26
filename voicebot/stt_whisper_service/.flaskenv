@@ -1,0 +1,3 @@
+FLASK_APP=run_whisper
+FLASK_ENV=development
+FLASK_RUN_PORT=3000
