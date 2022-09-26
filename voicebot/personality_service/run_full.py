@@ -5,7 +5,7 @@ from personality_full import Personality
 import numpy as np
 
 app = Flask(__name__)
-personality = Personality([0,0], 0, 0)
+personality = Personality([0,0], 0, 0, 1)
 
 def process(str):
     (x,y)=str.split(",")
@@ -28,13 +28,13 @@ def updatePersonality():
 def selectPersonality(selected):
     global personality
     if selected == "angry":
-        personality  = Personality([-0.7, 0.7], -2, 3)
+        personality  = Personality([-0.7, 0.7], -2, 3, 2)
     if selected == "neutral":
         personality = Personality([0,0],1, 10)
     if selected == "sad":
-        personality = Personality([-0.7, -0.7], 2, 3)
+        personality = Personality([-0.7, -0.7], 2, 3, 0.5)
     elif selected == "excited":
-        personality  = Personality([0.8, 0.5], 0.2, 3)
+        personality  = Personality([0.8, 0.5], 0.2, 3, 0.5)
     
 
 selectPersonality("excited")

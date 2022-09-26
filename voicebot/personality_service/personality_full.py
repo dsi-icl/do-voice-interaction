@@ -16,18 +16,19 @@ import numpy as np
 #                         |-1
 class Personality:
 
-    def __init__(self, thayersInitial, thayersReaction, thayersReset):
+    def __init__(self, thayersInitial, thayersReaction, thayersReset, deviation):
         self.thayersInitial=np.around(np.array(self.checkPosition(thayersInitial)), 3)
         self.thayersReset=self.checkReset(thayersReset)
         self.thayersReaction=self.checkReaction(thayersReaction)
         self.thayersPosition=self.thayersInitial
+        self.deviation=deviation
         self.count=0
     
 
 
     def updateThayers(self, speakerEmotion):
         speakerEmotion=self.checkPosition(speakerEmotion)
-        self.thayersPosition=np.around(self.thayersPosition+self.thayersReaction*np.array(speakerEmotion),3)
+        self.thayersPosition=np.around(self.thayersPosition+self.thayersReaction*np.array(speakerEmotion)+np.random.normal(0, self.deviation, size = 1),3)
         self.checkPosition(self.thayersPosition)
         self.count+=1
         if self.count==self.thayersReset:
