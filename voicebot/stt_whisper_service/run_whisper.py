@@ -18,7 +18,6 @@ def speech_to_text():
     with open('audio.mp3', 'wb') as f:
         f.write(mp3_data)
     result = model.transcribe("audio.mp3")
-    print(result["text"])   
     data = {'status': 'ok', 'service': 'Speech To Text service', 'text': result['text']}
     response = app.response_class(
         response=json.dumps(data),

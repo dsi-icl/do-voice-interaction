@@ -81,12 +81,12 @@ services:
     volumes:
       - "./emotion_recognition_service:/usr/src/app"
 
-  do-personality-service:
-    image: dsi-icl/do-personality-service:latest
-    container_name: do-personality-service
-    build: personality_service/
-    volumes:
-      - "./personality_service:/usr/src/app"
+  # do-personality-service:
+  #   image: dsi-icl/do-personality-service:latest
+  #   container_name: do-personality-service
+  #   build: personality_service/
+  #   volumes:
+  #     - "./personality_service:/usr/src/app"
 
 
   # do-voice-grammar-correction-service:
