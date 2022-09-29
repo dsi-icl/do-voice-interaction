@@ -1,3 +1,10 @@
+### This file contains code to process the emotions in MELD 
+### into data that can be fed to the LSTM. The driver for this 
+### file is located in personality_service/train_2.py where a 
+### particular personality can be selected. This is the 'two
+### feature' approach (please see report for details)
+
+
 import pandas as pd
 import copy
 import os
@@ -33,8 +40,7 @@ def get_data(character):
     sentiments = df_train['Sentiment'].tolist()
     sets = df_train['Set'].tolist()
     speakers = df_train['Speaker'].tolist()
-    # speakers_count = {s:speakers.count(s) for s in speakers}
-    # speakers_count = sorted(speakers_count.items(), key=lambda item: item[1])
+
 
     dia_num=0
     dialogues=[]
@@ -59,7 +65,6 @@ def get_data(character):
     build_ups=[]
 
 
-    # Ovidiu suggestion
     for i in indices:
         last_utterance=0
         for u in range(len(dialogues[i])):

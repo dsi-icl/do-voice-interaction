@@ -1,3 +1,6 @@
+// This file contains code to test the tts_cereproc service
+// running locally. It makes the request using node-fetch.
+
 const fs = require('fs')
 const fetch = require('node-fetch')
 

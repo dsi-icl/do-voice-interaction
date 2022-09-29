@@ -1,5 +1,9 @@
 version: "3.1"
 
+# nb. 3 different chitchat rules were used becuase Rasa training did not work
+# properly when only one was used. This does not change the performance at 
+# prediction time.
+
 rules:
 - rule: respond_to_chitchat
   condition:

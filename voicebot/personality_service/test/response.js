@@ -1,3 +1,5 @@
+// This file contains code to test the Personality Service running locally
+
 const fetch = require('node-fetch')
 
 

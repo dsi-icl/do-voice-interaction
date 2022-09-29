@@ -1,3 +1,9 @@
+// This file contains code to translate a textual input into audio
+// output. This file will either use Cereproc TTS or Google TTS 
+// depending on the settings in the tts_cereproc/config folder.
+// The Cereproc method can be configured to either an in-memory
+// buffer or a read-from-file method in the tts_cereproc/config folder.
+
 import GTTS from 'gtts'
 import { Base64Encode } from 'base64-stream'
 import streamToPromise from 'stream-to-promise'
@@ -11,8 +17,6 @@ let userData
 
 
 export function setupEngine(){
-  // import('./cerevoice/sdk/cerevoice_eng/jslib/cerevoice_eng.node').then((cere)=>{
-    // cerevoiceEng = cere;
   eng = cerevoiceEng.CPRCEN_engine_load(
     global.config.voice_file,
     global.config.licence_file,
@@ -21,7 +25,6 @@ export function setupEngine(){
     global.config.client_key
   );
   userData = new UserData(null, cerevoiceEng, eng, global.config)
-// })
 }
 
  
@@ -107,6 +110,9 @@ function cereBuffer(text, res) {
 
 function channel_callback(res, abuf, userdata) {
   var cerevoice_eng = userdata.crvc_eng;
+
+  // variable to check if the last spurt from the Cereproc Engine has arrived.
+  // If so, dispatch the Res object. Otherwise, concatenate with buffer array.
   var final = false
 
   var trans_mk = cerevoice_eng.CPRC_abuf_trans_mk(abuf);

@@ -1,3 +1,6 @@
+### This file contains code to start a Flask app and 
+### load an LSTM-based personality
+
 from flask import Flask
 from flask import request
 import json

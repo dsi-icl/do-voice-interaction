@@ -1,6 +1,12 @@
+# This file contains the configurations for each of the Docker
+# Microservices. Please comment/uncomment services depending on 
+# which ones you would like to run. NB you should only run one STT
+# service and one TTS service at one time. You also need to change 
+# the configurations in voice_assistant_service/config to match the 
+# STT/TTS services you are using. 
+
 version: '3.1'
 services:
-
   do-voice-stt-whisper:
     image: dsi-icl/do-voice-stt-whisper:latest
     container_name: do-voice-stt-whisper

@@ -1,3 +1,5 @@
+// This file contains code to test the tts_cereproc service
+// running locally. It makes the request using axios.
 
 const axios = require('axios');
 const fs = require('fs')

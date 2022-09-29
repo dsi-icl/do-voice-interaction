@@ -1,4 +1,6 @@
-import numpy as np
+### This class contains the Personality class which maintains and
+### updates the state of parameterised personalities.
+
 
 #                 Arousal |1
 #                         |
@@ -14,6 +16,10 @@ import numpy as np
 #                         |
 #                         |
 #                         |-1
+
+import numpy as np
+
+
 class Personality:
 
     def __init__(self, thayersInitial, thayersReaction, thayersReset, deviation):

@@ -1,3 +1,8 @@
+### This file contains code to run predictions on the models
+### trained using the files in the personality_service/train
+### folder. 
+
+
 import pickle
 import numpy as np
 

@@ -1,3 +1,13 @@
+### This file contains code to train an LSTM to model emotional 
+### transitions in the characters from the Friends Dataset 
+### according to approach 1 from the report. Please change the 
+### variable 'character' below to train for a different character.
+### There are options below to train using masking or using a 
+### batch size of 1.
+
+character="Joey"
+
+
 import tensorflow as tf
 from tensorflow.keras import Sequential, optimizers
 from tensorflow.keras.layers import LSTM, Dense, Masking
@@ -27,7 +37,6 @@ class TestCallback(tf.keras.callbacks.Callback):
         self.model.evaluate(x, y, verbose=2, batch_size=1)
 
 
-character="Joey"
 examples, labels = get_data(character)
 
 ####### Batch_size = 1 Approach ##########

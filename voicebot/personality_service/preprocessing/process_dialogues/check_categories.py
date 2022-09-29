@@ -1,5 +1,7 @@
-import pandas as pd
+### This file contains code to count the number of combinations
+### of sentiment and emotion in the MELD Dataset.
 
+import pandas as pd
 
 df_train = pd.read_csv('/home/dodev/ben_msc_project/do-voice-interaction/voicebot/personality_service/preprocessing/MELD_combined.csv') 
 emotions = df_train['Emotion'].tolist() 

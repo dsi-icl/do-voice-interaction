@@ -1,5 +1,11 @@
-import numpy as np
-import pickle
+### This class contains the Personality class which maintains and
+### updates the state of personalities learned from LSTMs. The 
+### variables 'type' and 'personality' can be changed to load a 
+### different personality model.
+
+type='2'
+personality="Monica"
+
 
 #                 Arousal |1
 #                         |
@@ -16,9 +22,10 @@ import pickle
 #                         |
 #                         |-1
 
+import numpy as np
+import pickle
 
-type='2'
-personality="Monica"
+
 model = pickle.load(open("models/type_"+type+"/"+personality+".pickle", 'rb'))
 
 

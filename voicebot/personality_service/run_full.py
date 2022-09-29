@@ -1,3 +1,7 @@
+### This file contains code to start a Flask app and 
+### load a parameterised personality.
+
+
 from flask import Flask
 from flask import request
 import json
@@ -36,6 +40,8 @@ def selectPersonality(selected):
     elif selected == "excited":
         personality  = Personality([0.8, 0.5], 0.2, 3, 0.5)
     
+
+### Change the type of personality to be loaded here
 
 selectPersonality("excited")
 

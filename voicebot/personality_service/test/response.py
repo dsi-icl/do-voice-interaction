@@ -1,3 +1,5 @@
+### This file contains code to test the Personality Service running locally
+
 import requests
 r = requests.get('http://localhost:4000/personality-service', params={"emotion": "0.452323,0.92343434"})
 print(r.status_code)

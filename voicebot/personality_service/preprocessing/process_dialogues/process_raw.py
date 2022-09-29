@@ -1,8 +1,14 @@
+### This file contains code to transform the dialogues in MELD_combined.csv
+### into training data for the Rasa pipeline. The variable 'personality'
+### needs to be changed to one of the characters from the Friends TV series
+### or alternatively to 'full' if Rasa is to be trained on the entire MELD
+### Dataset.
+
 import pandas as pd
 import nlpaug.augmenter.word as naw
 from googletrans import Translator
 
-
+personality = "Phoebe"
 
 df_train = pd.read_csv('./MELD_combined.csv') 
 utt = df_train['Utterance'].tolist() 
@@ -34,7 +40,6 @@ for u, sd, ed, dd, ud, set, emo, sent, spea in zip(utt, sea_id, epi_id, dia_id, 
         dia_num=dd
 dialogues.append(dialogue)
 
-personality = "Phoebe"
 
 
 if personality=='full':
@@ -69,7 +74,6 @@ aug1 = naw.ContextualWordEmbsAug(model_path='bert-base-uncased', action="insert"
 aug2 = naw.ContextualWordEmbsAug(model_path='bert-base-uncased', action="substitute", aug_max=4)
 translator = Translator()
 
-# YML
 
 with open("./"+personality+"_yml/nlu.yml", "w") as f:
     f.write('version: "3.1"\n')
@@ -88,15 +92,6 @@ with open("./"+personality+"_yml/nlu.yml", "w") as f:
 
 f.close()
 
-# with open("./"+personality+"_yml/", "w") as f:
-#     f.write('version: "3.1"\n')
-#     f.write("rules:\n")
-#     for s, i, r in zip(stories, intents, responses):
-#         f.write("- rule: "+s+"\n")
-#         f.write("  steps:\n")
-#         f.write("  - intent: "+i[0]+"\n")
-#         f.write("  - action: "+r[0]+"\n")
-# f.close()
 
 with open("./"+personality+"_yml/domain.yml", "w") as f:
     f.write('version: "3.1"\n\n')
@@ -112,7 +107,8 @@ f.close()
 
 
 
-# MARKDOWN
+### This code creates training data in MARKDOWN format for the 
+### Rasa pipeline. This format is legacy and was replaced by YAML. 
 
 # with open("data_md/nlu.md", "w") as f:
 #     for u, i in zip(utt, intents):

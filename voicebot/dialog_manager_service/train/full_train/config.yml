@@ -7,9 +7,6 @@ recipe: default.v1
 language: en
 
 pipeline:
-# # No configuration for the NLU pipeline was provided. The following default pipeline was used to train your model.
-# # If you'd like to customize it, uncomment and adjust the pipeline.
-# # See https://rasa.com/docs/rasa/tuning-your-model for more information.
   - name: WhitespaceTokenizer
   - name: LanguageModelFeaturizer
     model_name: "bert"
@@ -29,7 +26,14 @@ pipeline:
     epochs: 50
     retrieval_intent: chitchat
     constrain_similarities: True
-
+  - name: ResponseSelector
+    epochs: 50
+    retrieval_intent: chitchat_2
+    constrain_similarities: True  
+  - name: ResponseSelector
+    epochs: 50
+    retrieval_intent: chitchat_3
+    constrain_similarities: True
 
 # Configuration for Rasa Core.
 # https://rasa.com/docs/rasa/core/policies/
