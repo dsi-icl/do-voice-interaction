@@ -3,7 +3,7 @@
  * @author Aurélie Beaugeard
  */
 
- import { postDataTTS, getDataRasa, postDataRasa, getBotEmotion } from './index.js'
+ import { postDataTTS, getDataRasa, postData, getBotEmotion } from './index.js'
 
  /**
   * Function that manages the actions to do if the deepspeech transcription has been successfully done
@@ -19,7 +19,7 @@
      commandForDialogManager = grammarCorrectionPrediction
    }
    console.log(botThayers)
-   const botResult = await postDataRasa(global.config.services.dialogManagerService, '{"message":"' + commandForDialogManager + '","emotion":"' + botThayers + '"}', 'Data Observatory Control Service')
+   const botResult = await postData(global.config.services.dialogManagerService, '{"message":"' + commandForDialogManager + '","emotion":"' + botThayers + '"}', 'Data Observatory Control Service')
    console.log('bot result', botResult)
  
    if (botResult.success) {
@@ -89,7 +89,7 @@
    var grammarPositions = []
    var grammarPrediction = ''
    const dataForGrammarCorrection = { transcript: sttResponse.text }
-   const grammarCorrectionResponse = await postDataRasa(global.config.services.grammarCorrectionService, JSON.stringify(dataForGrammarCorrection), 'Grammar Correction Service')
+   const grammarCorrectionResponse = await postData(global.config.services.grammarCorrectionService, JSON.stringify(dataForGrammarCorrection), 'Grammar Correction Service')
    console.log('grammarCorrectionResponse ', grammarCorrectionResponse)
  
    if (grammarCorrectionResponse.success) {
@@ -105,7 +105,7 @@
    var humanEmotion = 'n/a'
    var humanThayers = 'n/a'
    const dataForEmotionRecognition = { audio: speech, transcript: sttResponse.text }
-   const emotionRecognitionResponse = await postDataRasa(global.config.services.emotionRecognitionService, JSON.stringify(dataForEmotionRecognition), 'Emotion Recognition Service')
+   const emotionRecognitionResponse = await postData(global.config.services.emotionRecognitionService, JSON.stringify(dataForEmotionRecognition), 'Emotion Recognition Service')
    console.log('emotionRecognitionResponse ', emotionRecognitionResponse)
  
    if (emotionRecognitionResponse.success) {
@@ -113,7 +113,7 @@
      humanThayers = emotionRecognitionResponse.data.thayers
      // Set the emotion slot in rasa via http api
      const newData = { event: 'slot', timestamp: null, name: 'emotion', value: humanEmotion }
-     const botResult = await postDataRasa(global.config.services.rasaTrackerEvents, JSON.stringify(newData), 'Data Observatory Control Service')
+     const botResult = await postData(global.config.services.rasaTrackerEvents, JSON.stringify(newData), 'Data Observatory Control Service')
      console.log('set emotion in rasa ', botResult)
  
      return [humanEmotion, humanThayers, null]
@@ -128,7 +128,7 @@
      await errorProcess(client, error, '', request)
    } else {
      const p1 = new Promise((resolve, reject) => {
-       resolve(postDataRasa(global.config.services.hotwordService, request.audio.data, 'Hotword Service'))
+       resolve(postData(global.config.services.hotwordService, request.audio.data, 'Hotword Service'))
      })
      const p2 = new Promise((resolve, reject) => setTimeout(() => resolve('not-present'), global.config.hotword.timeout))
  
@@ -150,7 +150,7 @@
      const error = { status: 'fail', service: 'Voice-assistant service', text: 'The record format is wrong' }
      await errorProcess(client, error, '', request)
    } else {
-     const sttResponse = await postDataRasa(global.config.services.sttService, request.audio.data, 'Speech To Text Service')
+     const sttResponse = await postData(global.config.services.sttService, request.audio.data, 'Speech To Text Service')
      console.log('sttresponse', sttResponse)
  
      // If an error was encountered during the request or the string response is empty we inform the user through the event problem with the socket.

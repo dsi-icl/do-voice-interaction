@@ -65,7 +65,7 @@
  }
  
  /**
-  * This function is used to post the user's voice encoded in a blob to the speech to text service thanks to fetch.
+  * This function is used to post data to specific services thanks to fetch.
   *
   * @param {URL} url The url to make the post request (.../api/stt)
   * @param {Blob} data The blob to be sent through the req body.
@@ -74,7 +74,7 @@
   * @see {@link https://www.npmjs.com/package/node-fetch|Fetch}
   * @see {@link https://deepspeech.readthedocs.io/en/v0.7.4/NodeJS-API.html|DeepSpeech}
   */
- export async function postDataRasa (url, data, serviceName) {
+ export async function postData (url, data, serviceName) {
    try {
      const response = await fetch(url, {
        method: 'post',
