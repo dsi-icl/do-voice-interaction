@@ -1,0 +1,435 @@
+version: "3.1"
+stories:
+- story: welcome and asking for help
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: affirm
+  - action: action_help
+- story: welcome and no help needed
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: deny
+  - action: utter_goodbye
+- story: quit
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+- story: help
+  steps:
+  - intent: help
+  - action: action_help
+- story: open success
+  steps:
+  - intent: open
+  - action: action_open
+  - slot_was_set:
+    - demo: null
+  - slot_was_set:
+    - read_list: false
+  - slot_was_set:
+    - restart: false
+- story: open fail and list
+  steps:
+  - intent: open
+  - action: action_open
+  - slot_was_set:
+    - read_list: true
+  - slot_was_set:
+    - restart: false
+  - intent: affirm
+  - action: action_reset_slot_open
+  - slot_was_set:
+    - demo: null
+  - slot_was_set:
+    - read_list: false
+  - slot_was_set:
+    - restart: false
+  - action: action_list_demos
+- story: open fail and not list
+  steps:
+  - intent: open
+  - action: action_open
+  - slot_was_set:
+    - read_list: true
+  - slot_was_set:
+    - restart: false
+  - intent: deny
+  - action: utter_affirm
+  - action: action_reset_slot_open
+  - slot_was_set:
+    - demo: null
+  - slot_was_set:
+    - read_list: false
+  - slot_was_set:
+    - restart: false
+- story: open fail and restart
+  steps:
+  - intent: open
+  - action: action_open
+  - slot_was_set:
+    - read_list: false
+  - slot_was_set:
+    - restart: true
+  - intent: affirm
+  - action: action_open
+- story: open fail and not restart
+  steps:
+  - intent: open
+  - action: action_open
+  - slot_was_set:
+    - read_list: false
+  - slot_was_set:
+    - restart: true
+  - intent: deny
+  - action: utter_affirm
+  - action: action_reset_slot_open
+  - slot_was_set:
+    - demo: null
+  - slot_was_set:
+    - read_list: false
+  - slot_was_set:
+    - restart: false
+- story: open and find demo similar
+  steps:
+  - intent: open
+  - action: action_open
+  - slot_was_set:
+    - read_list: false
+  - slot_was_set:
+    - restart: false
+  - intent: open
+  - action: action_open
+  - slot_was_set:
+    - demo: null
+  - slot_was_set:
+    - read_list: false
+  - slot_was_set:
+    - restart: false
+- story: open and find demo similar but cancel or cancel restart
+  steps:
+  - intent: open
+  - action: action_open
+  - intent: deny
+  - action: utter_affirm
+  - action: action_reset_slot_open
+  - slot_was_set:
+    - demo: null
+  - slot_was_set:
+    - read_list: false
+- story: out_of_scope
+  steps:
+  - intent: out_of_scope
+  - action: utter_out_of_scope
+- story: search
+  steps:
+  - intent: search
+  - action: action_search
+  - slot_was_set:
+    - demo: null
+  - slot_was_set:
+    - tag: null
+  - slot_was_set:
+    - search_mode: null
+- story: search and problem, new try
+  steps:
+  - intent: search
+  - action: action_search
+  - intent: affirm
+  - action: action_search
+- story: search and give up
+  steps:
+  - intent: search
+  - action: action_search
+  - intent: deny
+  - action: utter_affirm
+  - action: action_reset_slot_search
+  - slot_was_set:
+    - demo: null
+  - slot_was_set:
+    - tag: null
+  - slot_was_set:
+    - search_mode: null
+- story: shutdown confirm
+  steps:
+  - intent: shutdown
+  - action: utter_confirm_shutdown
+  - intent: affirm
+  - action: action_shutdown
+- story: shutdown confirm and fail, restart
+  steps:
+  - intent: shutdown
+  - action: utter_confirm_shutdown
+  - intent: affirm
+  - action: action_shutdown
+  - intent: affirm
+  - action: action_shutdown
+- story: shutdown confirm and fail, give up
+  steps:
+  - intent: shutdown
+  - action: utter_confirm_shutdown
+  - intent: affirm
+  - action: action_shutdown
+  - intent: deny
+  - action: utter_affirm
+- story: shutdown cancel
+  steps:
+  - intent: shutdown
+  - action: utter_confirm_shutdown
+  - intent: deny
+  - action: utter_affirm
+- story: turn on gdo, confirm
+  steps:
+  - intent: turn_on_gdo
+  - action: utter_confirm_turn_on_gdo
+  - intent: affirm
+  - action: action_turn_on_gdo
+- story: turn on gdo, cancel
+  steps:
+  - intent: turn_on_gdo
+  - action: utter_confirm_turn_on_gdo
+  - intent: deny
+  - action: utter_affirm
+- story: turn on gdo, confirm, restart
+  steps:
+  - intent: turn_on_gdo
+  - action: utter_confirm_turn_on_gdo
+  - intent: affirm
+  - action: action_turn_on_gdo
+  - intent: affirm
+  - action: action_turn_on_gdo
+- story: turn on gdo, confirm, without restart
+  steps:
+  - intent: turn_on_gdo
+  - action: utter_confirm_turn_on_gdo
+  - intent: affirm
+  - action: action_turn_on_gdo
+  - intent: deny
+- story: control
+  steps:
+  - intent: control
+  - action: action_control
+  - slot_was_set:
+    - control_command: null
+- story: clear screens
+  steps:
+  - intent: clear_space
+  - action: action_clear_space
+- story: switch modes
+  steps:
+  - intent: switch_modes
+  - action: action_switch_modes
+  - slot_was_set:
+    - mode: null
+  - slot_was_set:
+    - switch_action: null
+- story: open environment
+  steps:
+  - intent: open_environment
+  - action: action_open_environment
+  - slot_was_set:
+    - work_environment: null
+- story: open browsers success
+  steps:
+  - intent: open_browsers
+  - action: action_open_browsers
+  - slot_was_set:
+    - open_browsers: null
+- story: open browsers, fail, try again
+  steps:
+  - intent: open_browsers
+  - action: action_open_browsers
+  - intent: affirm
+  - action: action_open_browsers
+- story: open browsers, fail
+  steps:
+  - intent: open_browsers
+  - action: action_open_browsers
+  - intent: deny
+  - action: utter_affirm
+  - action: action_reset_slot_browsers
+- story: close browsers success
+  steps:
+  - intent: close_browsers
+  - action: action_close_browsers
+  - slot_was_set:
+    - close_browsers: null
+- story: close browsers, fail, try again
+  steps:
+  - intent: close_browsers
+  - action: action_close_browsers
+  - intent: affirm
+  - action: action_close_browsers
+- story: close browsers, fail
+  steps:
+  - intent: close_browsers
+  - action: action_close_browsers
+  - intent: deny
+  - action: utter_affirm
+  - action: action_reset_slot_browsers
+- story: refresh browsers success
+  steps:
+  - intent: refresh_browsers
+  - action: action_refresh_browsers
+  - slot_was_set:
+    - reset_browsers: null
+- story: refresh browsers, fail, try again
+  steps:
+  - intent: refresh_browsers
+  - action: action_refresh_browsers
+  - intent: affirm
+  - action: action_refresh_browsers
+- story: refresh browsers, fail
+  steps:
+  - intent: refresh_browsers
+  - action: action_refresh_browsers
+  - intent: deny
+  - action: utter_affirm
+  - action: action_reset_slot_browsers
+- story: ask repeat
+  steps:
+  - intent: ask_repeat
+  - action: action_repeat
+- story: list of available projects
+  steps:
+  - intent: list_available_demos
+  - action: action_list_demos
+- story: list of available projects and try again
+  steps:
+  - intent: list_available_demos
+  - action: action_list_demos
+  - intent: affirm
+  - action: action_list_demos
+- story: list of available projects and cancel
+  steps:
+  - intent: list_available_demos
+  - action: action_list_demos
+  - intent: deny
+  - action: utter_affirm
+- story: zoom
+  steps:
+  - intent: zoom
+  - action: action_zoom
+  - slot_was_set:
+    - zoom_action: null
+  - slot_was_set:
+    - zoom_big_level: null
+  - slot_was_set:
+    - zoom_small_level: null
+- story: zoom and try again
+  steps:
+  - intent: zoom
+  - action: action_zoom
+  - intent: affirm
+  - action: action_zoom
+- story: zoom and cancel
+  steps:
+  - intent: zoom
+  - action: action_zoom
+  - intent: deny
+  - action: utter_affirm
+  - action: action_reset_slot_zoom
+  - slot_was_set:
+    - zoom_action: null
+  - slot_was_set:
+    - zoom_big_level: null
+  - slot_was_set:
+    - zoom_small_level: null
+- story: zoom and ask action type
+  steps:
+  - intent: zoom
+  - action: action_zoom
+  - slot_was_set:
+    - zoom_action: null
+  - intent: zoom
+  - action: action_zoom
+- story: move
+  steps:
+  - intent: move
+  - action: action_move
+  - slot_was_set:
+    - direction: null
+- story: move and ask direction
+  steps:
+  - intent: move
+  - action: action_move
+  - intent: move
+  - action: action_move
+- story: move and try again
+  steps:
+  - intent: move
+  - action: action_move
+  - intent: affirm
+  - action: action_move
+- story: move and cancel
+  steps:
+  - intent: move
+  - action: action_move
+  - intent: deny
+  - action: utter_affirm
+  - action: action_reset_slot_direction
+  - slot_was_set:
+    - direction: null
+- story: conversation with emotion detection
+  steps:
+  - intent: start_small_talk
+  - action: utter_confirm_start_small_talk
+  - action: utter_ask_to_turn_on_emotion_detection
+  - intent: affirm
+  - action: action_turn_on_emotion_detection
+  - action: utter_ask_about_today
+  - intent: tell_about_today
+  - action: action_respond_about_today
+- story: conversation without emotion detection
+  steps:
+  - intent: start_small_talk
+  - action: utter_confirm_start_small_talk
+  - action: utter_ask_to_turn_on_emotion_detection
+  - intent: deny
+  - action: utter_affirm
+  - action: action_turn_off_emotion_detection
+  - action: utter_ask_about_today
+  - intent: tell_about_today
+  - action: action_respond_about_today
+- story: turn on emotion detection
+  steps:
+  - intent: turn_on_emotion_detection
+  - action: utter_affirm
+  - action: action_turn_on_emotion_detection
+- story: turn off emotion detection
+  steps:
+  - intent: turn_off_emotion_detection
+  - action: utter_affirm
+  - action: action_turn_off_emotion_detection
+- story: check emotion detection status
+  steps:
+  - intent: check_emotion_detection_enabled
+  - action: action_check_emotion_detection_enabled
+- story: name
+  steps:
+  - intent: want_to_give_name
+  - action: utter_ask_name
+  - intent: give_name
+  - action: action_receive_name
+  - intent: repeat_name
+  - action: action_say_name
+- story: announce current emotion
+  steps:
+  - intent: ask_current_emotion
+  - action: utter_current_emotion
+- story: turn on grammar correction
+  steps:
+  - intent: turn_on_grammar_correction
+  - action: utter_affirm
+  - action: action_turn_on_grammar_correction
+- story: turn off grammar correction
+  steps:
+  - intent: turn_off_grammar_correction
+  - action: utter_affirm
+  - action: action_turn_off_grammar_correction
+- story: check grammar correction status
+  steps:
+  - intent: check_grammar_correction_enabled
+  - action: action_check_grammar_correction_enabled
+

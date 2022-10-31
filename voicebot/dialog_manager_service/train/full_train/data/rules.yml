@@ -1,0 +1,33 @@
+version: "3.1"
+
+# nb. 3 different chitchat rules were used becuase Rasa training did not work
+# properly when only one was used. This does not change the performance at 
+# prediction time.
+
+rules:
+- rule: respond_to_chitchat
+  condition:
+  - slot_was_set:
+    - emotion_detection_enabled: true
+  steps:
+  - intent: chitchat
+  - action: utter_chitchat
+
+- rule: respond_to_chitchat_2
+  condition:
+  - slot_was_set:
+    - emotion_detection_enabled: true
+  steps:
+  - intent: chitchat_2
+  - action: utter_chitchat_2
+  
+- rule: respond_to_chitchat_3
+  condition:
+  - slot_was_set:
+    - emotion_detection_enabled: true
+  steps:
+  - intent: chitchat_3
+  - action: utter_chitchat_3
+
+
+

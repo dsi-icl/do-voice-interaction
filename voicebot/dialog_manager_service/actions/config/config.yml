@@ -1,0 +1,47 @@
+# Configuration for Rasa NLU.
+# https://rasa.com/docs/rasa/nlu/components/
+language: en
+recipe: default.v1
+pipeline:
+  - name: WhitespaceTokenizer
+  - name: RegexFeaturizer
+  - name: LexicalSyntacticFeaturizer
+  - name: CountVectorsFeaturizer
+  - name: CountVectorsFeaturizer
+    analyzer: "char_wb"
+    min_ngram: 1
+    max_ngram: 9
+  - name: DIETClassifier
+    epochs: 100
+    constrain_similarities: True
+  - name: EntitySynonymMapper
+  - name: ResponseSelector
+    constrain_similarities: True
+    epochs: 100
+
+# Configuration for Rasa Core.
+# https://rasa.com/docs/rasa/core/policies/
+policies:
+  - name: MemoizationPolicy
+  - name: RulePolicy
+  - name: TEDPolicy
+    max_history: 5
+    epochs: 100
+    constrain_similarities: True
+
+# Configuration for Graphql
+graphql:
+  - url: http://specify-the-gql-server-ip-here:4000/graphql
+  - move:
+      - left: "-5000,0"
+      - right: "5000,0"
+      - up: "0,-5000"
+      - down: "0,5000"
+  - zoomin:
+      - little: "3.0"
+      - medium: "6.0"
+      - big: "8.0"
+  - zoomout:
+      - little: "-3.0"
+      - medium: "-6.0"
+      - big: "-8.0"

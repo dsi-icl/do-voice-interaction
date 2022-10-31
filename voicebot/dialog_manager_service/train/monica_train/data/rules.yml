@@ -1,0 +1,10 @@
+version: "3.1"
+
+rules:
+- rule: respond_to_chitchat
+  condition:
+  - slot_was_set:
+    - emotion_detection_enabled: true
+  steps:
+  - intent: chitchat
+  - action: utter_chitchat

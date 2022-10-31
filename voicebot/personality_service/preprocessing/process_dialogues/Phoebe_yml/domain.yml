@@ -1,0 +1,2357 @@
+version: "3.1"
+
+
+
+responses:
+  utter_chitchat/dev_4_4_1_4,neutral,neutral:
+  - text: "Hey."
+  utter_chitchat/dev_4_4_1_6,neutral,neutral:
+  - text: "Ohh, you guys, remember that cute client I told you about? I bit him."
+  utter_chitchat/dev_4_4_1_8,neutral,neutral:
+  - text: "On the touchy."
+  utter_chitchat/dev_4_4_1_10,surprise,negative:
+  - text: "No, I know!"
+  utter_chitchat/dev_8_3_6_2,neutral,neutral:
+  - text: "All in good time my love."
+  utter_chitchat/dev_8_3_6_8,surprise,negative:
+  - text: "What?! They took mine to give to you!"
+  utter_chitchat/dev_5_19_11_2,neutral,neutral:
+  - text: "Wait, Rach! Where's the other one?"
+  utter_chitchat/dev_5_19_11_4,anger,negative:
+  - text: "Rachel Karen Green, where's the other earring?!"
+  utter_chitchat/dev_5_19_11_7,fear,negative:
+  - text: "Well, what am I going to tell Monica? She wants to wear them tonight!"
+  utter_chitchat/dev_5_19_11_9,neutral,neutral:
+  - text: "These"
+  utter_chitchat/dev_5_19_11_11,neutral,neutral:
+  - text: "Why not?"
+  utter_chitchat/dev_7_24_12_1,neutral,neutral:
+  - text: "Yeah!"
+  utter_chitchat/dev_7_24_12_4,sadness,negative:
+  - text: "Oh my God! Why would you play hide and seek with someone you know is a flight risk?!"
+  utter_chitchat/dev_5_3_13_1,anger,negative:
+  - text: "I already had a baby. Leave me alone."
+  utter_chitchat/dev_7_5_16_4,anger,negative:
+  - text: "What about her whining and her constant need for attention?!"
+  utter_chitchat/dev_7_5_16_6,anger,negative:
+  - text: "Oh right, because you're so capable of change."
+  utter_chitchat/dev_7_5_16_12,anger,negative:
+  - text: "Yeah, and y'know what? I don't give a tiny rat's ass."
+  utter_chitchat/dev_7_5_16_15,neutral,neutral:
+  - text: "Oh. Y'know, he hums while he does other stuff to."
+  utter_chitchat/dev_7_5_16_17,anger,negative:
+  - text: "And y'know, even if they break up again, you'd better not let him in your sad men's club!"
+  utter_chitchat/dev_6_22_18_1,neutral,neutral:
+  - text: "Yeah?"
+  utter_chitchat/dev_6_22_18_3,neutral,neutral:
+  - text: "No! Why?"
+  utter_chitchat/dev_6_22_18_7,fear,negative:
+  - text: "Well for the regular guy, it's bad, but Chandler, Oh dear God!"
+  utter_chitchat/dev_6_22_18_9,neutral,neutral:
+  - text: "What are you gonna do?"
+  utter_chitchat/dev_6_22_18_12,surprise,negative:
+  - text: "Rachel said that!"
+  utter_chitchat/dev_1_23_19_16,joy,positive:
+  - text: "This is so great."
+  utter_chitchat/dev_1_23_19_18,sadness,negative:
+  - text: "I mean, well, 'cause when I was growing up, you know my dad left, and my mother died, and my stepfather went to jail, so I barely had enough pieces of parents to make one whole one."
+  utter_chitchat/dev_1_20_21_2,neutral,neutral:
+  - text: "You know he's gay?"
+  utter_chitchat/dev_3_6_23_1,sadness,negative:
+  - text: "Oh, it's already closed, Chris gave me the keys to lock up-what is wrong?"
+  utter_chitchat/dev_3_6_23_3,surprise,negative:
+  - text: "Oh no! Why?"
+  utter_chitchat/dev_3_6_23_5,surprise,negative:
+  - text: "Oh my God! I don't believe it! Oh, you poor bunny."
+  utter_chitchat/dev_3_6_23_8,neutral,neutral:
+  - text: "Aw! Hey, do you think that Susan person is her lover?"
+  utter_chitchat/dev_3_6_23_10,sadness,negative:
+  - text: "I'm sorry."
+  utter_chitchat/dev_3_6_23_13,sadness,negative:
+  - text: "Aw, God Ross. Oh."
+  utter_chitchat/dev_2_1_25_2,anger,negative:
+  - text: "Yeah, but this  isn't the face of a person who trusts a person."
+  utter_chitchat/dev_2_1_25_5,anger,negative:
+  - text: "Would you relax? I know what I am doing. This is how he wears it."
+  utter_chitchat/dev_8_1_27_1,neutral,neutral:
+  - text: "I can't say."
+  utter_chitchat/dev_8_1_27_4,neutral,neutral:
+  - text: "I can't say because he's famous."
+  utter_chitchat/dev_8_1_27_7,neutral,neutral:
+  - text: "Okay, okay. It's James Brolin. James Brolin is the father of my baby."
+  utter_chitchat/dev_8_1_27_9,surprise,negative:
+  - text: "What?! Well he never said that to me!"
+  utter_chitchat/dev_5_8_28_1,sadness,negative:
+  - text: "Oh, this life! Oh okay no, Chandler's is worse."
+  utter_chitchat/dev_5_8_28_3,neutral,neutral:
+  - text: "Of course you don't sweetie. You're brand new."
+  utter_chitchat/dev_5_8_28_7,joy,positive:
+  - text: "Oh no, I know! I know! It's the one where Joey got Monica's turkey stuck on his head!"
+  utter_chitchat/dev_6_20_30_1,fear,negative:
+  - text: "You've got to get out of here! Save yourself!"
+  utter_chitchat/dev_6_20_30_3,sadness,negative:
+  - text: "Don't worry about me, I'm a robot! I'm just a machine!!"
+  utter_chitchat/dev_6_20_30_5,surprise,positive:
+  - text: "Oh my God."
+  utter_chitchat/dev_6_20_30_7,neutral,neutral:
+  - text: "I am"
+  utter_chitchat/dev_6_20_30_9,joy,positive:
+  - text: "No, I mean I was really acting my ass off."
+  utter_chitchat/dev_6_20_30_11,neutral,neutral:
+  - text: "Oh yeah, you're solid. Yeah, you're just no me."
+  utter_chitchat/dev_6_20_30_13,anger,negative:
+  - text: "Fine!"
+  utter_chitchat/dev_3_24_37_8,surprise,negative:
+  - text: "Wait, if that's his favourite area, why is he being so mean to it?"
+  utter_chitchat/dev_3_17_45_4,neutral,neutral:
+  - text: "Aren't you gonna go?"
+  utter_chitchat/dev_3_17_45_8,neutral,neutral:
+  - text: "No, y'know what don't close it  ‘cause the... keys...are in there."
+  utter_chitchat/dev_3_8_46_1,neutral,neutral:
+  - text: "Although, don't feel like you can't visit."
+  utter_chitchat/dev_3_8_46_9,neutral,neutral:
+  - text: "Well, you could wait ‘til I go to the dentist, maybe"
+  utter_chitchat/dev_1_23_49_6,anger,negative:
+  - text: "Hey, hey, ok, all right, that's it!"
+  utter_chitchat/dev_1_23_49_13,anger,negative:
+  - text: "Don't make me do this again, I don't like my voice like this."
+  utter_chitchat/dev_6_22_50_3,neutral,neutral:
+  - text: "Okay, maybe ask this guy."
+  utter_chitchat/dev_1_4_54_1,neutral,neutral:
+  - text: "Okay, okay."
+  utter_chitchat/dev_3_1_57_1,neutral,neutral:
+  - text: "See, I-I think that one that Elton John wrote for, um, that guy on"
+  utter_chitchat/dev_3_1_57_3,joy,positive:
+  - text: "Hi Monica!"
+  utter_chitchat/dev_3_1_57_6,surprise,negative:
+  - text: "Oh my God, has she slept at all?"
+  utter_chitchat/dev_3_1_57_10,neutral,neutral:
+  - text: "Oh, okay that explains it."
+  utter_chitchat/dev_5_20_59_2,neutral,neutral:
+  - text: "Well you all know that I'm a pacifist so I'm not interested in war in any way."
+  utter_chitchat/dev_3_21_61_1,joy,positive:
+  - text: "Hey!"
+  utter_chitchat/dev_3_21_61_3,neutral,neutral:
+  - text: "What?"
+  utter_chitchat/dev_3_21_61_5,joy,positive:
+  - text: "Ohh, Monica, I am so excited for you."
+  utter_chitchat/dev_7_23_66_2,neutral,neutral:
+  - text: "Or maybe he-he was writing to tell her that-that he's changed his name, y'know? Tell Monica I'm sorry."
+  utter_chitchat/dev_7_23_66_4,anger,negative:
+  - text: "Don't be so negative! Good God! Isn't it possible that Sorry is sitting in there  right now?!"
+  utter_chitchat/dev_6_19_67_10,neutral,neutral:
+  - text: "Well, what kind of guy are you looking for?"
+  utter_chitchat/dev_6_21_68_2,neutral,neutral:
+  - text: "Oh, Rachel and I have appointments to get our hair cut."
+  utter_chitchat/dev_6_21_68_4,neutral,neutral:
+  - text: "I want to see what he wants first."
+  utter_chitchat/dev_5_11_72_2,anger,negative:
+  - text: "Then do Iceberg!"
+  utter_chitchat/dev_5_11_72_4,neutral,neutral:
+  - text: "G"
+  utter_chitchat/dev_5_11_72_6,anger,negative:
+  - text: "No, but you're questioning my method!"
+  utter_chitchat/dev_5_11_72_9,anger,negative:
+  - text: "Y'know none of my other student thought I was stupid."
+  utter_chitchat/dev_5_11_72_11,anger,negative:
+  - text: "Yeah, well, y'know maybe you just need to try a little harder!"
+  utter_chitchat/dev_5_11_72_16,anger,negative:
+  - text: "Fine! You go learn from your qualified instructor! But don't come crying to me when everyone's sick and tired of hearing you play"
+  utter_chitchat/dev_5_11_72_18,anger,negative:
+  - text: "Oh, fine! Take his side!"
+  utter_chitchat/dev_8_24_77_2,neutral,neutral:
+  - text: "I just can't decide who she looks more alike, you or Rachel?"
+  utter_chitchat/dev_8_24_77_4,neutral,neutral:
+  - text: "I'm sorry, for the last time, why aren't you two together again?"
+  utter_chitchat/dev_8_24_77_9,neutral,neutral:
+  - text: "Yeah that's true. Yeah, you love her. You always have. You have a child together. There is no right answer."
+  utter_chitchat/dev_8_24_77_17,neutral,neutral:
+  - text: "I know. I know. I know. I know, and if you try to make it more you might wreck it."
+  utter_chitchat/dev_8_24_77_19,neutral,neutral:
+  - text: "Right.  Or you might get everything you've wanted since you were fifteen."
+  utter_chitchat/dev_1_10_80_2,neutral,neutral:
+  - text: "No, no, he hasn't been around."
+  utter_chitchat/dev_1_10_80_4,surprise,negative:
+  - text: "Minsk?"
+  utter_chitchat/dev_1_10_80_6,neutral,neutral:
+  - text: "I know where Minsk is."
+  utter_chitchat/dev_1_10_80_8,neutral,neutral:
+  - text: "So when, when do you leave?"
+  utter_chitchat/dev_6_21_82_7,neutral,neutral:
+  - text: "Well, why don't you just get him fired?"
+  utter_chitchat/dev_5_13_84_2,neutral,neutral:
+  - text: "He said, Nice to meet you Glenda.  Well, obviously I couldn't give him my real name?"
+  utter_chitchat/dev_5_13_84_4,sadness,negative:
+  - text: "Come on, you saw the way he ran out of here!"
+  utter_chitchat/dev_5_13_84_7,neutral,neutral:
+  - text: "Well, I said, I told him y'know, that I was the executor person of Francis' will and that I needed to talk to him so I'm gonna meet him at the coffee house later."
+  utter_chitchat/dev_8_4_85_5,surprise,positive:
+  - text: "Oh, you came on to Ross!"
+  utter_chitchat/dev_1_8_86_3,neutral,neutral:
+  - text: "Hi, sorry I'm late, I couldn't find my bearings."
+  utter_chitchat/dev_8_14_88_2,surprise,negative:
+  - text: "Oh, it has a name?"
+  utter_chitchat/dev_8_14_88_4,anger,negative:
+  - text: "Okay—Oop! Too late! I'm leaving! Come on Chandler let's go!"
+  utter_chitchat/dev_2_1_90_3,neutral,neutral:
+  - text: "Where?"
+  utter_chitchat/dev_2_2_91_2,neutral,neutral:
+  - text: "So?"
+  utter_chitchat/dev_2_2_91_7,neutral,neutral:
+  - text: "You won't even taste it?"
+  utter_chitchat/dev_2_2_91_9,neutral,neutral:
+  - text: "Not even if you just pretend that it's milk?"
+  utter_chitchat/dev_6_11_92_2,joy,positive:
+  - text: "Oh sure!  Noo!"
+  utter_chitchat/dev_6_11_92_5,surprise,negative:
+  - text: "What?!"
+  utter_chitchat/dev_6_11_92_7,surprise,negative:
+  - text: "Ross, where did you get this?!"
+  utter_chitchat/dev_6_11_92_9,anger,negative:
+  - text: "Wow! Oh my God, well if they've ripped off our table ours must be much more than one and fifty dollars!"
+  utter_chitchat/dev_2_1_93_1,neutral,neutral:
+  - text: "It's too soon to tell. She's resting, which is a good sign."
+  utter_chitchat/dev_2_1_93_3,sadness,negative:
+  - text: "I'm not gonna lie to you, Ross, it doesn't look good."
+  utter_chitchat/dev_2_1_93_6,sadness,negative:
+  - text: "Your hair looks too good, I think it would upset her. Ross, why don't you come on in."
+  utter_chitchat/dev_2_2_94_3,neutral,neutral:
+  - text: "Come on. It doesn't taste bad."
+  utter_chitchat/dev_8_4_95_4,neutral,neutral:
+  - text: "Regina Philange."
+  utter_chitchat/dev_8_24_96_1,neutral,neutral:
+  - text: "Oh, I'll get it."
+  utter_chitchat/dev_8_24_96_3,joy,positive:
+  - text: "Relax, it's not like we're forking."
+  utter_chitchat/dev_3_20_97_1,joy,positive:
+  - text: "Hey!"
+  utter_chitchat/dev_3_20_97_3,joy,positive:
+  - text: "Oh! Ooh! Oh Monica! It's so beautiful."
+  utter_chitchat/dev_3_20_97_5,joy,positive:
+  - text: "So, I'm here, ready to play."
+  utter_chitchat/dev_3_20_97_7,joy,positive:
+  - text: "I brought a bunch of stuff for the house, so check it out. Ha-ha."
+  utter_chitchat/dev_3_20_97_9,joy,positive:
+  - text: "That's a dog, every house should have a dog."
+  utter_chitchat/dev_3_20_97_11,joy,positive:
+  - text: "Well, maybe it's so big because the house was built on radioactive waste."
+  utter_chitchat/dev_3_20_97_13,neutral,neutral:
+  - text: "No, no, that's the ghost for the attic."
+  utter_chitchat/dev_3_20_97_15,neutral,neutral:
+  - text: "Well, nobody wants a ghost. But you've got one, because the house is sitting on an ancient Indian burial ground."
+  utter_chitchat/dev_3_20_97_17,neutral,neutral:
+  - text: "Okay, obviously you don't know much about the U.S. government."
+  utter_chitchat/dev_3_20_99_2,joy,positive:
+  - text: "Watch, watch."
+  utter_chitchat/dev_3_20_99_4,joy,positive:
+  - text: "And, and!"
+  utter_chitchat/dev_6_18_106_2,neutral,neutral:
+  - text: "What's a Movement class?"
+  utter_chitchat/dev_5_3_108_1,fear,negative:
+  - text: "Oh, okay, I'm having another one!"
+  utter_chitchat/dev_6_11_110_2,neutral,neutral:
+  - text: "Well, what period is it from?"
+  utter_chitchat/dev_6_11_110_4,neutral,neutral:
+  - text: "Yes, yes I do."
+  utter_chitchat/dev_6_11_110_9,joy,positive:
+  - text: "White Plains. Oh, it sounds like such a magical place."
+  utter_chitchat/dev_4_1_112_3,sadness,negative:
+  - text: "Noooo!!"
+  utter_chitchat/test_5_15_3_6,neutral,neutral:
+  - text: "Yeah. I really like his glasses."
+  utter_chitchat/test_4_14_4_2,surprise,positive:
+  - text: "It kicked! I think the baby kicked!"
+  utter_chitchat/test_4_14_4_4,neutral,neutral:
+  - text: "Oh no wait, oh no, the elastic on my underwear busted."
+  utter_chitchat/test_3_16_6_2,surprise,negative:
+  - text: "Oh?!"
+  utter_chitchat/test_3_24_7_1,neutral,neutral:
+  - text: "Oh."
+  utter_chitchat/test_6_18_9_3,surprise,negative:
+  - text: "Oh!"
+  utter_chitchat/test_6_18_9_9,sadness,negative:
+  - text: "Oh, it's bad. It's really bad. The only thing in there that isn't burned is an ass. Which I do"
+  utter_chitchat/test_7_24_11_3,neutral,neutral:
+  - text: "Okay. Oh but don't tell them Monica's pregnant because they frown on that."
+  utter_chitchat/test_1_13_13_1,neutral,neutral:
+  - text: "But I don't. Me, Phoebe."
+  utter_chitchat/test_1_13_13_3,surprise,positive:
+  - text: "You're not? See, that's why you're so great!"
+  utter_chitchat/test_6_4_14_6,joy,positive:
+  - text: "Hey!"
+  utter_chitchat/test_6_4_14_9,joy,positive:
+  - text: "We're just celebrating that Joey got his health insurance back."
+  utter_chitchat/test_5_20_15_2,joy,positive:
+  - text: "Okay!"
+  utter_chitchat/test_3_7_17_3,disgust,negative:
+  - text: "Ewww! Oh! It's the Mattress King!"
+  utter_chitchat/test_3_7_17_16,fear,negative:
+  - text: "I'm, I'm freaking out!"
+  utter_chitchat/test_3_7_17_21,neutral,neutral:
+  - text: "I am"
+  utter_chitchat/test_2_4_21_2,neutral,neutral:
+  - text: "Here you go."
+  utter_chitchat/test_2_4_21_6,surprise,positive:
+  - text: "So your brother's straigh huh? Seriously."
+  utter_chitchat/test_5_3_24_2,neutral,neutral:
+  - text: "I want to keep one."
+  utter_chitchat/test_8_20_27_1,neutral,neutral:
+  - text: "Hi."
+  utter_chitchat/test_8_23_28_1,joy,positive:
+  - text: "Oh down please.  I-I hate to be a ball buster can I just do it?"
+  utter_chitchat/test_8_23_28_3,sadness,negative:
+  - text: "Sure! I feel so bad for you. I broke my leg once too."
+  utter_chitchat/test_8_23_28_5,neutral,neutral:
+  - text: "Well, it's a long story."
+  utter_chitchat/test_8_23_28_12,neutral,neutral:
+  - text: "Uh-huh, yeah."
+  utter_chitchat/test_8_23_28_14,joy,positive:
+  - text: "Oh yeah! I-I would like that."
+  utter_chitchat/test_3_25_32_2,neutral,neutral:
+  - text: "No-no, sorry. Cookies are good, thanks."
+  utter_chitchat/test_3_25_32_4,neutral,neutral:
+  - text: "Well, so, umm, anyway umm, I've been, I've been looking for my Father, and umm, have you heard from him, or seen him?"
+  utter_chitchat/test_3_25_32_6,neutral,neutral:
+  - text: "Oh, okay. Well, so tell me everything about my parents. Everything."
+  utter_chitchat/test_3_25_32_8,surprise,positive:
+  - text: "Oh, what? What was it?"
+  utter_chitchat/test_3_25_32_12,joy,positive:
+  - text: "Yeah, no, it was great."
+  utter_chitchat/test_9_2_33_10,anger,negative:
+  - text: "Yeah, no kidding, this just proves no good can come from  having sex with Ross!"
+  utter_chitchat/test_7_16_40_1,neutral,neutral:
+  - text: "I'm really glad you guys are okay but, I just keep thinking what would happen if-if you two  actually had hooked up."
+  utter_chitchat/test_4_14_41_3,surprise,negative:
+  - text: "Who, Josh?"
+  utter_chitchat/test_4_14_41_8,surprise,negative:
+  - text: "Oh no!"
+  utter_chitchat/test_4_7_42_3,surprise,positive:
+  - text: "After that? Yeah! No, I mean if I can help."
+  utter_chitchat/test_4_13_43_6,neutral,neutral:
+  - text: "Oh."
+  utter_chitchat/test_7_1_45_1,neutral,neutral:
+  - text: "I'm sorry, but I just wrote the best dance song for your wedding. Check this out."
+  utter_chitchat/test_7_1_45_3,surprise,positive:
+  - text: "Really?!"
+  utter_chitchat/test_3_14_46_7,joy,positive:
+  - text: "I stepped in something icky."
+  utter_chitchat/test_4_23_48_1,neutral,neutral:
+  - text: "Okay, okay, but Rachel's gonna be here too, can't I just ask her this stuff?"
+  utter_chitchat/test_5_23_55_2,joy,positive:
+  - text: "Uh-huh! Why do you think it takes me so long to answer the door?"
+  utter_chitchat/test_4_18_65_1,neutral,neutral:
+  - text: "All right, so, what are we supposed to call you?"
+  utter_chitchat/test_4_18_65_5,neutral,neutral:
+  - text: "Umm, Gene."
+  utter_chitchat/test_4_18_65_8,neutral,neutral:
+  - text: "Bye, Gene."
+  utter_chitchat/test_5_7_67_1,neutral,neutral:
+  - text: "Umm, do health inspectors work on commission?"
+  utter_chitchat/test_5_7_67_3,joy,positive:
+  - text: "It's okay to laugh right?"
+  utter_chitchat/test_4_15_73_6,neutral,neutral:
+  - text: "Hi."
+  utter_chitchat/test_4_11_74_4,neutral,neutral:
+  - text: "My mom never gave birth. Oh! But my birth mom did."
+  utter_chitchat/test_5_13_75_2,neutral,neutral:
+  - text: "Come, sit."
+  utter_chitchat/test_1_7_76_14,neutral,neutral:
+  - text: "Alright. I looked all over the building and I couldn't find the kitty anywhere."
+  utter_chitchat/test_1_7_76_16,joy,positive:
+  - text: "Ah! Well! There you go! Last to know again! And I'm guessing... since nobody told me... this is Paolo."
+  utter_chitchat/test_1_7_76_18,joy,positive:
+  - text: "You betcha!"
+  utter_chitchat/test_3_1_78_9,joy,positive:
+  - text: "Rach, look!  Oh, hi! Where is my strong Ross Skywalker to come rescue me.  There he is."
+  utter_chitchat/test_3_11_83_1,neutral,neutral:
+  - text: "Where'd you get too? We lost you after you opened up all the presents."
+  utter_chitchat/test_3_11_83_6,surprise,negative:
+  - text: "Why, what happened?"
+  utter_chitchat/test_3_4_88_1,joy,positive:
+  - text: "Oh, oh! It's on again!"
+  utter_chitchat/test_5_15_95_3,neutral,neutral:
+  - text: "Yeah, uh-huh, a 100 dollars."
+  utter_chitchat/test_5_15_95_5,anger,negative:
+  - text: "Yeah, but they didn't ask me!"
+  utter_chitchat/test_5_15_95_10,neutral,neutral:
+  - text: "No I'm not."
+  utter_chitchat/test_5_15_95_15,joy,positive:
+  - text: "Hey!"
+  utter_chitchat/test_5_15_95_19,joy,positive:
+  - text: "Yeah, okay, my bad."
+  utter_chitchat/test_1_7_98_10,neutral,neutral:
+  - text: "Can I borrow the phone? I want to call my apartment and check on my grandma.  What's my number?"
+  utter_chitchat/test_3_16_101_2,sadness,negative:
+  - text: "Hey, why are you mopping your ceiling?"
+  utter_chitchat/test_3_24_102_1,neutral,neutral:
+  - text: "Yeah, she was bald, she's not now."
+  utter_chitchat/test_3_24_102_3,neutral,neutral:
+  - text: "I don't know, I hardly ever say that about people."
+  utter_chitchat/test_3_24_102_5,sadness,negative:
+  - text: "Well I'm sorry, I thought you said it was okay."
+  utter_chitchat/test_3_24_102_7,sadness,negative:
+  - text: "Well, maybe it won't work out. Maybe Ross won't like her personality."
+  utter_chitchat/test_3_24_102_9,joy,positive:
+  - text: "Oh no, Bonnie's the best!"
+  utter_chitchat/test_3_7_108_5,joy,positive:
+  - text: "Hi. Y'know in England this car would be on the other side of the store.  Woo!"
+  utter_chitchat/test_3_7_108_7,surprise,positive:
+  - text: "Eh, Monica it, it feels so weird, y'know, Chandler's your friend...  Oh!"
+  utter_chitchat/test_8_17_112_2,disgust,negative:
+  - text: "I know, but that creep that I went on that date with goes to there so I have to find a new one."
+  utter_chitchat/test_8_17_112_5,neutral,neutral:
+  - text: "A new grocery store."
+  utter_chitchat/test_8_17_112_9,neutral,neutral:
+  - text: "Yeah, we both can. And we both will."
+  utter_chitchat/test_8_17_112_13,surprise,positive:
+  - text: "What?"
+  utter_chitchat/test_8_17_112_15,neutral,neutral:
+  - text: "Oh yeah well, I'm sorry about that too, but what are you going to do?"
+  utter_chitchat/test_8_17_112_17,neutral,neutral:
+  - text: "A little.   Now you're talking."
+  utter_chitchat/test_8_17_112_19,joy,positive:
+  - text: "I-I-I'd love to. Let me just tell my friend."
+  utter_chitchat/test_8_17_112_21,neutral,neutral:
+  - text: "She must've left."
+  utter_chitchat/test_8_12_119_1,sadness,negative:
+  - text: "Hey, you guys. Listen, I'm sorry that I was hogging the game before——Oh my God! Your friends have some unfortunate initials!"
+  utter_chitchat/test_8_12_119_3,surprise,negative:
+  - text: "Chandler sucks! He couldn't have gotten this good!"
+  utter_chitchat/test_8_5_123_1,neutral,neutral:
+  - text: "But"
+  utter_chitchat/test_8_5_123_3,neutral,neutral:
+  - text: "Okay. Okay, but you can't fire him today."
+  utter_chitchat/test_8_5_123_5,neutral,neutral:
+  - text: "Because I'm dumping him today."
+  utter_chitchat/test_8_5_123_7,neutral,neutral:
+  - text: "He"
+  utter_chitchat/test_8_5_123_9,disgust,negative:
+  - text: "Then he comes over!  I'm so worried about you. Uck! Be a man!"
+  utter_chitchat/test_8_5_123_11,sadness,negative:
+  - text: "You can't fire him and dump him the same day, he'll kill himself."
+  utter_chitchat/test_8_5_123_13,disgust,negative:
+  - text: "Are you kidding?! Another week with that sip, I'll kill"
+  utter_chitchat/test_8_5_123_15,sadness,negative:
+  - text: "Okay. But the question is who's gonna go first. ‘Cause whoever goes second is the bitch."
+  utter_chitchat/test_7_4_125_2,neutral,neutral:
+  - text: "Hey—Ooh, how's Hilda? Is she working out?"
+  utter_chitchat/test_7_4_125_20,sadness,negative:
+  - text: "Sorry."
+  utter_chitchat/test_6_17_127_2,neutral,neutral:
+  - text: "Ohh,"
+  utter_chitchat/test_8_3_131_2,neutral,neutral:
+  - text: "Hey! So how was the doctor?"
+  utter_chitchat/test_8_3_131_4,neutral,neutral:
+  - text: "Good."
+  utter_chitchat/test_8_3_131_6,joy,positive:
+  - text: "Oh."
+  utter_chitchat/test_8_23_132_4,joy,positive:
+  - text: "Oh yay! Great! Okay, what room number is he in?"
+  utter_chitchat/test_8_23_132_11,neutral,neutral:
+  - text: "Hands."
+  utter_chitchat/test_8_23_132_17,neutral,neutral:
+  - text: "Thank you."
+  utter_chitchat/test_8_23_132_19,surprise,negative:
+  - text: "No!"
+  utter_chitchat/test_3_2_151_2,neutral,neutral:
+  - text: "Yeah I know what I wanted to ask you."
+  utter_chitchat/test_3_5_152_2,surprise,positive:
+  - text: "Yeah, yeah. You can do it to."
+  utter_chitchat/test_3_5_152_4,neutral,neutral:
+  - text: "Oh right, yeah okay, my Mom could, and I can't. We don't have that...."
+  utter_chitchat/test_8_11_154_8,anger,negative:
+  - text: "Y'know she has a face Ross!"
+  utter_chitchat/test_5_9_167_7,anger,negative:
+  - text: "You completely stole my answer!"
+  utter_chitchat/test_5_9_167_9,anger,negative:
+  - text: "Well how would you know?! You didn't even read it!"
+  utter_chitchat/test_5_9_167_11,neutral,neutral:
+  - text: "I think that uh, yours is a question with many answers."
+  utter_chitchat/test_5_9_167_13,neutral,neutral:
+  - text: "Would"
+  utter_chitchat/test_5_9_167_16,neutral,neutral:
+  - text: "Okay then."
+  utter_chitchat/test_8_2_169_1,joy,positive:
+  - text: "Hell yeah! I'll marry you!"
+  utter_chitchat/test_8_2_169_3,anger,negative:
+  - text: "Hey lady, your day's over! It's my turn!"
+  utter_chitchat/test_8_2_169_6,anger,negative:
+  - text: "I can and I will!"
+  utter_chitchat/test_8_2_169_9,anger,negative:
+  - text: "Hey!"
+  utter_chitchat/test_8_2_169_11,surprise,negative:
+  - text: "It's Joey!"
+  utter_chitchat/test_8_2_169_13,neutral,neutral:
+  - text: "We don't know."
+  utter_chitchat/test_8_2_169_17,surprise,negative:
+  - text: "Who? Who is it?"
+  utter_chitchat/test_8_2_169_19,neutral,neutral:
+  - text: "Was that story over?"
+  utter_chitchat/test_8_2_169_21,surprise,negative:
+  - text: "Oh my God! I know who the father is"
+  utter_chitchat/test_6_24_170_1,surprise,positive:
+  - text: "Ohh, let me see it! Let me see your hand!"
+  utter_chitchat/test_6_24_170_3,disgust,negative:
+  - text: "I wanna see what's in your hand. I wanna see the trash."
+  utter_chitchat/test_9_1_177_2,neutral,neutral:
+  - text: "To see if know what these guys are talking about."
+  utter_chitchat/test_6_5_178_1,neutral,neutral:
+  - text: "I'm doing okay. I think it's going well. Do you think they're having fun? Am I talking to fast?"
+  utter_chitchat/test_6_5_178_7,neutral,neutral:
+  - text: "Na-uh, no, we are all responsible for our own babies."
+  utter_chitchat/test_1_20_180_4,joy,positive:
+  - text: "Whoo-hoo!"
+  utter_chitchat/test_3_3_181_2,joy,positive:
+  - text: "Hi!"
+  utter_chitchat/test_3_3_181_4,neutral,neutral:
+  - text: "Hey, oh, you know that guy who's been following me? I talked to him today."
+  utter_chitchat/test_8_14_184_2,anger,negative:
+  - text: "There's nothing sexual about this?"
+  utter_chitchat/test_8_14_184_7,sadness,negative:
+  - text: "No, you can't let this stop you from getting massages!"
+  utter_chitchat/test_8_14_184_10,neutral,neutral:
+  - text: "Well not clients, lovers. But let's just y'know, try it again. Come back and-and we'll work through it."
+  utter_chitchat/test_8_14_184_12,neutral,neutral:
+  - text: "Yes."
+  utter_chitchat/test_8_14_184_14,joy,positive:
+  - text: "Great! Okay, if you'll just excuse me.  So, did you hear something you liked?"
+  utter_chitchat/test_6_21_192_6,neutral,neutral:
+  - text: "You guys, I'm sorry, could you please talk a little slower?"
+  utter_chitchat/test_6_21_192_8,joy,positive:
+  - text: "Yeah, it's about relationships. Y'know? The traps, the pitfalls, what not to do, keep going. This stuff is great!"
+  utter_chitchat/test_6_21_192_10,neutral,neutral:
+  - text: "And how none of it matters when the people really love each other."
+  utter_chitchat/test_5_4_196_2,anger,negative:
+  - text: "Ooh, it's not a toy."
+  utter_chitchat/test_6_14_197_1,neutral,neutral:
+  - text: "Yeah?"
+  utter_chitchat/test_6_14_197_3,neutral,neutral:
+  - text: "Yeah."
+  utter_chitchat/test_4_20_199_1,sadness,negative:
+  - text: "Oh, how did it go?"
+  utter_chitchat/test_4_20_199_3,neutral,neutral:
+  - text: "What did he say?"
+  utter_chitchat/test_4_20_199_9,sadness,negative:
+  - text: "Yeah, maybe."
+  utter_chitchat/test_4_20_199_11,sadness,negative:
+  - text: "Any luck?"
+  utter_chitchat/test_1_20_205_7,surprise,negative:
+  - text: "How can people do that?...  Oh, you guys, look! Ugly Naked Guy got gravity boots!"
+  utter_chitchat/test_6_21_210_5,joy,positive:
+  - text: "Hi!"
+  utter_chitchat/test_6_21_210_7,joy,positive:
+  - text: "I know what time you said."
+  utter_chitchat/test_6_21_210_9,neutral,neutral:
+  - text: "Well actually, I know what time Chester and Marcia said."
+  utter_chitchat/test_6_22_211_1,surprise,negative:
+  - text: "Well, what did he do?"
+  utter_chitchat/test_6_22_211_3,surprise,negative:
+  - text: "Joey!"
+  utter_chitchat/test_6_22_211_6,neutral,neutral:
+  - text: "Well, we should go."
+  utter_chitchat/test_7_11_215_2,joy,positive:
+  - text: "That's really beautiful. What does it mean?"
+  utter_chitchat/test_7_11_215_4,joy,positive:
+  - text: "That's good. I got to admit, I thought it was something else."
+  utter_chitchat/test_7_11_215_6,sadness,negative:
+  - text: "You're right! You're right. Don't say it."
+  utter_chitchat/test_7_11_215_8,sadness,negative:
+  - text: "I do too."
+  utter_chitchat/test_7_11_215_10,sadness,negative:
+  - text: "Okay, now's not the time Joey. All right? You can yell at me tomorrow."
+  utter_chitchat/test_7_1_223_4,neutral,neutral:
+  - text: "Check it out. Okay, I can play this when the guests are coming in. Okay."
+  utter_chitchat/test_7_1_223_6,neutral,neutral:
+  - text: "If you would've let me finish, it goes on to say that he's probably not gay."
+  utter_chitchat/test_3_22_225_1,joy,positive:
+  - text: "Yes!! Yes!! I'm the next caller! You were gonna have me hang up."
+  utter_chitchat/test_3_22_225_4,neutral,neutral:
+  - text: "No."
+  utter_chitchat/test_6_23_226_4,neutral,neutral:
+  - text: "That's easy! You just have to think of him as a-as a jar of pickles that won't open."
+  utter_chitchat/test_6_23_226_6,neutral,neutral:
+  - text: "No that's what you do when you want to get the truth out of someone."
+  utter_chitchat/test_2_1_230_2,neutral,neutral:
+  - text: "I'm still on no."
+  utter_chitchat/test_2_1_230_5,neutral,neutral:
+  - text: "What's goin' on?"
+  utter_chitchat/test_2_1_230_8,disgust,negative:
+  - text: "Ewww!"
+  utter_chitchat/test_7_10_233_2,surprise,negative:
+  - text: "Fish!"
+  utter_chitchat/test_7_10_233_4,sadness,negative:
+  - text: "Yes, but I wanted you to want to live with me, but okay, if you're having so much fun over here"
+  utter_chitchat/test_7_10_233_6,joy,positive:
+  - text: "We did have fun, didn't we?"
+  utter_chitchat/test_7_10_233_8,neutral,neutral:
+  - text: "Oh, anyway, they say, if we want, we can see it tonight."
+  utter_chitchat/test_7_10_233_10,joy,positive:
+  - text: "Yay, okay!"
+  utter_chitchat/test_7_10_233_12,neutral,neutral:
+  - text: "Great, all right, okay, and Monica ask me to make the drumming stop."
+  utter_chitchat/test_1_15_237_7,joy,positive:
+  - text: "That's so great! 'Cause you already know how to do that!"
+  utter_chitchat/test_7_22_241_4,neutral,neutral:
+  - text: "Yeah, I understand."
+  utter_chitchat/test_3_6_244_1,neutral,neutral:
+  - text: "Okay, well maybe not on those levels."
+  utter_chitchat/test_3_6_244_5,neutral,neutral:
+  - text: "Why, nobody good?"
+  utter_chitchat/test_3_6_244_20,surprise,positive:
+  - text: "Oh, really?"
+  utter_chitchat/test_3_14_250_1,neutral,neutral:
+  - text: "No. But thanks."
+  utter_chitchat/test_3_14_250_3,neutral,neutral:
+  - text: "Okay. No. But thanks."
+  utter_chitchat/test_3_14_250_6,neutral,neutral:
+  - text: "Well okay, let this be a lesson to all of you, all right."
+  utter_chitchat/test_5_11_260_4,surprise,positive:
+  - text: "Ooh, you nailed the Old Lady!"
+  utter_chitchat/test_5_11_260_6,anger,negative:
+  - text: "Did you, did you"
+  utter_chitchat/test_5_11_260_8,anger,negative:
+  - text: "Give me your hands.  Strings. Gimme it!  Pick. Do you want to learn to play guitar?"
+  utter_chitchat/test_5_11_260_10,anger,negative:
+  - text: "Then don't touch one!!"
+  utter_chitchat/test_7_5_278_1,surprise,positive:
+  - text: "Oh Willie's still alive!"
+  utter_chitchat/test_7_5_278_7,surprise,negative:
+  - text: "Oh my God! That's the creep that you're with at the"
+  utter_chitchat/test_7_5_278_12,neutral,neutral:
+  - text: "Hey, why don't you guys go get portraits done by a professional photographer."
+  utter_chitchat/test_7_5_278_14,neutral,neutral:
+  - text: "Yeah that's great! Next to that, Chandler won't look so stupid."
+  utter_chitchat/train_3_12_3_2,surprise,negative:
+  - text: "What?!"
+  utter_chitchat/train_3_15_5_2,neutral,neutral:
+  - text: "Ameri-can. Y'know it's a"
+  utter_chitchat/train_4_23_11_4,neutral,neutral:
+  - text: "Thank you."
+  utter_chitchat/train_4_23_11_9,joy,positive:
+  - text: "Oh, do you need a hug? You don't have to bring me anything!"
+  utter_chitchat/train_3_25_16_2,disgust,negative:
+  - text: "Oy!!"
+  utter_chitchat/train_3_25_16_4,neutral,neutral:
+  - text: "Oh, yeah, Bob said there might be flood damage."
+  utter_chitchat/train_1_1_19_1,neutral,neutral:
+  - text: "Hey!"
+  utter_chitchat/train_7_7_20_2,joy,positive:
+  - text: "Yay!! Oh so, you're not, you're not mad at us anymore?"
+  utter_chitchat/train_7_7_20_10,neutral,neutral:
+  - text: "Didn't you sleep together?"
+  utter_chitchat/train_1_4_21_3,surprise,positive:
+  - text: "Oh! What what what! ...Hi."
+  utter_chitchat/train_1_4_21_6,anger,negative:
+  - text: "I got no sleep last night!"
+  utter_chitchat/train_1_4_21_8,disgust,negative:
+  - text: "My grandmother has this new boyfriend, and they're both kind of insecure in bed."
+  utter_chitchat/train_1_4_21_13,joy,positive:
+  - text: "Thanks."
+  utter_chitchat/train_3_11_23_2,surprise,negative:
+  - text: "How can you not know which one?"
+  utter_chitchat/train_6_22_31_3,neutral,neutral:
+  - text: "So umm, now do you have any of Matt Lauer's clothes here? Maybe? Just ones that haven't been cleaned yet?"
+  utter_chitchat/train_1_12_32_1,neutral,neutral:
+  - text: "Oh yeah, I'm sure.  And all of a sudden his hands weren't the problem anymore."
+  utter_chitchat/train_1_12_32_3,neutral,neutral:
+  - text: "Oh, boy scouts could have camped under there."
+  utter_chitchat/train_1_12_32_5,neutral,neutral:
+  - text: "Uma Thurman."
+  utter_chitchat/train_1_12_32_17,fear,negative:
+  - text: "She is gonna hate me."
+  utter_chitchat/train_6_24_33_4,surprise,positive:
+  - text: "Oh! Oop!"
+  utter_chitchat/train_8_2_38_4,surprise,negative:
+  - text: "Wait you stole those from these people's wedding?"
+  utter_chitchat/train_8_2_38_10,surprise,negative:
+  - text: "Oh my God!!"
+  utter_chitchat/train_8_4_40_3,neutral,neutral:
+  - text: "Greg and Jenny?"
+  utter_chitchat/train_4_19_46_3,surprise,positive:
+  - text: "I don't know. Ooh! Ooh! Look it!  Ah-ha!"
+  utter_chitchat/train_3_21_52_1,joy,positive:
+  - text: "Ooh, I have to tell you something."
+  utter_chitchat/train_3_21_52_3,neutral,neutral:
+  - text: "But I can't tell you."
+  utter_chitchat/train_3_21_52_5,neutral,neutral:
+  - text: "Well, sure in a perfect world. But, no, I promised I wouldn't tell, and I swore to like all my gods."
+  utter_chitchat/train_3_21_52_7,neutral,neutral:
+  - text: "No."
+  utter_chitchat/train_3_21_52_9,neutral,neutral:
+  - text: "No."
+  utter_chitchat/train_3_21_52_11,neutral,neutral:
+  - text: "No, but let's come back to that later!"
+  utter_chitchat/train_4_13_58_2,surprise,positive:
+  - text: "That sounds great!"
+  utter_chitchat/train_7_16_64_3,neutral,neutral:
+  - text: "With what?"
+  utter_chitchat/train_7_16_64_5,joy,positive:
+  - text: "Oo! You should have one of us do it!"
+  utter_chitchat/train_7_16_64_7,joy,positive:
+  - text: "No! No! It's-it's uh a real thing! Anyone can get ordained on the Internet and perform like weddings and stuff!"
+  utter_chitchat/train_7_16_64_9,anger,negative:
+  - text: "What?! No! It was my idea!"
+  utter_chitchat/train_3_6_66_4,neutral,neutral:
+  - text: "Yeah, I would've except I had a big spaghetti stain on the other side."
+  utter_chitchat/train_3_6_66_6,neutral,neutral:
+  - text: "Okay, this is what I'm talking about, this. I-I need to live in a land where people can spill."
+  utter_chitchat/train_3_6_66_8,sadness,negative:
+  - text: "Aw, honey it's not your fault, y'know this is who you are, and I love you, and I want us to be friends, and if I keep living here I don't see that happening."
+  utter_chitchat/train_3_6_66_10,joy,positive:
+  - text: "Aww, good.  What?"
+  utter_chitchat/train_3_6_66_12,neutral,neutral:
+  - text: "No you're not, you're wondering which cushion it is."
+  utter_chitchat/train_6_3_67_12,neutral,neutral:
+  - text: "No."
+  utter_chitchat/train_1_5_69_4,sadness,negative:
+  - text: "Yeah, it was really hard."
+  utter_chitchat/train_1_5_69_6,anger,negative:
+  - text: "Ok, you weren't there."
+  utter_chitchat/train_1_4_71_1,neutral,neutral:
+  - text: "Yeah?"
+  utter_chitchat/train_3_23_74_1,neutral,neutral:
+  - text: "Yeah, but Jason's really sensitive."
+  utter_chitchat/train_3_23_74_3,neutral,neutral:
+  - text: "Yeah."
+  utter_chitchat/train_3_23_74_5,anger,negative:
+  - text: "Jason is not a sissy!"
+  utter_chitchat/train_6_17_78_2,anger,negative:
+  - text: "No Rachel! They got here first!"
+  utter_chitchat/train_1_7_81_5,neutral,neutral:
+  - text: "About what?"
+  utter_chitchat/train_1_7_81_7,surprise,positive:
+  - text: "What surprise party?"
+  utter_chitchat/train_1_7_81_9,neutral,neutral:
+  - text: "Well, he didn't tell me."
+  utter_chitchat/train_1_7_81_11,anger,negative:
+  - text: "This is so typical. I'm always the last one to know everything."
+  utter_chitchat/train_1_7_81_13,anger,negative:
+  - text: "Yuh-huh!"
+  utter_chitchat/train_7_22_82_7,neutral,neutral:
+  - text: "Ooh, I think I wanna trade circles."
+  utter_chitchat/train_7_22_82_11,neutral,neutral:
+  - text: "Okay, I think I need to do some shopping."
+  utter_chitchat/train_4_20_84_1,anger,negative:
+  - text: "No, yeah! The groom cannot see the bride!"
+  utter_chitchat/train_4_20_84_3,anger,negative:
+  - text: "Not after this!"
+  utter_chitchat/train_5_9_85_1,neutral,neutral:
+  - text: "Okay."
+  utter_chitchat/train_5_9_85_3,neutral,neutral:
+  - text: "I thought you said you read it in high school."
+  utter_chitchat/train_1_5_87_4,joy,positive:
+  - text: "What a neat idea. All your clothes match. I'm gonna do this."
+  utter_chitchat/train_1_5_87_6,neutral,neutral:
+  - text: "Hey, how'd it go?"
+  utter_chitchat/train_9_21_88_2,neutral,neutral:
+  - text: "Ok."
+  utter_chitchat/train_1_3_107_7,neutral,neutral:
+  - text: "Dear Ms. Buffay."
+  utter_chitchat/train_4_14_109_3,anger,negative:
+  - text: "Ha-ha, it's not my baby, ha-ha-ha!"
+  utter_chitchat/train_4_14_109_5,joy,positive:
+  - text: "I really, really enjoyed it. Very exotic."
+  utter_chitchat/train_4_14_109_9,joy,positive:
+  - text: "Come on! Look where you are!!"
+  utter_chitchat/train_4_14_109_11,neutral,neutral:
+  - text: "Remember, a virgin for me please."
+  utter_chitchat/train_4_14_109_14,neutral,neutral:
+  - text: "Well, if you think it will help."
+  utter_chitchat/train_4_14_109_19,surprise,positive:
+  - text: "You should! How is she?"
+  utter_chitchat/train_7_3_110_1,surprise,positive:
+  - text: "You do?"
+  utter_chitchat/train_7_3_110_3,anger,negative:
+  - text: "That and arrogance."
+  utter_chitchat/train_7_2_112_1,surprise,negative:
+  - text: "Okay, well Ross, what is this really about?"
+  utter_chitchat/train_7_2_112_3,anger,negative:
+  - text: "Okay, I will find someplace else to do the rest of my appointments. I just don't know what the big deal is!"
+  utter_chitchat/train_4_14_121_5,anger,negative:
+  - text: "Y'know you, you just stop being such a wuss and get those off and you come with us and watch naked girls dance around!!"
+  utter_chitchat/train_4_14_121_7,sadness,negative:
+  - text: "I'm sorry."
+  utter_chitchat/train_8_14_128_2,joy,positive:
+  - text: "Great, let's begin.  How's the pressure?"
+  utter_chitchat/train_8_14_128_4,joy,positive:
+  - text: "Stating the obvious, but thank you. And it's not weird is it."
+  utter_chitchat/train_8_14_128_6,neutral,neutral:
+  - text: "That's right, you just enjoy."
+  utter_chitchat/train_8_14_128_8,neutral,neutral:
+  - text: "Okay."
+  utter_chitchat/train_5_9_139_2,anger,negative:
+  - text: "I don't know! I didn't come with her!"
+  utter_chitchat/train_8_24_140_2,surprise,negative:
+  - text: "Somebody went to college. Wow.  What is it? I'm sorry."
+  utter_chitchat/train_3_9_143_3,joy,positive:
+  - text: "Umm, this stuffing is amazing. Do you think we should bring them some?"
+  utter_chitchat/train_1_20_145_8,anger,negative:
+  - text: "Oh my God!  Go away!  Stop looking in here!"
+  utter_chitchat/train_1_20_145_16,surprise,positive:
+  - text: "You cook naked?"
+  utter_chitchat/train_3_14_146_1,sadness,negative:
+  - text: "It's just y'know, been a couple of hours, and she hasn't called. Not that I even care, y'know."
+  utter_chitchat/train_3_14_146_3,anger,negative:
+  - text: "You think you know me so well."
+  utter_chitchat/train_3_14_146_5,neutral,neutral:
+  - text: "Yeah."
+  utter_chitchat/train_3_14_146_7,neutral,neutral:
+  - text: "That's what I said."
+  utter_chitchat/train_3_14_146_9,sadness,negative:
+  - text: "I can't."
+  utter_chitchat/train_8_7_149_2,neutral,neutral:
+  - text: "No, I got in trouble for that before. I'll see you later."
+  utter_chitchat/train_3_6_153_3,neutral,neutral:
+  - text: "So what are they doing?"
+  utter_chitchat/train_3_6_153_5,neutral,neutral:
+  - text: "Hey, you're early."
+  utter_chitchat/train_3_6_153_7,neutral,neutral:
+  - text: "I'm just taking it to be re-wired."
+  utter_chitchat/train_3_6_153_9,neutral,neutral:
+  - text: "No, no, Mr. Heckles no one is making any noise up here."
+  utter_chitchat/train_3_6_153_11,anger,negative:
+  - text: "You don't play the oboe!"
+  utter_chitchat/train_8_2_156_3,anger,negative:
+  - text: "I may play the fool at times, but I'm a little more than a pretty blond girl with an ass that won't quit."
+  utter_chitchat/train_8_2_156_6,neutral,neutral:
+  - text: "Uh-huh. Now you can turn around or you can go in there and rip the Band-Aid off. What to you want to do?"
+  utter_chitchat/train_8_2_156_8,surprise,negative:
+  - text: "Really? Are you sure?"
+  utter_chitchat/train_8_2_156_10,neutral,neutral:
+  - text: "Okay, sorry. Yeah."
+  utter_chitchat/train_3_14_167_2,anger,negative:
+  - text: "Oh-ho yeah! A song with rhyming words. Oo, I never thought of that before."
+  utter_chitchat/train_3_14_167_4,neutral,neutral:
+  - text: "Why? Because she can sing and play guitar and do both at the same time?"
+  utter_chitchat/train_3_14_167_9,anger,negative:
+  - text: "Okay, see, see, everyone else is happy she's done."
+  utter_chitchat/train_3_14_167_12,neutral,neutral:
+  - text: "Oh no, one of those ‘look for the hidden meaning' songs."
+  utter_chitchat/train_6_1_173_2,joy,positive:
+  - text: "Well, you promised me a fun road trip!"
+  utter_chitchat/train_6_1_173_6,anger,negative:
+  - text: "Yeah! And until then you are going to sing to me because the radio's broken and you are selfish but have a nice voice."
+  utter_chitchat/train_6_1_173_8,anger,negative:
+  - text: "Sing!!"
+  utter_chitchat/train_8_2_177_1,neutral,neutral:
+  - text: "Rachel has something that she wants to tell you and umm, I believe that this is your red sweater."
+  utter_chitchat/train_8_2_177_3,fear,negative:
+  - text: "Oh no. Could I get anyone a coffee or…poison? No? Just for me? Okay."
+  utter_chitchat/train_2_4_183_2,joy,positive:
+  - text: "Ta-da."
+  utter_chitchat/train_2_4_183_4,neutral,neutral:
+  - text: "Hi."
+  utter_chitchat/train_2_4_183_6,neutral,neutral:
+  - text: "Do I? Thank you, so do you."
+  utter_chitchat/train_2_4_183_8,neutral,neutral:
+  - text: "Sparkly."
+  utter_chitchat/train_2_4_183_13,neutral,neutral:
+  - text: "Yeah, well, ya know, I'm kind of spooky that way. Wooo."
+  utter_chitchat/train_2_4_183_15,neutral,neutral:
+  - text: "OK."
+  utter_chitchat/train_2_4_183_17,neutral,neutral:
+  - text: "Oh, right, OK. Ole."
+  utter_chitchat/train_2_4_183_19,joy,positive:
+  - text: "Um, the matador.  Ole, ha ha ha."
+  utter_chitchat/train_1_24_185_3,neutral,neutral:
+  - text: "Remembered what?"
+  utter_chitchat/train_1_24_185_8,surprise,positive:
+  - text: "Oh, it's so pretty. This must have cost him a fortune."
+  utter_chitchat/train_5_21_186_1,joy,positive:
+  - text: "I like waking up with you too.  Oh! It's such a beautiful morning.  Oh, I can stay here all day."
+  utter_chitchat/train_5_21_186_3,joy,positive:
+  - text: "We could have breakfast in bed"
+  utter_chitchat/train_5_21_186_5,surprise,negative:
+  - text: "Okay.  Oh! Oh no."
+  utter_chitchat/train_3_24_187_1,surprise,positive:
+  - text: "Um-hmm. Oh wait! This is Bonnie."
+  utter_chitchat/train_3_24_187_8,neutral,neutral:
+  - text: "Well I hope you have fun tonight."
+  utter_chitchat/train_5_12_189_4,neutral,neutral:
+  - text: "Hey!"
+  utter_chitchat/train_5_12_189_9,neutral,neutral:
+  - text: "What were you doing?"
+  utter_chitchat/train_7_5_190_1,neutral,neutral:
+  - text: "You guys make a"
+  utter_chitchat/train_3_14_193_2,joy,positive:
+  - text: "Oh, yeah!"
+  utter_chitchat/train_3_14_193_4,neutral,neutral:
+  - text: "I..., a jingle? No, no-no-no, no."
+  utter_chitchat/train_3_14_193_6,neutral,neutral:
+  - text: "Okay, well if I was in this for the money, I'd be a millionaire by now, y'know."
+  utter_chitchat/train_3_10_194_1,joy,positive:
+  - text: "That's okay. All right, I'm gonna play song that's really, really sad. It's called Magician Box Mix Up."
+  utter_chitchat/train_6_25_198_2,joy,positive:
+  - text: "Left!  Thank you."
+  utter_chitchat/train_6_25_198_4,surprise,positive:
+  - text: "Ross!"
+  utter_chitchat/train_6_25_198_6,joy,positive:
+  - text: "Yeah absolutely!"
+  utter_chitchat/train_6_19_199_9,surprise,positive:
+  - text: "Oh my God, look! That's Elizabeth!"
+  utter_chitchat/train_6_5_202_1,neutral,neutral:
+  - text: "How do you feel?"
+  utter_chitchat/train_6_5_202_3,neutral,neutral:
+  - text: "Okay, so I"
+  utter_chitchat/train_6_5_202_6,neutral,neutral:
+  - text: "I know, the babies are asleep."
+  utter_chitchat/train_6_5_202_8,joy,positive:
+  - text: "I did it! I took care of the babies all by myself!"
+  utter_chitchat/train_1_14_205_4,joy,positive:
+  - text: "See, there you go, the cleansing works!"
+  utter_chitchat/train_3_15_207_3,neutral,neutral:
+  - text: "Knock, knock, knock, knock, hi."
+  utter_chitchat/train_3_15_207_8,neutral,neutral:
+  - text: "Interesting."
+  utter_chitchat/train_3_15_207_10,joy,positive:
+  - text: "Okay, ah, before you get all talky again, umm, could you also please tell Sergei that I really like his suit."
+  utter_chitchat/train_3_15_207_15,neutral,neutral:
+  - text: "Monica, can I talk to you behind my menu, please.  What are you doing?"
+  utter_chitchat/train_3_15_207_17,anger,negative:
+  - text: "Yeah but, Mischa is so interested in you, that Sergei and I haven't been able to say two words to each other."
+  utter_chitchat/train_3_15_207_19,neutral,neutral:
+  - text: "That would be great. Thank you."
+  utter_chitchat/train_7_23_210_10,neutral,neutral:
+  - text: "I know."
+  utter_chitchat/train_3_16_212_2,neutral,neutral:
+  - text: "Grasp one of the linen strips by its ‘easy grab tab' and pull it off in one quick pain free motion."
+  utter_chitchat/train_3_16_212_4,surprise,negative:
+  - text: "Was it not pain-free?"
+  utter_chitchat/train_3_16_212_6,neutral,neutral:
+  - text: "Huh, well, the girls in the satin nighties on the commercial don't seem to think it's that bad."
+  utter_chitchat/train_3_16_212_9,surprise,negative:
+  - text: "Ow-ow-ow-ow! Oh my God!!!"
+  utter_chitchat/train_7_11_214_2,sadness,negative:
+  - text: "David the scientist guy, David that I was in love with, David who went to Russia and broke my heart David!"
+  utter_chitchat/train_7_11_214_4,neutral,neutral:
+  - text: "Oh, you say someone's name enough, they turn around."
+  utter_chitchat/train_7_11_214_6,surprise,positive:
+  - text: "David!  What-what are you doing here? Aren't you supposed to be in Russia?"
+  utter_chitchat/train_7_11_214_8,joy,positive:
+  - text: "Well… Yeah. You look great too. Did you get a haircut?"
+  utter_chitchat/train_7_11_214_10,neutral,neutral:
+  - text: "Yeah."
+  utter_chitchat/train_5_8_219_7,neutral,neutral:
+  - text: "Oh wait! That can't be the one Rachel's talking about. She didn't even know that happened. So which one was it?"
+  utter_chitchat/train_4_22_220_3,sadness,negative:
+  - text: "I-I wanted to apologise if I—y'know seemed a tad edgy yesterday at my shower. Y'know it's just the hormones, y'know."
+  utter_chitchat/train_5_11_228_4,joy,positive:
+  - text: "Uh-huh!"
+  utter_chitchat/train_5_11_228_7,anger,negative:
+  - text: "No!"
+  utter_chitchat/train_1_23_232_12,surprise,positive:
+  - text: "Hey. Ooh, look at you, dressy-dress."
+  utter_chitchat/train_7_14_238_1,neutral,neutral:
+  - text: "Okay, here's what we're gonna do."
+  utter_chitchat/train_9_23_240_5,neutral,neutral:
+  - text: "Oh, I should go, too."
+  utter_chitchat/train_9_22_241_6,neutral,neutral:
+  - text: "Exactly!"
+  utter_chitchat/train_9_22_241_8,anger,negative:
+  - text: "I didn't even think about that!  Aaargh,"
+  utter_chitchat/train_9_22_241_10,joy,positive:
+  - text: "Ok, that'll be great!"
+  utter_chitchat/train_7_18_245_3,joy,positive:
+  - text: "All I could think of was y'know, Is he gonna kiss me? Is he gonna kiss me?"
+  utter_chitchat/train_7_18_245_5,joy,positive:
+  - text: "I'm a lady Monica, I don't kiss and tell. But this hickey speaks for itself."
+  utter_chitchat/train_7_18_245_7,joy,positive:
+  - text: "I just like him so much that I just feel like I've had 10 drinks today and I've only had six."
+  utter_chitchat/train_7_18_245_10,disgust,negative:
+  - text: "You sound like a guy."
+  utter_chitchat/train_7_18_245_16,neutral,neutral:
+  - text: "You'll have a last kiss."
+  utter_chitchat/train_8_9_247_1,surprise,negative:
+  - text: "Joey! Those are my maternity pants!"
+  utter_chitchat/train_8_12_248_6,joy,positive:
+  - text: "Oh, I'm sorry. I didn't hear you over all the winning."
+  utter_chitchat/train_1_15_250_2,surprise,positive:
+  - text: "Oh! You have a window!"
+  utter_chitchat/train_1_15_250_4,surprise,positive:
+  - text: "Oh look! That guy's peeing!"
+  utter_chitchat/train_9_17_254_2,anger,negative:
+  - text: "You can't have it."
+  utter_chitchat/train_9_17_254_4,anger,negative:
+  - text: "No"
+  utter_chitchat/train_9_17_254_6,anger,negative:
+  - text: "Oh yeah."
+  utter_chitchat/train_9_17_254_9,anger,negative:
+  - text: "Damn you Monica Geller hyphen Bing!"
+  utter_chitchat/train_8_22_256_8,neutral,neutral:
+  - text: "Oh I know, I've been there. I remember toward the end"
+  utter_chitchat/train_3_25_260_1,anger,negative:
+  - text: "She cancelled! My namesake cancelled on me!"
+  utter_chitchat/train_3_25_260_3,sadness,negative:
+  - text: "Yeah, she clamed she had to go out of town suddenly."
+  utter_chitchat/train_3_25_260_7,sadness,negative:
+  - text: "Yeah, well, don't “Aww Pheebs, that sucks!” me yet."
+  utter_chitchat/train_3_25_260_9,neutral,neutral:
+  - text: "Well, she's out of town so, there's gotta be something in her house that tells me where my Father is."
+  utter_chitchat/train_3_25_260_11,anger,negative:
+  - text: "Well, are any of those people here?!"
+  utter_chitchat/train_4_1_261_2,neutral,neutral:
+  - text: "Wait-wait-wait, wait! Puppies. Cute or ugly?"
+  utter_chitchat/train_4_1_261_4,anger,negative:
+  - text: "Uh-huh, well! But umm, still I'm-I'm mad at you."
+  utter_chitchat/train_4_1_261_6,neutral,neutral:
+  - text: "Well umm, do you wanna get something to eat? I'm kinda hungry."
+  utter_chitchat/train_4_1_261_8,sadness,negative:
+  - text: "All right, stop it. Now you're just doing it to freak me out."
+  utter_chitchat/train_7_18_263_2,neutral,neutral:
+  - text: "Go for it."
+  utter_chitchat/train_7_18_263_4,neutral,neutral:
+  - text: "I'm just saying, get his number just in case."
+  utter_chitchat/train_7_18_263_8,joy,positive:
+  - text: "I did, but that was really fun."
+  utter_chitchat/train_6_1_272_2,anger,negative:
+  - text: "Y'know what? I'm not talking to you! You go back to sleep!  And you, are you a rapist?!"
+  utter_chitchat/train_6_1_272_4,neutral,neutral:
+  - text: "Do you like car games?"
+  utter_chitchat/train_6_1_272_6,neutral,neutral:
+  - text: "I"
+  utter_chitchat/train_6_1_272_8,anger,negative:
+  - text: "No-No! You need your sleep. Night-night! Shh!"
+  utter_chitchat/train_6_23_273_5,neutral,neutral:
+  - text: "Now, have you told anyone else?"
+  utter_chitchat/train_6_23_273_7,surprise,positive:
+  - text: "You told me."
+  utter_chitchat/train_6_23_273_9,surprise,positive:
+  - text: "Yeah well, once again not knocking pays off. I only wish you hadn't been on the toilet."
+  utter_chitchat/train_6_23_273_13,joy,positive:
+  - text: "Hey! So Chandler, wanna go to the coffeehouse?"
+  utter_chitchat/train_7_10_278_1,joy,positive:
+  - text: "So you like the drums!"
+  utter_chitchat/train_7_10_278_8,joy,positive:
+  - text: "That's fun."
+  utter_chitchat/train_5_12_280_1,anger,negative:
+  - text: "Exactly! Because it's in the past!"
+  utter_chitchat/train_7_22_281_1,joy,positive:
+  - text: "Hey!"
+  utter_chitchat/train_7_22_281_3,neutral,neutral:
+  - text: "Yeah!"
+  utter_chitchat/train_7_22_281_5,neutral,neutral:
+  - text: "I know. They were mine."
+  utter_chitchat/train_7_22_281_7,neutral,neutral:
+  - text: "No, it's not! We were just goofing around and I dared him to try them on."
+  utter_chitchat/train_7_22_281_9,neutral,neutral:
+  - text: "I'm wearing his briefs right now."
+  utter_chitchat/train_1_22_282_2,joy,positive:
+  - text: "And! Y'know what Jake says? That women's underwear is actually more comfortable. And he loves the way the silk feels against his skin."
+  utter_chitchat/train_7_22_283_1,neutral,neutral:
+  - text: "There is nothing wrong with Jake! Okay? He is all man! I'm thinking even more than you."
+  utter_chitchat/train_7_22_283_3,neutral,neutral:
+  - text: "I'm just saying that only a man completely secure with his masculinity could walk around in women's underwear!"
+  utter_chitchat/train_7_22_283_6,disgust,negative:
+  - text: "Okay, whatever."
+  utter_chitchat/train_7_19_284_2,neutral,neutral:
+  - text: "I don't know.  A cowboy theme?"
+  utter_chitchat/train_1_15_286_2,neutral,neutral:
+  - text: "Where are you going, Mr. Suity-Man?"
+  utter_chitchat/train_7_13_289_3,sadness,negative:
+  - text: "Yeah! Now, why do you want to kill yourself?"
+  utter_chitchat/train_7_13_289_5,neutral,neutral:
+  - text: "Chandler?"
+  utter_chitchat/train_6_21_293_12,joy,positive:
+  - text: "You wish."
+  utter_chitchat/train_7_11_295_1,neutral,neutral:
+  - text: "Well… It's a date."
+  utter_chitchat/train_7_11_295_4,sadness,negative:
+  - text: "Come on Joey, don't make me feel badly about this."
+  utter_chitchat/train_7_11_295_10,anger,negative:
+  - text: "That—It's not the same thing! This is"
+  utter_chitchat/train_7_11_295_12,surprise,negative:
+  - text: "She was?"
+  utter_chitchat/train_7_11_295_14,joy,positive:
+  - text: "Okay, whatever."
+  utter_chitchat/train_7_11_295_18,anger,negative:
+  - text: "Yeah!"
+  utter_chitchat/train_7_11_295_20,anger,negative:
+  - text: "Yeah!"
+  utter_chitchat/train_4_20_297_2,anger,negative:
+  - text: "No-no, let me in!"
+  utter_chitchat/train_4_20_297_4,joy,positive:
+  - text: "Yeah!"
+  utter_chitchat/train_4_20_297_6,joy,positive:
+  - text: "No, you have to let me in right now!!"
+  utter_chitchat/train_4_20_297_8,joy,positive:
+  - text: "Yes!"
+  utter_chitchat/train_3_13_302_2,fear,negative:
+  - text: "Please, right now, no, every time I see him it's like ‘Is it on the lose?' ‘Is it watching me?'"
+  utter_chitchat/train_3_13_302_6,neutral,neutral:
+  - text: "Hey."
+  utter_chitchat/train_3_13_302_8,neutral,neutral:
+  - text: "No, I can spot you from here."
+  utter_chitchat/train_3_13_302_10,neutral,neutral:
+  - text: "Okay, listen Robert..."
+  utter_chitchat/train_3_5_304_10,anger,negative:
+  - text: "Build the unit Cinderelly, lay the tile Cinderelly."
+  utter_chitchat/train_7_13_308_1,joy,positive:
+  - text: "Okay, I can do that! Oh, by the way, I"
+  utter_chitchat/train_7_13_308_3,neutral,neutral:
+  - text: "Oh okay. Umm, all right.  Hi, this is Phoebe from Empire Office Supplies, can I speak to your supply manager please?"
+  utter_chitchat/train_7_13_308_5,neutral,neutral:
+  - text: "Umm, okay I would like to talk to you about your toner needs."
+  utter_chitchat/train_4_13_310_2,joy,positive:
+  - text: "Well, it's just that maternity clothes are so expensive."
+  utter_chitchat/train_4_9_311_3,joy,positive:
+  - text: "Okayyyyy, open up!"
+  utter_chitchat/train_4_9_311_5,joy,positive:
+  - text: "Yeah, it's for our catering business!"
+  utter_chitchat/train_4_9_311_9,neutral,neutral:
+  - text: "No, we're gonna paint over the sword, and replace it with a baguette."
+  utter_chitchat/train_4_9_311_11,neutral,neutral:
+  - text: "And also, we don't know what to do with this."
+  utter_chitchat/train_6_25_314_1,joy,positive:
+  - text: "I know, they're gonna be"
+  utter_chitchat/train_6_25_314_3,neutral,neutral:
+  - text: "Not"
+  utter_chitchat/train_6_25_314_5,joy,positive:
+  - text: "Me too! So happy for them!"
+  utter_chitchat/train_6_25_314_9,joy,positive:
+  - text: "Totally. I'm like 90/10."
+  utter_chitchat/train_4_9_315_1,neutral,neutral:
+  - text: "Oh sure, Cilantro Larry."
+  utter_chitchat/train_4_9_315_4,anger,negative:
+  - text: "How could you say yes, what about our catering business?"
+  utter_chitchat/train_4_9_315_7,joy,positive:
+  - text: "Oh, in that case——Yay!  That was me hopping on board."
+  utter_chitchat/train_7_11_317_2,neutral,neutral:
+  - text: "Well, I'll tell you Rachel Karen Green, I had plans with Joey tonight and he left me this note."
+  utter_chitchat/train_7_11_317_4,neutral,neutral:
+  - text: "Oh that's a nickname we were trying out."
+  utter_chitchat/train_7_11_317_7,joy,positive:
+  - text: "Oh! Here's Joseph Francis!"
+  utter_chitchat/train_7_11_317_9,anger,negative:
+  - text: "So what?! That doesn't give you the right to ditch me!"
+  utter_chitchat/train_7_11_317_12,anger,negative:
+  - text: "I don't accept this rule."
+  utter_chitchat/train_8_7_321_2,joy,positive:
+  - text: "Hey!  Can we pick up where we left off?"
+  utter_chitchat/train_8_7_321_4,surprise,positive:
+  - text: "Why?"
+  utter_chitchat/train_8_7_321_6,surprise,positive:
+  - text: "What sex?"
+  utter_chitchat/train_8_7_321_8,surprise,positive:
+  - text: "We didn't have sex."
+  utter_chitchat/train_8_7_321_10,disgust,negative:
+  - text: "Ew! Ew! Ew! Ew! Ew! Ew!"
+  utter_chitchat/train_4_1_324_1,surprise,negative:
+  - text: "Ehh?"
+  utter_chitchat/train_8_1_326_3,neutral,neutral:
+  - text: "Now you know how you really feel about it."
+  utter_chitchat/train_8_1_326_7,neutral,neutral:
+  - text: "With who?"
+  utter_chitchat/train_5_22_327_2,surprise,positive:
+  - text: "Oh my God, I remember now! We were playing chess!"
+  utter_chitchat/train_5_22_327_4,joy,positive:
+  - text: "Oh, come on!"
+  utter_chitchat/train_6_6_329_2,neutral,neutral:
+  - text: "Hey, how are you guys doing?"
+  utter_chitchat/train_6_6_329_6,neutral,neutral:
+  - text: "Okay, you guys. You guys I think I know what's going on here. Okay, you guys"
+  utter_chitchat/train_6_6_329_8,neutral,neutral:
+  - text: "Well, deep-deep-deep down!"
+  utter_chitchat/train_6_6_329_10,neutral,neutral:
+  - text: "Then keep running."
+  utter_chitchat/train_5_2_331_2,neutral,neutral:
+  - text: "I'm sorry."
+  utter_chitchat/train_6_7_345_1,neutral,neutral:
+  - text: "Hey!"
+  utter_chitchat/train_6_7_345_3,neutral,neutral:
+  - text: "See? And you don't care if people are staring, it's just for a second cause then you're gone!"
+  utter_chitchat/train_4_1_347_4,sadness,negative:
+  - text: "Well, umm, my Mom's friend, Phoebe, is actually my birth Mom."
+  utter_chitchat/train_4_1_347_7,sadness,negative:
+  - text: "Oh, my new Mom, who-who's a big, fat abandoner!"
+  utter_chitchat/train_4_1_347_9,sadness,negative:
+  - text: "No. I'm just, I wanna, I need to be alone."
+  utter_chitchat/train_9_19_349_1,joy,positive:
+  - text: "Hey!"
+  utter_chitchat/train_9_19_349_4,joy,positive:
+  - text: "Sure!"
+  utter_chitchat/train_9_19_349_7,sadness,negative:
+  - text: "Well, I can't give you a massage, because my licence has been    revoked again!"
+  utter_chitchat/train_9_19_349_9,neutral,neutral:
+  - text: "Well, it was an accident...You know, it's a lot of oil and sometimes    the hand just slips!"
+  utter_chitchat/train_9_19_349_11,surprise,negative:
+  - text: "Oh no!You guys aren't supposed to get divorced for 7 years!"
+  utter_chitchat/train_2_3_354_6,neutral,neutral:
+  - text: "I miss Janice though.  Hello, Chandler Bing."
+  utter_chitchat/train_1_5_355_2,neutral,neutral:
+  - text: "Oh, he needed some time to grieve."
+  utter_chitchat/train_1_5_355_4,neutral,neutral:
+  - text: "That oughta do it."
+  utter_chitchat/train_3_8_358_3,sadness,negative:
+  - text: "No, no, it's just my tooth."
+  utter_chitchat/train_3_8_358_6,fear,negative:
+  - text: "No thanks, I have a good one too. I just, I, I can't see him."
+  utter_chitchat/train_3_8_358_9,anger,negative:
+  - text: "Because, every time I go to the dentist, somebody dies."
+  utter_chitchat/train_3_8_358_12,neutral,neutral:
+  - text: "Yeah, yeah, first there was my aunt Mary, and then there was umm, John, my mailman, and then my, my cowboy friend ‘Albino Bob'."
+  utter_chitchat/train_3_8_358_14,sadness,negative:
+  - text: "Yes, while I was in the chair!"
+  utter_chitchat/train_3_8_358_18,sadness,negative:
+  - text: "Well tell that to them. Oh! You can't, their dead."
+  utter_chitchat/train_1_5_366_8,surprise,negative:
+  - text: "Oh my god.  How many of those have you had?"
+  utter_chitchat/train_1_5_366_10,neutral,neutral:
+  - text: "Chandler, easy, easy. Go to your happy place. La la la la la la la."
+  utter_chitchat/train_1_5_366_12,neutral,neutral:
+  - text: "All right."
+  utter_chitchat/train_1_5_366_14,neutral,neutral:
+  - text: "Wait here. Breathe."
+  utter_chitchat/train_1_5_366_16,neutral,neutral:
+  - text: "It's like a gift."
+  utter_chitchat/train_1_5_366_18,neutral,neutral:
+  - text: "Oh, I'd like that."
+  utter_chitchat/train_1_13_372_1,joy,positive:
+  - text: "Nothing, nothing."
+  utter_chitchat/train_1_13_372_3,sadness,negative:
+  - text: "It's, I mean, it's nothing, I'm fine."
+  utter_chitchat/train_1_13_372_8,joy,positive:
+  - text: "But they don't see all the wonderfulness that I see."
+  utter_chitchat/train_1_13_372_12,neutral,neutral:
+  - text: "Intense and creepy."
+  utter_chitchat/train_7_22_376_1,joy,positive:
+  - text: "Hey!"
+  utter_chitchat/train_7_22_376_3,fear,negative:
+  - text: "Wow! Nice! Manly and also kind of a slut."
+  utter_chitchat/train_8_17_384_2,neutral,neutral:
+  - text: "Oh Jim, Jim Nelson I'm Phoebe, Phoebe Buffay. We certainly have been seeing a lot of each other lately."
+  utter_chitchat/train_8_17_384_4,joy,positive:
+  - text: "Well, maybe we will.  Oh!"
+  utter_chitchat/train_3_6_385_2,sadness,negative:
+  - text: "What?"
+  utter_chitchat/train_3_6_385_5,neutral,neutral:
+  - text: "You have chalk on your face."
+  utter_chitchat/train_4_2_389_4,surprise,positive:
+  - text: "Yeah?"
+  utter_chitchat/train_4_2_389_6,joy,positive:
+  - text: "So great. Oh, we took a nap today and my Mom fell asleep on my tummy and purred."
+  utter_chitchat/train_4_2_389_10,neutral,neutral:
+  - text: "I just feel so, uhh....."
+  utter_chitchat/train_4_23_392_1,joy,positive:
+  - text: "Hey, Joey!"
+  utter_chitchat/train_4_23_392_8,joy,positive:
+  - text: "Ohh, they're having a"
+  utter_chitchat/train_4_23_392_10,surprise,positive:
+  - text: "So you're not homesick yet?"
+  utter_chitchat/train_4_23_392_12,joy,positive:
+  - text: "All right, the seven of us miss you."
+  utter_chitchat/train_1_12_398_2,anger,negative:
+  - text: "Ok, I've got milk  Here you go...  Oh! Better?"
+  utter_chitchat/train_1_12_398_4,surprise,negative:
+  - text: "I'm so embarrassed, I'm the one he hit on!"
+  utter_chitchat/train_1_12_398_6,sadness,negative:
+  - text: "I'm so sorry! No I'm sorry! No I'm sorry! No I'm sorry!"
+  utter_chitchat/train_1_12_398_9,disgust,negative:
+  - text: "Such a pig!"
+  utter_chitchat/train_1_12_398_11,disgust,negative:
+  - text: "Oh he's like a..."
+  utter_chitchat/train_1_12_398_13,neutral,neutral:
+  - text: "...like a..."
+  utter_chitchat/train_1_12_400_2,sadness,negative:
+  - text: "Oh! I know!  It's because... he's gorgeous, and he's charming, and when he looks at you..."
+  utter_chitchat/train_1_12_400_4,neutral,neutral:
+  - text: "The end."
+  utter_chitchat/train_1_12_400_6,surprise,negative:
+  - text: "Should I not have told you?"
+  utter_chitchat/train_3_25_401_3,neutral,neutral:
+  - text: "Knock, knock, knock."
+  utter_chitchat/train_3_25_401_5,neutral,neutral:
+  - text: "Are you ah, Phoebe Abott?"
+  utter_chitchat/train_3_25_401_7,joy,positive:
+  - text: "Hi Phoebe Abott, I'm your best friends daughter!"
+  utter_chitchat/train_3_25_401_9,neutral,neutral:
+  - text: "No, I-I mean your-your old best friend, here.  Lily, from high school. Remember?"
+  utter_chitchat/train_3_25_401_11,sadness,negative:
+  - text: "Phoebe.  Phoebe. Phoebe, yeah. She named me after you I guess."
+  utter_chitchat/train_5_4_407_1,sadness,negative:
+  - text: "Well, it helps the bee look tough in front of his bee friends. The bee is happy and I am definitely not."
+  utter_chitchat/train_5_4_407_3,surprise,negative:
+  - text: "Aw, dammit!"
+  utter_chitchat/train_8_11_408_1,neutral,neutral:
+  - text: "Yeah."
+  utter_chitchat/train_8_11_408_4,neutral,neutral:
+  - text: "Yeah. Yeah, that's what you need a good…pill."
+  utter_chitchat/train_6_15_411_1,fear,negative:
+  - text: "Was it my work? Were they mad? Was it Jack? Did he yell?!"
+  utter_chitchat/train_6_15_411_3,joy,positive:
+  - text: "Thank God."
+  utter_chitchat/train_4_2_412_7,surprise,negative:
+  - text: "Oh my God, you guys are selling the entertainment center?"
+  utter_chitchat/train_1_24_416_1,surprise,positive:
+  - text: "I know. This is really, really huge."
+  utter_chitchat/train_4_10_420_2,joy,positive:
+  - text: "Oh, yay!"
+  utter_chitchat/train_4_10_420_4,disgust,negative:
+  - text: "I know but it's so hard! Nothing rhymes with your stupid name!"
+  utter_chitchat/train_4_10_420_6,neutral,neutral:
+  - text: "All good, thanks.  Do you maybe have a nickname have like a nickname that's easier to rhyme?"
+  utter_chitchat/train_8_21_422_1,neutral,neutral:
+  - text: "I see. Nice sidestep on the do do thing by the way."
+  utter_chitchat/train_8_21_422_3,neutral,neutral:
+  - text: "You gotta go!"
+  utter_chitchat/train_8_21_422_5,neutral,neutral:
+  - text: "Okay, don't worry. You're ready."
+  utter_chitchat/train_8_21_422_7,neutral,neutral:
+  - text: "Absolutely! Just fight all your natural instincts and you'll be great."
+  utter_chitchat/train_4_10_424_8,neutral,neutral:
+  - text: "If she's no fun, why do you want to date her at all?"
+  utter_chitchat/train_4_10_424_15,joy,positive:
+  - text: "Hey! Ooh, how was your first day working at the restaurant?"
+  utter_chitchat/train_7_23_425_3,surprise,positive:
+  - text: "Oh my God!"
+  utter_chitchat/train_7_23_425_5,surprise,positive:
+  - text: "There was a pregnancy test in the garbage, and it's positive. Monica's pregnant.  So I guess she won't be totally alone."
+  utter_chitchat/train_4_14_428_1,anger,negative:
+  - text: "I-I wanna be with her,  I like her."
+  utter_chitchat/train_6_2_430_1,neutral,neutral:
+  - text: "Rachel is one of my closest friends.  Although, being the only one who knows anything about this does makes me feel special. Okay!"
+  utter_chitchat/train_6_2_430_3,anger,negative:
+  - text: "Hey Rach!"
+  utter_chitchat/train_6_2_430_5,neutral,neutral:
+  - text: "Sorry, mix up. Hey, how was the movie?"
+  utter_chitchat/train_6_2_430_7,surprise,positive:
+  - text: "Well then you'd better hurry! The Angelica! Go! Go!"
+  utter_chitchat/train_5_2_431_2,neutral,neutral:
+  - text: "Yeah?"
+  utter_chitchat/train_5_2_431_4,neutral,neutral:
+  - text: "Yeah?"
+  utter_chitchat/train_5_2_431_6,anger,negative:
+  - text: "Ohh, that's so nice! How great! Well, where? Where's the trip?!"
+  utter_chitchat/train_5_2_431_9,disgust,negative:
+  - text: "That sucks!"
+  utter_chitchat/train_5_2_431_18,disgust,negative:
+  - text: "That's fine, just don't bring it in my mouth."
+  utter_chitchat/train_8_19_437_1,surprise,positive:
+  - text: "Hey! Check it out! This is unbelievable! Joey has been holding his breath for almost four minutes!"
+  utter_chitchat/train_3_5_439_1,disgust,negative:
+  - text: "No, no, no, I wouldn't do you myself, I mean that would be weird."
+  utter_chitchat/train_1_14_440_2,joy,positive:
+  - text: "Um, that's ok!  Ok. All right. Now we need the semen of a righteous man."
+  utter_chitchat/train_1_14_440_5,neutral,neutral:
+  - text: "Ok, yeah, ok.  Oh, OK."
+  utter_chitchat/train_1_14_440_7,neutral,neutral:
+  - text: "Ok, and I have the, uh receipt for my dinner with Nokululu Oon Ah Ah."
+  utter_chitchat/train_3_17_443_4,neutral,neutral:
+  - text: "Oh, hey, look, I found coffee!  Okay, let's skedaddle."
+  utter_chitchat/train_3_17_443_6,neutral,neutral:
+  - text: "Okay, your highness."
+  utter_chitchat/train_8_8_445_2,sadness,negative:
+  - text: "It's Lafite. The '74 Latour is actually drinking quite nicely."
+  utter_chitchat/train_3_19_446_2,neutral,neutral:
+  - text: "Y'know what, you should like, you should buy a state and then just name it after yourself."
+  utter_chitchat/train_3_19_446_4,neutral,neutral:
+  - text: "Yeah, or, or, or, Mississ-Pete."
+  utter_chitchat/train_6_6_448_7,joy,positive:
+  - text: "Hey! I call her!"
+  utter_chitchat/train_6_6_448_11,neutral,neutral:
+  - text: "Yeah, we should get a move on if we wanna make those dinner reservations."
+  utter_chitchat/train_3_23_450_7,sadness,negative:
+  - text: "Oh, you so would! Oh, you should get that anyway.  Like for clubbing."
+  utter_chitchat/train_3_23_450_14,neutral,neutral:
+  - text: "Hey Mon umm, if you do get married, can I bring two guests?"
+  utter_chitchat/train_3_23_450_16,neutral,neutral:
+  - text: "No, that was my way of telling you."
+  utter_chitchat/train_3_23_450_20,neutral,neutral:
+  - text: "Yeah, well he'd prefer water colors, but y'know, he has easy access to a lot of charcoal."
+  utter_chitchat/train_3_23_450_22,neutral,neutral:
+  - text: "Well, yeah, because I have to break up with someone, and… Okay so Jason is sensitive,  but now so's Vince  Plus, Vince has the body y'know?"
+  utter_chitchat/train_8_11_454_2,anger,negative:
+  - text: "Fine! Then you tell Roger because he was really looking forward to this!"
+  utter_chitchat/train_6_23_456_2,anger,negative:
+  - text: "Oh my God Chandler, the one you picked is gone. It's over!"
+  utter_chitchat/train_6_23_456_4,sadness,negative:
+  - text: "Some guy bought it. I'm sorry. I tired to stop it but they  put me in jail!"
+  utter_chitchat/train_6_23_456_6,anger,negative:
+  - text: "The little jail between the doors!"
+  utter_chitchat/train_6_23_456_8,anger,negative:
+  - text: "I know, I'm sorry! But y'know, this ring is better! Monica never even saw the other ring."
+  utter_chitchat/train_6_23_456_10,neutral,neutral:
+  - text: "Maybe it was the guy."
+  utter_chitchat/train_6_1_460_1,neutral,neutral:
+  - text: "No, we can go together! Just don't wait too long though, okay? ‘Cause I'm outta here sometime before Friday."
+  utter_chitchat/train_6_1_460_3,joy,positive:
+  - text: "No-no, it'll be fun! We can come back and we can haunt these guys!"
+  utter_chitchat/train_3_13_461_3,neutral,neutral:
+  - text: "You've have lipstick right here . That's okay, it's mine, we just kissed."
+  utter_chitchat/train_8_20_468_2,surprise,positive:
+  - text: "What? He's gonna be dressed as a baby!  Oh hi Mrs. Green!"
+  utter_chitchat/train_8_20_468_4,joy,positive:
+  - text: "I'm so glad you could make it."
+  utter_chitchat/train_8_20_468_8,joy,positive:
+  - text: "Yeah I know. Isn't it great? One less person we have to make small talk with."
+  utter_chitchat/train_9_2_473_3,fear,negative:
+  - text: "Alright you guys, we can't turn on each other, Okay?   That's just what she wants."
+  utter_chitchat/train_7_19_474_4,neutral,neutral:
+  - text: "And then for forgetting to invite you to it."
+  utter_chitchat/train_7_19_474_6,neutral,neutral:
+  - text: "Well, we called everyone in your phone book and a bunch of people came, but it took us so long to get you here that they-they had to leave."
+  utter_chitchat/train_7_19_474_8,sadness,negative:
+  - text: "We ruined everything."
+  utter_chitchat/train_9_23_475_1,neutral,neutral:
+  - text: "Well, on the bright side, now you won't have to see all these paleontologists with their shirts off."
+  utter_chitchat/train_9_23_475_15,neutral,neutral:
+  - text: "... and...?"
+  utter_chitchat/train_3_20_476_3,surprise,negative:
+  - text: "Hey!"
+  utter_chitchat/train_3_20_476_5,surprise,negative:
+  - text: "What?! Oh my...  Oh my God!! What happened?!"
+  utter_chitchat/train_3_20_476_7,fear,negative:
+  - text: "All right. Did everyone get out okay?"
+  utter_chitchat/train_3_20_476_9,surprise,negative:
+  - text: "Ohh. What is this?"
+  utter_chitchat/train_3_20_476_11,sadness,negative:
+  - text: "Ohh, the-the Foster puppets!"
+  utter_chitchat/train_3_24_477_4,neutral,neutral:
+  - text: "So Ross, how umm, how did it go with Bonnie?"
+  utter_chitchat/train_3_24_477_6,sadness,negative:
+  - text: "Ohh, that's too bad!"
+  utter_chitchat/train_3_24_477_8,neutral,neutral:
+  - text: "Yeah, y'know what, there are other fish in the sea."
+  utter_chitchat/train_3_24_477_10,disgust,negative:
+  - text: "Okay, I hear you! Are you capable of talking about any thing else?"
+  utter_chitchat/train_7_12_482_3,neutral,neutral:
+  - text: "That's not mine."
+  utter_chitchat/train_7_12_482_5,fear,negative:
+  - text: "How do you know?"
+  utter_chitchat/train_7_12_482_7,anger,negative:
+  - text: "Okay do you—Okay, do you have a search warrant? Because the last time I checked this was still America!"
+  utter_chitchat/train_7_12_482_9,anger,negative:
+  - text: "Fine!  But please God.. tell me how to stop them from going off!"
+  utter_chitchat/train_7_12_482_11,surprise,negative:
+  - text: "There's a reset button?!"
+  utter_chitchat/train_1_20_483_12,neutral,neutral:
+  - text: "Radiator."
+  utter_chitchat/train_1_20_483_14,neutral,neutral:
+  - text: "Rdtor."
+  utter_chitchat/train_6_17_495_2,anger,negative:
+  - text: "Then why are you answering? Do you at least know what route we're on?"
+  utter_chitchat/train_3_17_496_1,neutral,neutral:
+  - text: "Okay.  We are at a rest stop on Route 27. Okay.  There is no Route 27.   Okay, either 93 or 76?"
+  utter_chitchat/train_3_17_496_3,neutral,neutral:
+  - text: "Hey, can you send somebody up and down 76 and check every rest stop, and, and also 93?"
+  utter_chitchat/train_3_17_496_11,fear,negative:
+  - text: "But if..."
+  utter_chitchat/train_3_17_496_13,joy,positive:
+  - text: "Oh good, oh Joey and Chandler are back."
+  utter_chitchat/train_6_25_499_1,joy,positive:
+  - text: "Definitely!"
+  utter_chitchat/train_6_25_499_5,neutral,neutral:
+  - text: "What do you mean?"
+  utter_chitchat/train_6_25_499_7,neutral,neutral:
+  - text: "You mean a backup?"
+  utter_chitchat/train_6_25_499_9,neutral,neutral:
+  - text: "Yeah, yeah I got that."
+  utter_chitchat/train_6_25_499_11,neutral,neutral:
+  - text: "Hm-mmm"
+  utter_chitchat/train_6_25_499_15,joy,positive:
+  - text: "Yeah!"
+  utter_chitchat/train_6_25_499_17,joy,positive:
+  - text: "Yeah, I locked him years ago!"
+  utter_chitchat/train_6_25_499_19,neutral,neutral:
+  - text: "Yep, we shook on it. Yeah but believe me that is not how he wanted to seal the deal."
+  utter_chitchat/train_5_3_502_1,neutral,neutral:
+  - text: "I know."
+  utter_chitchat/train_8_9_504_3,neutral,neutral:
+  - text: "Is there anything we can do for you?"
+  utter_chitchat/train_7_2_505_1,neutral,neutral:
+  - text: "I need to talk to you, it's pretty urgent. It's about Monica and Chandler."
+  utter_chitchat/train_7_2_505_7,neutral,neutral:
+  - text: "Well, umm, not much."
+  utter_chitchat/train_7_2_505_11,neutral,neutral:
+  - text: "Nothing..Why?"
+  utter_chitchat/train_7_2_505_13,neutral,neutral:
+  - text: "Oh yeah it is! I'm going to the movies and it starts in like five minutes."
+  utter_chitchat/train_7_2_505_15,neutral,neutral:
+  - text: "Oh, I'm sorry. I'm so rude. Does anyone want to come to the movies?"
+  utter_chitchat/train_7_15_512_1,joy,positive:
+  - text: "Hi!"
+  utter_chitchat/train_7_15_512_3,neutral,neutral:
+  - text: "Good."
+  utter_chitchat/train_7_15_512_5,neutral,neutral:
+  - text: "Yeah."
+  utter_chitchat/train_7_15_512_7,joy,positive:
+  - text: "Yeah!"
+  utter_chitchat/train_7_15_512_9,fear,negative:
+  - text: "Ooh, now you lost me."
+  utter_chitchat/train_7_15_512_11,anger,negative:
+  - text: "No I didn't!"
+  utter_chitchat/train_7_15_512_13,fear,negative:
+  - text: "No. Umm, okay. But while you dial, let me show you the features of my new ringing handbag.  Oh, it does work!"
+  utter_chitchat/train_3_11_515_2,neutral,neutral:
+  - text: "Well, he's very charming."
+  utter_chitchat/train_3_11_515_4,neutral,neutral:
+  - text: "Well, you're just gonna have to try."
+  utter_chitchat/train_8_14_517_2,neutral,neutral:
+  - text: "Yeah, you like that don't you?"
+  utter_chitchat/train_8_14_517_4,joy,positive:
+  - text: "You want it there? You take it there baby!"
+  utter_chitchat/train_8_14_517_6,joy,positive:
+  - text: "Yeah, say my name. Say it!  And now I'm going to cover you back up, and umm we're never doing this again."
+  utter_chitchat/train_7_8_520_1,neutral,neutral:
+  - text: "Hey you guys I'm gonna go out and take a walk."
+  utter_chitchat/train_7_8_520_3,neutral,neutral:
+  - text: "Oh, it's not!"
+  utter_chitchat/train_7_8_520_6,neutral,neutral:
+  - text: "It's just my knitting that's all!  Yes! I knit this. I'm very good."
+  utter_chitchat/train_7_18_522_2,joy,positive:
+  - text: "Oh.  It's just so unexpected! I…I uh…Boy I'll tell you it's just such an honor to be nominated for a"
+  utter_chitchat/train_7_18_522_4,neutral,neutral:
+  - text: "in Reservations at 8:00 by Neil Simon.  Thank-thank you Neil. Thank you for the words."
+  utter_chitchat/train_7_18_522_6,joy,positive:
+  - text: "Please, don't play the music. Just uh one more."
+  utter_chitchat/train_1_12_523_12,anger,negative:
+  - text: "Fine!"
+  utter_chitchat/train_1_12_523_14,sadness,negative:
+  - text: "Nothing, I'm sorry, I'm just, I'm out of sorts."
+  utter_chitchat/train_1_12_523_19,neutral,neutral:
+  - text: "All right, you know Paolo?"
+  utter_chitchat/train_1_12_523_21,anger,negative:
+  - text: "Well, he made a move on me."
+  utter_chitchat/train_3_10_524_2,sadness,negative:
+  - text: "Well, I-I thought a lot about what you said, and um, I realilized duh, all right maybe I was a little judgmental."
+  utter_chitchat/train_3_10_524_5,neutral,neutral:
+  - text: "Destiny."
+  utter_chitchat/train_3_10_524_7,neutral,neutral:
+  - text: "Yes."
+  utter_chitchat/train_3_10_524_9,surprise,negative:
+  - text: "Okay.  Yikes! That one doesn't look very fulfilled."
+  utter_chitchat/train_3_10_524_11,anger,negative:
+  - text: "You keep the old ones in the back, that is so ageist."
+  utter_chitchat/train_3_10_524_13,sadness,negative:
+  - text: "So, what happens to the old guys?"
+  utter_chitchat/train_3_10_524_15,fear,negative:
+  - text: "Why, do I have a feeling that's not as happy as it sounds?  No! Nooooo!!!"
+  utter_chitchat/train_1_4_525_7,surprise,positive:
+  - text: "Yeah?"
+  utter_chitchat/train_5_24_527_2,surprise,positive:
+  - text: "Ohh! You made up!"
+  utter_chitchat/train_5_24_527_5,disgust,negative:
+  - text: "Ohh, get a room."
+  utter_chitchat/train_5_24_527_7,disgust,negative:
+  - text: "I know. Use it."
+  utter_chitchat/train_3_25_530_2,neutral,neutral:
+  - text: "I-I, came to fill your ice cube trays."
+  utter_chitchat/train_3_25_530_4,neutral,neutral:
+  - text: "Umm, okay, okay, look."
+  utter_chitchat/train_3_25_530_14,surprise,negative:
+  - text: "My Father is Chuck Magioni?"
+  utter_chitchat/train_3_25_530_17,sadness,negative:
+  - text: "Oh."
+  utter_chitchat/train_3_25_530_22,surprise,negative:
+  - text: "Heh?"
+  utter_chitchat/train_7_19_534_2,joy,positive:
+  - text: "Oh! No problem! I"
+  utter_chitchat/train_6_11_538_5,joy,positive:
+  - text: "Okay. Hey—Ooh, cool sheets!"
+  utter_chitchat/train_6_11_538_7,joy,positive:
+  - text: "Sure!"
+  utter_chitchat/train_6_11_538_9,disgust,negative:
+  - text: "You bought your sheets at a flea market? Ross come on, you gotta loosen the purse strings a little."
+  utter_chitchat/train_3_21_542_2,surprise,positive:
+  - text: "Oh my God, they took my idea!"
+  utter_chitchat/train_3_21_542_4,joy,positive:
+  - text: "Yeah! Okay, here you go."
+  utter_chitchat/train_3_21_542_6,surprise,negative:
+  - text: "Oh my God, are you guys okay?"
+  utter_chitchat/train_1_9_545_1,sadness,negative:
+  - text: "Oh, I'm sorry, oh, I just, I thought we could have them whipped and then add some peas and onions."
+  utter_chitchat/train_1_9_545_3,sadness,negative:
+  - text: "Well, 'cause then they'd be like my mom used to make them, you know, before she died."
+  utter_chitchat/train_1_9_545_11,anger,negative:
+  - text: "Almost never."
+  utter_chitchat/train_1_21_546_7,neutral,neutral:
+  - text: "I think she means  'You"
+  utter_chitchat/train_1_21_546_13,joy,positive:
+  - text: "I'm totally getting it!"
+  utter_chitchat/train_1_21_546_17,neutral,neutral:
+  - text: "Okay. And, my, dead, mother, says, you, are, it. I'm with Rachel."
+  utter_chitchat/train_6_18_551_2,neutral,neutral:
+  - text: "Oh that's all right. I'm still full from your homemade potato chips."
+  utter_chitchat/train_6_18_551_4,neutral,neutral:
+  - text: "Okay."
+  utter_chitchat/train_6_18_551_6,neutral,neutral:
+  - text: "Okay, I'll be out in a second."
+  utter_chitchat/train_6_18_551_9,neutral,neutral:
+  - text: "That doesn't lock does it?"
+  utter_chitchat/train_1_1_559_6,neutral,neutral:
+  - text: "No."
+  utter_chitchat/train_5_12_565_3,neutral,neutral:
+  - text: "Oh, nobody's judging you."
+  utter_chitchat/train_5_14_568_4,sadness,negative:
+  - text: "Bye Chandler!   I miss you already."
+  utter_chitchat/train_3_8_571_2,anger,negative:
+  - text: "I'm telling you he's dead. What we are about to have here is a dead fat guy on a stick."
+  utter_chitchat/train_3_8_571_10,joy,positive:
+  - text: "He's alive! He's a-live!!!"
+  utter_chitchat/train_6_17_573_2,neutral,neutral:
+  - text: "Alex Trebek?"
+  utter_chitchat/train_6_17_573_4,neutral,neutral:
+  - text: "Chuck Woolery?"
+  utter_chitchat/train_6_17_573_7,joy,positive:
+  - text: "Say we are unagi!"
+  utter_chitchat/train_5_5_574_19,sadness,negative:
+  - text: "We're so stupid! Do you know what's going on in there? They're trying to take Joey!"
+  utter_chitchat/train_6_10_583_2,neutral,neutral:
+  - text: "Hmm, how about my azzz?"
+  utter_chitchat/train_6_10_583_4,surprise,negative:
+  - text: "What?"
+  utter_chitchat/train_6_10_583_6,fear,negative:
+  - text: "No, don't look directly at them!"
+  utter_chitchat/train_6_10_583_8,neutral,neutral:
+  - text: "Alright, no, we could look at them!"
+  utter_chitchat/train_3_6_585_2,sadness,negative:
+  - text: "I know no, no, y'know you don't deserve this, you don't Ross."
+  utter_chitchat/train_3_6_585_5,neutral,neutral:
+  - text: "And you're so sweet.  And you're kind"
+  utter_chitchat/train_3_6_585_8,neutral,neutral:
+  - text: "Okay, it's okay."
+  utter_chitchat/train_3_6_585_11,surprise,negative:
+  - text: "What?"
+  utter_chitchat/train_7_13_589_1,surprise,positive:
+  - text: "Oh my God! So was she! Oh, I've got-I've got goose bumps."
+  utter_chitchat/train_7_13_589_3,neutral,neutral:
+  - text: "Well, y'know I'm wearing layers and it's warm."
+  utter_chitchat/train_7_13_589_5,sadness,negative:
+  - text: "But if—no look, okay. These jerks might not care about you, but the universe does! And that says a lot!"
+  utter_chitchat/train_7_5_590_4,joy,positive:
+  - text: "I'm having a really good time!"
+  utter_chitchat/train_7_5_590_6,neutral,neutral:
+  - text: "Ohh. No that's okay, he's a friend."
+  utter_chitchat/train_7_5_590_8,sadness,negative:
+  - text: "Yeah, I… Well y'know I-I mean I missed the-the semi-finals, so I'd just be lost."
+  utter_chitchat/train_7_5_590_10,neutral,neutral:
+  - text: "Okay, don't freak out. I'll go."
+  utter_chitchat/train_7_5_590_12,neutral,neutral:
+  - text: "Okay, I know. Hold on.  Hey Ross?"
+  utter_chitchat/train_7_5_590_14,neutral,neutral:
+  - text: "Yeah, umm that's Whitney , Kyle's ex-wife out there, now do you think that you can y'know divert her so that we can slip out?"
+  utter_chitchat/train_7_5_590_16,neutral,neutral:
+  - text: "Well okay but I have two tickets to the ballroom dance finals."
+  utter_chitchat/train_5_12_592_1,disgust,negative:
+  - text: "You two will have very hairy children."
+  utter_chitchat/train_5_12_592_11,neutral,neutral:
+  - text: "So are you actually gonna see her again?"
+  utter_chitchat/train_3_13_593_2,joy,positive:
+  - text: "Umm, I think you're really, really great..."
+  utter_chitchat/train_3_13_593_9,surprise,negative:
+  - text: "I-I-I-I-I don't know, I don't know what to say."
+  utter_chitchat/train_6_5_596_2,neutral,neutral:
+  - text: "Yeah, but only a genius would swallow a sonic blaster gun."
+  utter_chitchat/train_6_5_596_8,anger,negative:
+  - text: "What?! No, you can't, you can't leave me here with them! We're baby-sitting!"
+  utter_chitchat/train_6_5_596_10,anger,negative:
+  - text: "But you-you can't leave me with them! We-we're a team! We're playing a zone! They're gonna triple team me!"
+  utter_chitchat/train_6_5_596_12,neutral,neutral:
+  - text: "But no, because a doctor won't be able to help him, it's just gonna y'know naturally pass through his system in like seven years."
+  utter_chitchat/train_6_5_596_14,neutral,neutral:
+  - text: "I'm pretty sure it's gun."
+  utter_chitchat/train_6_5_596_16,anger,negative:
+  - text: "A real man wouldn't just run to the hospital!  No! What would, what would Krog do?"
+  utter_chitchat/train_7_9_599_6,joy,positive:
+  - text: "Yeah, and they've been coming by all day. They love it!"
+  utter_chitchat/train_7_9_599_11,neutral,neutral:
+  - text: "Sure!"
+  utter_chitchat/train_7_9_599_14,surprise,positive:
+  - text: "Oh my God Ross!!"
+  utter_chitchat/train_7_9_599_16,neutral,neutral:
+  - text: "I"
+  utter_chitchat/train_1_4_601_2,joy,positive:
+  - text: "Right- where we've been looking all night!"
+  utter_chitchat/train_7_10_603_8,neutral,neutral:
+  - text: "Oh."
+  utter_chitchat/train_7_10_603_12,neutral,neutral:
+  - text: "Oh."
+  utter_chitchat/train_3_21_604_2,surprise,positive:
+  - text: "Wow! That's exciting, you went to Japan, made up a woman."
+  utter_chitchat/train_3_21_604_4,surprise,positive:
+  - text: "I'm just saying, this woman, I mean she's fictitious. No?"
+  utter_chitchat/train_3_21_604_6,neutral,neutral:
+  - text: "‘Cause you're still into Monica."
+  utter_chitchat/train_3_21_604_9,neutral,neutral:
+  - text: "Yeah, no, I'm fairly intuitive and psychic. It's a substantial gift."
+  utter_chitchat/train_3_21_604_11,neutral,neutral:
+  - text: "Absolutely, oh I promise. Tell her what?"
+  utter_chitchat/train_3_21_604_13,neutral,neutral:
+  - text: "No I'm serious. I mean I'm intuitive, but my memory sucks."
+  utter_chitchat/train_1_7_608_4,neutral,neutral:
+  - text: "Thanks."
+  utter_chitchat/train_7_3_613_1,neutral,neutral:
+  - text: "That's what you think."
+  utter_chitchat/train_7_3_613_3,neutral,neutral:
+  - text: "Well, y'know I may have relatives in France who would know. My grandmother said she got the recipe from her grandmother, Nesele Tolouse."
+  utter_chitchat/train_7_3_613_5,neutral,neutral:
+  - text: "Nestley Toulouse."
+  utter_chitchat/train_7_3_613_7,neutral,neutral:
+  - text: "Oh, you Americans always butcher the French language."
+  utter_chitchat/train_7_3_613_10,anger,negative:
+  - text: "I know! You see it is stuff like this which is why  you're burning in hell!!"
+  utter_chitchat/train_1_3_615_1,neutral,neutral:
+  - text: "Does, um, anyone wanna see?"
+  utter_chitchat/train_1_3_615_21,neutral,neutral:
+  - text: "Yeah, 'cause otherwise someone might get what they actually ordered."
+  utter_chitchat/train_7_10_617_2,neutral,neutral:
+  - text: "Probably?"
+  utter_chitchat/train_8_11_622_1,neutral,neutral:
+  - text: "Yeah?"
+  utter_chitchat/train_8_11_622_3,neutral,neutral:
+  - text: "He's awfully short and I think he's talking to himself. And to be completely honest, he's not that good in bed."
+  utter_chitchat/train_8_11_622_7,neutral,neutral:
+  - text: "Wait a second! This is about the fourth month of your pregnancy, right?"
+  utter_chitchat/train_8_11_622_9,neutral,neutral:
+  - text: "This is completely normal, around the fourth month your hormones start going crazy."
+  utter_chitchat/train_8_11_622_11,neutral,neutral:
+  - text: "Oh absolutely yeah!"
+  utter_chitchat/train_8_11_622_14,neutral,neutral:
+  - text: "Yeah. Yeah, I remember trying to steal a cardboard cutout of Evander Holyfield from a"
+  utter_chitchat/train_6_18_630_1,joy,positive:
+  - text: "Thanks Monica!"
+  utter_chitchat/train_6_18_630_3,surprise,negative:
+  - text: "What the smell from Joey's? No, I can hardly smell it over here."
+  utter_chitchat/train_6_18_630_5,joy,positive:
+  - text: "I can smell it a little, bake the pie."
+  utter_chitchat/train_6_18_630_7,neutral,neutral:
+  - text: "Okay."
+  utter_chitchat/train_6_18_630_9,surprise,negative:
+  - text: "Oh!  Hello?  Yeah this is Phoebe.  Really?!"
+  utter_chitchat/train_7_24_633_2,surprise,positive:
+  - text: "Oh my God Monica!"
+  utter_chitchat/train_7_14_636_5,joy,positive:
+  - text: "Oh let me guess, and you wanna have them all at the same time and you wanna have them for your brother."
+  utter_chitchat/train_1_23_639_1,joy,positive:
+  - text: "Hi, I'm Ben. I'm hospital worker Ben. It's Ben... to the rescue!"
+  utter_chitchat/train_1_23_639_8,neutral,neutral:
+  - text: "Well, Susan, I see what appears to be a dark vent. Wait. Yes, it is in fact a dark vent."
+  utter_chitchat/train_7_8_643_2,disgust,negative:
+  - text: "Wash your hands!!!"
+  utter_chitchat/train_8_20_645_14,surprise,positive:
+  - text: "Hey! Why are you all red and sweaty?"
+  utter_chitchat/train_8_20_645_16,neutral,neutral:
+  - text: "Not if you were here."
+  utter_chitchat/train_7_6_646_2,neutral,neutral:
+  - text: "I hope it's you."
+  utter_chitchat/train_7_6_646_8,joy,positive:
+  - text: "Yes!!! Oh!!"
+  utter_chitchat/train_7_6_646_10,neutral,neutral:
+  - text: "Still."
+  utter_chitchat/train_7_6_646_14,neutral,neutral:
+  - text: "Yeah, I'll do that. So who gets to be yours?"
+  utter_chitchat/train_7_6_646_16,surprise,positive:
+  - text: "Wh-why is that the best part?"
+  utter_chitchat/train_7_6_646_21,joy,positive:
+  - text: "Aww, and good luck to you too!  What a nice lady!"
+  utter_chitchat/train_7_10_648_4,neutral,neutral:
+  - text: "Yes, thank you. You see, this is how normal people are supposed to react to drums."
+  utter_chitchat/train_7_10_648_6,neutral,neutral:
+  - text: "Maybe on some level."
+  utter_chitchat/train_1_18_650_2,joy,positive:
+  - text: "Ha. Ha, ha."
+  utter_chitchat/train_1_18_650_4,neutral,neutral:
+  - text: "Oh, hello, kettle? This is Monica. You're black."
+  utter_chitchat/train_1_6_652_13,neutral,neutral:
+  - text: "Oh, oh, but y'know, you always see these really beautiful women with these really nothing guys, you could be one of those guys."
+  utter_chitchat/train_1_15_653_1,neutral,neutral:
+  - text: "OK."
+  utter_chitchat/train_7_17_657_15,joy,positive:
+  - text: "Ooh, is that spelled with a ‘C' or a ‘K'? Oh my God! It doesn't matter; they're both great!"
+  utter_chitchat/train_1_20_658_11,anger,negative:
+  - text: "Oh, God, just do it!  Call her! Stop being so testosteroney!"
+  utter_chitchat/train_1_20_658_15,neutral,neutral:
+  - text: "So, uh, why didn't you say anything?"
+  utter_chitchat/train_1_20_658_19,neutral,neutral:
+  - text: "Okay, they're just talking..."
+  utter_chitchat/train_4_12_665_1,joy,positive:
+  - text: "Oh! I knew it! I knew it! I felt really thick this morning."
+  utter_chitchat/train_4_12_665_4,surprise,positive:
+  - text: "Embryossss? As in, More than one?"
+  utter_chitchat/train_4_12_665_6,neutral,neutral:
+  - text: "Five? Okay, where am I giving birth, a hospital or a big box under the stairs?"
+  utter_chitchat/train_4_12_665_8,surprise,negative:
+  - text: "That's it! 25 percent? That means that's it's like 75 percent chance of no baby at all!"
+  utter_chitchat/train_4_12_665_11,neutral,neutral:
+  - text: "Okay, well y'know what, don't worry you guys, ‘cause I'm-I'm gonna do this as many times as it takes to get it right."
+  utter_chitchat/train_4_12_665_15,disgust,negative:
+  - text: "Whoa!! That—okay, that's a"
+  utter_chitchat/train_4_12_665_17,surprise,positive:
+  - text: "Wow! You guys really don't know anything!"
+  utter_chitchat/train_5_7_666_3,disgust,negative:
+  - text: "Oh, I took Larry there to eat but it was all violated. So we shut it down!"
+  utter_chitchat/train_5_7_666_16,neutral,neutral:
+  - text: "Hey, guys, you know what Larry would say? He would say, See you ladle."
+  utter_chitchat/train_1_18_674_2,neutral,neutral:
+  - text: "Alright, here's my $7.50.  But I think you should know that this money is cursed."
+  utter_chitchat/train_1_18_674_4,neutral,neutral:
+  - text: "Oh, I cursed it. So now bad things will happen to he who spends it."
+  utter_chitchat/train_2_1_675_2,neutral,neutral:
+  - text: "Ok, I just wanna be really sure this time. Andie McDowell's the girl from"
+  utter_chitchat/train_2_1_675_4,neutral,neutral:
+  - text: "Oh, yeah. Ok, thank you."
+  utter_chitchat/train_3_5_678_3,neutral,neutral:
+  - text: "Joey."
+  utter_chitchat/train_3_5_678_6,neutral,neutral:
+  - text: "This is Monica."
+  utter_chitchat/train_3_5_678_8,neutral,neutral:
+  - text: "And this is Rachel."
+  utter_chitchat/train_3_5_678_11,neutral,neutral:
+  - text: "I'm gonna get coffee."
+  utter_chitchat/train_3_5_678_15,joy,positive:
+  - text: "Oh yeah! Yeah, no, we're gonna connect, y'know bond, and everything."
+  utter_chitchat/train_6_21_679_11,neutral,neutral:
+  - text: "No! Joey, you're going to be great!"
+  utter_chitchat/train_6_21_679_16,neutral,neutral:
+  - text: "I'll be waiting."
+  utter_chitchat/train_6_18_680_5,sadness,negative:
+  - text: "Well, since the fire was kinda my fault I guess  you should get to stay here."
+  utter_chitchat/train_6_18_680_7,neutral,neutral:
+  - text: "Well no, it was my fault so you should get the nice room."
+  utter_chitchat/train_1_7_681_2,sadness,negative:
+  - text: "Oh, poor little Tooty is scared to death. We should find his owner."
+  utter_chitchat/train_1_23_682_8,joy,positive:
+  - text: "Oh, look, look, he's closing his eyes.  Look, he's opening his eyes."
+  utter_chitchat/train_1_23_682_14,neutral,neutral:
+  - text: "Oh, look, he's closing his eyes again."
+  utter_chitchat/train_4_22_690_1,joy,positive:
+  - text: "It's so good.  Oh, thanks."
+  utter_chitchat/train_4_22_690_4,surprise,negative:
+  - text: "Oh!"
+  utter_chitchat/train_4_22_690_7,surprise,negative:
+  - text: "Oh! No, I-I think I just had a contraction."
+  utter_chitchat/train_5_14_697_2,joy,positive:
+  - text: "Oh absolutely. Shall we say, around seven?"
+  utter_chitchat/train_5_14_697_4,joy,positive:
+  - text: "Good. I'm really looking forward to you and me having sexual intercourse."
+  utter_chitchat/train_5_24_699_2,anger,negative:
+  - text: "Fine! Here! Take a hike toots!"
+  utter_chitchat/train_5_24_699_5,disgust,negative:
+  - text: "Sells drugs to kids."
+  utter_chitchat/train_5_24_699_7,disgust,negative:
+  - text: "She sells drugs to kids."
+  utter_chitchat/train_5_24_699_10,neutral,neutral:
+  - text: "How about we talk about this over dinner?"
+  utter_chitchat/train_5_24_699_12,anger,negative:
+  - text: "No! No, you can't arrest me! No!! I won't go back! I won't go back to that hell hole!!"
+  utter_chitchat/train_5_24_699_14,neutral,neutral:
+  - text: "Oh, okay."
+  utter_chitchat/train_5_10_705_2,joy,positive:
+  - text: "Ohh, you and your ways.  Since it's Christmastime. I'm going to be one of those people collection donations."
+  utter_chitchat/train_5_10_705_5,joy,positive:
+  - text: "Yeah, yeah, I'm going to be out there spreading joy to the people."
+  utter_chitchat/train_3_24_717_2,surprise,positive:
+  - text: "No! No! Look at that!  It's a line of ants! They're working as a team!"
+  utter_chitchat/train_3_24_717_11,neutral,neutral:
+  - text: "Oh no! That really is nothing, she is"
+  utter_chitchat/train_6_23_723_2,neutral,neutral:
+  - text: "Hi."
+  utter_chitchat/train_6_23_723_5,neutral,neutral:
+  - text: "Oh I know, I helped pick out the ring."
+  utter_chitchat/train_1_11_724_2,neutral,neutral:
+  - text: "What about Glen? He could be a Glen."
+  utter_chitchat/train_1_11_724_4,neutral,neutral:
+  - text: "Ooh! How about Agamemnon?"
+  utter_chitchat/train_7_22_725_1,joy,positive:
+  - text: "Hey!"
+  utter_chitchat/train_7_22_725_3,joy,positive:
+  - text: "Wow! Nice! Manly and also kind of a slut."
+  utter_chitchat/train_7_22_725_5,neutral,neutral:
+  - text: "Uh-huh."
+  utter_chitchat/train_4_7_728_10,surprise,negative:
+  - text: "Wow! Could everyone totally see up his robe?"
+  utter_chitchat/train_6_1_733_6,neutral,neutral:
+  - text: "No thanks, I've already seen one."
+  utter_chitchat/train_6_1_733_9,neutral,neutral:
+  - text: "Always."
+  utter_chitchat/train_6_1_733_11,surprise,negative:
+  - text: "What?!"
+  utter_chitchat/train_7_13_738_5,surprise,negative:
+  - text: "What? What happened to the window in the attic?!"
+  utter_chitchat/train_7_13_738_8,surprise,negative:
+  - text: "I can't believe I still don't know what happened to the"
+  utter_chitchat/train_7_3_741_3,surprise,negative:
+  - text: "Your own boat?"
+  utter_chitchat/train_3_4_745_4,neutral,neutral:
+  - text: "Hey."
+  utter_chitchat/train_3_4_745_11,anger,negative:
+  - text: "Yes, it was! It was him! Uh huh!  Okay, it was me!"
+  utter_chitchat/train_3_5_758_1,surprise,negative:
+  - text: "Hey!-Hey! What's going on?"
+  utter_chitchat/train_2_13_761_2,anger,negative:
+  - text: "Oh!  All right.  Now, let's not do this!"
+  utter_chitchat/train_2_13_761_6,neutral,neutral:
+  - text: "Alright, now I will let go if you both stop."
+  utter_chitchat/train_2_13_761_9,neutral,neutral:
+  - text: "There we go.You know what, if we were in prison, you guys would be, like, my bitches."
+  utter_chitchat/train_6_12_766_1,joy,positive:
+  - text: "That's great. Good for you guys."
+  utter_chitchat/train_6_12_766_4,neutral,neutral:
+  - text: "Who said you were?"
+  utter_chitchat/train_6_12_766_6,neutral,neutral:
+  - text: "Oh, I'm flaky. I'll say anything."
+  utter_chitchat/train_1_24_773_1,disgust,negative:
+  - text: "We've got the ground-up flesh of formerly cute cows and turkeys, ew..."
+  utter_chitchat/train_1_7_775_7,neutral,neutral:
+  - text: "Oh... Milwaukee."
+  utter_chitchat/train_1_7_775_13,neutral,neutral:
+  - text: "Oh, Rachel."
+  utter_chitchat/train_3_22_776_2,neutral,neutral:
+  - text: "Oh, is the play over?"
+  utter_chitchat/train_3_22_776_6,neutral,neutral:
+  - text: "Nah. I kept myself busy."
+  utter_chitchat/train_6_11_777_1,neutral,neutral:
+  - text: "Yeah no, I'm telling you Rachel has such a great eye for this stuff."
+  utter_chitchat/train_6_11_777_5,joy,positive:
+  - text: "Oh, come on! I think he's ready to get rid of, what did you call it? The cheap knock-offs and dinosaur junk."
+  utter_chitchat/train_6_11_777_10,joy,positive:
+  - text: "No! I do want to!"
+  utter_chitchat/train_6_11_777_13,joy,positive:
+  - text: "Yeah!"
+  utter_chitchat/train_4_4_778_1,sadness,negative:
+  - text: "These old things."
+  utter_chitchat/train_4_4_778_3,neutral,neutral:
+  - text: "You mean the—Okay by siadic, you mean the towel covered portion."
+  utter_chitchat/train_4_4_778_5,neutral,neutral:
+  - text: "Sure, yeah, no I can do that, yeah, because umm, y'know, the muscles in the siadic area can get y'know, real  nice and tight."
+  utter_chitchat/train_4_4_778_8,neutral,neutral:
+  - text: "Oh."
+  utter_chitchat/train_4_4_778_10,surprise,positive:
+  - text: "No!"
+  utter_chitchat/train_3_3_780_5,surprise,negative:
+  - text: "What?"
+  utter_chitchat/train_4_12_783_8,sadness,negative:
+  - text: "Uh-huh.  Good luck."
+  utter_chitchat/train_8_10_802_1,joy,positive:
+  - text: "Oh my God! I do love you! How did you do it?!"
+  utter_chitchat/train_8_10_802_3,joy,positive:
+  - text: "Oo, where are the seats?"
+  utter_chitchat/train_4_5_805_7,neutral,neutral:
+  - text: "Thank you."
+  utter_chitchat/train_5_19_812_1,joy,positive:
+  - text: "Definitely!"
+  utter_chitchat/train_5_19_812_3,neutral,neutral:
+  - text: "Oh, then no."
+  utter_chitchat/train_5_23_817_1,neutral,neutral:
+  - text: "Ohh, you are"
+  utter_chitchat/train_5_23_817_3,surprise,negative:
+  - text: "But she just came up here!"
+  utter_chitchat/train_5_23_817_5,neutral,neutral:
+  - text: "I wonder where she is. That is so weird."
+  utter_chitchat/train_5_23_817_7,anger,negative:
+  - text: "Would you stop that!"
+  utter_chitchat/train_5_23_817_12,anger,negative:
+  - text: "Yes! Now, she feels terrible! She really wants to make up! You gotta find her."
+  utter_chitchat/train_5_23_817_14,neutral,neutral:
+  - text: "Good.  I should really start wearing hats!"
+  utter_chitchat/train_7_4_819_1,neutral,neutral:
+  - text: "Anyway, I should go. Okay, bye."
+  utter_chitchat/train_7_19_820_2,neutral,neutral:
+  - text: "What are you doing?"
+  utter_chitchat/train_7_19_820_4,sadness,negative:
+  - text: "Oh! You got it?!"
+  utter_chitchat/train_7_19_820_10,neutral,neutral:
+  - text: "The next next?"
+  utter_chitchat/train_7_19_820_17,neutral,neutral:
+  - text: "What's the matter?"
+  utter_chitchat/train_7_19_820_21,joy,positive:
+  - text: "Grandma's gonna have to get in line."
+  utter_chitchat/train_3_4_822_2,neutral,neutral:
+  - text: "Okay, um, oh, the zoo commercial."
+  utter_chitchat/train_3_4_822_4,joy,positive:
+  - text: "No. They said you 'Weren't believable as a human being.' So, you can work on that."
+  utter_chitchat/train_3_4_822_6,neutral,neutral:
+  - text: "Um, the off-Broadway play people said 'You were pretty but dumb.'"
+  utter_chitchat/train_3_4_822_8,neutral,neutral:
+  - text: "Oh no wait, I'm sorry, that's 'pretty dumb.'"
+  utter_chitchat/train_3_3_823_2,joy,positive:
+  - text: "Oh, well he's yummy. We did a little kissin'."
+  utter_chitchat/train_3_3_823_4,neutral,neutral:
+  - text: "Oh, no, no, no, no. You know what, he's not into that stuff anymore. He quit for me."
+  utter_chitchat/train_3_3_823_6,joy,positive:
+  - text: "Look, he gave me his night vision goggles and everything."
+  utter_chitchat/train_3_3_823_8,surprise,positive:
+  - text: "What, he's not still following her. Do you think he is still following her?"
+  utter_chitchat/train_3_3_823_10,neutral,neutral:
+  - text: "What are you saying I should do?"
+  utter_chitchat/train_3_3_823_12,joy,positive:
+  - text: "Thank you, Monica."
+  utter_chitchat/train_7_5_824_1,joy,positive:
+  - text: "Ooh, let's see it!"
+  utter_chitchat/train_3_16_827_2,neutral,neutral:
+  - text: "The mailman was downstairs, so I brought up your mail."
+  utter_chitchat/train_3_16_827_4,neutral,neutral:
+  - text: "Now what is Fabutec?"
+  utter_chitchat/train_3_16_827_11,joy,positive:
+  - text: "Oh, it's incredible! I so want to be a Waxine girl."
+  utter_chitchat/train_3_16_827_13,fear,negative:
+  - text: "God. Do think it really doesn't hurt? ‘Cause how can they do that?"
+  utter_chitchat/train_3_16_827_15,neutral,neutral:
+  - text: "They have the best stuff in there."
+  utter_chitchat/train_9_21_829_2,anger,negative:
+  - text: "Ok, are they listening?"
+  utter_chitchat/train_4_10_832_2,neutral,neutral:
+  - text: "Joey stuffing 15"
+  utter_chitchat/train_4_10_832_4,neutral,neutral:
+  - text: "Where were you?"
+  utter_chitchat/train_4_10_832_7,neutral,neutral:
+  - text: "Oh, which museum?"
+  utter_chitchat/train_6_12_834_5,joy,positive:
+  - text: "Oh, yeah. Aw, remember the days when you used to go out to the barn, lift up your shirt, and bend over?"
+  utter_chitchat/train_6_12_834_13,neutral,neutral:
+  - text: "Rachel."
+  utter_chitchat/train_6_12_834_15,neutral,neutral:
+  - text: "I don't know.  Me neither."
+  utter_chitchat/train_6_14_837_1,joy,positive:
+  - text: "It's Phoebe! Phoebe!"
+  utter_chitchat/train_6_14_839_1,anger,negative:
+  - text: "You're making one right now!"
+  utter_chitchat/train_6_14_839_4,joy,positive:
+  - text: "Look, I'm talking right now! You're—you mean her."
+  utter_chitchat/train_6_14_839_6,surprise,negative:
+  - text: "What?!"
+  utter_chitchat/train_6_14_839_8,disgust,negative:
+  - text: "No!!"
+  utter_chitchat/train_1_12_840_2,neutral,neutral:
+  - text: "Are you moving out?"
+  utter_chitchat/train_1_12_840_4,neutral,neutral:
+  - text: "Um, um, Rachel can we talk for a sec?"
+  utter_chitchat/train_1_12_840_6,fear,negative:
+  - text: "Oh!  Ok, um, ok, um,"
+  utter_chitchat/train_1_12_840_8,neutral,neutral:
+  - text: "Ok, um,  we haven't known each other for that long a time, and, um, there are three things that you should know about me."
+  utter_chitchat/train_1_12_840_11,neutral,neutral:
+  - text: "Oh, I don't make them a lot because I don't think it's fair to the other cookies"
+  utter_chitchat/train_1_12_840_13,neutral,neutral:
+  - text: "Which proves that I never lie."
+  utter_chitchat/train_1_12_840_15,sadness,negative:
+  - text: "Paolo made a pass at me."
+  utter_chitchat/train_6_22_841_17,neutral,neutral:
+  - text: "Hey, did she buy it?"
+  utter_chitchat/train_6_22_841_19,neutral,neutral:
+  - text: "So did Heldi show you the place?"
+  utter_chitchat/train_6_22_841_21,joy,positive:
+  - text: "I can't believe you're gonna ask Monica to marry you!"
+  utter_chitchat/train_7_15_842_4,sadness,negative:
+  - text: "Ohh, I lost my mom to suicide."
+  utter_chitchat/train_7_15_842_6,sadness,negative:
+  - text: "Did I use that already today? I'm sorry."
+  utter_chitchat/train_7_15_842_11,neutral,neutral:
+  - text: "So you don't know that's"
+  utter_chitchat/train_7_2_843_6,surprise,negative:
+  - text: "My God! What did you order?!"
+  utter_chitchat/train_5_3_846_2,neutral,neutral:
+  - text: "They're gonna call her Chandler."
+  utter_chitchat/train_5_3_846_4,neutral,neutral:
+  - text: "Works on you."
+  utter_chitchat/train_7_9_853_1,anger,negative:
+  - text: "Oh, hello liar."
+  utter_chitchat/train_7_9_853_3,anger,negative:
+  - text: "I could've been killed I hope you know!"
+  utter_chitchat/train_7_9_853_5,joy,positive:
+  - text: "Well, I would love to but…the bike got stolen and the police have no suspects."
+  utter_chitchat/train_7_9_853_7,anger,negative:
+  - text: "What?!  What the hell?!"
+  utter_chitchat/train_7_9_853_10,surprise,negative:
+  - text: "What?! Why?!"
+  utter_chitchat/train_7_9_853_12,anger,negative:
+  - text: "All right. If you care enough to make up that load of crap, okay."
+  utter_chitchat/train_7_9_853_14,anger,negative:
+  - text: "Okay Ross!  Please don't die!"
+  utter_chitchat/train_4_13_858_2,neutral,neutral:
+  - text: "Oh-okay, I get the game now."
+  utter_chitchat/train_8_6_859_2,surprise,positive:
+  - text: "Wait a second! So, what's new with you?"
+  utter_chitchat/train_8_17_860_1,neutral,neutral:
+  - text: "Okay."
+  utter_chitchat/train_8_17_860_7,neutral,neutral:
+  - text: "Okay."
+  utter_chitchat/train_8_17_860_9,surprise,negative:
+  - text: "What?!"
+  utter_chitchat/train_8_17_860_11,disgust,negative:
+  - text: "Oh my God!"
+  utter_chitchat/train_8_17_860_13,surprise,positive:
+  - text: "Wow! You do?"
+  utter_chitchat/train_8_17_860_15,disgust,negative:
+  - text: "All right."
+  utter_chitchat/train_4_18_871_8,neutral,neutral:
+  - text: "Well, I, I like the idea of naming him after someone I love, and Joey and Chandler are great names."
+  utter_chitchat/train_5_4_873_1,neutral,neutral:
+  - text: "Hi Joey."
+  utter_chitchat/train_5_4_873_3,neutral,neutral:
+  - text: "I"
+  utter_chitchat/train_5_4_873_5,anger,negative:
+  - text: "Oh, I'm still mad at them but I also now that they bring happiness to lots of kids who's moms didn't kill themselves, so by supporting them, I'm doing a good thing, but I'm not"
+  utter_chitchat/train_7_11_877_2,joy,positive:
+  - text: "Oh, I wouldn't miss this."
+  utter_chitchat/train_7_11_877_4,joy,positive:
+  - text: "Oh, you're such a gentleman.  Come on! We're going to my place!"
+  utter_chitchat/train_4_17_886_7,joy,positive:
+  - text: "Ooh, good, you're hear! Okay."
+  utter_chitchat/train_4_17_886_9,joy,positive:
+  - text: "Hi!"
+  utter_chitchat/train_4_17_886_11,joy,positive:
+  - text: "Oh this, well I'm glad you asked."
+  utter_chitchat/train_4_17_886_17,joy,positive:
+  - text: "No!"
+  utter_chitchat/train_4_17_886_21,neutral,neutral:
+  - text: "No-no, I know that, but I just have to make enough money for the second part of my plan."
+  utter_chitchat/train_8_1_889_1,neutral,neutral:
+  - text: "Uh-hmm."
+  utter_chitchat/train_8_1_889_3,neutral,neutral:
+  - text: "Oh, I know. I could only think of two names, him and Ed Begley Jr. and then I remembered he's gay."
+  utter_chitchat/train_8_1_889_5,surprise,positive:
+  - text: "Really?!"
+  utter_chitchat/train_8_16_891_6,joy,positive:
+  - text: "Oh hey you guys!"
+  utter_chitchat/train_8_3_895_1,neutral,neutral:
+  - text: "Of course I do! And I'm gonna give it back to you as soon as they're done with it at the key shining place."
+  utter_chitchat/train_8_3_895_5,neutral,neutral:
+  - text: "Well why don't you use your key?"
+  utter_chitchat/train_8_3_895_10,neutral,neutral:
+  - text: "Oh! We could have done that."
+  utter_chitchat/train_8_16_896_1,sadness,negative:
+  - text: "Oh, I'm so sorry."
+  utter_chitchat/train_8_16_896_5,neutral,neutral:
+  - text: "Well, he may not be my soul mate, but a girl's gotta eat."
+  utter_chitchat/train_3_15_900_8,joy,positive:
+  - text: "Thank you, very much! Oh!  Thank you!"
+  utter_chitchat/train_3_15_900_10,neutral,neutral:
+  - text: "Okay, y'know what, you don't have to do that now."
+  utter_chitchat/train_7_14_902_9,joy,positive:
+  - text: "Speech! Speech! Let's hear from the birthday girl! Huh?"
+  utter_chitchat/train_7_14_902_11,joy,positive:
+  - text: "Don't you see? Everyone's looking at me! The plan's working! I didn't even have to take off my top yet!"
+  utter_chitchat/train_4_15_904_7,anger,negative:
+  - text: "See? I'm doing it. I am totally doing it.  I lost it."
+  utter_chitchat/train_1_11_905_2,anger,negative:
+  - text: "Yeah, we-we feel kinda responsible."
+  utter_chitchat/train_5_16_907_3,anger,negative:
+  - text: "No but you shouldn't! Don't ever do that again."
+  utter_chitchat/train_5_16_907_5,anger,negative:
+  - text: "Hold it!  N.Y.P.D! Freeze punk!"
+  utter_chitchat/train_5_16_907_7,anger,negative:
+  - text: "Yeah that's right you are so busted.  Book 'em."
+  utter_chitchat/train_5_16_907_9,disgust,negative:
+  - text: "Save it Red! Unless you wanna spend the night in the slammer, you apologize to the tree."
+  utter_chitchat/train_5_16_907_11,anger,negative:
+  - text: "You apologize to the tree right now or I am calling for backup.   Backup! Backup!!"
+  utter_chitchat/train_5_16_907_13,neutral,neutral:
+  - text: "Okay, cancel backup! Cancel backup!"
+  utter_chitchat/train_8_10_909_2,neutral,neutral:
+  - text: "Hi!"
+  utter_chitchat/train_8_10_909_4,neutral,neutral:
+  - text: "Uh-huh."
+  utter_chitchat/train_8_10_909_6,neutral,neutral:
+  - text: "Why else would I be here?"
+  utter_chitchat/train_4_18_918_4,surprise,negative:
+  - text: "You're actually going through with this?"
+  utter_chitchat/train_4_18_918_7,anger,negative:
+  - text: "You got problems because of you!"
+  utter_chitchat/train_8_7_921_2,surprise,negative:
+  - text: "You didn't notice she was wearing different clothes?!"
+  utter_chitchat/train_8_7_921_4,disgust,negative:
+  - text: "Oh. Ew! Ew! Ew! Ugh! Y'know what? This is too weird."
+  utter_chitchat/train_8_7_921_8,sadness,negative:
+  - text: "So I guess this is it."
+  utter_chitchat/train_8_7_921_10,anger,negative:
+  - text: "Yeah, so do you."
+  utter_chitchat/train_4_23_922_2,neutral,neutral:
+  - text: "So, did shopping make you feel any better about Ross?"
+  utter_chitchat/train_4_23_922_4,neutral,neutral:
+  - text: "Well,"
+  utter_chitchat/train_4_23_922_6,neutral,neutral:
+  - text: "Yeah. I just need you to bring me some photos of Ross."
+  utter_chitchat/train_4_23_922_8,neutral,neutral:
+  - text: "And a small piece of chocolate."
+  utter_chitchat/train_8_23_924_2,neutral,neutral:
+  - text: "Wait a second, or maybe you can go in first."
+  utter_chitchat/train_8_23_924_4,neutral,neutral:
+  - text: "No not you, Dr. Drake Remoray. You can ask him questions and see what's he like. People tell doctors everything."
+  utter_chitchat/train_6_1_927_2,surprise,negative:
+  - text: "Really?!"
+  utter_chitchat/train_6_1_927_4,surprise,negative:
+  - text: "Oh my God!—Eh! Well"
+  utter_chitchat/train_3_9_929_1,anger,negative:
+  - text: "Hey, it's your Thanksgiving too, y'know, instead of watching football, you could help."
+  utter_chitchat/train_5_23_935_1,neutral,neutral:
+  - text: "Thanks."
+  utter_chitchat/train_5_23_935_3,neutral,neutral:
+  - text: "Y'know Monica you had a minor setback in your relationship with Chandler. Big deal! It's only Chandler.  I am"
+  utter_chitchat/train_5_23_935_5,neutral,neutral:
+  - text: "So go fix it!"
+  utter_chitchat/train_5_23_935_10,joy,positive:
+  - text: "Sure!   Yeah! Las Vegas, number one!"
+  utter_chitchat/train_4_23_936_1,surprise,negative:
+  - text: "Yeah, it's in the guys' apartment under the sink. Why?"
+  utter_chitchat/train_4_23_936_3,surprise,negative:
+  - text: "What?! What do you mean you're going to London?"
+  utter_chitchat/train_4_23_936_6,fear,negative:
+  - text: "I—Rachel, you can't go! Ross loves Emily!"
+  utter_chitchat/train_4_23_936_10,sadness,negative:
+  - text: "That's not why you're going!"
+  utter_chitchat/train_4_23_936_14,sadness,negative:
+  - text: "No!"
+  utter_chitchat/train_4_23_936_21,joy,positive:
+  - text: "I do! I do! I do!  I do!  Ugh, like I can really chase you. I'm carrying a litter."
+  utter_chitchat/train_9_1_939_2,neutral,neutral:
+  - text: "Are you all right?"
+  utter_chitchat/train_9_1_939_4,surprise,positive:
+  - text: "Oh my God! He did it?"
+  utter_chitchat/train_9_1_939_6,surprise,positive:
+  - text: "Are you kidding?"
+  utter_chitchat/train_9_1_939_10,neutral,neutral:
+  - text: "I just talked him into it, don't tell me I have to do you too.  The puppet master gets tired people."
+  utter_chitchat/train_9_1_939_12,surprise,positive:
+  - text: "Why?! You two are so meant to be together, everybody thinks  so."
+  utter_chitchat/train_9_1_939_14,joy,positive:
+  - text: "Especially Ross!"
+  utter_chitchat/train_9_1_939_17,joy,positive:
+  - text: "There he goes, your fiancée."
+  utter_chitchat/train_9_1_939_19,neutral,neutral:
+  - text: "Although he does play with himself in his sleep."
+  utter_chitchat/train_3_6_940_2,joy,positive:
+  - text: "Cute naked guy is really starting to put on weight."
+  utter_chitchat/train_3_6_940_4,neutral,neutral:
+  - text: "You didn't leave lipstick marks on the phone."
+  utter_chitchat/train_3_6_940_6,joy,positive:
+  - text: "Bye-bye!  That's why I moved out."
+  utter_chitchat/train_3_6_940_8,neutral,neutral:
+  - text: "I think on some levels she already knows."
+  utter_chitchat/train_7_3_943_4,surprise,positive:
+  - text: "Oh, what was that for? Like a bake sale?"
+  utter_chitchat/train_1_11_946_2,neutral,neutral:
+  - text: "Just wanna check my horoscope, see if it was right."
+  utter_chitchat/train_1_11_946_6,joy,positive:
+  - text: "Where?  Ooh, come to Momma."
+  utter_chitchat/train_1_11_946_8,joy,positive:
+  - text: "We should do something. Whistle."
+  utter_chitchat/train_1_11_946_10,neutral,neutral:
+  - text: "Come on, do it."
+  utter_chitchat/train_1_11_946_12,joy,positive:
+  - text: "Do it!"
+  utter_chitchat/train_1_11_946_14,joy,positive:
+  - text: "Do it do it do it!"
+  utter_chitchat/train_1_11_946_16,surprise,negative:
+  - text: "I can't believe you did that!"
+  utter_chitchat/train_9_19_948_5,joy,positive:
+  - text: "Well, you said that you had customers lined up in the street,    so I am here to entertain!"
+  utter_chitchat/train_9_19_948_7,joy,positive:
+  - text: "Yeah!"
+  utter_chitchat/train_9_19_948_11,neutral,neutral:
+  - text: "Yeah."
+  utter_chitchat/train_9_19_948_13,neutral,neutral:
+  - text: "But what?"
+  utter_chitchat/train_9_19_948_15,neutral,neutral:
+  - text: "Ok, say no more."
+  utter_chitchat/train_8_19_952_5,disgust,negative:
+  - text: "Oh, please!"
+  utter_chitchat/train_9_12_953_2,neutral,neutral:
+  - text: "What are you doing?"
+  utter_chitchat/train_9_12_953_4,surprise,negative:
+  - text: "To kill Bob??"
+  utter_chitchat/train_9_12_953_6,anger,negative:
+  - text: "No, Mike, I don't want to kill him!"
+  utter_chitchat/train_9_12_953_9,neutral,neutral:
+  - text: "I'll find Bob, I'll get him."
+  utter_chitchat/train_9_12_953_18,neutral,neutral:
+  - text: "I don't know, I kinda like Bob for a girl."
+  utter_chitchat/train_9_12_953_20,sadness,negative:
+  - text: "Oh my god, we killed Bob!"
+  utter_chitchat/train_9_12_953_22,neutral,neutral:
+  - text: "Suzie"
+  utter_chitchat/train_5_12_961_3,anger,negative:
+  - text: "Nothing!   This is not over!"
+  utter_chitchat/train_5_12_961_5,surprise,negative:
+  - text: "What?!"
+  utter_chitchat/train_8_10_966_1,surprise,negative:
+  - text: "How can you let him talk to your crotch like that?"
+  utter_chitchat/train_8_10_966_3,surprise,positive:
+  - text: "Ohh!"
+  utter_chitchat/train_8_10_966_7,neutral,neutral:
+  - text: "Okay."
+  utter_chitchat/train_3_1_973_5,anger,negative:
+  - text: "All right. No, no, no, not a Richard thing, just put down the glass. And get out!"
+  utter_chitchat/train_3_1_973_7,neutral,neutral:
+  - text: "Well, okay, fine, use my happy place."
+  utter_chitchat/train_3_1_973_10,neutral,neutral:
+  - text: "Okay, all right, so, your in a meadow, millions of stars in the sky...."
+  utter_chitchat/train_3_1_973_12,joy,positive:
+  - text: "All right, there are no questions in the happy place. Okay, just, the warm breeze, and the moonlight flowing through the trees...."
+  utter_chitchat/train_3_1_973_14,neutral,neutral:
+  - text: "All right, betting and wagering of any kind, are, I'm sure, not permitted in the happy place."
+  utter_chitchat/train_5_14_979_3,surprise,positive:
+  - text: "God!"
+  utter_chitchat/train_5_22_984_2,neutral,neutral:
+  - text: "Yeah, I've been around."
+  utter_chitchat/train_5_22_984_4,neutral,neutral:
+  - text: "Ooh, if you take the northern route there's a man in Illinois with a beard of bees."
+  utter_chitchat/train_5_14_986_3,surprise,positive:
+  - text: "Oh, I can't believe it!"
+  utter_chitchat/train_5_14_986_12,surprise,positive:
+  - text: "Okay, so now they know that you know and they don't know that Rachel knows?"
+  utter_chitchat/train_7_21_988_2,surprise,negative:
+  - text: "How could it not be?"
+  utter_chitchat/train_1_13_992_1,neutral,neutral:
+  - text: "Hey."
+  utter_chitchat/train_1_13_992_3,joy,positive:
+  - text: "Good. Oh oh! Roger's having a dinner thing and he wanted me to invite you guys."
+  utter_chitchat/train_1_13_992_11,neutral,neutral:
+  - text: "Uh-huh."
+  utter_chitchat/train_5_7_1005_1,joy,positive:
+  - text: "Ooh, absolutely!"
+  utter_chitchat/train_5_7_1005_3,neutral,neutral:
+  - text: "Ooh, I love that place!  So, no."
+  utter_chitchat/train_5_7_1005_5,neutral,neutral:
+  - text: "Enh. Sure!"
+  utter_chitchat/train_5_7_1005_7,neutral,neutral:
+  - text: "Oh, no-no, this place is totally healthy!"
+  utter_chitchat/train_5_7_1005_14,anger,negative:
+  - text: "Okay, stop!"
+  utter_chitchat/train_5_7_1005_18,joy,positive:
+  - text: "Thank you."
+  utter_chitchat/train_6_18_1006_1,joy,positive:
+  - text: "No but at Monica's you can eat cookies over the sink!"
+  utter_chitchat/train_6_18_1006_3,neutral,neutral:
+  - text: "All right fine! This looks like so much fun."
+  utter_chitchat/train_6_18_1006_5,neutral,neutral:
+  - text: "God, what a mess."
+  utter_chitchat/train_3_10_1007_8,sadness,negative:
+  - text: "This is the worst Christmas ever."
+  utter_chitchat/train_1_4_1009_4,neutral,neutral:
+  - text: "What?"
+  utter_chitchat/train_1_4_1009_6,joy,positive:
+  - text: "I don't even have a 'pl'."
+  utter_chitchat/train_1_4_1009_11,joy,positive:
+  - text: "And-and a power tie?"
+  utter_chitchat/train_1_4_1009_15,neutral,neutral:
+  - text: "Big Bird's friend."
+  utter_chitchat/train_1_4_1009_17,joy,positive:
+  - text: "Oh, I wanna see! Lemme see! Lemme see!"
+  utter_chitchat/train_5_3_1012_1,surprise,positive:
+  - text: "Hi! And you're going into what grade?"
+  utter_chitchat/train_5_3_1012_3,joy,positive:
+  - text: "Uh-huh, me too. Ross, maybe I should've specified that I'd be needing a grown up doctor."
+  utter_chitchat/train_5_3_1012_5,anger,negative:
+  - text: "Shh!"
+  utter_chitchat/train_1_22_1015_8,neutral,neutral:
+  - text: "Petrie."
+  utter_chitchat/train_3_17_1016_7,joy,positive:
+  - text: "Ross, thank God."
+  utter_chitchat/train_3_17_1016_9,disgust,negative:
+  - text: "I ate a bug."
+  utter_chitchat/train_3_17_1016_11,fear,negative:
+  - text: "Listen Ross, we ran out of gas, and we don't know where we are, so we can't get a tow truck."
+  utter_chitchat/train_3_17_1016_13,neutral,neutral:
+  - text: "Yes, please."
+  utter_chitchat/train_5_6_1017_1,sadness,negative:
+  - text: "Oh, I know."
+  utter_chitchat/train_5_6_1017_6,neutral,neutral:
+  - text: "All right, I can't sit here anymore. I have to walk places."
+  utter_chitchat/train_5_6_1017_8,anger,negative:
+  - text: "Well, I've been reading up and for your information, minks are not very nice."
+  utter_chitchat/train_8_8_1018_2,neutral,neutral:
+  - text: "I'd better go. (She goes and sits down in the"
+  utter_chitchat/train_8_8_1018_11,anger,negative:
+  - text: "That's it?!"
+  utter_chitchat/train_6_9_1025_2,anger,negative:
+  - text: "Monica, leave him alone"

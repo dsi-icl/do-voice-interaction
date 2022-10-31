@@ -25,14 +25,16 @@ function messageColor(index, positions) {
     return "white"
 }
 
+
+
 const FeedItem = ({date, command, emotion, grammar_positions, grammar_prediction, response, error}) => <Feed.Event>
     <Feed.Label>
         <Icon name="comments" className="feed-icon"/>
     </Feed.Label>
     <Feed.Content>
-        <Feed.Date className="feed-text">{date}</Feed.Date>
+        <Feed.Date className="feed-text">{date}</Feed.Date> 
         <Feed.Summary className="feed-text">You: {parse(replaceHtmlElements(command))}</Feed.Summary>
-        <Feed.Summary className="feed-text">Emotion Detected: {parse(replaceHtmlElements(emotion))}</Feed.Summary>
+        <Feed.Summary className="feed-text">Emotion Detected: {parse(replaceHtmlElements(emotion))}</Feed.Summary> 
         {grammar_prediction && <Feed.Summary className="feed-text">Grammar Correction output:</Feed.Summary>}
         {grammar_prediction && <div>
             {command.split(" ").map((word, index) => {

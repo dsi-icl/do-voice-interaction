@@ -48,7 +48,7 @@ def execute_task(filename):
 
 # equivalent to mapping_generator() in data_generator.py
 def mapping_generator(filename):
-    print('\n***************** Creating synchronisation map *****************')
+    # print('\n***************** Creating synchronisation map *****************')
     
     fo = open(filename + '.csv', 'w')
 
@@ -59,7 +59,7 @@ def mapping_generator(filename):
 
 # equivalent to process_audio_frames() in data_generator.py 
 def process_audio_frames(time, audio_signal, sr):
-    print('\n***************** Enter process_audio_frames(time, audio_signal, sr) *****************')
+    # print('\n***************** Enter process_audio_frames(time, audio_signal, sr) *****************')
     target_interculator_audio = [np.zeros((1, 2205), dtype=np.float32) # changed from 4410 to 2205
                                  for _ in range(len(time))]  # consider interlocutor information
     
@@ -84,7 +84,7 @@ def process_audio_frames(time, audio_signal, sr):
     return target_interculator_audio
 
 def process_word_mappings(time, time_mappings):
-    print('\n***************** Enter process_word_mappings(time, time_mappings) *****************')
+    # print('\n***************** Enter process_word_mappings(time, time_mappings) *****************')
 
     # Process word mappings
     start_time = time_mappings[:, 1].astype(np.float32)
@@ -112,7 +112,7 @@ def process_word_mappings(time, time_mappings):
 
 # equivalent to load_metadata() in data_generator.py
 def load_metadata(filename):
-    print('\n***************** Enter load_metadata *****************')
+    # print('\n***************** Enter load_metadata *****************')
     audio_signal, sampling_rate = lb.core.load('./' + filename + '.wav', sr=TARGET_SAMPLING_RATE)
     audio_signal = np.pad(audio_signal, (0, CHUNK_SIZE - audio_signal.shape[0] % CHUNK_SIZE), 'constant')
     time_mappings = np.loadtxt('./' + filename + '.csv', delimiter=',', dtype=str, ndmin=2)
@@ -124,7 +124,7 @@ def load_metadata(filename):
 
 # equivalent to get_samples() in data_generator.py
 def get_samples(filename):
-    print('\n***************** Getting samples *****************')
+    # print('\n***************** Getting samples *****************')
     audio_signal, sr, time_mappings, time = load_metadata(filename)
     
     # Process audio frames
@@ -137,7 +137,7 @@ def get_samples(filename):
     development_msg(target_interculator_audio[0].shape)
     development_msg(corresponding_word[0].shape)
 
-    print('Returning samples foor this file')
+    # print('Returning samples foor this file')
     return target_interculator_audio, corresponding_word
 
 
@@ -152,7 +152,7 @@ def _get_embedding(word):
     if embed_dict.get(word, None) is not None:
         return embed_dict[word]
     else:
-        print('Word {%s} not in dict, so returning random embedding')
+        # print('Word {%s} not in dict, so returning random embedding')
         return np.random.rand(EMBEDDING_DIMENSION)
 
 
@@ -182,12 +182,12 @@ def classifyEmotion(arousal, valence):
     elif arousal<0 and valence<0.5:
         return 'sad'
     else:
-        print('Unclassfied emotion! This should not be happening! Check the code!')
+        # print('Unclassfied emotion! This should not be happening! Check the code!')
         exit(-1)
 
 
 def processPrediction(prediction):
-    print('\nCategorising detected emotion in chunks of 5 seconds (20 frames)')
+    # print('\nCategorising detected emotion in chunks of 5 seconds (20 frames)')
     
     # classify every 5 seconds (20 frames)
     if len(prediction)%20 == 0:
@@ -196,53 +196,54 @@ def processPrediction(prediction):
         n_emotions = len(prediction) // 20 + 1
 
     classifiedEmotions = []
+    arousals=[]
+    valences=[]
     for i in range(n_emotions):
-        print('')
+        # print('')
         chunk = prediction[i*20:(i+1)*20]
-        print(chunk)
+        # print(chunk)
         mean_a, mean_v = np.mean(chunk, axis=0)
-        print('mean arousal = ' + str(mean_a))
-        print('mean valence = ' + str(mean_v))
+        # print('mean arousal = ' + str(mean_a))
+        # print('mean valence = ' + str(mean_v))
+        arousals.append(mean_a)
+        valences.append(mean_v)
         emotion = classifyEmotion(mean_a, mean_v)
         classifiedEmotions.append(emotion)
         print(emotion)
-    print('\nclassfied emotions are:')
-    print(classifiedEmotions)
-    print('')
+    # print('\nclassfied emotions are:')
+    # print(classifiedEmotions)
+    # print('')
 
     # deduce overall emotion to apply to the bot response
     counter = Counter(classifiedEmotions) # dictionary of emotion occurances {angry: 2, neutral: 2, happy:1, sad: 1}
     most_common_emotion = counter.most_common() # a list of tuple in starting from the most common emotion [(angry, 2), (neutral, 2), (happy, 1), (sad, 1)]
 
-    # check if the first two entries have the same number of occurance in the list
-    if len(most_common_emotion) > 1 and most_common_emotion[0][1] == most_common_emotion[1][1]:
-        # there is more than one most_common emotions
-        final_emotion = 'mixed'
-    else:
-        final_emotion =  most_common_emotion[0][0]
-    print('\nFinal single emotion is: ' + str(final_emotion) + '\n')
-    return final_emotion
+
+    final_emotion =  most_common_emotion[0][0]
+    # print('\nFinal single emotion is: ' + str(final_emotion) + '\n')
+    thayers = str(sum(valences)/n_emotions)+","+str(sum(arousals)/n_emotions)
+    return final_emotion, thayers
 
 
 @app.route("/emotion-recognition", methods=['POST'])
 def detectEmotion():
 
-    print("\nRecieved Audio ♪")
+    # print("\nRecieved Audio ♪")
     receivedData = json.loads(request.data)
     base63_data = receivedData['audio']
     text_data = receivedData['transcript']
-    print('\nReceived transcript = ' + text_data)
+    # print('\nReceived transcript = ' + text_data)
 
-    print("\nDecoding Base64 into Wav") 
+    # print("\nDecoding Base64 into Wav") 
     wav_data = base64.b64decode(base63_data)
 
-    print("\nWriting audio to wav file") 
+    # print("\nWriting audio to wav file") 
     filename = str(uuid.uuid4())
     f = open(filename + '.wav', 'wb')
     f.write(wav_data)
     f.close()
     
-    print("\nWriting transcript to txt file") 
+    # print("\nWriting transcript to txt file") 
     f = open(filename + '.txt', 'w')
     f.write(text_data)
     f.close()
@@ -301,17 +302,17 @@ def detectEmotion():
         predictions = predictions.eval() # convert tensor to numpy array (1, 100, 2) n_batches, n_frames, n_outputs
     predictions = predictions[0, :(n_frames-gap_to_fill)] # discard irrelevant predictions
 
-    print('\n****************** Realtime Predictions ********************\n')
-    print(predictions)
-    print('\nRealtime Predictions Shape:\n')
-    print(predictions.shape)
-    print(type(predictions))
+    # print('\n****************** Realtime Predictions ********************\n')
+    # print(predictions)
+    # print('\nRealtime Predictions Shape:\n')
+    # print(predictions.shape)
+    # print(type(predictions))
     delete_files(filename)
 
-    emotion = processPrediction(predictions)
+    (emotion, thayers) = processPrediction(predictions)
 
     # Send the detected emotion back to voice assistant service
-    data = {'status': 'ok', 'service': 'emotion recognition service', 'emotion': emotion}
+    data = {'status': 'ok', 'service': 'emotion recognition service', 'emotion': emotion, 'thayers':thayers}
     
     response = app.response_class(
         response=json.dumps(data),

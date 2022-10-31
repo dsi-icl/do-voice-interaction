@@ -9,3 +9,5 @@ package-lock.json
 
 # do not commit the real config file, use the template instead
 config/config.json
+
+save/
