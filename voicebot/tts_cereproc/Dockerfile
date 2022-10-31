@@ -1,5 +1,5 @@
 FROM node:10.19-alpine as builder
-LABEL maintainer="o.serban@imperial.ac.uk"
+LABEL maintainer="ben.kirwan21@imperial.ac.uk"
 
 WORKDIR /code
 

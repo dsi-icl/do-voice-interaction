@@ -1,6 +1,6 @@
 /**
  * @file Manages routing of the text-to-speech service
- * @author Aurélie Beaugeard
+ * @author Ben Kirwan
  */
 
 
