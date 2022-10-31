@@ -30,7 +30,7 @@ MarkupSafe==2.0.1
 numba==0.53.1
 packaging==21.0
 pooch==1.4.0
-protobuf==3.17.3
+protobuf==3.18.3
 pycparser==2.20
 pyparsing==2.4.7
 requests==2.25.1
