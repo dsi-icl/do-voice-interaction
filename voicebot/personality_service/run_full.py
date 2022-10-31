@@ -34,7 +34,7 @@ def selectPersonality(selected):
     if selected == "angry":
         personality  = Personality([-0.7, 0.7], -2, 3, 2)
     if selected == "neutral":
-        personality = Personality([0,0],1, 10)
+        personality = Personality([0,0],1, 10, 0.2)
     if selected == "sad":
         personality = Personality([-0.7, -0.7], 2, 3, 0.5)
     elif selected == "excited":

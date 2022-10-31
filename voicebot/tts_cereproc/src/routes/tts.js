@@ -102,6 +102,11 @@ function cereBuffer(text, res) {
 
   cerevoiceEng.CPRCEN_engine_set_callback(eng, chan_handle, userData, resParameter);
 
+  if (typeof text !== 'string'){
+    res.status(400).send("Bad request");
+    return 
+  }
+
   cerevoiceEng.CPRCEN_engine_channel_speak(eng, chan_handle, text + "\n", text.length + 1, 1);
   cerevoiceEng.CPRCEN_engine_callback_delete()
   cerevoiceEng.CPRCEN_engine_channel_close(eng, chan_handle);
