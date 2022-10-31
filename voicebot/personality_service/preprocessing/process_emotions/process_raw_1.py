@@ -1,6 +1,6 @@
 ### This file contains code to process the emotions in MELD 
 ### into data that can be fed to the LSTM. The driver for this 
-### file is located in personality_service/train_1.py where a 
+### file is located in personality_service/train/train_1.py where a 
 ### particular personality can be selected. This is the 'three
 ### feature' approach (please see report for details)
 
@@ -9,7 +9,9 @@ import pandas as pd
 import copy
 import os
 
-os.chdir('/home/dodev/ben_msc_project/do-voice-interaction/voicebot/personality_service/preprocessing/process_emotions')
+abspath = os.path.abspath(__file__)
+dname = os.path.dirname(abspath)
+os.chdir(dname)
 
 
 def make_continuous(emotion, sentiment):

@@ -148,7 +148,10 @@ print(model.evaluate(x_test, y_test))
 
 ########   Save model   ########
 
-# os.chdir('/home/dodev/ben_msc_project/do-voice-interaction/voicebot/personality_service/models/type_1')
+# abspath = os.path.abspath(__file__)
+# dname = os.path.dirname(abspath)
+# os.chdir(dname)
+# os.chdir('../models/type_1')
 
 
 # pickle.dump(model, open(character+".pickle", 'wb'))
