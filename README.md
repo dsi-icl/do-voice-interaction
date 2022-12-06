@@ -33,6 +33,11 @@ The evolution of the system will be best seen after looking at the system diagra
     * **Author(s):** [Bianca Ganescu](https://github.com/biancaganescu), [Izabella Kacprzak](https://github.com/izabellakacprzak), [Una Miralles](https://github.com/umiralles), [Vlad Nicolaescu](https://github.com/vladioannicolaescu), [Nicole Obretincheva](https://github.com/nobretincheva), [Alex Stocks](https://github.com/AlexanderJStocks)
     * **Project type:** Undergraduate Group Project - 8 weeks
     * **Objective:** Hotword detection. Grammar correction to improve transcription quality. A draft speech filler model. 
+    
+* [Version 4](https://github.com/dsi-icl/do-voice-interaction/blob/master/diagrams/architecture-v3.png)
+    * **Author(s):** [Ben Kirwan](https://github.com/bk121)
+    * **Project type:** MSc Individual Project - 5 months
+    * **Objective:** Learning personality transitions from conversational data, by using sequence to sequence models. 
 
 ## Further reading
 
