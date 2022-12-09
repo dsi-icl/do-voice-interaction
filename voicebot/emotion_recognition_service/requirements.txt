@@ -5,7 +5,7 @@ astor==0.8.1
 audioread==2.1.9
 beautifulsoup4==4.9.3
 cached-property==1.5.2
-certifi==2021.5.30
+certifi==2022.12.7
 cffi==1.14.5
 chardet==4.0.0
 click==8.0.1
