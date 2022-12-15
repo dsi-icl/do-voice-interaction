@@ -16,7 +16,7 @@
     "cors": "2.8.5",
     "debug": "4.3.1",
     "esm": "3.2.25",
-    "express": "4.17.1",
+    "express": "4.17.3",
     "gtts": "0.2.1",
     "http-errors": "1.8.0",
     "jsdoc-route-plugin": "0.1.0",
