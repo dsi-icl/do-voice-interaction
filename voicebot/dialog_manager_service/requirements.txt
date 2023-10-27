@@ -131,7 +131,7 @@ typeguard==2.13.3
 typing-extensions==3.10.0.2
 tzlocal==2.1
 ujson==4.3.0
-urllib3==1.26.10
+urllib3==1.26.18
 uvloop==0.16.0
 wcwidth==0.2.5
 webexteamssdk==1.6.1
