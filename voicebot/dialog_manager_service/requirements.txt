@@ -98,7 +98,7 @@ rsa==4.9
 ruamel.yaml==0.16.13
 ruamel.yaml.clib==0.2.6
 s3transfer==0.6.0
-sanic==20.9.1
+sanic==20.12.7
 Sanic-Cors==0.10.0.post3
 sanic-jwt==1.6.0
 Sanic-Plugins-Framework==0.9.5
