@@ -15,7 +15,7 @@ cachetools==4.2.4
 certifi==2022.6.15
 cffi==1.15.1
 chardet==3.0.4
-charset-normalizer==2.1.0
+charset-normalizer==2.1.1
 clang==5.0
 cloudpickle==1.6.0
 colorclass==2.2.2
