@@ -82,7 +82,7 @@ pyTelegramBotAPI==3.8.3
 python-crfsuite==0.9.8
 python-dateutil==2.8.2
 python-engineio==4.3.3
-python-socketio==5.7.1
+python-socketio==5.14.0
 pytz==2021.3
 questionary==1.9.0
 rasa==2.8.11
