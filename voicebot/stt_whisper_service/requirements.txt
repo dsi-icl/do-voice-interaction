@@ -3,7 +3,7 @@ charset-normalizer==2.1.1
 click==8.1.3
 ffmpeg-python==0.2.0
 filelock==3.8.0
-Flask==2.2.2
+Flask==2.2.5
 future==0.18.2
 huggingface-hub==0.9.1
 idna==3.4
