@@ -139,4 +139,4 @@ websockets==8.1
 Werkzeug==2.1.2
 wrapt==1.12.1
 yarl==1.7.2
-zipp==3.8.1
+zipp==3.19.1
